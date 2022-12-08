@@ -1,3 +1,6 @@
-# ok-system-simple
-
-Simple系统编码-SpringBoot3.0
+## 核心依赖
+| 依赖             | 版本      |
+|----------------|---------|
+| Java           | 17      |
+| Spring Boot    | 3.0.0   |
+| Graalvm Native | 0.9.18  |

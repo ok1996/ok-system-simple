@@ -1,0 +1,5 @@
+server:
+  port: 11010
+spring:
+  application:
+    name: simple-demo-boot3
