@@ -3,3 +3,12 @@ server:
 spring:
   application:
     name: simple-demo-boot3
+simple:
+  openApi:
+    title: 接口文档示例1
+    description: 接口文档示例描述
+    version: 1.0.0
+    contact:
+      name: ok1996
+      url: https://ok96.cn
+      email: git.ok96.cn

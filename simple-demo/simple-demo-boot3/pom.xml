@@ -12,8 +12,8 @@
     <artifactId>simple-demo-boot3</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>cn.iosd</groupId>
+            <artifactId>simple-starter-web</artifactId>
         </dependency>
     </dependencies>
 
