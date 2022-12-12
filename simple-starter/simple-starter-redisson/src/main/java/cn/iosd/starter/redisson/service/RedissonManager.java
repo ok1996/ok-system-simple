@@ -71,18 +71,6 @@ public class RedissonManager {
             String connectionType = redissonProperties.getType();
             //声明配置上下文
             RedissonConfigService redissonConfigService;
-//            if (connectionType.equals(RedisConnectionType.STANDALONE.getConnectionType())) {
-//                redissonConfigService = new StandaloneConfigImpl();
-//            } else if (connectionType.equals(RedisConnectionType.SENTINEL.getConnectionType())) {
-//                redissonConfigService = new SentinelConfigImpl();
-//            } else if (connectionType.equals(RedisConnectionType.CLUSTER.getConnectionType())) {
-//                redissonConfigService = new ClusterConfigImpl();
-//            } else if (connectionType.equals(RedisConnectionType.MASTERSLAVE.getConnectionType())) {
-//                redissonConfigService = new MasterSlaveConfigImpl();
-//            } else {
-//                throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
-//            }
-
             switch (connectionType) {
                 case "standalone":
                     redissonConfigService = new StandaloneConfigImpl();
@@ -99,7 +87,6 @@ public class RedissonManager {
                 default:
                     throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
             }
-
             return redissonConfigService.createRedissonConfig(redissonProperties);
         }
     }

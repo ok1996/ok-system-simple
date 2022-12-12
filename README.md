@@ -32,7 +32,7 @@ simple:
     #缺省项为false
     enabled: true
     type: standalone
-    address: redis.demo.cn
+    address: 127.0.0.1
     password: password
     database: 0
 ~~~
