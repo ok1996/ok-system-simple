@@ -18,6 +18,7 @@
 
     <modules>
         <module>simple-starter-web</module>
+        <module>simple-starter-redisson</module>
     </modules>
 
 </project>

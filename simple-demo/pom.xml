@@ -17,6 +17,7 @@
     </description>
     <modules>
         <module>simple-demo-boot3</module>
+        <module>simple-demo-redisson</module>
     </modules>
 
 </project>

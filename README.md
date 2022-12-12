@@ -6,15 +6,16 @@
 | Graalvm Native | 0.9.18  |
 
 ## 模块
-| 模块名称               | 使用技术          | 实现说明                |
-|--------------------|---------------|---------------------|
-| simple-starter-web | web、springdoc | SpringBoot Web、接口文档 |
+| 模块名称                    | 使用技术          | 实现说明                |
+|-------------------------|---------------|---------------------|
+| simple-starter-web      | web、springdoc | SpringBoot Web、接口文档 |
+| simple-starter-redisson | redisson      | 自定义注解：分布式锁、分布式幂等    |
 
 ## 端口分配
-| 服务                | HTTP端口号 | 端口号 |
-|-------------------|---------|-----|
-| simple-demo-boot3 | 11010   |     |
-
+| 服务                   | HTTP端口号 | 端口号 |
+|----------------------|---------|-----|
+| simple-demo-boot3    | 11010   |     |
+| simple-demo-redisson | 11020   |     |
 
 ## Simple支持配置项
 ~~~
@@ -27,4 +28,11 @@ simple:
       name: ok1996
       url: https://ok96.cn
       email: git.ok96.cn
+  redisson:
+    #缺省项为false
+    enabled: true
+    type: standalone
+    address: redis.demo.cn
+    password: password
+    database: 0
 ~~~

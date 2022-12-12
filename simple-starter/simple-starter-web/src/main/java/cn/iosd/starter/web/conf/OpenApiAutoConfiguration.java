@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ok96
+ * @author ok1996
  */
 @Configuration
 public class OpenApiAutoConfiguration {

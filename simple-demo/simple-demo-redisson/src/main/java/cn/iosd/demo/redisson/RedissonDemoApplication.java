@@ -1,4 +1,5 @@
-package cn.iosd.demo.boot3;
+package cn.iosd.demo.redisson;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ok1996
  */
 @SpringBootApplication
-public class Boot3Application {
+public class RedissonDemoApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(Boot3Application.class, args);
+        SpringApplication.run(RedissonDemoApplication.class, args);
     }
 }
