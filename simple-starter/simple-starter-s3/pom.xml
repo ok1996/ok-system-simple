@@ -5,21 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.iosd</groupId>
-        <artifactId>ok-system-simple</artifactId>
+        <artifactId>simple-starter</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>simple-starter</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>simple-starter-s3</artifactId>
 
-    <description>
-        simple-starter父模块
-    </description>
-
-    <modules>
-        <module>simple-starter-web</module>
-        <module>simple-starter-redisson</module>
-        <module>simple-starter-s3</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

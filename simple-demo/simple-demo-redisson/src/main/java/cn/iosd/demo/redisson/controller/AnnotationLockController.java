@@ -1,6 +1,7 @@
 package cn.iosd.demo.redisson.controller;
 
 import cn.iosd.starter.redisson.annotation.DistributedLock;
+import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +26,12 @@ public class AnnotationLockController {
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
     @DistributedLock(value = "demo-redisson:decrement", leaseTime = 105)
-    public String decrement() {
+    public Response decrement() {
         if (TOTAL > 0) {
             TOTAL--;
         }
         log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
-        return "success";
+        return Response.ok();
     }
 
     @Operation(summary = "库存自减-测试异常")

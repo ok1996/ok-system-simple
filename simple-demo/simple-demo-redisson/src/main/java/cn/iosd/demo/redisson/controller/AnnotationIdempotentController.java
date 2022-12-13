@@ -1,6 +1,7 @@
 package cn.iosd.demo.redisson.controller;
 
 import cn.iosd.starter.redisson.annotation.DistributedIdempotent;
+import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -24,23 +25,23 @@ public class AnnotationIdempotentController {
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
     @DistributedIdempotent
-    public String decrement() {
+    public Response decrement() {
         if (TOTAL > 0) {
             TOTAL--;
         }
         log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
-        return "success";
+        return Response.ok();
     }
 
     @Operation(summary = "库存自减-请求参数变量")
     @GetMapping("decrementReqPara")
     @DistributedIdempotent(value = "#keyName", message = "请求重复！")
-    public String decrementReqPara(String keyName) {
+    public Response decrementReqPara(String keyName) {
         if (TOTAL > 0) {
             TOTAL--;
         }
         log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
-        return "success" + keyName;
+        return Response.ok();
     }
 
     @Operation(summary = "库存自减-异常测试")

@@ -14,6 +14,7 @@
         <ok-system-simple.version>1.0.0</ok-system-simple.version>
         <java.version>17</java.version>
         <spring-boot.version>3.0.0</spring-boot.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler.version>3.10.1</maven-compiler.version>
@@ -21,6 +22,7 @@
 
         <hutool.version>5.8.10</hutool.version>
         <redisson.version>3.18.1</redisson.version>
+        <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
         <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
 
@@ -32,6 +34,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -49,6 +60,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws-java-sdk-s3.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-web</artifactId>
                 <version>${ok-system-simple.version}</version>
@@ -59,6 +76,13 @@
                 <artifactId>simple-starter-redisson</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-s3</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -69,6 +93,11 @@
     <packaging>pom</packaging>
 
     <dependencies>
+        <!-- bootstrap 启动器 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
         <!-- 工具类 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

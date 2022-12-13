@@ -1,6 +1,7 @@
 package cn.iosd.demo.redisson.controller;
 
 import cn.iosd.starter.redisson.service.RedissonService;
+import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class LockController {
 
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
-    public String decrement() throws InterruptedException {
+    public Response decrement() throws InterruptedException {
         redissonService.lock(LOCK_NAME, 10L);
         if (TOTAL > 0) {
             TOTAL--;
@@ -47,12 +48,12 @@ public class LockController {
         if (redissonService.isHeldByCurrentThread(LOCK_NAME)) {
             redissonService.unlock(LOCK_NAME);
         }
-        return "success";
+        return Response.ok();
     }
 
     @Operation(summary = "库存自减-TryLock")
     @GetMapping("decrementTryLock")
-    public String decrementTryLock() throws InterruptedException {
+    public Response decrementTryLock() throws InterruptedException {
         //锁有效时间
         Long lease = 5L;
         //等待时间
@@ -67,17 +68,17 @@ public class LockController {
         } else {
             log.info("[ExecutorRedisson]获取锁失败");
         }
-        return "success";
+        return Response.ok();
     }
 
     @Operation(summary = "库存自减-未加锁")
     @GetMapping("decrementNotLock")
-    public String notLock() throws InterruptedException {
+    public Response notLock() throws InterruptedException {
         if (TOTAL_NOT_LOCK > 0) {
             TOTAL_NOT_LOCK--;
         }
         Thread.sleep(50);
         log.info("===notLock===减完库存后,当前库存===" + TOTAL_NOT_LOCK);
-        return "success";
+        return Response.ok();
     }
 }
