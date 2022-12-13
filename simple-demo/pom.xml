@@ -19,6 +19,8 @@
         <module>simple-demo-boot3</module>
         <module>simple-demo-redisson</module>
         <module>simple-demo-s3</module>
+        <module>simple-demo-socket-one</module>
+        <module>simple-demo-socket-two</module>
     </modules>
 
 </project>

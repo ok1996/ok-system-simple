@@ -22,6 +22,7 @@
 
         <hutool.version>5.8.10</hutool.version>
         <redisson.version>3.18.1</redisson.version>
+        <netty-socketio.version>1.7.22</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
         <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
@@ -66,6 +67,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.corundumstudio.socketio</groupId>
+                <artifactId>netty-socketio</artifactId>
+                <version>${netty-socketio.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-web</artifactId>
                 <version>${ok-system-simple.version}</version>
@@ -80,6 +87,12 @@
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-s3</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-socket</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
 
