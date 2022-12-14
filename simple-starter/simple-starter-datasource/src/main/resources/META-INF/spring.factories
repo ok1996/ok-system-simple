@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationContextInitializer=\
+cn.iosd.starter.datasource.config.DatabaseInitializer

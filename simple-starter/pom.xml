@@ -22,6 +22,7 @@
         <module>simple-starter-s3</module>
         <module>simple-starter-socket</module>
         <module>simple-starter-grpc</module>
+        <module>simple-starter-datasource</module>
     </modules>
 
 </project>

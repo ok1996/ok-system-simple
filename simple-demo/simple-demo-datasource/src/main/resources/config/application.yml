@@ -1,0 +1,13 @@
+server:
+  port: 11080
+
+spring:
+  application:
+    name: simple-demo-datasource
+  datasource:
+    mysql:
+      master:
+        database: simple_demo
+
+mybatis:
+  typeAliasesPackage: cn.iosd.demo.datasource.domain

@@ -6,13 +6,14 @@
 | Graalvm Native | 0.9.18  |
 
 ## 模块
-| 模块名称                    | 使用技术                    | 实现说明                          |
-|-------------------------|-------------------------|-------------------------------|
-| simple-starter-web      | web、springdoc           | SpringBoot Web、接口文档           |
-| simple-starter-redisson | redisson                | 自定义注解：分布式锁、分布式幂等              |
-| simple-starter-s3       | aws-java-sdk-s3         | 导入配置参数，封装管理接口                 |
-| simple-starter-socket   | netty-socketIo、redisson | 导入配置参数，socket集群使用redis订阅及广播机制 |
-| simple-starter-grpc     | grpc                    | 自定义注解：客户端、服务端                 |
+| 模块名称                      | 使用技术                        | 实现说明                          |
+|---------------------------|-----------------------------|-------------------------------|
+| simple-starter-web        | web、springdoc               | SpringBoot Web、接口文档           |
+| simple-starter-redisson   | redisson                    | 自定义注解：分布式锁、分布式幂等              |
+| simple-starter-s3         | aws-java-sdk-s3             | 导入配置参数，封装管理接口                 |
+| simple-starter-socket     | netty-socketIo、redisson     | 导入配置参数，socket集群使用redis订阅及广播机制 |
+| simple-starter-grpc       | grpc                        | 自定义注解：客户端、服务端                 |
+| simple-starter-datasource | hikari、dynamic、p6spy、flyway | 数据库连接池、多数据源、动态监控、自动建表、自动创建数据库 |
 
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |
@@ -24,6 +25,7 @@
 | simple-demo-socket-two  | 11050   | SOCKET:12020 |
 | simple-demo-grpc-server | 11060   | GRPC:12030   |
 | simple-demo-grpc-client | 11070   |              |
+| simple-demo-datasource  | 11080   |              |
 
 ## Simple支持配置项
 ~~~
@@ -67,4 +69,7 @@ simple:
       #缺省项为false 
       enabled: true
       port: 12030
+  datasource:
+    #缺省项为true 
+    autoCreateDatabase: true
 ~~~

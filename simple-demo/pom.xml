@@ -24,6 +24,7 @@
         <module>simple-demo-grpc-proto</module>
         <module>simple-demo-grpc-server</module>
         <module>simple-demo-grpc-client</module>
+        <module>simple-demo-datasource</module>
     </modules>
 
 </project>
