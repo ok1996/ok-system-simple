@@ -21,6 +21,7 @@
         <module>simple-starter-redisson</module>
         <module>simple-starter-s3</module>
         <module>simple-starter-socket</module>
+        <module>simple-starter-grpc</module>
     </modules>
 
 </project>

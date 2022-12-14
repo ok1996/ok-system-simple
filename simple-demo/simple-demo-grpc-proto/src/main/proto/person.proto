@@ -1,0 +1,22 @@
+syntax="proto3";
+
+option java_multiple_files = true;
+option java_package = "cn.iosd.demo.grpc.proto.person";
+option java_outer_classname="AddressBookProto";
+
+service PersonHello {
+  // Sends a greeting
+  rpc PersonSayHello (PersonHelloRequest) returns (PersonHelloReply) {
+  }
+}
+
+// The request message containing the user's name.
+message PersonHelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message PersonHelloReply {
+  string message = 1;
+}
+

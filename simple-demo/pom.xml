@@ -21,6 +21,9 @@
         <module>simple-demo-s3</module>
         <module>simple-demo-socket-one</module>
         <module>simple-demo-socket-two</module>
+        <module>simple-demo-grpc-proto</module>
+        <module>simple-demo-grpc-server</module>
+        <module>simple-demo-grpc-client</module>
     </modules>
 
 </project>

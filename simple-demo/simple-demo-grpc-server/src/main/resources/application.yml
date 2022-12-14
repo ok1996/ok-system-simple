@@ -1,0 +1,10 @@
+server:
+  port: 11060
+spring:
+  application:
+    name: simple-demo-grpc-server
+simple:
+  grpc:
+    server:
+      enabled: true
+      port: 12030

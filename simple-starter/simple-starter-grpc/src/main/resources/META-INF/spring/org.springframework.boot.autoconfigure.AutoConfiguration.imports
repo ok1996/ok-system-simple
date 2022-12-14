@@ -1,0 +1,2 @@
+cn.iosd.starter.grpc.server.scanner.ServiceScanner
+cn.iosd.starter.grpc.client.scanner.ServiceScanner

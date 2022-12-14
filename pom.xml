@@ -21,6 +21,7 @@
         <native-maven-plugin.version>0.9.18</native-maven-plugin.version>
 
         <hutool.version>5.8.10</hutool.version>
+        <io-grpc.version>1.51.0</io-grpc.version>
         <redisson.version>3.18.1</redisson.version>
         <netty-socketio.version>1.7.22</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
@@ -73,6 +74,24 @@
             </dependency>
 
             <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-protobuf</artifactId>
+                <version>${io-grpc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${io-grpc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-netty-shaded</artifactId>
+                <version>${io-grpc.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-web</artifactId>
                 <version>${ok-system-simple.version}</version>
@@ -96,6 +115,11 @@
                 <version>${ok-system-simple.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-grpc</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
