@@ -22,12 +22,12 @@
 
         <p6spy.version>3.9.1</p6spy.version>
         <hutool.version>5.8.10</hutool.version>
-        <io-grpc.version>1.51.0</io-grpc.version>
-        <redisson.version>3.18.1</redisson.version>
+        <io-grpc.version>1.51.1</io-grpc.version>
+        <redisson.version>3.19.0</redisson.version>
         <netty-socketio.version>1.7.22</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
-        <dynamic-datasource.version>3.6.0</dynamic-datasource.version>
-        <spring-boot-mybatis.version>3.0.0</spring-boot-mybatis.version>
+        <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
+        <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
         <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
 

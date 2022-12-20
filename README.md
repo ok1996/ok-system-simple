@@ -4,8 +4,6 @@
 | Java                      | 17       |
 | Spring Boot               | 3.0.0    |
 | Spring Cloud              | 2022.0.0 |
-| Graalvm Community Edition | 22.3.0   |
-| Native Maven Plugin       | 0.9.18   |
 
 ## 模块
 | 模块名称                      | 使用技术                        | 实现说明                          |
