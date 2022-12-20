@@ -44,3 +44,4 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+.mvn/
