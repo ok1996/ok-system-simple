@@ -14,6 +14,7 @@
 | simple-starter-socket     | netty-socketIo、redisson     | 导入配置参数，socket集群使用redis订阅及广播机制 |
 | simple-starter-grpc       | grpc                        | 自定义注解：客户端、服务端                 |
 | simple-starter-datasource | hikari、dynamic、p6spy、flyway | 数据库连接池、多数据源、动态监控、自动建表、自动创建数据库 |
+| simple-starter-freemarker | freemarker                  | 模板引擎，导入配置参数                   |
 
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |
@@ -26,6 +27,7 @@
 | simple-demo-grpc-server | 11060   | GRPC:12030   |
 | simple-demo-grpc-client | 11070   |              |
 | simple-demo-datasource  | 11080   |              |
+| simple-demo-freemarker  | 11090   |              |
 
 ## Simple支持配置项
 ~~~
@@ -72,4 +74,11 @@ simple:
   datasource:
     #缺省项为true 
     autoCreateDatabase: true
+  freemarker:  
+    resourceVoList:  
+        # resourceHandler：访问的前缀 resourceLocations：真实路径
+      - resourceHandler:  /layui/**
+        resourceLocations:  classpath:/plugin/layui/
+      - resourceHandler:  /Users/**
+        resourceLocations:  file:/Users/
 ~~~

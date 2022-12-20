@@ -25,6 +25,7 @@
         <module>simple-demo-grpc-server</module>
         <module>simple-demo-grpc-client</module>
         <module>simple-demo-datasource</module>
+        <module>simple-demo-freemarker</module>
     </modules>
 
 </project>

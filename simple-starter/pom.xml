@@ -23,6 +23,7 @@
         <module>simple-starter-socket</module>
         <module>simple-starter-grpc</module>
         <module>simple-starter-datasource</module>
+        <module>simple-starter-freemarker</module>
     </modules>
 
 </project>

@@ -1,0 +1,4 @@
+cn.iosd.starter.freemarker.properties.FreemarkerProperties
+cn.iosd.starter.freemarker.custom.CustomFreemarker
+cn.iosd.starter.freemarker.config.HttpConverterConfig
+cn.iosd.starter.freemarker.config.FreemarkerConfig

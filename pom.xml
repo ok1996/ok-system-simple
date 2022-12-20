@@ -148,6 +148,12 @@
                 <artifactId>simple-starter-datasource</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-freemarker</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

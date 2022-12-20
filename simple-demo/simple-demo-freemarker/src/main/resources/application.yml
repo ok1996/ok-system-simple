@@ -1,0 +1,25 @@
+server:
+  port: 11090
+spring:
+  application:
+    name: simple-demo-freemarker
+  freemarker:
+    allow-request-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    settings:
+      number_format: 0.##
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+
+simple:
+  freemarker:
+    resourceVoList:
+      # resourceHandler：访问的前缀 resourceLocations：真实路径
+      - resourceHandler:  /Users/**
+        resourceLocations:  file:/Users/
