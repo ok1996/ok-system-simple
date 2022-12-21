@@ -113,6 +113,13 @@
                 <version>${spring-boot-mybatis.version}</version>
             </dependency>
 
+            <!-- 工具类 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-db</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-web</artifactId>
@@ -177,9 +184,8 @@
         </dependency>
         <!-- 工具类 -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

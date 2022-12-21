@@ -1,6 +1,5 @@
 package cn.iosd.starter.s3.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.s3.domain.req.StorageObjectReq;
 import cn.iosd.starter.s3.domain.resp.StorageObjectResp;
 import cn.iosd.starter.s3.properties.S3Properties;
@@ -25,6 +24,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +77,7 @@ public class SimpleStorageServiceImpl implements SimpleStorageService, Initializ
     @Override
     public List<Bucket> getListBuckets(String bucketName) {
         List<Bucket> buckets = client.listBuckets();
-        if (StrUtil.isNotBlank(bucketName)) {
+        if (StringUtils.isNotBlank(bucketName)) {
             buckets = buckets.stream().filter(s -> s.getName().contains(bucketName)).collect(Collectors.toList());
         }
         return buckets;

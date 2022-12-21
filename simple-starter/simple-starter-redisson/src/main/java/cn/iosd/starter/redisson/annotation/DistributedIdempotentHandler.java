@@ -1,6 +1,5 @@
 package cn.iosd.starter.redisson.annotation;
 
-import cn.hutool.crypto.SecureUtil;
 import cn.iosd.starter.redisson.service.RedissonService;
 import cn.iosd.starter.redisson.utils.SpElUtil;
 import jakarta.annotation.Resource;
@@ -12,6 +11,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 
 import java.util.Map;
 import java.util.function.Supplier;
@@ -42,7 +42,7 @@ public class DistributedIdempotentHandler {
         final DistributedIdempotent idempotent = ((MethodSignature) point.getSignature()).getMethod()
                 .getAnnotation(DistributedIdempotent.class);
         final Map<String, Object> argMap = SpElUtil.getArgMap(point);
-        final Supplier<String> md5Supplier = () -> SecureUtil.md5(argMap.toString());
+        final Supplier<String> md5Supplier = () -> DigestUtils.md5DigestAsHex(argMap.toString().getBytes());
         final String lockName = getLockName(argMap, md5Supplier, idempotent.value());
         // init lock
         final RLock lock = redissonService.getLock(LOCK_KEY_PREFIX.concat(lockName));

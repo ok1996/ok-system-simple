@@ -1,11 +1,10 @@
 package cn.iosd.starter.redisson.service.impl;
 
-
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 
@@ -29,7 +28,7 @@ public class SentinelConfigImpl implements RedissonConfigService {
             //设置redis配置文件sentinel.conf配置的sentinel别名
             config.useSentinelServers().setMasterName(sentinelAliasName);
             config.useSentinelServers().setDatabase(database);
-            if (StrUtil.isNotBlank(password)) {
+            if (StringUtils.isNotBlank(password)) {
                 config.useSentinelServers().setPassword(password);
             }
             //设置sentinel节点的服务IP和端口

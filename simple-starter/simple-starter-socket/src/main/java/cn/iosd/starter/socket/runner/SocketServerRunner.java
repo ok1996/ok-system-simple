@@ -1,6 +1,5 @@
 package cn.iosd.starter.socket.runner;
 
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.socket.constant.SocketConstants;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
@@ -9,6 +8,7 @@ import com.corundumstudio.socketio.store.pubsub.DispatchMessage;
 import com.corundumstudio.socketio.store.pubsub.PubSubStore;
 import com.corundumstudio.socketio.store.pubsub.PubSubType;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,7 @@ public class SocketServerRunner implements CommandLineRunner {
             Object socketMessage = packet.getData();
             log.info("收到订阅消息：DispatchMessage={}", socketMessage);
             Collection<SocketIOClient> clients;
-            if (StrUtil.isEmpty(room) || SocketConstants.SEND_ALL.equals(room)) {
+            if (StringUtils.isEmpty(room) || SocketConstants.SEND_ALL.equals(room)) {
                 clients = socketIoServer.getBroadcastOperations().getClients();
             } else {
                 clients = socketIoServer.getRoomOperations(room).getClients();

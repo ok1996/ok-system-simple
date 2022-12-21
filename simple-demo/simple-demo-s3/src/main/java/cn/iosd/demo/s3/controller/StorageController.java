@@ -1,6 +1,5 @@
 package cn.iosd.demo.s3.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import cn.iosd.demo.s3.utils.FileTypeUtils;
 import cn.iosd.starter.s3.domain.req.StorageObjectReq;
 import cn.iosd.starter.s3.domain.resp.StorageObjectResp;
@@ -11,6 +10,7 @@ import com.amazonaws.services.s3.model.ObjectListing;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,7 +72,7 @@ public class StorageController {
     @PostMapping(value = "/object/upload")
     public Response<String> upload(@ModelAttribute MultipartFile file
             , @RequestParam(value = "bucketName") String bucketName) throws IOException {
-        String fileKey = RandomUtil.randomString(12) + "." + FileTypeUtils.getExtension(file);
+        String fileKey = RandomStringUtils.random(12) + "." + FileTypeUtils.getExtension(file);
         return Response.ok(simpleStorageService.upload(file.getContentType(), file.getSize(),
                 file.getInputStream(), bucketName, fileKey));
     }

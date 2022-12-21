@@ -1,9 +1,9 @@
 package cn.iosd.demo.socket.one.controller;
 
-import cn.hutool.core.util.StrUtil;
 import com.corundumstudio.socketio.AuthorizationListener;
 import com.corundumstudio.socketio.HandshakeData;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Configuration;
 
 
@@ -27,7 +27,7 @@ public class SocketAuthorization implements AuthorizationListener {
         String token = data.getSingleUrlParam("token");
         String room = data.getSingleUrlParam("room");
         log.info("socket认证参数: token={}, room={}", token, room);
-        if (StrUtil.isEmpty(token) || StrUtil.isEmpty(room)) {
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(room)) {
             log.error("socket认证失败, 参数不符合要求: token={}, room={}", token, room);
             return false;
         }

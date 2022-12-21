@@ -1,6 +1,5 @@
 package cn.iosd.starter.socket.handler;
 
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.socket.constant.SocketConstants;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -8,6 +7,7 @@ import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -75,11 +75,11 @@ public class MessageEventHandler {
      * @param room   多个使用逗号分割
      */
     private void joinRoom(SocketIOClient client, String room, String prefix) {
-        if (StrUtil.isNotBlank(room)) {
+        if (StringUtils.isNotBlank(room)) {
             String[] rooms = room.split(",");
             for (int i = 0; i < rooms.length; i++) {
                 if (!client.getAllRooms().contains(rooms[i])) {
-                    if (StrUtil.isEmpty(prefix)) {
+                    if (StringUtils.isEmpty(prefix)) {
                         prefix = "";
                     }
                     log.info("client join room:{}{}", prefix, rooms[i]);

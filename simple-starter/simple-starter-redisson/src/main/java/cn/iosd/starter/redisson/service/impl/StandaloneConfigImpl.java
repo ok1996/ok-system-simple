@@ -1,11 +1,10 @@
 package cn.iosd.starter.redisson.service.impl;
 
-
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
@@ -26,7 +25,7 @@ public class StandaloneConfigImpl implements RedissonConfigService {
             String redisAddr = RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue() + address;
             config.useSingleServer().setAddress(redisAddr);
             config.useSingleServer().setDatabase(database);
-            if (StrUtil.isNotBlank(password)) {
+            if (StringUtils.isNotBlank(password)) {
                 config.useSingleServer().setPassword(password);
             }
             log.info("初始化[单体部署]方式 连接地址:" + address);

@@ -1,8 +1,8 @@
 package cn.iosd.demo.s3.utils;
 
-import cn.hutool.core.util.StrUtil;
 import org.apache.commons.io.FilenameUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
@@ -19,7 +19,7 @@ public class FileTypeUtils {
      */
     public static final String getExtension(MultipartFile file) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        if (StrUtil.isNotEmpty(extension)) {
+        if (StringUtils.isNotEmpty(extension)) {
             extension = MimeTypeUtils.getExtension(Objects.requireNonNull(file.getContentType()));
         }
         return extension;

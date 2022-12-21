@@ -1,11 +1,10 @@
 package cn.iosd.starter.redisson.service.impl;
 
-
-import cn.hutool.core.util.StrUtil;
 import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 
 /**
@@ -28,7 +27,7 @@ public class ClusterConfigImpl implements RedissonConfigService {
                 config.useClusterServers()
                         .addNodeAddress(RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue()
                                 + addrTokens[i]);
-                if (StrUtil.isNotBlank(password)) {
+                if (StringUtils.isNotBlank(password)) {
                     config.useClusterServers().setPassword(password);
                 }
             }
