@@ -6,15 +6,15 @@
 | Spring Cloud              | 2022.0.0 |
 
 ## 模块
-| 模块名称                      | 使用技术                        | 实现说明                          |
-|---------------------------|-----------------------------|-------------------------------|
-| simple-starter-web        | web、springdoc               | SpringBoot Web、接口文档           |
-| simple-starter-redisson   | redisson                    | 自定义注解：分布式锁、分布式幂等              |
-| simple-starter-s3         | aws-java-sdk-s3             | 导入配置参数，封装管理接口                 |
-| simple-starter-socket     | netty-socketIo、redisson     | 导入配置参数，socket集群使用redis订阅及广播机制 |
-| simple-starter-grpc       | grpc                        | 自定义注解：客户端、服务端                 |
-| simple-starter-datasource | hikari、dynamic、p6spy、flyway | 数据库连接池、多数据源、动态监控、自动建表、自动创建数据库 |
-| simple-starter-freemarker | freemarker                  | 模板引擎，导入配置参数                   |
+| 模块名称                      | 使用场景     | 说明                          |
+|---------------------------|----------|-----------------------------|
+| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档       |
+| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等        |
+| simple-starter-s3         | 文件存储管理   | 简化导入配置参数，封装管理接口             |
+| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机 |
+| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端       |
+| simple-starter-datasource | 数据库连接应用  | 数据库连接使用hikari、自动创建数据库       |
+| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                    |
 
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |
