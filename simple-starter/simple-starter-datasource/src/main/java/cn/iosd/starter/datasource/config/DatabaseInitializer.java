@@ -1,19 +1,15 @@
 package cn.iosd.starter.datasource.config;
 
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.db.Db;
-import cn.hutool.db.DbUtil;
-import cn.hutool.db.StatementUtil;
-import cn.hutool.db.ds.simple.SimpleDataSource;
-import cn.hutool.db.sql.SqlExecutor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * 数据库不存在时创建数据库
@@ -33,46 +29,42 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
                 String url = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.url");
                 String username = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.username");
                 String password = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.password");
-                if (StrUtil.hasBlank(url, username, password)) {
+                if (StringUtils.isAllBlank(url, username, password)) {
                     return;
                 }
                 try {
-                    log.info("初始化数据库: 数据库若不存在则自动创建数据库");
                     initDatabase(url, username, password);
                 } catch (Exception e) {
-                    log.info("数据库初始化失败");
-                    log.error(e.getMessage(), e);
+                    log.error("数据库初始化失败", e.getMessage(), e);
                 }
             }
             RUN = true;
         }
     }
 
-    private void initDatabase(String url, String username, String password) {
+    private void initDatabase(String url, String username, String password) throws SQLException {
         String database = parseDatabaseName(url);
-        log.info("数据库名:{}", database);
         url = removeDatabaseName(url, database);
-        log.info("jdbcUrl:{}", url);
-
-        DataSource ds = new SimpleDataSource(url, username, password);
-        Db db = DbUtil.use(ds);
-        Connection conn = null;
+        log.info("AutoCreateDatabase：初始化数据库,数据库名:{},连接地址:{} ", database, url);
 
         String mysql = ":mysql:";
-        String createDataBaseSql = null;
+        StringBuffer createDataBaseSql = new StringBuffer();
         if (url.contains(mysql)) {
-            createDataBaseSql = StrUtil.format(
-                    "create database if not exists `{}` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci", database);
+            createDataBaseSql.append("create database if not exists `")
+                    .append(database)
+                    .append("` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci");
         }
 
+        Connection conn = DriverManager.getConnection(url, username, password);
+        Statement stat = conn.createStatement();
+
         try {
-            conn = ds.getConnection();
-            PreparedStatement preparedStatement = StatementUtil.prepareStatement(conn, createDataBaseSql, new Object[0]);
-            SqlExecutor.execute(preparedStatement, new Object[0]);
+            stat.executeUpdate(createDataBaseSql.toString());
         } catch (Exception e) {
             log.error("创建数据库失败:{}", e.getMessage(), e);
         } finally {
-            db.closeConnection(conn);
+            stat.close();
+            conn.close();
         }
 
     }
@@ -102,7 +94,7 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
                 ? jdbcUrl.substring(slashIndex)
                 : jdbcUrl.substring(slashIndex, questionMarkIndex);
 
-        if (StrUtil.isBlank(databaseName)) {
+        if (StringUtils.isBlank(databaseName)) {
             throw new IllegalArgumentException("can not parse database name from jdbcUrl:" + jdbcUrl);
         }
         return databaseName;

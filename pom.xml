@@ -21,7 +21,6 @@
         <native-maven-plugin.version>0.9.18</native-maven-plugin.version>
 
         <p6spy.version>3.9.1</p6spy.version>
-        <hutool.version>5.8.10</hutool.version>
         <io-grpc.version>1.51.1</io-grpc.version>
         <redisson.version>3.19.0</redisson.version>
         <netty-socketio.version>1.7.22</netty-socketio.version>
@@ -111,13 +110,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${spring-boot-mybatis.version}</version>
-            </dependency>
-
-            <!-- 工具类 -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-db</artifactId>
-                <version>${hutool.version}</version>
             </dependency>
 
             <dependency>
