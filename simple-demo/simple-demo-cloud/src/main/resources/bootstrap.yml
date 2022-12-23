@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: simple-demo-cloud
+  cloud:
+    nacos:
+      server-addr: http://127.0.0.1:8848
+      username:
+      password:
+      discovery:
+        registerEnabled: true
+        namespace:
+      config:
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - dataId: application.yml
+            group: DEFAULT_GROUP

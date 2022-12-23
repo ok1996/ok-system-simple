@@ -1,9 +1,10 @@
 ## 核心依赖
-| 依赖                        | 版本       |
-|---------------------------|----------|
-| Java                      | 17       |
-| Spring Boot               | 3.0.1    |
-| Spring Cloud              | 2022.0.0 |
+| 依赖                   | 版本             |
+|----------------------|----------------|
+| Java                 | 17             |
+| Spring Boot          | 3.0.1          |
+| Spring Cloud         | 2022.0.0       |
+| Spring Cloud Alibaba | 2022.0.0.0-RC1 |
 
 ## 模块
 | 模块名称                      | 使用场景     | 说明                          |
@@ -15,6 +16,7 @@
 | simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端       |
 | simple-starter-datasource | 数据库连接应用  | 数据库连接使用hikari、自动创建数据库       |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                    |
+| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等      |
 
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |

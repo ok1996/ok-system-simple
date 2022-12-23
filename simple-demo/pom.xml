@@ -26,6 +26,7 @@
         <module>simple-demo-grpc-client</module>
         <module>simple-demo-datasource</module>
         <module>simple-demo-freemarker</module>
+        <module>simple-demo-cloud</module>
     </modules>
 
 </project>
