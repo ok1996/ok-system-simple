@@ -30,6 +30,7 @@
 | simple-demo-grpc-client | 11070   |              |
 | simple-demo-datasource  | 11080   |              |
 | simple-demo-freemarker  | 11090   |              |
+| simple-demo-cloud       | 11100   |              |
 
 ## Simple支持配置项
 ~~~
