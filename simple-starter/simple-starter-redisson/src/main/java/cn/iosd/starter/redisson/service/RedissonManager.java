@@ -71,12 +71,20 @@ public class RedissonManager {
             //声明配置上下文
             RedissonConfigService redissonConfigService;
             switch (connectionType) {
-                case "standalone" -> redissonConfigService = new StandaloneConfigImpl();
-                case "sentinel" -> redissonConfigService = new SentinelConfigImpl();
-                case "cluster" -> redissonConfigService = new ClusterConfigImpl();
-                case "masterSlave" -> redissonConfigService = new MasterSlaveConfigImpl();
-                default ->
-                        throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
+                case "standalone":
+                    redissonConfigService = new StandaloneConfigImpl();
+                    break;
+                case "sentinel":
+                    redissonConfigService = new SentinelConfigImpl();
+                    break;
+                case "cluster":
+                    redissonConfigService = new ClusterConfigImpl();
+                    break;
+                case "masterSlave":
+                    redissonConfigService = new MasterSlaveConfigImpl();
+                    break;
+                default:
+                    throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
             }
             return redissonConfigService.createRedissonConfig(redissonProperties);
         }

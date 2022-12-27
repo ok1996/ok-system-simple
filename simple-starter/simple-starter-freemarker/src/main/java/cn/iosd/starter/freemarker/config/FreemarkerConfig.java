@@ -1,8 +1,8 @@
 package cn.iosd.starter.freemarker.config;
 
 import freemarker.template.Configuration;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 

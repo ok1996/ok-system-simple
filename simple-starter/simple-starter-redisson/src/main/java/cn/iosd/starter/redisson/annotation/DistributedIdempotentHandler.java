@@ -2,7 +2,7 @@ package cn.iosd.starter.redisson.annotation;
 
 import cn.iosd.starter.redisson.service.RedissonService;
 import cn.iosd.starter.redisson.utils.SpElUtil;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

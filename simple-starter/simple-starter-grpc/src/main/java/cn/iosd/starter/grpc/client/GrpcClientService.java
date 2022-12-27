@@ -37,10 +37,10 @@ public class GrpcClientService implements InitializingBean {
             GrpcClientBeans grpcClientBeans = beanInjection.getGrpcClientBeans();
             List<GrpcClientBeans.GrpcClientBean> lsGrpcClientBean = grpcClientBeans.getInjections();
             lsGrpcClientBean.forEach(v -> {
-                GrpcClient annotation = v.client();
-                Class<?> type = v.field().getType();
-                Field field = v.field();
-                Object bean = v.bean();
+                GrpcClient annotation = v.getClient();
+                Class<?> type = v.getField().getType();
+                Field field = v.getField();
+                Object bean = v.getBean();
 
                 if (grpcClientProperties.getChannel()!=null
                         &&grpcClientProperties.getChannel().get(annotation.value())!=null){
@@ -48,7 +48,7 @@ public class GrpcClientService implements InitializingBean {
                     GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
                     GrpcChannel client = new GrpcChannel(properties.getAddress());
                     Object object = client.getBlockingStub(type);
-                    boolean accessible = field.canAccess(bean);
+                    boolean accessible = field.isAccessible();
                     ReflectionUtils.makeAccessible(field);
                     try {
                         field.set(bean, object);

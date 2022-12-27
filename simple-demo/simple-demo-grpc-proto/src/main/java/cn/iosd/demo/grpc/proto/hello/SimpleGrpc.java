@@ -7,7 +7,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  * The greeting service definition.
  * </pre>
  */
-@jakarta.annotation.Generated(
+@javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.51.0)",
     comments = "Source: helloworld.proto")
 @io.grpc.stub.annotations.GrpcGenerated

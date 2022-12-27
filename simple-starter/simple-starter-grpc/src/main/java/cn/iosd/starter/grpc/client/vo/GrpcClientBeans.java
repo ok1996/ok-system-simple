@@ -15,8 +15,20 @@ public class GrpcClientBeans {
     private final List<GrpcClientBean> injections = new ArrayList<>();
 
 
-    public record GrpcClientBean(Object bean, GrpcClient client, Field field) {
+    @Data
+    public static class GrpcClientBean {
 
+        private final Object bean;
+
+        private final GrpcClient client;
+
+        private final Field field;
+
+        public GrpcClientBean(final Object bean, final GrpcClient client, final Field field) {
+            this.bean = bean;
+            this.client = client;
+            this.field = field;
+        }
     }
 
     public GrpcClientBeans add(final GrpcClientBean injection) {

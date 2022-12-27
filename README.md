@@ -1,10 +1,11 @@
 ## 核心依赖
-| 依赖                   | 版本             |
-|----------------------|----------------|
-| Java                 | 17             |
-| Spring Boot          | 3.0.1          |
-| Spring Cloud         | 2022.0.0       |
-| Spring Cloud Alibaba | 2022.0.0.0-RC1 |
+| 依赖                   | 版本           |
+|----------------------|--------------|
+| Java                 | 1.8          |
+| Spring Boot          | 2.7.7        |
+| Spring Cloud         | 2021.0.5     |
+| Spring Cloud Alibaba | 2021.0.4.0   |
+| Ok System Simple     | 2022.1.0.0   |
 
 ## 模块
 | 模块名称                      | 使用场景     | 说明                          |
