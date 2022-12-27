@@ -9,7 +9,7 @@
         <version>2022.1.0.0</version>
     </parent>
 
-    <artifactId>simple-demo-boot3</artifactId>
+    <artifactId>simple-demo-boot</artifactId>
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
