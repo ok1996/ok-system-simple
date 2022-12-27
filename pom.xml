@@ -12,14 +12,16 @@
 
     <properties>
         <ok-system-simple.version>1.0.0</ok-system-simple.version>
+
+        <maven-compiler.version>3.10.1</maven-compiler.version>
+        <native-maven-plugin.version>0.9.18</native-maven-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <java.version>17</java.version>
         <spring-boot.version>3.0.1</spring-boot.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-compiler.version>3.10.1</maven-compiler.version>
-        <native-maven-plugin.version>0.9.18</native-maven-plugin.version>
 
         <p6spy.version>3.9.1</p6spy.version>
         <io-grpc.version>1.51.1</io-grpc.version>
@@ -28,8 +30,8 @@
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
-        <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
         <knife4j-openapi-starter.version>4.0.0</knife4j-openapi-starter.version>
+        <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
 
     <!-- 依赖声明 -->
