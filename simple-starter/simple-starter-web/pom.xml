@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-web</artifactId>
 
+    <description>
+        simple starter web
+    </description>
+
     <dependencies>
         <!-- SpringBoot Web -->
         <dependency>

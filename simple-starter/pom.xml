@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <description>
-        simple-starter父模块
+        simple starter
     </description>
 
     <modules>

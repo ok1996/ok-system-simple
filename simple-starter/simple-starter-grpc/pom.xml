@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-grpc</artifactId>
 
+    <description>
+        simple starter grpc
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>io.grpc</groupId>
