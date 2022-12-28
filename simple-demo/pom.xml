@@ -16,7 +16,7 @@
         simple-demo示例模块
     </description>
     <modules>
-        <module>simple-demo-boot3</module>
+        <module>simple-demo-boot</module>
         <module>simple-demo-redisson</module>
         <module>simple-demo-s3</module>
         <module>simple-demo-socket-one</module>

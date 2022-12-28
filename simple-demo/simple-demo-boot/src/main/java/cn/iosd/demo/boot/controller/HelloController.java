@@ -1,4 +1,4 @@
-package cn.iosd.demo.boot3.controller;
+package cn.iosd.demo.boot.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
