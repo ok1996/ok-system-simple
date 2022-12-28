@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-redisson</artifactId>
 
+    <description>
+        simple starter redisson
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>org.redisson</groupId>

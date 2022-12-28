@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-datasource</artifactId>
 
+    <description>
+        simple starter datasource
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-cloud</artifactId>
 
+    <description>
+        simple starter cloud
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

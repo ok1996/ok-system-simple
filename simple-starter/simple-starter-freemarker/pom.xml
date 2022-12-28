@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-freemarker</artifactId>
 
+    <description>
+        simple starter freemarker
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>

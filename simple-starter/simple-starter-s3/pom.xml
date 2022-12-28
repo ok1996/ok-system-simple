@@ -11,6 +11,10 @@
 
     <artifactId>simple-starter-s3</artifactId>
 
+    <description>
+        simple starter s3
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>com.amazonaws</groupId>
