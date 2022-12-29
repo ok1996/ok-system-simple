@@ -12,7 +12,7 @@
     <artifactId>simple-starter-datasource</artifactId>
 
     <description>
-        simple starter datasource
+        Simple Starter Datasource
     </description>
 
     <dependencies>
