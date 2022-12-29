@@ -1,12 +1,13 @@
 package cn.iosd.starter.web.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serializable;
 
 /**
- * 响应信息主体
- *
  * @author ok1996
  */
+@Schema(description = "响应信息主体")
 public class Response<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,10 +21,13 @@ public class Response<T> implements Serializable {
      */
     public static final int FAIL = 500;
 
+    @Schema(description = "状态码")
     private int code;
 
+    @Schema(description = "响应信息")
     private String msg;
 
+    @Schema(description = "响应数据")
     private T data;
 
     public static <T> Response<T> ok() {
@@ -90,7 +94,7 @@ public class Response<T> implements Serializable {
         this.data = data;
     }
 
-    public static <T> Boolean isError(Response<T> ret){
+    public static <T> Boolean isError(Response<T> ret) {
         return !isSuccess(ret);
     }
 

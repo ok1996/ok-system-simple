@@ -29,6 +29,7 @@
         <io-grpc.version>1.51.1</io-grpc.version>
         <redisson.version>3.19.0</redisson.version>
         <netty-socketio.version>1.7.22</netty-socketio.version>
+        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>2.3.0</spring-boot-mybatis.version>
@@ -131,6 +132,13 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${spring-boot-mybatis.version}</version>
+            </dependency>
+
+            <!-- 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
             </dependency>
 
             <dependency>
