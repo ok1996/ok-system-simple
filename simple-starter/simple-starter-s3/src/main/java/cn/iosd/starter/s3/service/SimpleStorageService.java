@@ -1,7 +1,7 @@
 package cn.iosd.starter.s3.service;
 
-import cn.iosd.starter.s3.domain.req.StorageObjectReq;
-import cn.iosd.starter.s3.domain.resp.StorageObjectResp;
+import cn.iosd.starter.s3.domain.StorageObjectRequest;
+import cn.iosd.starter.s3.domain.StorageObjectResponse;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 
@@ -51,10 +51,10 @@ public interface SimpleStorageService {
     /**
      * 获取对象-首页列表
      *
-     * @param storageObjectReq
+     * @param storageObjectRequest
      * @return
      */
-    StorageObjectResp getStorageObject(StorageObjectReq storageObjectReq);
+    StorageObjectResponse getStorageObject(StorageObjectRequest storageObjectRequest);
 
     /**
      * 获取对象-下一页列表
@@ -62,7 +62,7 @@ public interface SimpleStorageService {
      * @param objectListing 首页信息
      * @return
      */
-    StorageObjectResp getStorageObjectNext(ObjectListing objectListing);
+    StorageObjectResponse getStorageObjectNext(ObjectListing objectListing);
 
     /**
      * 删除对象

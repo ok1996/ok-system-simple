@@ -1,8 +1,8 @@
 package cn.iosd.demo.s3.controller;
 
 import cn.iosd.demo.s3.utils.FileTypeUtils;
-import cn.iosd.starter.s3.domain.req.StorageObjectReq;
-import cn.iosd.starter.s3.domain.resp.StorageObjectResp;
+import cn.iosd.starter.s3.domain.StorageObjectRequest;
+import cn.iosd.starter.s3.domain.StorageObjectResponse;
 import cn.iosd.starter.s3.service.SimpleStorageService;
 import cn.iosd.starter.web.domain.Response;
 import com.amazonaws.services.s3.model.Bucket;
@@ -57,13 +57,13 @@ public class StorageController {
 
     @Operation(summary = "获取文件列表-首页")
     @PostMapping("/object")
-    public Response<StorageObjectResp> getStorageObject(@RequestBody StorageObjectReq storageObjectReq) {
-        return Response.ok(simpleStorageService.getStorageObject(storageObjectReq));
+    public Response<StorageObjectResponse> getStorageObject(@RequestBody StorageObjectRequest storageObjectRequest) {
+        return Response.ok(simpleStorageService.getStorageObject(storageObjectRequest));
     }
 
     @Operation(summary = "获取文件列表-下一页")
     @PostMapping("/object/Next")
-    public Response<StorageObjectResp> getStorageObjectNext(
+    public Response<StorageObjectResponse> getStorageObjectNext(
             @RequestBody @Parameter(name = "本页对象列表信息") ObjectListing objectListing) {
         return Response.ok(simpleStorageService.getStorageObjectNext(objectListing));
     }

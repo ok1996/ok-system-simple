@@ -1,4 +1,4 @@
-package cn.iosd.starter.s3.domain.req;
+package cn.iosd.starter.s3.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StorageObjectReq {
+public class StorageObjectRequest {
     /**
      * 存储桶
      */

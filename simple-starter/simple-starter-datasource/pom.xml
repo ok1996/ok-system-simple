@@ -52,12 +52,6 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-web</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
 </project>
