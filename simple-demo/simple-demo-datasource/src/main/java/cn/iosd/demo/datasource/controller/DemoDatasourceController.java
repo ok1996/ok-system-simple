@@ -2,7 +2,10 @@ package cn.iosd.demo.datasource.controller;
 
 import cn.iosd.demo.datasource.domain.DemoDatasource;
 import cn.iosd.demo.datasource.service.IDemoDatasourceService;
+import cn.iosd.starter.datasource.domain.PageRequest;
+import cn.iosd.starter.datasource.domain.PageResponse;
 import cn.iosd.starter.web.domain.Response;
+import com.github.pagehelper.PageHelper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +32,19 @@ public class DemoDatasourceController {
     private IDemoDatasourceService demoDatasourceService;
 
     @Operation(summary = "查询列表")
-    @GetMapping("/list")
-    public Response<List<DemoDatasource>> list(DemoDatasource demoDatasource) {
+    @PostMapping("/list")
+    public Response<List<DemoDatasource>> list(@RequestBody DemoDatasource demoDatasource) {
         return Response.ok(demoDatasourceService.selectDemoDatasourceList(demoDatasource));
+    }
+
+    @Operation(summary = "查询分页")
+    @PostMapping("/page")
+    public Response<PageResponse<DemoDatasource>> list(@RequestBody PageRequest<DemoDatasource> req) {
+        PageHelper.startPage(req.getPageNum(), req.getPageSize(), req.getOrderBy());
+        return Response.ok(
+                PageResponse.getPage(
+                        demoDatasourceService.selectDemoDatasourceList(req.getData())
+                ));
     }
 
     @Operation(summary = "获取详细信息")
