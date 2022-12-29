@@ -12,7 +12,7 @@
     <artifactId>simple-starter-grpc</artifactId>
 
     <description>
-        simple starter grpc
+        Simple Starter Grpc
     </description>
 
     <dependencies>

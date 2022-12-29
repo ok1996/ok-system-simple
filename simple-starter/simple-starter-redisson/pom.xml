@@ -12,7 +12,7 @@
     <artifactId>simple-starter-redisson</artifactId>
 
     <description>
-        simple starter redisson
+        Simple Starter Redisson
     </description>
 
     <dependencies>
