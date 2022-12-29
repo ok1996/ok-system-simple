@@ -1,4 +1,4 @@
-package cn.iosd.starter.s3.domain.resp;
+package cn.iosd.starter.s3.domain;
 
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StorageObjectResp {
+public class StorageObjectResponse {
     /**
      * 对象列表信息,注：truncated 为true 存在下一页
      */

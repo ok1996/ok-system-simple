@@ -1,7 +1,7 @@
 package cn.iosd.starter.s3.service.impl;
 
-import cn.iosd.starter.s3.domain.req.StorageObjectReq;
-import cn.iosd.starter.s3.domain.resp.StorageObjectResp;
+import cn.iosd.starter.s3.domain.StorageObjectRequest;
+import cn.iosd.starter.s3.domain.StorageObjectResponse;
 import cn.iosd.starter.s3.properties.S3Properties;
 import cn.iosd.starter.s3.service.SimpleStorageService;
 import com.amazonaws.ClientConfiguration;
@@ -94,24 +94,24 @@ public class SimpleStorageServiceImpl implements SimpleStorageService, Initializ
     }
 
     @Override
-    public StorageObjectResp getStorageObject(StorageObjectReq storageObjectReq) {
+    public StorageObjectResponse getStorageObject(StorageObjectRequest storageObjectRequest) {
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
-                .withBucketName(storageObjectReq.getBucketName())
-                .withPrefix(storageObjectReq.getPrefixFileName())
-                .withMaxKeys(storageObjectReq.getPageSize());
+                .withBucketName(storageObjectRequest.getBucketName())
+                .withPrefix(storageObjectRequest.getPrefixFileName())
+                .withMaxKeys(storageObjectRequest.getPageSize());
         ObjectListing objectListing = client.listObjects(listObjectsRequest);
         List<S3ObjectSummary> summaries = objectListing.getObjectSummaries();
-        return StorageObjectResp.builder()
+        return StorageObjectResponse.builder()
                 .summaries(summaries)
                 .objectListing(objectListing)
                 .build();
     }
 
     @Override
-    public StorageObjectResp getStorageObjectNext(ObjectListing objectListing) {
+    public StorageObjectResponse getStorageObjectNext(ObjectListing objectListing) {
         ObjectListing objectListingNext = client.listNextBatchOfObjects(objectListing);
         List<S3ObjectSummary> summaries = objectListing.getObjectSummaries();
-        return StorageObjectResp.builder()
+        return StorageObjectResponse.builder()
                 .summaries(summaries)
                 .objectListing(objectListingNext)
                 .build();
