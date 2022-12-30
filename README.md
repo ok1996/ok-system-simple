@@ -5,7 +5,7 @@
 | Spring Boot          | 2.7.7               |
 | Spring Cloud         | 2021.0.5            |
 | Spring Cloud Alibaba | 2021.0.4.0          |
-| Ok System Simple     | 2023.1.3.0-SNAPSHOT |
+| Ok System Simple     | 2022.1.3.0-SNAPSHOT |
 
 ## 模块
 | 模块名称                      | 使用场景     | 说明                          |
