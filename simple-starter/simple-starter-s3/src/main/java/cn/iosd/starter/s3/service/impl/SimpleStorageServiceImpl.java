@@ -23,8 +23,9 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,9 @@ import java.util.stream.Collectors;
 /**
  * @author ok1996
  */
-@Slf4j
 @Service
 public class SimpleStorageServiceImpl implements SimpleStorageService, InitializingBean {
+    private static final Logger log = LoggerFactory.getLogger(SimpleStorageServiceImpl.class);
 
     @Resource
     private S3Properties s3Properties;
@@ -101,20 +102,20 @@ public class SimpleStorageServiceImpl implements SimpleStorageService, Initializ
                 .withMaxKeys(storageObjectRequest.getPageSize());
         ObjectListing objectListing = client.listObjects(listObjectsRequest);
         List<S3ObjectSummary> summaries = objectListing.getObjectSummaries();
-        return StorageObjectResponse.builder()
-                .summaries(summaries)
-                .objectListing(objectListing)
-                .build();
+        StorageObjectResponse response = new StorageObjectResponse();
+        response.setSummaries(summaries);
+        response.setObjectListing(objectListing);
+        return response;
     }
 
     @Override
     public StorageObjectResponse getStorageObjectNext(ObjectListing objectListing) {
         ObjectListing objectListingNext = client.listNextBatchOfObjects(objectListing);
         List<S3ObjectSummary> summaries = objectListing.getObjectSummaries();
-        return StorageObjectResponse.builder()
-                .summaries(summaries)
-                .objectListing(objectListingNext)
-                .build();
+        StorageObjectResponse response = new StorageObjectResponse();
+        response.setSummaries(summaries);
+        response.setObjectListing(objectListingNext);
+        return response;
     }
 
     @Override

@@ -2,7 +2,7 @@ server:
   port: 11050
 spring:
   application:
-    name: simple-demo-s3
+    name: simple-demo-socket-two
 simple:
   ## 无Redis配置情况下，默认开启Socket单机
   redisson:

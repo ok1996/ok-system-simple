@@ -6,8 +6,9 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,10 +16,9 @@ import org.springframework.stereotype.Component;
  *
  * @author ok1996
  */
-@Slf4j
 @Component
 public class MessageEventHandler {
-
+    private static final Logger log = LoggerFactory.getLogger(MessageEventHandler.class);
 
     /**
      * 添加connect事件，当客户端发起连接时调用

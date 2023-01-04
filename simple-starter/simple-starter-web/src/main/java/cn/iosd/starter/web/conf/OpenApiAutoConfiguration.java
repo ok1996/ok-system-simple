@@ -23,7 +23,6 @@ import java.util.Map;
  */
 @Configuration
 public class OpenApiAutoConfiguration {
-
     @Resource
     private OpenApiProperties openApiProperties;
 

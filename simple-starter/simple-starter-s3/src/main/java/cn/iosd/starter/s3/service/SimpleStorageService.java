@@ -12,7 +12,6 @@ import java.util.List;
  * @author ok1996
  */
 public interface SimpleStorageService {
-
     /**
      * 上传文件
      *

@@ -2,10 +2,11 @@ package cn.iosd.starter.redisson.annotation;
 
 import cn.iosd.starter.redisson.service.RedissonService;
 import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +18,9 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-@Slf4j
 @ConditionalOnProperty(prefix = "simple.redisson", name = "enabled", havingValue = "true")
 public class DistributedLockHandler {
+    private static final Logger log = LoggerFactory.getLogger(DistributedLockHandler.class);
 
     @Resource
     RedissonService redissonService;

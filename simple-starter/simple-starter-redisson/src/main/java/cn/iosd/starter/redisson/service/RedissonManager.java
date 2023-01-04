@@ -5,7 +5,6 @@ import cn.iosd.starter.redisson.service.impl.ClusterConfigImpl;
 import cn.iosd.starter.redisson.service.impl.MasterSlaveConfigImpl;
 import cn.iosd.starter.redisson.service.impl.SentinelConfigImpl;
 import cn.iosd.starter.redisson.service.impl.StandaloneConfigImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
 
@@ -15,9 +14,7 @@ import org.redisson.config.Config;
  *
  * @author ok1996
  */
-@Slf4j
 public class RedissonManager {
-
     private Config config;
 
     private Redisson redisson;
@@ -27,7 +24,6 @@ public class RedissonManager {
             config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
             redisson = (Redisson) Redisson.create(config);
         } catch (Exception e) {
-            log.error("Redisson init error", e);
             throw new IllegalArgumentException("Redisson init error. Please check the configuration");
         }
     }

@@ -3,9 +3,10 @@ package cn.iosd.starter.redisson.service.impl;
 import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -13,8 +14,8 @@ import org.redisson.config.Config;
  *
  * @author ok1996
  */
-@Slf4j
 public class SentinelConfigImpl implements RedissonConfigService {
+    private static final Logger log = LoggerFactory.getLogger(SentinelConfigImpl.class);
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {

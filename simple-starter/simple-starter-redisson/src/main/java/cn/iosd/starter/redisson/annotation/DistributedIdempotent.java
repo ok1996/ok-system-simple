@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedIdempotent {
-
     String METHOD_NAME = "RedissonMethodName";
 
     /**

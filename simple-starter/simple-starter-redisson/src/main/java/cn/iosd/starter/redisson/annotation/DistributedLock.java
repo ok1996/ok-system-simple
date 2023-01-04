@@ -17,7 +17,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface DistributedLock {
-
     /**
      * 锁的名称
      */

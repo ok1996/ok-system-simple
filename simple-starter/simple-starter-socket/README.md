@@ -59,3 +59,13 @@ curl -X POST -H  "Accept:*/*" -H  "Content-Type:application/json" -d "{\"eventNa
 ~~~
 curl -X POST -H  "Accept:*/*" -H  "Content-Type:application/json" -d "{\"im\":\"00\"}" "http://localhost:11040/message/broadcast"
 ~~~
+
+## 异常提示
+若提示以下错误
+~~~
+java.util.ImmutableCollections$Set12.contains(java.lang.Object) accessible: module java.base does not “opens java.util” to unnamed module
+~~~
+则增加jvm参数即可
+~~~
+--add-opens java.base/java.util=ALL-UNNAMED
+~~~

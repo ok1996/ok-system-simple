@@ -3,7 +3,8 @@ package cn.iosd.starter.socket.handler;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.listener.ExceptionListener;
 import io.netty.channel.ChannelHandlerContext;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,9 +14,9 @@ import java.util.List;
  *
  * @author ok1996
  */
-@Slf4j
 @Component
 public class NettyExceptionListener implements ExceptionListener {
+    private static final Logger log = LoggerFactory.getLogger(NettyExceptionListener.class);
 
     @Override
     public void onEventException(Exception e, List<Object> args, SocketIOClient client) {
