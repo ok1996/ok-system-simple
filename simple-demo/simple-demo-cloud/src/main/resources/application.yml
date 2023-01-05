@@ -16,3 +16,7 @@ spring:
         shared-configs:
           - dataId: application.yml
             group: DEFAULT_GROUP
+  config:
+    import:
+      - optional:nacos:application.yml
+      - optional:nacos:simple-demo-cloud.yml?group=DEFAULT_GROUP&refreshEnabled=false
