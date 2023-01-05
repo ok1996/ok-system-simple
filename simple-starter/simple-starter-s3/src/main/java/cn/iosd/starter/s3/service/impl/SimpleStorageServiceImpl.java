@@ -22,11 +22,11 @@ import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class SimpleStorageServiceImpl implements SimpleStorageService, InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(SimpleStorageServiceImpl.class);
 
-    @Resource
+    @Autowired
     private S3Properties s3Properties;
 
     private AmazonS3 client;

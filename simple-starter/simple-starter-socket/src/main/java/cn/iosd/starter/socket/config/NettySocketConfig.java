@@ -10,7 +10,6 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import com.corundumstudio.socketio.store.RedissonStoreFactory;
 import com.corundumstudio.socketio.store.pubsub.PubSubStore;
-import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,10 @@ import org.springframework.context.annotation.Configuration;
 public class NettySocketConfig {
     private static final Logger log = LoggerFactory.getLogger(NettySocketConfig.class);
 
-    @Resource
+    @Autowired
     private SocketProperties socketProperties;
 
-    @Resource
+    @Autowired
     private NettyExceptionListener nettyExceptionListener;
 
     @Autowired(required = false)

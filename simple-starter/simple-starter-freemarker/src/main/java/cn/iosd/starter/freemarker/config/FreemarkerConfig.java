@@ -2,7 +2,7 @@ package cn.iosd.starter.freemarker.config;
 
 import freemarker.template.Configuration;
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FreemarkerConfig {
 
-    @Resource
+    @Autowired
     private Configuration configuration;
 
     @PostConstruct

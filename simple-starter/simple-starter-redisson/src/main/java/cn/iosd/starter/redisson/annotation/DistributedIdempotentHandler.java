@@ -2,7 +2,6 @@ package cn.iosd.starter.redisson.annotation;
 
 import cn.iosd.starter.redisson.service.RedissonService;
 import cn.iosd.starter.redisson.utils.SpElUtil;
-import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,6 +9,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
@@ -30,7 +30,7 @@ public class DistributedIdempotentHandler {
 
     private static final String LOCK_KEY_PREFIX = "RedissonIdempotent:";
 
-    @Resource
+    @Autowired
     RedissonService redissonService;
 
     /**

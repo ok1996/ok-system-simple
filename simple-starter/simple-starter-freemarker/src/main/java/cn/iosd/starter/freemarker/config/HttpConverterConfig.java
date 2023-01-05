@@ -2,7 +2,7 @@ package cn.iosd.starter.freemarker.config;
 
 import cn.iosd.starter.freemarker.properties.FreemarkerProperties;
 import cn.iosd.starter.freemarker.vo.ResourceVo;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +17,7 @@ import java.util.List;
 @Configuration
 public class HttpConverterConfig implements WebMvcConfigurer {
 
-    @Resource
+    @Autowired
     private FreemarkerProperties freemarkerProperties;
 
     @Override

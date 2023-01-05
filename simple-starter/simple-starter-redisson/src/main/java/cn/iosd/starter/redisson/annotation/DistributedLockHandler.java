@@ -1,12 +1,12 @@
 package cn.iosd.starter.redisson.annotation;
 
 import cn.iosd.starter.redisson.service.RedissonService;
-import jakarta.annotation.Resource;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class DistributedLockHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedLockHandler.class);
 
-    @Resource
+    @Autowired
     RedissonService redissonService;
 
     public final static String LOCK_NAME_APPEND = "RedissonLock:";
