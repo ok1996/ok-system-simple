@@ -1,13 +1,18 @@
 package cn.iosd.starter.grpc.client.properties;
 
-import lombok.Data;
 
 /**
  * @author ok1996
  */
-@Data
 public class GrpcChannelProperties {
 
     private String address;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

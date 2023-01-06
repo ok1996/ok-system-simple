@@ -11,8 +11,7 @@ spring:
         namespace:
       config:
         namespace:
-        file-extension: yml
-        # 共享配置
-        shared-configs:
-          - dataId: application.yml
-            group: DEFAULT_GROUP
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:simple-demo-cloud.yml?group=DEFAULT_GROUP&refreshEnabled=false

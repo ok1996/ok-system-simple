@@ -5,7 +5,8 @@ import cn.iosd.starter.grpc.server.properties.GrpcServerProperties;
 import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ import java.util.Map;
  *
  * @author ok1996
  */
-@Slf4j
 @Service
 public class GrpcServerService implements InitializingBean, ApplicationContextAware {
+    private static final Logger log = LoggerFactory.getLogger(GrpcServerService.class);
 
     @Autowired
     private GrpcServerProperties grpcServerProperties;

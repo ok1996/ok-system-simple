@@ -5,7 +5,8 @@ import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +20,9 @@ import java.util.List;
  *
  * @author ok1996
  */
-@Slf4j
 @Configuration
 public class GrpcClientService implements InitializingBean {
+    private static final Logger log = LoggerFactory.getLogger(GrpcClientService.class);
 
     @Autowired
     private GrpcClientProperties grpcClientProperties;
@@ -42,8 +43,8 @@ public class GrpcClientService implements InitializingBean {
                 Field field = v.getField();
                 Object bean = v.getBean();
 
-                if (grpcClientProperties.getChannel()!=null
-                        &&grpcClientProperties.getChannel().get(annotation.value())!=null){
+                if (grpcClientProperties.getChannel() != null
+                        && grpcClientProperties.getChannel().get(annotation.value()) != null) {
 
                     GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
                     GrpcChannel client = new GrpcChannel(properties.getAddress());
@@ -57,8 +58,8 @@ public class GrpcClientService implements InitializingBean {
                         throw new RuntimeException(e);
                     }
                     field.setAccessible(accessible);
-                }else {
-                    log.error("配置文件缺失请核查，GrpcChannel未装配值：{}",annotation.value());
+                } else {
+                    log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
                 }
             });
             log.info("完成GrpcChannel装配");

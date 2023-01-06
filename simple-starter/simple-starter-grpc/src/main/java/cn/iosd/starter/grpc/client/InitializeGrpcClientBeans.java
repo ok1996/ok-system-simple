@@ -2,7 +2,6 @@ package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
-import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -16,8 +15,11 @@ import org.springframework.util.ReflectionUtils;
 @Component
 public class InitializeGrpcClientBeans implements BeanPostProcessor {
 
-    @Getter
     final GrpcClientBeans grpcClientBeans = new GrpcClientBeans();
+
+    public GrpcClientBeans getGrpcClientBeans() {
+        return grpcClientBeans;
+    }
 
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;

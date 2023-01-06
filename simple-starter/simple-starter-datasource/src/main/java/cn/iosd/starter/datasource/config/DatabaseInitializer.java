@@ -1,8 +1,9 @@
 package cn.iosd.starter.datasource.config;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -16,8 +17,9 @@ import java.sql.Statement;
  *
  * @author ok1996
  */
-@Slf4j
 public class DatabaseInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+    private static final Logger log = LoggerFactory.getLogger(DatabaseInitializer.class);
+
     private static volatile boolean RUN = false;
     private static final String STR_FALSE = "false";
 

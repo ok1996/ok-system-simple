@@ -4,9 +4,10 @@ package cn.iosd.starter.redisson.service.impl;
 import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,8 @@ import java.util.List;
  *
  * @author ok1996
  */
-@Slf4j
 public class MasterSlaveConfigImpl implements RedissonConfigService {
+    private static final Logger log = LoggerFactory.getLogger(MasterSlaveConfigImpl.class);
 
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {

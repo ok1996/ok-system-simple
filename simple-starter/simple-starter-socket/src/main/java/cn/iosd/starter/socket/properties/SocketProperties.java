@@ -1,13 +1,11 @@
 package cn.iosd.starter.socket.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author ok1996
  */
-@Data
 @Configuration
 @ConfigurationProperties("simple.socket")
 public class SocketProperties {
@@ -31,4 +29,43 @@ public class SocketProperties {
      */
     private Integer upgradeTimeout;
 
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public Integer getPingInterval() {
+        return pingInterval;
+    }
+
+    public void setPingInterval(Integer pingInterval) {
+        this.pingInterval = pingInterval;
+    }
+
+    public Integer getPingTimeout() {
+        return pingTimeout;
+    }
+
+    public void setPingTimeout(Integer pingTimeout) {
+        this.pingTimeout = pingTimeout;
+    }
+
+    public Integer getUpgradeTimeout() {
+        return upgradeTimeout;
+    }
+
+    public void setUpgradeTimeout(Integer upgradeTimeout) {
+        this.upgradeTimeout = upgradeTimeout;
+    }
 }

@@ -1,7 +1,6 @@
 package cn.iosd.starter.datasource.domain;
 
 import com.github.pagehelper.PageInfo;
-import lombok.Data;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  *
  * @author ok1996
  */
-@Data
 public class PageResponse<T> {
     /**
      * 当前页
@@ -37,5 +35,37 @@ public class PageResponse<T> {
         rspData.setPageSize(pageInfo.getPageSize());
         rspData.setPageNum(pageInfo.getPageNum());
         return rspData;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
     }
 }

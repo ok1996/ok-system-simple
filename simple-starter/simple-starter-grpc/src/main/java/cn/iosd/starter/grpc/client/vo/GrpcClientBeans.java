@@ -1,8 +1,6 @@
 package cn.iosd.starter.grpc.client.vo;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
-import lombok.Data;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +8,10 @@ import java.util.List;
 /**
  * @author ok1996
  */
-@Data
 public class GrpcClientBeans {
     private final List<GrpcClientBean> injections = new ArrayList<>();
 
 
-    @Data
     public static class GrpcClientBean {
 
         private final Object bean;
@@ -29,6 +25,18 @@ public class GrpcClientBeans {
             this.client = client;
             this.field = field;
         }
+
+        public Object getBean() {
+            return bean;
+        }
+
+        public GrpcClient getClient() {
+            return client;
+        }
+
+        public Field getField() {
+            return field;
+        }
     }
 
     public GrpcClientBeans add(final GrpcClientBean injection) {
@@ -36,4 +44,7 @@ public class GrpcClientBeans {
         return this;
     }
 
+    public List<GrpcClientBean> getInjections() {
+        return injections;
+    }
 }

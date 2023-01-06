@@ -3,8 +3,9 @@ package cn.iosd.starter.redisson.config;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonManager;
 import cn.iosd.starter.redisson.service.RedissonService;
-import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,11 +18,11 @@ import org.springframework.core.annotation.Order;
  *
  * @author ok1996
  */
-@Slf4j
 @Configuration
 @ConditionalOnClass(Redisson.class)
 @ConditionalOnProperty(prefix = "simple.redisson", name = "enabled", havingValue = "true")
 public class RedissonAutoConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(RedissonAutoConfiguration.class);
 
     @Bean
     @ConditionalOnMissingBean

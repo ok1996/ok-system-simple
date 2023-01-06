@@ -11,11 +11,10 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springdoc.core.GroupedOpenApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ import java.util.Map;
 @Configuration
 public class OpenApiAutoConfiguration {
 
-    @Resource
+    @Autowired
     private OpenApiProperties openApiProperties;
 
     @Value("${spring.application.name}")

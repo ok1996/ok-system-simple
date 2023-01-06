@@ -1,6 +1,5 @@
 package cn.iosd.starter.redisson.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 
@@ -11,7 +10,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ok1996
  */
-@Slf4j
 public class RedissonService {
 
     private RedissonManager redissonManager;
@@ -56,7 +54,6 @@ public class RedissonService {
         try {
             getLock = rLock.tryLock(leaseTime, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
             e.printStackTrace();
             return false;
         }
@@ -77,7 +74,6 @@ public class RedissonService {
         try {
             getLock = rLock.tryLock(waitTime, leaseTime, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
             e.printStackTrace();
             return false;
         }
