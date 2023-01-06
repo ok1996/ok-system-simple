@@ -33,11 +33,11 @@
         <io-grpc.version>1.51.1</io-grpc.version>
         <redisson.version>3.19.0</redisson.version>
         <netty-socketio.version>1.7.22</netty-socketio.version>
-        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+        <pagehelper-boot.version>1.4.6</pagehelper-boot.version>
         <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
-        <knife4j-openapi-starter.version>4.0.0</knife4j-openapi-starter.version>
+        <knife4j-openapi3-ui.version>4.0.0</knife4j-openapi3-ui.version>
         <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
 
@@ -80,7 +80,7 @@
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-ui</artifactId>
-                <version>${knife4j-openapi-starter.version}</version>
+                <version>${knife4j-openapi3-ui.version}</version>
             </dependency>
 
             <dependency>
@@ -142,7 +142,7 @@
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
+                <version>${pagehelper-boot.version}</version>
             </dependency>
 
             <dependency>
