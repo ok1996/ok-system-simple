@@ -1,6 +1,7 @@
 ### 访问路径
 
 > host:port/swagger-ui/index.html
+> host:port/doc.html
 
 ### 关闭SwaggerUi
 ~~~
