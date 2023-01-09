@@ -45,38 +45,38 @@ simple:
       url: https://ok96.cn
       email: git@ok96.cn
   redisson:
-    #缺省项为false
+    #分布式锁 缺省项为false
     enabled: true
     type: standalone
     address: 127.0.0.1
     password: password
     database: 0
   socket:
-    #缺省项为false
+    #长链接通讯及集群 缺省项为false
     enabled: true
     port: 12010
     upgradeTimeout: 1000000
     pingTimeout: 6000000
     pingInterval: 25000
   s3:
-    #缺省项为false
+    #文件存储管理 缺省项为false
     enabled: true
     accessKey: 3sZWX1PLuCYNqzMw
     secretKey: vuLhQbT9iK1EunaLGETtytMBjJTxoHpw
     endpoint: 127.0.0.1:9000
   grpc:
     client:
-      #缺省项为false 
+      #Grpc客户端 缺省项为false 
       enabled: true
       channel:
         local-grpc-server:
           address: '127.0.0.1:12030'
     server:
-      #缺省项为false 
+      #Grpc服务端 缺省项为false 
       enabled: true
       port: 12030
   datasource:
-    #缺省项为true 
+    #自动创建数据库 缺省项为true 
     autoCreateDatabase: true
   freemarker:  
     resourceVoList:  
@@ -85,4 +85,8 @@ simple:
         resourceLocations:  classpath:/plugin/layui/
       - resourceHandler:  /Users/**
         resourceLocations:  file:/Users/
+  handler:
+    exception:
+      #全局异常处理器 缺省项为true 
+      enabled: true
 ~~~
