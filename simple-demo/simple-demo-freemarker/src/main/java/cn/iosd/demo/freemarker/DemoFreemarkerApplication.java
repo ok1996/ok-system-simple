@@ -1,5 +1,4 @@
-package cn.iosd.demo.grpc.client;
-
+package cn.iosd.demo.freemarker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,11 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ok1996
  */
 @SpringBootApplication
-public class GrpcClientDemoApplication {
+public class DemoFreemarkerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GrpcClientDemoApplication.class, args);
+        SpringApplication.run(DemoFreemarkerApplication.class, args);
     }
+
 }
-
-
