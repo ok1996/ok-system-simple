@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ok1996
  */
 @SpringBootApplication
-public class GrpcServerDemoApplication {
+public class DemoGrpcServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GrpcServerDemoApplication.class, args);
+        SpringApplication.run(DemoGrpcServerApplication.class, args);
     }
 }
 

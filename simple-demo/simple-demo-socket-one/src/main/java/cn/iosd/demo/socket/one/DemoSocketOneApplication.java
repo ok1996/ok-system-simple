@@ -1,5 +1,4 @@
-package cn.iosd.demo.s3;
-
+package cn.iosd.demo.socket.one;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ok1996
  */
 @SpringBootApplication
-public class S3DemoApplication {
+public class DemoSocketOneApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(S3DemoApplication.class, args);
+        SpringApplication.run(DemoSocketOneApplication.class, args);
     }
 }
