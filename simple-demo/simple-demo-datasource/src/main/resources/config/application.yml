@@ -8,6 +8,3 @@ spring:
     mysql:
       master:
         database: simple_demo
-
-mybatis:
-  typeAliasesPackage: cn.iosd.demo.datasource.domain
