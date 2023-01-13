@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.iosd</groupId>
         <artifactId>simple-demo</artifactId>
-        <version>2022.1.3.0-SNAPSHOT</version>
+        <version>2022.2.0.0</version>
     </parent>
 
     <artifactId>simple-demo-s3</artifactId>
