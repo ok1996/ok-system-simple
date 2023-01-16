@@ -1,3 +1,4 @@
 cn.iosd.starter.web.properties.OpenApiProperties
 cn.iosd.starter.web.conf.OpenApiAutoConfiguration
+cn.iosd.starter.web.conf.WebMvcConfiguration
 cn.iosd.starter.web.handler.GlobalExceptionHandler

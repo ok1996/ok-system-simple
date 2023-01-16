@@ -89,4 +89,8 @@ simple:
     exception:
       #全局异常处理器 缺省项为true 
       enabled: true
+  jackson:
+    serialize:
+      # 序列化格式转换 缺省项为true 
+      enabled: true
 ~~~
