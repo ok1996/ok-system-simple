@@ -25,8 +25,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <java.version>17</java.version>
-        <spring-boot.version>3.0.1</spring-boot.version>
-        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-cloud.version>2022.0.1</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
 
         <p6spy.version>3.9.1</p6spy.version>
