@@ -19,6 +19,19 @@
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                    |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等      |
 
+## 仓库地址
+例 simple-starter-web  
+最新版本号 2023.2.0.0
+~~~
+    <dependencies>
+        <dependency>
+            <groupId>cn.iosd</groupId>
+            <artifactId>simple-starter-web</artifactId>
+            <version>2023.2.0.0</version>
+        </dependency>
+    </dependencies>
+~~~
+
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |
 |-------------------------|---------|--------------|
