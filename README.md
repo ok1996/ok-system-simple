@@ -49,6 +49,7 @@
 ## Simple支持配置项
 ~~~
 simple:
+  ## simple-starter-web
   openApi:
     title: 接口文档示例
     description: 接口文档示例描述
@@ -57,6 +58,15 @@ simple:
       name: ok1996
       url: https://ok96.cn
       email: git@ok96.cn
+  handler:
+    exception:
+      #全局异常处理器 缺省项为true 
+      enabled: true
+  jackson:
+    serialize:
+      # 序列化格式转换 缺省项为true 
+      enabled: true
+  ## simple-starter-redisson
   redisson:
     #分布式锁 缺省项为false
     enabled: true
@@ -64,6 +74,7 @@ simple:
     address: 127.0.0.1
     password: password
     database: 0
+  ## simple-starter-socket
   socket:
     #长链接通讯及集群 缺省项为false
     enabled: true
@@ -71,12 +82,14 @@ simple:
     upgradeTimeout: 1000000
     pingTimeout: 6000000
     pingInterval: 25000
+  ## simple-starter-s3
   s3:
     #文件存储管理 缺省项为false
     enabled: true
     accessKey: 3sZWX1PLuCYNqzMw
     secretKey: vuLhQbT9iK1EunaLGETtytMBjJTxoHpw
     endpoint: 127.0.0.1:9000
+  ## simple-starter-grpc
   grpc:
     client:
       #Grpc客户端 缺省项为false 
@@ -88,9 +101,11 @@ simple:
       #Grpc服务端 缺省项为false 
       enabled: true
       port: 12030
+  ## simple-starter-datasource
   datasource:
     #自动创建数据库 缺省项为true 
     autoCreateDatabase: true
+  ## simple-starter-freemarker
   freemarker:  
     resourceVoList:  
         # resourceHandler：访问的前缀 resourceLocations：真实路径
@@ -98,12 +113,4 @@ simple:
         resourceLocations:  classpath:/plugin/layui/
       - resourceHandler:  /Users/**
         resourceLocations:  file:/Users/
-  handler:
-    exception:
-      #全局异常处理器 缺省项为true 
-      enabled: true
-  jackson:
-    serialize:
-      # 序列化格式转换 缺省项为true 
-      enabled: true
 ~~~
