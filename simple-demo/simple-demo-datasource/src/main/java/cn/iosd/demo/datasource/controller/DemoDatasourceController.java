@@ -39,7 +39,7 @@ public class DemoDatasourceController {
 
     @Operation(summary = "查询分页")
     @PostMapping("/page")
-    public Response<PageResponse<DemoDatasource>> list(@RequestBody PageRequest<DemoDatasource> req) {
+    public Response<PageResponse<DemoDatasource>> page(@RequestBody PageRequest<DemoDatasource> req) {
         PageHelper.startPage(req.getPageNum(), req.getPageSize(), req.getOrderBy());
         return Response.ok(
                 PageResponse.getPage(
