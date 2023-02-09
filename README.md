@@ -7,7 +7,7 @@
 | Spring Cloud Alibaba | 2022.0.0.0-RC1      |
 | Ok System Simple     | 2023.2.1.0-SNAPSHOT |
 
-## Starter模块
+## Starter自动装配模块
 | 模块名称                      | 使用场景     | 说明                          |
 |---------------------------|----------|-----------------------------|
 | simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档       |
@@ -19,7 +19,7 @@
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                    |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等      |
 
-## Base模块
+## Base服务类模块
 | 模块名称              | 使用场景 | 说明                    |
 |-------------------|------|-----------------------|
 | simple-base-param | 基础配置 | 启动自动初始化配置、可选覆盖生成、开放接口 |
