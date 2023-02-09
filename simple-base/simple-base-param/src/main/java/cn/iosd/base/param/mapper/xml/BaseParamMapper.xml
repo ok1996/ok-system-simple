@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.iosd.base.param.mapper.BaseParamMapper">
+
+    <resultMap type="cn.iosd.base.param.domain.BaseParam" id="BaseParamResult">
+        <result property="id" column="id"/>
+        <result property="moduleNames" column="module_names"
+                typeHandler="cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler"/>
+        <result property="paramKey" column="param_key"/>
+        <result property="codeValues" column="code_values"
+                typeHandler="cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler"/>
+        <result property="remark" column="remark"/>
+        <result property="historyCodeValues" column="history_code_values"
+                typeHandler="cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler"/>
+        <result property="enableFlag" column="enable_flag"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+    <sql id="selectBaseParamVo">
+        select id, module_names, param_key, code_values, remark, history_code_values, enable_flag, create_time, modify_time from base_param
+    </sql>
+
+    <select id="selectBaseParamList" parameterType="cn.iosd.base.param.vo.BaseParamListReqVo" resultMap="BaseParamResult">
+        <include refid="selectBaseParamVo"/>
+        <where>
+            <if test="moduleNames != null "> and JSON_CONTAINS( module_names, #{moduleNames,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler} )</if>
+            <if test="paramKey != null  and paramKey != ''"> and param_key = #{paramKey}</if>
+            <if test="enableFlag != null "> and enable_flag = #{enableFlag}</if>
+            <if test="remark != null "> and remark = #{remark}</if>
+        </where>
+    </select>
+
+    <select id="selectBaseParamById" parameterType="Long" resultMap="BaseParamResult">
+        <include refid="selectBaseParamVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectBaseParamByKey" parameterType="String" resultMap="BaseParamResult">
+        <include refid="selectBaseParamVo"/>
+        where param_key = #{paramKey}
+    </select>
+
+    <insert id="insertBaseParam" parameterType="cn.iosd.base.param.domain.BaseParam" useGeneratedKeys="true" keyProperty="id">
+        insert into base_param
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="moduleNames != null">module_names,</if>
+            <if test="paramKey != null and paramKey != ''">param_key,</if>
+            <if test="codeValues != null">code_values,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="historyCodeValues != null">history_code_values,</if>
+            <if test="enableFlag != null">enable_flag,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="moduleNames != null">#{moduleNames,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="paramKey != null and paramKey != ''">#{paramKey},</if>
+            <if test="codeValues != null">#{codeValues,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="historyCodeValues != null">#{historyCodeValues,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="enableFlag != null">#{enableFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="modifyTime != null">#{modifyTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBaseParam" parameterType="cn.iosd.base.param.domain.BaseParam">
+        update base_param
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="moduleNames != null">module_names = #{moduleNames,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="paramKey != null and paramKey != ''">param_key = #{paramKey},</if>
+            <if test="codeValues != null">code_values = #{codeValues,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="historyCodeValues != null">history_code_values = #{historyCodeValues,jdbcType=VARCHAR,typeHandler=cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler},</if>
+            <if test="enableFlag != null">enable_flag = #{enableFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="modifyTime != null">modify_time = #{modifyTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBaseParamById" parameterType="Long">
+        delete from base_param where id = #{id}
+    </delete>
+
+    <delete id="deleteBaseParamByIds" parameterType="Long">
+        delete from base_param where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

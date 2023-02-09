@@ -7,7 +7,7 @@
 | Spring Cloud Alibaba | 2022.0.0.0-RC1      |
 | Ok System Simple     | 2023.2.1.0-SNAPSHOT |
 
-## 模块
+## Starter模块
 | 模块名称                      | 使用场景     | 说明                          |
 |---------------------------|----------|-----------------------------|
 | simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档       |
@@ -18,6 +18,11 @@
 | simple-starter-datasource | 数据库连接应用  | 数据库连接使用hikari、自动创建数据库       |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                    |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等      |
+
+## Base模块
+| 模块名称              | 使用场景 | 说明                    |
+|-------------------|------|-----------------------|
+| simple-base-param | 基础配置 | 启动自动初始化配置、可选覆盖生成、开放接口 |
 
 ## 仓库地址
 例 simple-starter-web  
@@ -45,6 +50,7 @@
 | simple-demo-datasource  | 11080   |              |
 | simple-demo-freemarker  | 11090   |              |
 | simple-demo-cloud       | 11100   |              |
+| demo-base-param         | 13010   |              |
 
 ## Simple支持配置项
 ~~~
@@ -113,4 +119,8 @@ simple:
         resourceLocations:  classpath:/plugin/layui/
       - resourceHandler:  /Users/**
         resourceLocations:  file:/Users/
+  base:
+    param:
+      ##开启参数配置服务 缺省项为true 
+      enabled: true
 ~~~

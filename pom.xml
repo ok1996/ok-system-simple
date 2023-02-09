@@ -185,12 +185,19 @@
                 <artifactId>simple-starter-cloud</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-base-param</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>simple-demo</module>
         <module>simple-starter</module>
+        <module>simple-base</module>
     </modules>
     <packaging>pom</packaging>
 
