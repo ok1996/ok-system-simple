@@ -37,20 +37,20 @@
     </dependencies>
 ~~~
 
-## 端口分配
-| 服务                      | HTTP端口号 | 端口号          |
-|-------------------------|---------|--------------|
-| simple-demo-boot        | 11010   |              |
-| simple-demo-redisson    | 11020   |              |
-| simple-demo-s3          | 11030   |              |
-| simple-demo-socket-one  | 11040   | SOCKET:12010 |
-| simple-demo-socket-two  | 11050   | SOCKET:12020 |
-| simple-demo-grpc-server | 11060   | GRPC:12030   |
-| simple-demo-grpc-client | 11070   |              |
-| simple-demo-datasource  | 11080   |              |
-| simple-demo-freemarker  | 11090   |              |
-| simple-demo-cloud       | 11100   |              |
-| demo-base-param         | 13010   |              |
+## Demo示例
+| 服务                      | HTTP端口号 | 端口号          | 说明                      |
+|-------------------------|---------|--------------|-------------------------|
+| simple-demo-boot        | 11010   |              | 自动装配类-空项目启动示例           |
+| simple-demo-redisson    | 11020   |              | 自动装配类-锁使用示例             |
+| simple-demo-s3          | 11030   |              | 自动装配类-文件管理使用示例          |
+| simple-demo-socket-one  | 11040   | SOCKET:12010 | 自动装配类-长连接通讯（单体/集群）1使用示例 |
+| simple-demo-socket-two  | 11050   | SOCKET:12020 | 自动装配类-长连接通讯（单体/集群）2使用示例 |
+| simple-demo-grpc-server | 11060   | GRPC:12030   | 自动装配类-Grpc服务端启动示例       |
+| simple-demo-grpc-client | 11070   |              | 自动装配类-Grpc客户端使用示例       |
+| simple-demo-datasource  | 11080   |              | 自动装配类-数据库连接查询使用示例       |
+| simple-demo-freemarker  | 11090   |              | 自动装配类-freemarker页面使用示例  |
+| simple-demo-cloud       | 11100   |              | 自动装配类-微服务注册中心及配置中心使用示例  |
+| demo-base-param         | 13010   |              | 服务类-基础参数使用示例            |
 
 ## Simple支持配置项
 ~~~
@@ -126,7 +126,7 @@ simple:
       enabled: true
 ~~~
 
-## 启动Demo需修改的配置
+## 启动Demo需修改的配置  - Add VM options
 DemoBootApplication
 ~~~
 --add-opens
