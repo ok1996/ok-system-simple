@@ -40,7 +40,7 @@
 ## 端口分配
 | 服务                      | HTTP端口号 | 端口号          |
 |-------------------------|---------|--------------|
-| simple-demo-boot3       | 11010   |              |
+| simple-demo-boot        | 11010   |              |
 | simple-demo-redisson    | 11020   |              |
 | simple-demo-s3          | 11030   |              |
 | simple-demo-socket-one  | 11040   | SOCKET:12010 |
@@ -120,7 +120,60 @@ simple:
       - resourceHandler:  /Users/**
         resourceLocations:  file:/Users/
   base:
+    ## simple-base-param
     param:
       ##开启参数配置服务 缺省项为true 
       enabled: true
+~~~
+
+## 启动Demo需修改的配置
+DemoBootApplication
+~~~
+--add-opens
+java.base/java.util=ALL-UNNAMED
+~~~
+
+DemoCloudApplication
+~~~
+-Dspring.cloud.nacos.server-addr=
+-Dspring.cloud.nacos.username=nacos
+-Dspring.cloud.nacos.password=
+-Dspring.cloud.nacos.discovery.namespace=
+-Dspring.cloud.nacos.config.namespace=
+~~~
+
+DemoDatasourceApplication
+~~~
+-Dspring.datasource.dynamic.datasource.master.url=
+-Dspring.datasource.dynamic.datasource.master.username=root
+-Dspring.datasource.dynamic.datasource.master.password=
+~~~
+
+DemoRedissonApplication
+~~~
+-Dsimple.redisson.address=
+-Dsimple.redisson.password=
+~~~
+
+DemoSocketOneApplication
+~~~
+-Dsimple.redisson.address=
+-Dsimple.redisson.password=
+--add-opens
+java.base/java.util=ALL-UNNAMED
+~~~
+
+DemoSocketTwoApplication
+~~~
+-Dsimple.redisson.address=
+-Dsimple.redisson.password=
+--add-opens
+java.base/java.util=ALL-UNNAMED
+~~~
+
+BaseParamApplication
+~~~
+-Dspring.datasource.dynamic.datasource.master.url=
+-Dspring.datasource.dynamic.datasource.master.username=root
+-Dspring.datasource.dynamic.datasource.master.password=
 ~~~
