@@ -54,12 +54,23 @@ public class ParamInitUtil {
      */
     public static <T> T getValueByCode(List<BaseParamCodeValueVo<?>> simulation, String code, Class<T> valueType) throws JsonProcessingException {
         Optional<BaseParamCodeValueVo<?>> singleCodeValueDto = simulation.stream().filter(v ->
-                v.getCode().contains(code)
+                v.getCode().equals(code)
         ).findFirst();
         if (singleCodeValueDto.isPresent()) {
             String str = JsonUtil.DEFAULT_INSTANCE.writeValueAsString(singleCodeValueDto.get().getValue());
             return JsonUtil.DEFAULT_INSTANCE.readValue(str, valueType);
         }
         return null;
+    }
+
+    /**
+     * 从List列表中根据code获取BaseParamCodeValueVo
+     *
+     * @param simulation
+     * @param code
+     * @return
+     */
+    public static Optional<BaseParamCodeValueVo<?>> getBaseParamCodeValueVoByCode(List<BaseParamCodeValueVo<?>> simulation, String code) {
+        return simulation.stream().filter(v -> v.getCode().equals(code)).findFirst();
     }
 }
