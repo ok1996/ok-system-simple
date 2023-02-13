@@ -13,8 +13,6 @@ public class BaseParamListReqVo {
     private String paramKey;
     @Schema(description = "备注")
     private String remark;
-    @Schema(description = "是否启用 0启用 1禁用")
-    private Integer enableFlag;
 
     public JsonNode getModuleNames() {
         return moduleNames;
@@ -40,11 +38,4 @@ public class BaseParamListReqVo {
         this.remark = remark;
     }
 
-    public Integer getEnableFlag() {
-        return enableFlag;
-    }
-
-    public void setEnableFlag(Integer enableFlag) {
-        this.enableFlag = enableFlag;
-    }
 }

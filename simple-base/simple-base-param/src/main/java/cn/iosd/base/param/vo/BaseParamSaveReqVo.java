@@ -18,8 +18,6 @@ public class BaseParamSaveReqVo {
     private List<BaseParamCodeValueVo<?>> codeValues;
     @Schema(description = "备注")
     private String remark;
-    @Schema(description = "是否启用 0启用 1禁用")
-    private Integer enableFlag;
 
     public Long getId() {
         return id;
@@ -59,13 +57,5 @@ public class BaseParamSaveReqVo {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public Integer getEnableFlag() {
-        return enableFlag;
-    }
-
-    public void setEnableFlag(Integer enableFlag) {
-        this.enableFlag = enableFlag;
     }
 }

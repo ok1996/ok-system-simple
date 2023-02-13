@@ -68,7 +68,6 @@ public class ParamInitLifecycle implements SmartLifecycle {
     public BaseParamSaveReqVo initVo(ParamInit service) {
         BaseParamSaveReqVo vo = new BaseParamSaveReqVo();
         vo.setCodeValues(service.getCodeValues());
-        vo.setEnableFlag(service.getEnableFlag());
         vo.setModuleNames(service.getModuleNames());
         vo.setParamKey(service.getKey());
         vo.setRemark(service.getRemark());

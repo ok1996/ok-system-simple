@@ -66,11 +66,29 @@ public class ParamInitUtil {
     /**
      * 从List列表中根据code获取BaseParamCodeValueVo
      *
-     * @param simulation
+     * @param simulation 数据列表
      * @param code
      * @return
      */
     public static Optional<BaseParamCodeValueVo<?>> getBaseParamCodeValueVoByCode(List<BaseParamCodeValueVo<?>> simulation, String code) {
         return simulation.stream().filter(v -> v.getCode().equals(code)).findFirst();
+    }
+
+    /**
+     * 从List列表中根据code获取BaseParamCodeValueVo中的Value值（boolean类型）
+     * <p>code在数据列表中不存在时返回的默认值</p>
+     *
+     * @param simulation 数据列表
+     * @param code
+     * @return
+     */
+    public static boolean getBooleanValueByCodeDefaultFalse(List<BaseParamCodeValueVo<?>> simulation, String code) {
+        Optional<BaseParamCodeValueVo<?>> singleCodeValueDto = simulation.stream().filter(v ->
+                v.getCode().equals(code)
+        ).findFirst();
+        if (singleCodeValueDto.isPresent() && (Boolean) singleCodeValueDto.get().getValue()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -92,7 +92,6 @@ public class BaseParamServiceImpl implements IBaseParamService {
         baseParam.setModuleNames(moduleNames);
         baseParam.setCodeValues(codeValues);
         baseParam.setRemark(baseParamVo.getRemark());
-        baseParam.setEnableFlag(baseParamVo.getEnableFlag());
         baseParam.setParamKey(baseParamVo.getParamKey());
         return baseParam;
     }

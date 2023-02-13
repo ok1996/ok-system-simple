@@ -6,7 +6,6 @@ CREATE TABLE base_param
     code_values         json                  DEFAULT NULL COMMENT '参数值',
     remark              varchar(255) NOT NULL DEFAULT '' COMMENT '备注',
     history_code_values json                  DEFAULT NULL COMMENT '历史参数值',
-    enable_flag         tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用',
     create_time         timestamp NULL DEFAULT NULL COMMENT '创建时间',
     modify_time         timestamp NULL DEFAULT NULL COMMENT '修改时间',
     PRIMARY KEY (id),

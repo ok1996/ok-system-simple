@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class TestParamInit implements ParamInit {
     public static final String KEY = "key-test";
-
+    public static final String OPEN_SIMULATION_CODE = "openSimulation";
     @Override
     public String getKey() {
         return KEY;
@@ -26,7 +26,7 @@ public class TestParamInit implements ParamInit {
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
 
         return CollUtil.newArrayList(
-                new BaseParamCodeValueVo<>().setCode("openSimulation").setValue(true),
+                new BaseParamCodeValueVo<>().setCode(OPEN_SIMULATION_CODE).setValue(true),
                 new BaseParamCodeValueVo<>().setCode("contentData").setValue(
                         ClassmateVo.builder().personList(
                                 CollUtil.newArrayList(

@@ -21,8 +21,6 @@ public class BaseParam {
     private JsonNode historyCodeValues;
     @Schema(description = "备注")
     private String remark;
-    @Schema(description = "是否启用 0启用 1禁用")
-    private Integer enableFlag;
     @Schema(description = "更新时间")
     private LocalDateTime modifyTime;
     @Schema(description = "创建时间")
@@ -67,14 +65,6 @@ public class BaseParam {
 
     public void setHistoryCodeValues(JsonNode historyCodeValues) {
         this.historyCodeValues = historyCodeValues;
-    }
-
-    public Integer getEnableFlag() {
-        return enableFlag;
-    }
-
-    public void setEnableFlag(Integer enableFlag) {
-        this.enableFlag = enableFlag;
     }
 
     public LocalDateTime getModifyTime() {
