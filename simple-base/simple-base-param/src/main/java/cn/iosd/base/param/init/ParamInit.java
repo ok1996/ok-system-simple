@@ -48,11 +48,4 @@ public interface ParamInit {
     default List<String> getModuleNames() {
         return null;
     }
-
-    /**
-     * 是否启用 0启用 1禁用
-     *
-     * @return
-     */
-    int getEnableFlag();
 }

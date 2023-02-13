@@ -23,13 +23,12 @@ public class TestService {
     public ClassmateVo classmateList() throws JsonProcessingException {
         if (baseParamService != null) {
             List<BaseParamCodeValueVo<?>> simulation = baseParamService.selectCodeValueVoParamByKey(TestParamInit.KEY);
-            if (ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation,TestParamInit.OPEN_SIMULATION_CODE)) {
-                Optional<BaseParamCodeValueVo<?>> contentData =  ParamInitUtil.getBaseParamCodeValueVoByCode(simulation,"contentData");
+            if (ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation, TestParamInit.OPEN_SIMULATION_CODE)) {
+                Optional<BaseParamCodeValueVo<?>> contentData = ParamInitUtil.getBaseParamCodeValueVoByCode(simulation, TestParamInit.CONTENT_DATA_CODE);
                 if (contentData.isPresent()) {
                     return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
                 }
             }
-
         }
         return null;
     }

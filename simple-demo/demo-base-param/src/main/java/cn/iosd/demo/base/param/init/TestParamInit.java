@@ -17,6 +17,8 @@ import java.util.List;
 public class TestParamInit implements ParamInit {
     public static final String KEY = "key-test";
     public static final String OPEN_SIMULATION_CODE = "openSimulation";
+    public static final String CONTENT_DATA_CODE = "contentData";
+
     @Override
     public String getKey() {
         return KEY;
@@ -24,10 +26,9 @@ public class TestParamInit implements ParamInit {
 
     @Override
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
-
         return CollUtil.newArrayList(
                 new BaseParamCodeValueVo<>().setCode(OPEN_SIMULATION_CODE).setValue(true),
-                new BaseParamCodeValueVo<>().setCode("contentData").setValue(
+                new BaseParamCodeValueVo<>().setCode(CONTENT_DATA_CODE).setValue(
                         ClassmateVo.builder().personList(
                                 CollUtil.newArrayList(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
@@ -51,10 +52,5 @@ public class TestParamInit implements ParamInit {
     @Override
     public List<String> getModuleNames() {
         return CollUtil.newArrayList("模块分类1", "分类1-1");
-    }
-
-    @Override
-    public int getEnableFlag() {
-        return 0;
     }
 }
