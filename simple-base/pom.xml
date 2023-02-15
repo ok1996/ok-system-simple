@@ -17,6 +17,7 @@
     </description>
     <modules>
         <module>simple-base-param</module>
+        <module>simple-base-generator</module>
     </modules>
 
     <profiles>

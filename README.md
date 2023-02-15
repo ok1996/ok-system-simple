@@ -20,9 +20,11 @@
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等      |
 
 ## Base服务类模块
-| 模块名称              | 使用场景 | 说明                    |
-|-------------------|------|-----------------------|
-| simple-base-param | 基础配置 | 启动自动初始化配置、可选覆盖生成、开放接口 |
+| 模块名称                  | 使用场景 | 说明                    |
+|-----------------------|------|-----------------------|
+| simple-base-param     | 基础配置 | 启动自动初始化配置、可选覆盖生成、开放接口 |
+| simple-base-generator | 代码生成 | 自定义代码生成模版             |
+
 
 ## 仓库地址
 例 simple-starter-web  
@@ -51,6 +53,7 @@
 | simple-demo-freemarker  | 11090   |              | 自动装配类-freemarker页面使用示例  |
 | simple-demo-cloud       | 11100   |              | 自动装配类-微服务注册中心及配置中心使用示例  |
 | demo-base-param         | 13010   |              | 服务类-基础参数使用示例            |
+| demo-base-generator     |         |              | 服务类-代码生成使用示例            |
 
 ## Simple支持配置项
 ~~~
@@ -176,4 +179,11 @@ BaseParamApplication
 -Dspring.datasource.dynamic.datasource.master.url=
 -Dspring.datasource.dynamic.datasource.master.username=root
 -Dspring.datasource.dynamic.datasource.master.password=
+~~~
+
+BaseGeneratorApplication -修改代码
+~~~
+MybatisGeneratorVo.setDataBaseUrl()
+MybatisGeneratorVo.setDataBaseUserName()
+MybatisGeneratorVo.setDataBasePassword()
 ~~~

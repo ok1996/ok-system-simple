@@ -28,6 +28,7 @@
         <module>simple-demo-freemarker</module>
         <module>simple-demo-cloud</module>
         <module>demo-base-param</module>
+        <module>demo-base-generator</module>
     </modules>
 
     <build>
