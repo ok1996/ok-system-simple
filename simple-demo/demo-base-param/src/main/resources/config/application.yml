@@ -4,10 +4,6 @@ server:
 spring:
   application:
     name: demo-base-param
-  datasource:
-    mysql:
-      master:
-        database: simple_demo
 simple:
   base:
     param:

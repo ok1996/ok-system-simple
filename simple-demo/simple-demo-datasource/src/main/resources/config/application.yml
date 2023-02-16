@@ -4,7 +4,3 @@ server:
 spring:
   application:
     name: simple-demo-datasource
-  datasource:
-    mysql:
-      master:
-        database: simple_demo

@@ -16,7 +16,7 @@ spring:
         # 主库数据源
         master:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/${spring.datasource.mysql.master.database}?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+          url: jdbc:mysql://127.0.0.1:3306/simple_demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
           username: root
           password: password
             # 从库数据源
@@ -25,9 +25,6 @@ spring:
           # password: password
           # url:
           # driver-class-name:
-    # mysql:
-    #   master:
-    #     database:
 
   flyway:
     #  当迁移时发现目标schema非空，而且带有没有元数据的表时，是否自动执行基准迁移，默认false.
