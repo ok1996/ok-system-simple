@@ -24,7 +24,7 @@ spring:
     #  当迁移时发现目标schema非空，而且带有没有元数据的表时，是否自动执行基准迁移，默认false.
     baseline-on-migrate: true
     locations: classpath:db/mysql
-    table: ${"#{"}spring.application.name}_flyway_schema_history
+    table: ${"${"}spring.application.name}_flyway_schema_history
 # mybatis配置
 mybatis:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
