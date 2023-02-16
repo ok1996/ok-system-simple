@@ -6,7 +6,16 @@ import ${package.Service}.${table.serviceName};
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+<#list table.fields as column>
+  <#if column.name == "modify_time" && column.columnType == "LOCAL_DATE_TIME">
+import java.time.LocalDateTime;
+  <#break>
+  </#if>
+  <#if column.name == "modify_time" && column.columnType == "LOCAL_DATE_TIME">
+import java.time.LocalDateTime;
+  <#break>
+  </#if>
+</#list>
 /**
  * <p>
  * ${table.comment!} 服务实现类
@@ -32,11 +41,24 @@ public class ${table.serviceImplName} implements ${table.serviceName} {
 
     @Override
     public int insert(${table.entityName} ${table.entityPath}) {
+          <#list table.fields as column>
+            <#if column.name == "create_time" && column.columnType == "LOCAL_DATE_TIME">
+        ${table.entityPath}.setCreateTime(LocalDateTime.now());
+            </#if>
+            <#if column.name == "modify_time" && column.columnType == "LOCAL_DATE_TIME">
+        ${table.entityPath}.setModifyTime(LocalDateTime.now());
+            </#if>
+    	  </#list>
         return mapper.insert(${table.entityPath});
     }
 
     @Override
     public int update(${table.entityName} ${table.entityPath}) {
+          <#list table.fields as column>
+            <#if column.name == "modify_time" && column.columnType == "LOCAL_DATE_TIME">
+        ${table.entityPath}.setModifyTime(LocalDateTime.now());
+            </#if>
+    	  </#list>
         return mapper.update(${table.entityPath});
     }
 
