@@ -6,14 +6,36 @@ import java.util.List;
  * @author ok1996
  */
 public class MybatisGeneratorVo {
+    /**
+     * 项目名称 例：simple-base-generator
+     */
+    private String projectName;
+
     private String dataBaseUrl;
     private String dataBaseUserName;
     private String dataBasePassword;
     private String authorName;
+    /**
+     * 例：cn.iosd.demo.generator
+     * <p>packageName:cn.iosd.demo</p>
+     * <p>moduleName:generator</p>
+     * <p>将与moduleName组合成完成包名:packageName.moduleName</p>
+     */
     private String packageName;
+    /**
+     * 例：generator
+     */
     private String moduleName;
     private String tableName;
     private List<String> tablePrefix;
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
     public String getDataBaseUrl() {
         return dataBaseUrl;

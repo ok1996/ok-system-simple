@@ -4,6 +4,9 @@ package cn.iosd.demo.base.generator;
 import cn.iosd.base.generator.database.MybatisGenerator;
 import cn.iosd.base.generator.vo.MybatisGeneratorVo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ok1996
  */
@@ -15,8 +18,12 @@ public class BaseGeneratorApplication {
         vo.setDataBaseUserName("root");
         vo.setDataBasePassword("123456");
         vo.setPackageName("cn.iosd.demo");
-        vo.setModuleName("param");
-        vo.setTableName("base_param");
+        vo.setProjectName("generator-mybatis-code");
+        vo.setModuleName("code");
+        vo.setTableName("demo_article");
+        List<String> tablePrefix=new ArrayList<>();
+        tablePrefix.add("demo");
+        vo.setTablePrefix(tablePrefix);
         MybatisGenerator.generate(vo);
     }
 }
