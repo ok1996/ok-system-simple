@@ -24,7 +24,6 @@ import java.util.List;
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 @RestController
 @RequestMapping("<#if package.ModuleName?? && package.ModuleName != "">/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")

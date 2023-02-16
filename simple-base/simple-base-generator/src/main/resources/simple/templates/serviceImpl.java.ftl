@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 @Service
 public class ${table.serviceImplName} implements ${table.serviceName} {

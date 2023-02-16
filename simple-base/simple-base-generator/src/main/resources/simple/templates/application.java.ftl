@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author ${author}
- * @since ${date}
  */
 @SpringBootApplication
 public class ${ModuleName}Application {

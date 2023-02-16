@@ -27,7 +27,6 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 <#if entityLombokModel>
 @Getter

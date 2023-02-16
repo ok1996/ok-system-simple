@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 @Configuration
 @MapperScan("${package.Mapper}")

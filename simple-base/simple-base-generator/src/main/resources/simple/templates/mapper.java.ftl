@@ -9,7 +9,6 @@ import java.util.List;
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 public interface ${table.mapperName}{
     /**
