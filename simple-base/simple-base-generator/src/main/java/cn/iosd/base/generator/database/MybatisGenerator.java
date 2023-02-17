@@ -49,6 +49,12 @@ public class MybatisGenerator {
      */
     private static final String CUSTOM_FILE_PREFIX = File.separator + ".." + File.separator;
 
+    /**
+     * 代码生成函数
+     * <p/> 注：依赖使用mybatis-plus、若仅使用Mybatis注意配置项修改mybatis.mapperLocations
+     *
+     * @param vo
+     */
     @SneakyThrows
     public static void generate(MybatisGeneratorVo vo) {
         //文件输出地址前缀
