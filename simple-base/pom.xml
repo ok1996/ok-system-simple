@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.iosd</groupId>
         <artifactId>ok-system-simple</artifactId>
-        <version>2023.2.1.0-SNAPSHOT</version>
+        <version>2023.2.1.0</version>
     </parent>
 
     <artifactId>simple-base</artifactId>
@@ -20,27 +20,16 @@
         <module>simple-base-generator</module>
     </modules>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
