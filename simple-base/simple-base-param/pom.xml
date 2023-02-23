@@ -33,6 +33,12 @@
                     <include>**/*.xml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.imports</include>
+                </includes>
+            </resource>
         </resources>
     </build>
 
