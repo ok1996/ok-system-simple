@@ -15,6 +15,7 @@
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-grpc</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- SpringBoot Web -->
