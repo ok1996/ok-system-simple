@@ -36,7 +36,7 @@
         <netty-socketio.version>1.7.23</netty-socketio.version>
         <pagehelper-boot.version>1.4.6</pagehelper-boot.version>
         <knife4j-openapi3.version>4.0.0</knife4j-openapi3.version>
-        <aws-java-sdk-s3.version>1.12.362</aws-java-sdk-s3.version>
+        <aws-java-sdk-s3.version>1.12.416</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
     </properties>
