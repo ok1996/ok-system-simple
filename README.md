@@ -1,11 +1,11 @@
 ## 核心依赖
-| 依赖                   | 版本                  |
-|----------------------|---------------------|
-| Java                 | 17                  |
-| Spring Boot          | 3.0.3               |
-| Spring Cloud         | 2022.0.1            |
-| Spring Cloud Alibaba | 2022.0.0.0-RC1      |
-| Ok System Simple     | 2023.2.2.0-SNAPSHOT |
+| 依赖                   | 版本             |
+|----------------------|----------------|
+| Java                 | 17             |
+| Spring Boot          | 3.0.3          |
+| Spring Cloud         | 2022.0.1       |
+| Spring Cloud Alibaba | 2022.0.0.0-RC1 |
+| Ok System Simple     | 2023.2.2.0     |
 
 ## Starter自动装配模块
 | 模块名称                      | 使用场景     | 说明                          |
@@ -28,13 +28,13 @@
 
 ## 仓库地址
 例 simple-starter-web  
-最新版本号 2023.2.1.0
+最新版本号 2023.2.2.0
 ~~~
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
-            <version>2023.2.1.0</version>
+            <version>2023.2.2.0</version>
         </dependency>
     </dependencies>
 ~~~
