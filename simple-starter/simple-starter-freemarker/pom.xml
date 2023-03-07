@@ -16,9 +16,10 @@
     </description>
 
     <dependencies>
+        <!-- SpringBoot Web -->
         <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
 
