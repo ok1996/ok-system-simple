@@ -158,6 +158,13 @@ DemoRedissonApplication
 -Dsimple.redisson.password=
 ~~~
 
+DemoS3Application
+~~~
+-Dsimple.s3.accessKey=
+-Dsimple.s3.secretKey=
+-Dsimple.s3.endpoint=
+~~~
+
 DemoSocketOneApplication
 ~~~
 -Dsimple.redisson.address=
