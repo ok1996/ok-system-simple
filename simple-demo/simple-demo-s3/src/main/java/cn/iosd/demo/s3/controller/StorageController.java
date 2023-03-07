@@ -1,6 +1,5 @@
 package cn.iosd.demo.s3.controller;
 
-import cn.iosd.demo.s3.utils.FileTypeUtils;
 import cn.iosd.starter.s3.domain.StorageObjectRequest;
 import cn.iosd.starter.s3.domain.StorageObjectResponse;
 import cn.iosd.starter.s3.service.SimpleStorageService;
@@ -71,8 +70,9 @@ public class StorageController {
     @Operation(summary = "上传文件")
     @PostMapping(value = "/object/upload")
     public Response<String> upload(@ModelAttribute MultipartFile file
-            , @RequestParam(value = "bucketName") String bucketName) throws IOException {
-        String fileKey = RandomStringUtils.random(12) + "." + FileTypeUtils.getExtension(file);
+            , @RequestParam(value = "bucketName") String bucketName
+            , @RequestParam(value = "fileExtension") String fileExtension) throws IOException {
+        String fileKey = RandomStringUtils.randomAlphabetic(12) + "." + fileExtension;
         return Response.ok(simpleStorageService.upload(file.getContentType(), file.getSize(),
                 file.getInputStream(), bucketName, fileKey));
     }
