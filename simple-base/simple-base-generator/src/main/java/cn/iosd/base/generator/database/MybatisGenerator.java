@@ -4,7 +4,6 @@ import cn.iosd.base.generator.vo.MybatisGeneratorVo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -55,7 +54,6 @@ public class MybatisGenerator {
      *
      * @param vo
      */
-    @SneakyThrows
     public static void generate(MybatisGeneratorVo vo) {
         //文件输出地址前缀
         String outputDirPrefixReal = OUTPUT_DIR_PREFIX.replace("/", File.separator);

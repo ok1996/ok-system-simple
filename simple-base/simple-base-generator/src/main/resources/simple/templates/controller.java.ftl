@@ -9,6 +9,7 @@ import cn.iosd.starter.datasource.domain.PageResponse;
 import cn.iosd.starter.web.domain.Response;
 import com.github.pagehelper.PageHelper;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,8 @@ public class ${table.controllerName} {
     private ${table.serviceName} service;
 
     @Operation(summary = "查询列表")
-    @PostMapping("/list")
-    public Response<List<${table.entityName}>> list(@RequestBody ${table.entityName} ${table.entityPath}) {
+    @GetMapping("/list")
+    public Response<List<${table.entityName}>> list(@ParameterObject ${table.entityName} ${table.entityPath}) {
         return Response.ok(service.selectList(${table.entityPath}));
     }
 

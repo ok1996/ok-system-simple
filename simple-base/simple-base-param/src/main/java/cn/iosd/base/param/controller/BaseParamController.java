@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,10 +36,9 @@ public class BaseParamController {
     private IBaseParamService baseParamService;
 
     @Operation(summary = "查询列表")
-    @PostMapping("/list")
-    public Response<List<BaseParam>> list(@RequestBody BaseParamListReqVo baseParam) {
+    @GetMapping("/list")
+    public Response<List<BaseParam>> list(@ParameterObject BaseParamListReqVo baseParam) {
         return Response.ok(baseParamService.selectBaseParamList(baseParam));
-
     }
 
     @Operation(summary = "查询分页")
@@ -52,7 +53,8 @@ public class BaseParamController {
 
     @Operation(summary = "获取详细信息")
     @GetMapping(value = "/info")
-    public Response<BaseParam> getInfo(Long id, String paramKey) {
+    public Response<BaseParam> getInfo(@RequestParam(value = "id", required = false) Long id
+            , @RequestParam(value = "paramKey", required = false) String paramKey) {
         return Response.ok(id != null ?
                 baseParamService.selectBaseParamById(id) :
                 baseParamService.selectBaseParamByKey(paramKey));

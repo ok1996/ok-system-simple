@@ -8,6 +8,7 @@ import cn.iosd.starter.web.domain.Response;
 import com.github.pagehelper.PageHelper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,8 @@ public class DemoDatasourceController {
     private IDemoDatasourceService demoDatasourceService;
 
     @Operation(summary = "查询列表")
-    @PostMapping("/list")
-    public Response<List<DemoDatasource>> list(@RequestBody DemoDatasource demoDatasource) {
+    @GetMapping("/list")
+    public Response<List<DemoDatasource>> list(@ParameterObject DemoDatasource demoDatasource) {
         return Response.ok(demoDatasourceService.selectDemoDatasourceList(demoDatasource));
     }
 
