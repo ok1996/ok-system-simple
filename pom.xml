@@ -39,6 +39,7 @@
         <aws-java-sdk-s3.version>1.12.416</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
+        <springdoc-openapi-starter.version>2.0.0</springdoc-openapi-starter.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -72,8 +73,14 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-openapi-starter.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-ui</artifactId>
                 <version>${knife4j-openapi3.version}</version>
             </dependency>
 
