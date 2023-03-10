@@ -40,7 +40,7 @@
 ~~~
 
 ## 依赖关系
-![依赖关系图](./deploy/imgs/ok-simple依赖关系.png)
+![依赖关系图](https://raw.githubusercontent.com/imkude/ok1996/main/20230310/okSimpleDependencies.sh0yqumkc0w.png)
 
 ## Demo示例
 | 服务                      | HTTP端口号 | 端口号          | 说明                      |
