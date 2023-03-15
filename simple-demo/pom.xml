@@ -29,6 +29,7 @@
         <module>simple-demo-cloud</module>
         <module>demo-base-param</module>
         <module>demo-base-generator</module>
+        <module>simple-demo-encode</module>
     </modules>
 
     <build>

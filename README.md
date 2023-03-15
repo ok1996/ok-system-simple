@@ -40,7 +40,7 @@
 | simple-starter-datasource | 数据库连接应用  | 数据库连接使用hikari、自动创建数据库                                        |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
-
+| simple-starter-encode     | 加密       | 注解字段加密脱敏                                                     |
 
 
 

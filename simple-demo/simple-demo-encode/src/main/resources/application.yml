@@ -1,0 +1,5 @@
+server:
+  port: 11110
+spring:
+  application:
+    name: simple-demo-encode
