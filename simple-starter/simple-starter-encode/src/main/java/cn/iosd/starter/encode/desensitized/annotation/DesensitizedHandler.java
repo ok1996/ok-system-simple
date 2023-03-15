@@ -24,7 +24,7 @@ public class DesensitizedHandler {
         Field[] fields = responseObj.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.isAnnotationPresent(SensitiveField.class)) {
-                if (!field.isAccessible()) {
+                if (!field.canAccess(responseObj)) {
                     field.setAccessible(true);
                 }
                 Object obj = field.get(responseObj);
