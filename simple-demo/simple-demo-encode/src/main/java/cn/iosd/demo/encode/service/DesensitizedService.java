@@ -21,15 +21,12 @@ public class DesensitizedService {
 
     @Desensitized
     public List<PersonVo> getPersonList() {
-        return getPersonListResponse();
-    }
-
-    public List<PersonVo> getPersonListResponse() {
         List<PersonVo> list = new ArrayList<>();
         list.add(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build());
         list.add(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build());
         return list;
     }
+
 
     @Desensitized
     public SuperPersonVo getSuperPerson() {
@@ -42,10 +39,6 @@ public class DesensitizedService {
 
     @Desensitized
     public List<SuperPersonVo> getSuperPersonList() {
-        return superPersonListResponse();
-    }
-
-    public List<SuperPersonVo> superPersonListResponse() {
         List<SuperPersonVo> list = new ArrayList<>();
         list.add(SuperPersonVo.builder()
                 .personVo(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build())
@@ -59,4 +52,5 @@ public class DesensitizedService {
                 .build());
         return list;
     }
+
 }
