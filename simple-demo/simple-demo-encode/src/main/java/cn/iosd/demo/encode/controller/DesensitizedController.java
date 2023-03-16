@@ -2,6 +2,8 @@ package cn.iosd.demo.encode.controller;
 
 import cn.iosd.demo.encode.service.DesensitizedService;
 import cn.iosd.demo.encode.vo.PersonVo;
+import cn.iosd.demo.encode.vo.SuperPersonVo;
+import cn.iosd.starter.encode.desensitized.annotation.Desensitized;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,5 +34,31 @@ public class DesensitizedController {
     @GetMapping(value = "/personList")
     public Response<List<PersonVo>> personList() {
         return Response.ok(service.getPersonList());
+    }
+
+    @Desensitized
+    @Operation(summary = "测试列表-嵌套-Response-person")
+    @GetMapping(value = "/personListResponse")
+    public Response<List<PersonVo>> personListResponse() {
+        return Response.ok(service.getPersonListResponse());
+    }
+
+    @Operation(summary = "测试单体-嵌套")
+    @GetMapping(value = "/superPerson")
+    public Response<SuperPersonVo> superPerson() {
+        return Response.ok(service.getSuperPerson());
+    }
+
+    @Operation(summary = "测试列表-嵌套")
+    @GetMapping(value = "/superPersonList")
+    public Response<List<SuperPersonVo>> superPersonList() {
+        return Response.ok(service.getSuperPersonList());
+    }
+
+    @Desensitized
+    @Operation(summary = "测试列表-嵌套-Response-superPerson")
+    @GetMapping(value = "/superPersonListResponse")
+    public Response<List<SuperPersonVo>> superPersonListResponse() {
+        return Response.ok(service.superPersonListResponse());
     }
 }

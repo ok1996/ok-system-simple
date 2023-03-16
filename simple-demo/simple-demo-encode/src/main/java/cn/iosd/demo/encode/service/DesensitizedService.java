@@ -1,6 +1,7 @@
 package cn.iosd.demo.encode.service;
 
 import cn.iosd.demo.encode.vo.PersonVo;
+import cn.iosd.demo.encode.vo.SuperPersonVo;
 import cn.iosd.starter.encode.desensitized.annotation.Desensitized;
 import org.springframework.stereotype.Service;
 
@@ -15,34 +16,46 @@ public class DesensitizedService {
 
     @Desensitized
     public PersonVo getPerson() {
-        return PersonVo.builder()
-                .name("张三")
-                .idCard("350061323543513135")
-                .address("离开省和你市好多天县谢谢谢谢谢奥所多")
-                .phone("15151115112")
-                .remark("我是备注奥术大师大所多")
-                .normalField("艾维奇若")
-                .build();
+        return PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build();
     }
 
     @Desensitized
     public List<PersonVo> getPersonList() {
+        return getPersonListResponse();
+    }
+
+    public List<PersonVo> getPersonListResponse() {
         List<PersonVo> list = new ArrayList<>();
-        list.add(PersonVo.builder()
-                .name("张三")
-                .idCard("350061323543513135")
-                .address("离开省和你市好多天县谢谢谢谢谢奥所多")
-                .phone("15151115112")
-                .remark("我是备注奥术大师大所多")
-                .normalField("艾维奇若")
+        list.add(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build());
+        list.add(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build());
+        return list;
+    }
+
+    @Desensitized
+    public SuperPersonVo getSuperPerson() {
+        return SuperPersonVo.builder()
+                .personVo(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build())
+                .nickname("超人")
+                .specificFunction("镭射眼")
+                .build();
+    }
+
+    @Desensitized
+    public List<SuperPersonVo> getSuperPersonList() {
+        return superPersonListResponse();
+    }
+
+    public List<SuperPersonVo> superPersonListResponse() {
+        List<SuperPersonVo> list = new ArrayList<>();
+        list.add(SuperPersonVo.builder()
+                .personVo(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build())
+                .nickname("超人")
+                .specificFunction("镭射眼")
                 .build());
-        list.add(PersonVo.builder()
-                .name("张三")
-                .idCard("350061323543513135")
-                .address("离开省和你市好多天县谢谢谢谢谢奥所多")
-                .phone("15151115112")
-                .remark("我是备注奥术大师大所多")
-                .normalField("艾维奇若")
+        list.add(SuperPersonVo.builder()
+                .personVo(PersonVo.builder().name("张三").idCard("350061323543513135").address("离开省和你市好多天县谢谢谢谢谢奥所多").phone("15151115112").remark("我是备注奥术大师大所多").normalField("艾维奇若").build())
+                .nickname("超人")
+                .specificFunction("镭射眼")
                 .build());
         return list;
     }
