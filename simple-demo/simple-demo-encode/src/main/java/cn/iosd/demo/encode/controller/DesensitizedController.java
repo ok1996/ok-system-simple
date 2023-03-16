@@ -36,13 +36,6 @@ public class DesensitizedController {
         return Response.ok(service.getPersonList());
     }
 
-    @Desensitized
-    @Operation(summary = "测试列表-嵌套-Response-person")
-    @GetMapping(value = "/personListResponse")
-    public Response<List<PersonVo>> personListResponse() {
-        return Response.ok(service.getPersonListResponse());
-    }
-
     @Operation(summary = "测试单体-嵌套")
     @GetMapping(value = "/superPerson")
     public Response<SuperPersonVo> superPerson() {
@@ -55,10 +48,4 @@ public class DesensitizedController {
         return Response.ok(service.getSuperPersonList());
     }
 
-    @Desensitized
-    @Operation(summary = "测试列表-嵌套-Response-superPerson")
-    @GetMapping(value = "/superPersonListResponse")
-    public Response<List<SuperPersonVo>> superPersonListResponse() {
-        return Response.ok(service.superPersonListResponse());
-    }
 }

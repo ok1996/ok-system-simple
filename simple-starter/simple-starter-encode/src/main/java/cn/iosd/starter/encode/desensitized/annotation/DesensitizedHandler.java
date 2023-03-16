@@ -51,8 +51,7 @@ public class DesensitizedHandler {
                 String deValue = desensitize(String.valueOf(obj), sensitiveField.rule()
                         , sensitiveField.prefixLen(), sensitiveField.suffixLen());
                 field.set(responseObj, deValue);
-            } else if (field.isAnnotationPresent(SensitiveEntity.class) ||
-                    "java.lang.Object".equals(field.getType().getName())) {
+            } else if (field.isAnnotationPresent(SensitiveEntity.class)) {
                 if (!field.canAccess(responseObj)) {
                     field.setAccessible(true);
                 }
