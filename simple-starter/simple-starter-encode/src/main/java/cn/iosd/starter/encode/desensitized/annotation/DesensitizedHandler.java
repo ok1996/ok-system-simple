@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author ok1996
@@ -31,10 +31,10 @@ public class DesensitizedHandler {
      * 将对象进行脱敏加密
      *
      * @param responseObj 对象
-     * @throws Throwable
+     * @throws IllegalAccessException
      */
-    private void desensitizeAndEncryptObjects(Object responseObj) throws Throwable {
-        if (responseObj instanceof ArrayList<?>) {
+    private void desensitizeAndEncryptObjects(Object responseObj) throws IllegalAccessException {
+        if (responseObj instanceof List<?>) {
             for (Object singleObj : (List<?>) responseObj) {
                 desensitizeAndEncryptObjects(singleObj);
             }
@@ -42,21 +42,17 @@ public class DesensitizedHandler {
 
         Field[] fields = responseObj.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if (field.isAnnotationPresent(SensitiveField.class)) {
-                if (!field.canAccess(responseObj)) {
-                    field.setAccessible(true);
-                }
-                Object obj = field.get(responseObj);
-                SensitiveField sensitiveField = field.getAnnotation(SensitiveField.class);
-                String deValue = desensitize(String.valueOf(obj), sensitiveField.rule()
-                        , sensitiveField.prefixLen(), sensitiveField.suffixLen());
+            SensitiveField sensitiveField = field.getAnnotation(SensitiveField.class);
+            if (sensitiveField != null) {
+                field.setAccessible(true);
+                Object fieldValue = field.get(responseObj);
+                String deValue = desensitize(String.valueOf(fieldValue), sensitiveField.rule(),
+                        sensitiveField.prefixLen(), sensitiveField.suffixLen());
                 field.set(responseObj, deValue);
             } else if (field.isAnnotationPresent(SensitiveEntity.class)) {
-                if (!field.canAccess(responseObj)) {
-                    field.setAccessible(true);
-                }
-                Object obj = field.get(responseObj);
-                desensitizeAndEncryptObjects(obj);
+                field.setAccessible(true);
+                Object fieldValue = field.get(responseObj);
+                desensitizeAndEncryptObjects(fieldValue);
             }
         }
     }
@@ -73,17 +69,10 @@ public class DesensitizedHandler {
     private String desensitize(String value, SensitiveRule sensitiveRule, int prefixLen, int suffixLen) {
         String deStr;
         switch (sensitiveRule) {
-            case CHINESE_NAME -> deStr = DesensitizedUtils.chineseName(value);
-            case ID_CARD -> deStr = DesensitizedUtils.idCardNum(value);
-            case FIXED_PHONE -> deStr = DesensitizedUtils.fixedPhone(value);
-            case MOBILE_PHONE -> deStr = DesensitizedUtils.mobilePhone(value);
-            case ADDRESS -> deStr = DesensitizedUtils.address(value);
-            case EMAIL -> deStr = DesensitizedUtils.email(value);
-            case BANK_CARD -> deStr = DesensitizedUtils.bankCard(value);
-            case PASSWORD -> deStr = DesensitizedUtils.password(value);
             case CUSTOM_BROADSIDE_CLEAR_TEXT -> deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
             case CUSTOM_BROADSIDE_MASK_TEXT -> deStr = DesensitizedUtils.maskValue(value, prefixLen, suffixLen);
-            default -> deStr = value;
+            default ->
+                    deStr = DesensitizedUtils.desensitizeMap.getOrDefault(sensitiveRule, Function.identity()).apply(value);
         }
         return deStr;
     }

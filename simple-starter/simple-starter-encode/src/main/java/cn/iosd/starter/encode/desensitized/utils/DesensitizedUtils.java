@@ -1,6 +1,11 @@
 package cn.iosd.starter.encode.desensitized.utils;
 
+import cn.iosd.starter.encode.desensitized.vo.SensitiveRule;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * 脱敏工具类
@@ -12,6 +17,23 @@ public class DesensitizedUtils {
      * 用于遮罩的字符串
      */
     private static final String MASK_STR = "*";
+
+    /**
+     * 函数式接口
+     */
+    public static final Map<SensitiveRule, Function<String, String>> desensitizeMap = new EnumMap<>(SensitiveRule.class);
+
+    static {
+        desensitizeMap.put(SensitiveRule.CHINESE_NAME, DesensitizedUtils::chineseName);
+        desensitizeMap.put(SensitiveRule.ID_CARD, DesensitizedUtils::idCardNum);
+        desensitizeMap.put(SensitiveRule.FIXED_PHONE, DesensitizedUtils::fixedPhone);
+        desensitizeMap.put(SensitiveRule.MOBILE_PHONE, DesensitizedUtils::mobilePhone);
+        desensitizeMap.put(SensitiveRule.ADDRESS, DesensitizedUtils::address);
+        desensitizeMap.put(SensitiveRule.EMAIL, DesensitizedUtils::email);
+        desensitizeMap.put(SensitiveRule.BANK_CARD, DesensitizedUtils::bankCard);
+        desensitizeMap.put(SensitiveRule.PASSWORD, DesensitizedUtils::password);
+    }
+
 
     /**
      * 对字符串进行脱敏操作
