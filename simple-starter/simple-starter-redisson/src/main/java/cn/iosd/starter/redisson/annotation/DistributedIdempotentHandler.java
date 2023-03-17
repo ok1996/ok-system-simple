@@ -40,40 +40,29 @@ public class DistributedIdempotentHandler {
             "@within(cn.iosd.starter.redisson.annotation.DistributedIdempotent)")
     public Object idempotent(final ProceedingJoinPoint point) throws Throwable {
         log.info("[开始]执行DistributedIdempotent环绕通知");
-        final DistributedIdempotent idempotent = ((MethodSignature) point.getSignature()).getMethod()
-                .getAnnotation(DistributedIdempotent.class);
-        final Map<String, Object> argMap = SpElUtil.getArgMap(point);
-        final Supplier<String> md5Supplier = () -> DigestUtils.md5DigestAsHex(argMap.toString().getBytes());
-        final String lockName = getLockName(argMap, md5Supplier, idempotent.value());
-        // init lock
-        final RLock lock = redissonService.getLock(LOCK_KEY_PREFIX.concat(lockName));
-        // 已经被锁住了
+        DistributedIdempotent idempotent = ((MethodSignature) point.getSignature()).getMethod().getAnnotation(DistributedIdempotent.class);
+        String lockName = getLockName(SpElUtil.getArgMap(point), () -> DigestUtils.md5DigestAsHex(SpElUtil.getArgMap(point).toString().getBytes()), idempotent.value());
+        RLock lock = redissonService.getLock(LOCK_KEY_PREFIX.concat(lockName));
         if (lock.isLocked()) {
             throw new Exception(idempotent.message());
         }
         if (lock.tryLock(idempotent.acquireTimeout(), idempotent.expireTime(), idempotent.unit())) {
             log.info("执行Redis幂等切面[成功]，加锁完成，开始执行业务逻辑...");
-            final Object proceed;
             try {
-                proceed = point.proceed();
-            } catch (Throwable throwable) {
+                Object proceed = point.proceed();
+                log.info("[完成]执行DistributedIdempotent环绕通知");
+                return proceed;
+            } finally {
                 lock.unlock();
-                throw throwable;
             }
-            log.info("[完成]执行DistributedIdempotent环绕通知");
-            return proceed;
         }
-        // 没有加锁成功，不执行，抛出异常，提醒用户
         throw new Exception(idempotent.message());
     }
 
     private static String getLockName(final Map<String, Object> argMap, final Supplier<String> md5, final String spEl) {
         final String methodName = argMap.get(DistributedIdempotent.METHOD_NAME).toString();
-        if (spEl.equals(DistributedIdempotent.METHOD_NAME)) {
-            return methodName + md5.get();
-        } else {
-            return SpElUtil.analytical(spEl, argMap, String.class, methodName) + md5.get();
-        }
+        return spEl.equals(DistributedIdempotent.METHOD_NAME)
+                ? methodName + md5.get()
+                : SpElUtil.analytical(spEl, argMap, String.class, methodName) + md5.get();
     }
-
 }
