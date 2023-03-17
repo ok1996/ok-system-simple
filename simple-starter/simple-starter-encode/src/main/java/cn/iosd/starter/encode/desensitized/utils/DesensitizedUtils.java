@@ -22,23 +22,21 @@ public class DesensitizedUtils {
      * @return 脱敏后结果
      */
     public static String desValue(String origin, int prefixLen, int suffixLen) {
-        if (StringUtils.isBlank(origin)) {
+        if (origin == null || origin.isEmpty()) {
             return origin;
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0, n = origin.length(); i < n; i++) {
-            if (i < prefixLen) {
+        int len = origin.length();
+        for (int i = 0; i < len; i++) {
+            if (i < prefixLen || i >= len - suffixLen) {
                 sb.append(origin.charAt(i));
-                continue;
+            } else {
+                sb.append(MASK_STR);
             }
-            if (i > (n - suffixLen - 1)) {
-                sb.append(origin.charAt(i));
-                continue;
-            }
-            sb.append(MASK_STR);
         }
         return sb.toString();
     }
+
 
     /**
      * 【中文姓名】只显示最后一个汉字，其他隐藏为星号，比如：**梦
