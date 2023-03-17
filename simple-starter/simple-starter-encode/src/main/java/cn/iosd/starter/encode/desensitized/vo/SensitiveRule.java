@@ -39,7 +39,13 @@ public enum SensitiveRule {
      */
     PASSWORD,
     /**
-     * 自定义
+     * 自定义-两侧保留明文
      */
-    CUSTOM
+    CUSTOM_BROADSIDE_CLEAR_TEXT,
+    /**
+     * 自定义-两侧密文
+     */
+    CUSTOM_BROADSIDE_MASK_TEXT,
+
+
 }

@@ -81,7 +81,8 @@ public class DesensitizedHandler {
             case EMAIL -> deStr = DesensitizedUtils.email(value);
             case BANK_CARD -> deStr = DesensitizedUtils.bankCard(value);
             case PASSWORD -> deStr = DesensitizedUtils.password(value);
-            case CUSTOM -> deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
+            case CUSTOM_BROADSIDE_CLEAR_TEXT -> deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
+            case CUSTOM_BROADSIDE_MASK_TEXT -> deStr = DesensitizedUtils.maskValue(value, prefixLen, suffixLen);
             default -> deStr = value;
         }
         return deStr;

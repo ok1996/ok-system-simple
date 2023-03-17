@@ -28,14 +28,15 @@ public class PersonVo {
     @SensitiveField(rule = SensitiveRule.ADDRESS)
     private String address;
 
-    @Schema(description = "备注")
-    @SensitiveField(rule = SensitiveRule.CUSTOM, prefixLen = 2, suffixLen = 2)
+    @Schema(description = "备注-两侧保留明文")
+    @SensitiveField(rule = SensitiveRule.CUSTOM_BROADSIDE_CLEAR_TEXT, prefixLen = 2, suffixLen = 2)
     private String remark;
 
     @Schema(description = "身份证")
     @SensitiveField(rule = SensitiveRule.ID_CARD)
     private String idCard;
 
-    @Schema(description = "普通字段")
+    @Schema(description = "普通字段-两侧密文")
+    @SensitiveField(rule = SensitiveRule.CUSTOM_BROADSIDE_MASK_TEXT, prefixLen = 2, suffixLen = 2)
     private String normalField;
 }

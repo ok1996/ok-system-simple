@@ -37,6 +37,30 @@ public class DesensitizedUtils {
         return sb.toString();
     }
 
+    /**
+     * 对字符串进行脱敏操作
+     *
+     * @param origin    原始字符串
+     * @param prefixLen 左侧需要几位密文字段
+     * @param suffixLen 右侧需要几位密文字段
+     * @return 脱敏后结果
+     */
+    public static String maskValue(String origin, int prefixLen, int suffixLen) {
+        if (origin == null || origin.isEmpty() || (prefixLen + suffixLen) >= origin.length()) {
+            return origin;
+        }
+        int len = origin.length();
+        int end = len - suffixLen;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            if (i < prefixLen || i >= end) {
+                sb.append(MASK_STR);
+            } else {
+                sb.append(origin.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * 【中文姓名】只显示最后一个汉字，其他隐藏为星号，比如：**梦
