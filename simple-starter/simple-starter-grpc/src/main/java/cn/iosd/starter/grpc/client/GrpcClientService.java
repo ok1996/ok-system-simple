@@ -31,7 +31,7 @@ public class GrpcClientService implements InitializingBean {
     private InitializeGrpcClientBeans beanInjection;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         if (beanInjection != null && beanInjection.getGrpcClientBeans() != null
                 && beanInjection.getGrpcClientBeans().getInjections() != null) {
 
@@ -43,8 +43,8 @@ public class GrpcClientService implements InitializingBean {
                 Field field = v.field();
                 Object bean = v.bean();
 
-                if (grpcClientProperties.getChannel()!=null
-                        &&grpcClientProperties.getChannel().get(annotation.value())!=null){
+                if (grpcClientProperties.getChannel() != null
+                        && grpcClientProperties.getChannel().get(annotation.value()) != null) {
 
                     GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
                     GrpcChannel client = new GrpcChannel(properties.getAddress());
@@ -58,8 +58,8 @@ public class GrpcClientService implements InitializingBean {
                         throw new RuntimeException(e);
                     }
                     field.setAccessible(accessible);
-                }else {
-                    log.error("配置文件缺失请核查，GrpcChannel未装配值：{}",annotation.value());
+                } else {
+                    log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
                 }
             });
             log.info("完成GrpcChannel装配");

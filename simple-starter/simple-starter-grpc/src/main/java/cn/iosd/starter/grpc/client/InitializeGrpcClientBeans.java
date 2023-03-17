@@ -5,7 +5,8 @@ import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ReflectionUtils;
+
+import java.util.stream.Stream;
 
 /**
  * 存储使用到GrpcClient注解的Bean对象地址
@@ -25,20 +26,13 @@ public class InitializeGrpcClientBeans implements BeanPostProcessor {
     }
 
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        ReflectionUtils.doWithFields(bean.getClass(), field -> {
-            // 被指定注解  注解的field
-            GrpcClient annotation = field.getAnnotation(GrpcClient.class);
-            if (annotation == null) {
-                return;
-            }
-            GrpcClientBeans.GrpcClientBean registry =
-                    new GrpcClientBeans.GrpcClientBean(
-                            bean,
-                            annotation,
-                            field);
-
-            grpcClientBeans.add(registry);
-        });
+        Stream.of(bean.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(GrpcClient.class))
+                .forEach(field -> {
+                    GrpcClient annotation = field.getAnnotation(GrpcClient.class);
+                    GrpcClientBeans.GrpcClientBean registry = new GrpcClientBeans.GrpcClientBean(bean, annotation, field);
+                    grpcClientBeans.add(registry);
+                });
         return bean;
     }
 

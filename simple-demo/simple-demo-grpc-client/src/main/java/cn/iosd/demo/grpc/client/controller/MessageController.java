@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,15 +22,15 @@ public class MessageController {
     private GrpcDemoClientService service;
 
     @Operation(summary = "往Hello服务端发送消息")
-    @GetMapping("sendHello")
-    public Response<String> sendHello(String chatMessage) {
-        return Response.ok(service.sendHelloMessage(chatMessage));
+    @GetMapping("/sendHello")
+    public Response<String> sendHello(@RequestParam(name = "message", required = true) String message) {
+        return Response.ok(service.sendHelloMessage(message));
     }
 
     @Operation(summary = "往Person服务端发送消息")
-    @GetMapping("sendPerson")
-    public Response<String> sendPerson(String chatMessage) {
-        return Response.ok(service.sendPersonMessage(chatMessage));
+    @GetMapping("/sendPerson")
+    public Response<String> sendPerson(@RequestParam(name = "message", required = true) String message) {
+        return Response.ok(service.sendPersonMessage(message));
     }
 
 }

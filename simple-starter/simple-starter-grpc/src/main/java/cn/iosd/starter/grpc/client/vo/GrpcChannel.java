@@ -25,7 +25,7 @@ public class GrpcChannel {
             c.setAccessible(true);
             return c.newInstance(new Object[]{channel, CallOptions.DEFAULT});
         } catch (Exception e) {
-            throw new RuntimeException("service接口不存在参数为Channel的构造函数");
+            throw new RuntimeException("service接口不存在参数为Channel的构造函数", e);
         }
     }
 
