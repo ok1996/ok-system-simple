@@ -76,12 +76,14 @@ public class SimpleStorageServiceImpl implements SimpleStorageService, Initializ
     }
 
     @Override
-    public List<Bucket> getListBuckets(String bucketName) {
+    public List<Bucket> getListBuckets(String bucketNameFilter) {
         List<Bucket> buckets = client.listBuckets();
-        if (StringUtils.isNotBlank(bucketName)) {
-            buckets = buckets.stream().filter(s -> s.getName().contains(bucketName)).collect(Collectors.toList());
+        if (StringUtils.isBlank(bucketNameFilter)) {
+            return buckets;
         }
-        return buckets;
+        return buckets.stream()
+                .filter(bucket -> bucket.getName().contains(bucketNameFilter))
+                .collect(Collectors.toList());
     }
 
     @Override
