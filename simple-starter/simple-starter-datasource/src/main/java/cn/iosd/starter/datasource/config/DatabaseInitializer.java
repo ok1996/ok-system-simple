@@ -31,7 +31,7 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
                 String url = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.url");
                 String username = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.username");
                 String password = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.password");
-                if (StringUtils.isAllBlank(url, username, password)) {
+                if (StringUtils.isAnyBlank(url, username, password)) {
                     return;
                 }
                 try {
