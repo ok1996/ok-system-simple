@@ -32,37 +32,41 @@ public class GrpcClientService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        if (beanInjection != null && beanInjection.getGrpcClientBeans() != null
-                && beanInjection.getGrpcClientBeans().getInjections() != null) {
+        if (beanInjection == null || beanInjection.getGrpcClientBeans() == null) {
+            return;
+        }
 
-            GrpcClientBeans grpcClientBeans = beanInjection.getGrpcClientBeans();
-            List<GrpcClientBeans.GrpcClientBean> lsGrpcClientBean = grpcClientBeans.getInjections();
-            lsGrpcClientBean.forEach(v -> {
-                GrpcClient annotation = v.client();
-                Class<?> type = v.field().getType();
-                Field field = v.field();
-                Object bean = v.bean();
+        GrpcClientBeans grpcClientBeans = beanInjection.getGrpcClientBeans();
+        List<GrpcClientBeans.GrpcClientBean> grpcClientBeanList = grpcClientBeans.getInjections();
 
-                if (grpcClientProperties.getChannel() != null
-                        && grpcClientProperties.getChannel().get(annotation.value()) != null) {
+        for (GrpcClientBeans.GrpcClientBean grpcClientBean : grpcClientBeanList) {
+            GrpcClient annotation = grpcClientBean.client();
+            Class<?> type = grpcClientBean.field().getType();
+            Field field = grpcClientBean.field();
+            Object bean = grpcClientBean.bean();
 
-                    GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
-                    GrpcChannel client = new GrpcChannel(properties.getAddress());
-                    Object object = client.getBlockingStub(type);
-                    boolean accessible = field.canAccess(bean);
-                    ReflectionUtils.makeAccessible(field);
-                    try {
-                        field.set(bean, object);
-                    } catch (IllegalAccessException e) {
-                        log.error("对象Bean注入配置GrpcChannel异常：", e.getMessage());
-                        throw new RuntimeException(e);
-                    }
-                    field.setAccessible(accessible);
-                } else {
-                    log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
-                }
-            });
-            log.info("完成GrpcChannel装配");
+            if (grpcClientProperties.getChannel() == null || grpcClientProperties.getChannel().get(annotation.value()) == null) {
+                log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
+                continue;
+            }
+
+            GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
+            GrpcChannel client = new GrpcChannel(properties.getAddress());
+            Object object = client.getBlockingStub(type);
+
+            boolean accessible = field.canAccess(bean);
+            ReflectionUtils.makeAccessible(field);
+
+            try {
+                field.set(bean, object);
+                log.info("完成 {} 的 GrpcChannel 装配", annotation.value());
+            } catch (IllegalAccessException e) {
+                String message = String.format("对象 %s 注入配置 GrpcChannel 异常：", bean.getClass().getSimpleName());
+                log.error(message, e);
+                throw new IllegalStateException(message, e);
+            } finally {
+                field.setAccessible(accessible);
+            }
         }
     }
 }

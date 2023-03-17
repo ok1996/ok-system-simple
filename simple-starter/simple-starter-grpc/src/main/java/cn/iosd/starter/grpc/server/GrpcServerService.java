@@ -51,21 +51,25 @@ public class GrpcServerService implements InitializingBean, ApplicationContextAw
     }
 
     private void start(final int port) throws IOException {
-        ServerBuilder serverBuilder = ServerBuilder.forPort(port);
+        ServerBuilder<?> serverBuilder = ServerBuilder.forPort(port);
         if (context != null) {
             Map<String, Object> beansWithAnnotationMap = context.getBeansWithAnnotation(GrpcService.class);
-            beansWithAnnotationMap.forEach((key, value) -> serverBuilder.addService(
-                    (BindableService) value
-            ));
+            beansWithAnnotationMap.forEach((key, value) -> {
+                if (value instanceof BindableService) {
+                    serverBuilder.addService((BindableService) value);
+                    log.info("GrpcServer add service: {}", value.getClass().getName());
+                } else {
+                    log.warn("GrpcServer ignore non-BindableService class: {}", value.getClass().getName());
+                }
+            });
         }
-
         this.server = serverBuilder.build();
         this.server.start();
-
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             this.server.shutdown();
             log.info("GrpcServer shut down");
         }));
     }
+
 
 }
