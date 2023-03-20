@@ -9,7 +9,7 @@
 | Spring Boot          | 3.0.4               |
 | Spring Cloud         | 2022.0.1            |
 | Spring Cloud Alibaba | 2022.0.0.0-RC1      |
-| Ok System Simple     | 2023.2.4.0-SNAPSHOT |
+| Ok System Simple     | 2023.3.0.0-SNAPSHOT |
 
 ## 仓库地址
 例 simple-starter-web  
