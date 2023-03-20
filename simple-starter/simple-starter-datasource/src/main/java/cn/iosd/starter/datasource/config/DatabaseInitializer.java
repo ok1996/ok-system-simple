@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -80,26 +82,20 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
      * @return 数据库名
      */
     String parseDatabaseName(String jdbcUrl) {
-        int index = jdbcUrl.indexOf("://");
-        if (index == -1) {
-            throw new IllegalArgumentException("can not parse database name from jdbcUrl:" + jdbcUrl);
+        if (StringUtils.isBlank(jdbcUrl)) {
+            throw new IllegalArgumentException("jdbcUrl is null or empty");
         }
-
-        int slashIndex = jdbcUrl.indexOf("/", index + 3);
-        slashIndex++;
-        if (slashIndex == 0 || slashIndex == jdbcUrl.length()) {
-            throw new IllegalArgumentException("can not parse database name from jdbcUrl:" + jdbcUrl);
+        try {
+            URI uri = new URI(jdbcUrl.substring(5));
+            String path = uri.getPath();
+            String databaseName = path.substring(1);
+            if (StringUtils.isBlank(databaseName)) {
+                throw new IllegalArgumentException("can not parse database name from jdbcUrl: " + jdbcUrl);
+            }
+            return databaseName;
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException("can not parse database name from jdbcUrl: " + jdbcUrl + ". Invalid URI syntax", e);
         }
-
-        int questionMarkIndex = jdbcUrl.indexOf("?", slashIndex);
-        String databaseName = questionMarkIndex == -1
-                ? jdbcUrl.substring(slashIndex)
-                : jdbcUrl.substring(slashIndex, questionMarkIndex);
-
-        if (StringUtils.isBlank(databaseName)) {
-            throw new IllegalArgumentException("can not parse database name from jdbcUrl:" + jdbcUrl);
-        }
-        return databaseName;
     }
 
     /**
