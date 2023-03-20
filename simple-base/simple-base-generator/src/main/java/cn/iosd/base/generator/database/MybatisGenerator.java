@@ -55,11 +55,11 @@ public class MybatisGenerator {
      * @param vo
      */
     public static void generate(MybatisGeneratorVo vo) {
-        //文件输出地址前缀
+        // 文件输出地址前缀
         String outputDirPrefixReal = OUTPUT_DIR_PREFIX.replace("/", File.separator);
-        StringBuffer outputDirModule = new StringBuffer(outputDirPrefixReal).append(File.separator).append(vo.getPackageName().replace(".", File.separator)).append(File.separator).append(vo.getModuleName()).append(File.separator);
+        String outputDirModule = String.join(File.separator, outputDirPrefixReal, vo.getPackageName().replace(".", File.separator), vo.getModuleName()) + File.separator;
 
-        //基础模板文件输出地址
+        // 基础模板文件输出地址
         String outputDirXml = outputDirModule + "mapper" + File.separator + "xml";
         String outputDirController = outputDirModule + "controller";
         String outputDirMapper = outputDirModule + "mapper";
@@ -75,40 +75,45 @@ public class MybatisGenerator {
         pathInfo.put(OutputFile.service, outputDirService);
         pathInfo.put(OutputFile.serviceImpl, outputDirServiceImpl);
 
-        //自定义模板文件输出地址
-        StringBuffer customFileConf = new StringBuffer(CUSTOM_FILE_PREFIX).append("config").append(File.separator).append(StringUtils.capitalize(vo.getModuleName()))
-                .append("AutoConfig.java");
-        StringBuffer customFileYml = new StringBuffer(CUSTOM_FILE_PREFIX).append("resources").append(File.separator)
-                .append("application.yml");
-        StringBuffer customFileConfigYml = new StringBuffer(CUSTOM_FILE_PREFIX).append("resources").append(File.separator).append("config").append(File.separator)
-                .append("application.yml");
-        StringBuffer customFileApplication = new StringBuffer(CUSTOM_FILE_PREFIX).append(StringUtils.capitalize(vo.getModuleName()))
-                .append("Application.java");
-        StringBuffer customFilePom = new StringBuffer(CUSTOM_FILE_PREFIX).append("pom.xml");
+        // 自定义模板文件输出地址
+        String customFilePrefix = CUSTOM_FILE_PREFIX;
+        String moduleName = vo.getModuleName();
+        String packageName = vo.getPackageName();
+        String capitalizedModuleName = StringUtils.capitalize(moduleName);
+        String packageParent = packageName + "." + moduleName;
+        String configPackage = packageParent + ".config";
+        String mapperLocations = "/" + packageName.replace(".", "/") + "/" + moduleName + "/";
 
-        Map<String, String> customFile = new HashMap<>(16);
-        customFile.put(customFileConf.toString(), TEMPLATES_DIR_CONFIG);
-        customFile.put(customFileYml.toString(), TEMPLATES_DIR_YML);
-        customFile.put(customFileConfigYml.toString(), TEMPLATES_DIR_CONFIG_YML);
-        customFile.put(customFilePom.toString(), TEMPLATES_DIR_POM);
-        customFile.put(customFileApplication.toString(), TEMPLATES_DIR_APPLICATION);
-        customFile.put(customFilePom.toString(), TEMPLATES_DIR_POM);
-        //定制模版传参
+        Map<String, String> customFile = Map.of(
+                customFilePrefix + "config/" + capitalizedModuleName + "AutoConfig.java", TEMPLATES_DIR_CONFIG,
+                customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML,
+                customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML,
+                customFilePrefix + "pom.xml", TEMPLATES_DIR_POM,
+                customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION
+        );
+
+        // 定制模版传参
         Map<String, Object> customMap = new HashMap<>(16);
-        StringBuffer packageParent = new StringBuffer(vo.getPackageName()).append(".").append(vo.getModuleName());
-        customMap.put("packageParent", packageParent.toString());
-        packageParent.append(".").append("config");
-        customMap.put("packageConfig", packageParent.toString());
-        customMap.put("ModuleName", StringUtils.capitalize(vo.getModuleName()));
-        StringBuffer mapperLocations = new StringBuffer("/")
-                .append(vo.getPackageName().replace(".", "/")).append("/").append(vo.getModuleName()).append("/");
+        customMap.put("packageParent", packageParent);
+        customMap.put("packageConfig", configPackage);
+        customMap.put("ModuleName", capitalizedModuleName);
         customMap.put("mapperLocations", mapperLocations);
         customMap.put("simpleVersion", SIMPLE_VERSION);
         customMap.put("projectName", vo.getProjectName());
 
         FastAutoGenerator.create(vo.getDataBaseUrl(), vo.getDataBaseUserName(), vo.getDataBasePassword())
-                .globalConfig(builder -> builder.author(vo.getAuthorName()).enableSpringdoc().outputDir(outputDirPrefixReal).disableOpenDir())
-                .packageConfig(builder -> builder.parent(vo.getPackageName()).moduleName(vo.getModuleName()).xml("mapper").pathInfo(pathInfo))
+                .globalConfig(builder -> builder
+                        .author(vo.getAuthorName())
+                        .enableSpringdoc()
+                        .outputDir(outputDirPrefixReal)
+                        .disableOpenDir()
+                )
+                .packageConfig(builder -> builder
+                        .parent(packageName)
+                        .moduleName(moduleName)
+                        .xml("mapper")
+                        .pathInfo(pathInfo)
+                )
                 .strategyConfig(builder -> {
                     builder.addInclude(vo.getTableName());
                     if (vo.getTablePrefix() != null) {
