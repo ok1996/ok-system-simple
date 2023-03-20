@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
 
 /**
  * @author ok1996
@@ -44,44 +43,27 @@ public class OpenApiAutoConfiguration {
 
     @Bean
     public OpenAPI openApi() {
-        Info info = new Info()
-                .title(titleName())
-                .description(openApiProperties.getDescription())
-                .version(openApiProperties.getVersion());
         Contact contact = new Contact();
         contact.setName(openApiProperties.getContact().getName());
-        contact.setEmail(openApiProperties.getContact().getEmail());
         contact.setUrl(openApiProperties.getContact().getUrl());
-        info.contact(contact);
+        contact.setEmail(openApiProperties.getContact().getEmail());
 
-        OpenAPI openApi = new OpenAPI();
-        openApi.info(new Info()
-                .title(openApiProperties.getTitle())
+        OpenAPI openApi = new OpenAPI().info(new Info()
+                .title(titleName())
                 .description(openApiProperties.getDescription())
                 .contact(contact)
                 .version(openApiProperties.getVersion()));
-        openApi.components(components())
-                .addSecurityItem(new SecurityRequirement()
-                        .addList(COMPONENT_SECURITY_SCHEME_KEY));
 
+        openApi.addSecurityItem(new SecurityRequirement().addList(COMPONENT_SECURITY_SCHEME_KEY));
+        openApi.components(new Components().securitySchemes(Collections.singletonMap(COMPONENT_SECURITY_SCHEME_KEY,
+                new SecurityScheme().type(SecurityScheme.Type.APIKEY)
+                        .name("Authorization")
+                        .in(SecurityScheme.In.HEADER))));
         return openApi;
     }
 
-    private Components components() {
-        Map<String, SecurityScheme> securitySchemeMap = new HashMap<>(16);
-        SecurityScheme securityScheme = new SecurityScheme();
-        securityScheme.setType(SecurityScheme.Type.APIKEY);
-        securityScheme.setName("Authorization");
-        securityScheme.in(SecurityScheme.In.HEADER);
-        securitySchemeMap.put(COMPONENT_SECURITY_SCHEME_KEY, securityScheme);
-        return new Components().securitySchemes(securitySchemeMap);
-    }
-
     private String titleName() {
-        if (StringUtils.isBlank(openApiProperties.getTitle())) {
-            return applicationName;
-        }
-        return openApiProperties.getTitle();
+        return StringUtils.isNotBlank(openApiProperties.getTitle()) ? openApiProperties.getTitle() : applicationName;
     }
 
 }
