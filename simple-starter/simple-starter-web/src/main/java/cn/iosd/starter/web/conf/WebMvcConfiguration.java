@@ -33,6 +33,8 @@ import java.util.List;
         , havingValue = "true", matchIfMissing = true)
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(mappingJackson2HttpMessageConverter());
@@ -48,19 +50,28 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         SimpleModule simpleModule = new SimpleModule();
-        //LocalDateTime、LocalDate、LocalTime类型序列化为时间戳
-        simpleModule.addSerializer(LocalDateTime.class, new StdDelegatingSerializer(new LocalDateTimeToLongConvert()));
-        simpleModule.addSerializer(LocalDate.class, new StdDelegatingSerializer(new LocalDateToLongConvert()));
-        simpleModule.addSerializer(LocalTime.class, new StdDelegatingSerializer(new LocalTimeToLongConvert()));
-        //字符串反序列化为LocalDateTime、LocalDate、LocalTime
-        simpleModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        simpleModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        simpleModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
-
+        registerSerializers(simpleModule);
+        registerDeserializers(simpleModule);
         objectMapper.registerModule(simpleModule);
+
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;
     }
+
+    private void registerSerializers(SimpleModule simpleModule) {
+        simpleModule.addSerializer(LocalDateTime.class, new StdDelegatingSerializer(new LocalDateTimeToLongConvert()));
+        simpleModule.addSerializer(LocalDate.class, new StdDelegatingSerializer(new LocalDateToLongConvert()));
+        simpleModule.addSerializer(LocalTime.class, new StdDelegatingSerializer(new LocalTimeToLongConvert()));
+    }
+
+
+    private void registerDeserializers(SimpleModule simpleModule) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        simpleModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
+        simpleModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(dateTimeFormatter));
+        simpleModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(dateTimeFormatter));
+    }
+
 
 
 }
