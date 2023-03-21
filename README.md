@@ -1,6 +1,6 @@
 ## Links
 - [文档详情](https://ok96.cn/pages/8e9dc3/)
-- [更新项说明](https://ok96.cn/pages/ae03ef/)
+- [版本说明](https://ok96.cn/pages/ae03ef/)
 
 ## 核心依赖
 | 依赖                   | 版本                  |
