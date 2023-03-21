@@ -35,7 +35,7 @@
 |---------------------------|----------|--------------------------------------------------------------|
 | simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类 |
 | simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等                                         |
-| simple-starter-s3         | 文件管理客户端  | 初始化客户端                                                       |
+| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                              |
 | simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                  |
 | simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                        |
 | simple-starter-datasource | 数据库连接应用  | 数据库连接使用hikari、自动创建数据库                                        |
