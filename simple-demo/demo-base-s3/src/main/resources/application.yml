@@ -1,0 +1,12 @@
+server:
+  port: 13030
+spring:
+  application:
+    name: demo-base-s3
+simple:
+  s3:
+    #缺省项为false
+    enabled: true
+    accessKey: RKcxrJ80qTgziqaH
+    secretKey: pVlB5bm0vIA6aidjWLG8ZfKUIuB7dNUC
+    endpoint: 127.0.0.1:9000

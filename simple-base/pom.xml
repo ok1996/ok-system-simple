@@ -18,6 +18,7 @@
     <modules>
         <module>simple-base-param</module>
         <module>simple-base-generator</module>
+        <module>simple-base-s3</module>
     </modules>
 
     <profiles>

@@ -1,7 +1,7 @@
-package cn.iosd.starter.s3.service;
+package cn.iosd.base.s3.service;
 
-import cn.iosd.starter.s3.domain.StorageObjectRequest;
-import cn.iosd.starter.s3.domain.StorageObjectResponse;
+import cn.iosd.base.s3.domain.StorageObjectRequest;
+import cn.iosd.base.s3.domain.StorageObjectResponse;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 
@@ -20,9 +20,17 @@ public interface SimpleStorageService {
      * @param input       内容流
      * @param bucket      存储桶
      * @param key         文件主键（eg:awed13.jpg）
-     * @return
      */
-    String upload(String contentType, Long size, InputStream input, String bucket, String key);
+    void upload(String contentType, Long size, InputStream input, String bucket, String key);
+
+    /**
+     * 生成带有预签名的URL，用于私有S3对象的访问
+     *
+     * @param bucket 存储桶的名称
+     * @param key    存储对象的键
+     * @return 带有预签名的URL
+     */
+    String generatePresignedUrl(String bucket, String key);
 
     /**
      * 获取桶列表
@@ -67,8 +75,8 @@ public interface SimpleStorageService {
      * 删除对象
      *
      * @param bucketName 桶名称
-     * @param objectName 对象名称
+     * @param key        文件主键（eg:awed13.jpg）
      * @return
      */
-    Boolean deleteStorageObject(String bucketName, String objectName);
+    void deleteStorageObject(String bucketName, String key);
 }

@@ -1,7 +1,8 @@
-package cn.iosd.starter.s3.domain;
+package cn.iosd.base.s3.domain;
 
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -11,13 +12,11 @@ import java.util.List;
  * @author ok1996
  */
 public class StorageObjectResponse {
-    /**
-     * 对象列表信息,注：truncated 为true 存在下一页
-     */
+
+    @Schema(description = "对象列表信息,注：truncated 为true 存在下一页")
     private ObjectListing objectListing;
-    /**
-     * 对象列表数据
-     */
+
+    @Schema(description = "对象列表数据")
     private List<S3ObjectSummary> summaries;
 
     public ObjectListing getObjectListing() {

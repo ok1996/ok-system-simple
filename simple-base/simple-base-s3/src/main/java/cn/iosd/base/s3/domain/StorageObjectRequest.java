@@ -1,5 +1,7 @@
-package cn.iosd.starter.s3.domain;
+package cn.iosd.base.s3.domain;
 
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 存储对象列表请求参数
@@ -7,17 +9,14 @@ package cn.iosd.starter.s3.domain;
  * @author ok1996
  */
 public class StorageObjectRequest {
-    /**
-     * 存储桶
-     */
+
+    @Schema(description = "存储桶")
     private String bucketName;
-    /**
-     * 文件名前缀
-     */
+
+    @Schema(description = "文件名前缀")
     private String prefixFileName;
-    /**
-     * 每页大小
-     */
+
+    @Schema(description = "每页大小")
     private Integer pageSize;
 
     public String getBucketName() {

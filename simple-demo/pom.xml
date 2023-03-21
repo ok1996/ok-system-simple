@@ -30,6 +30,7 @@
         <module>demo-base-param</module>
         <module>demo-base-generator</module>
         <module>simple-demo-encode</module>
+        <module>demo-base-s3</module>
     </modules>
 
     <build>

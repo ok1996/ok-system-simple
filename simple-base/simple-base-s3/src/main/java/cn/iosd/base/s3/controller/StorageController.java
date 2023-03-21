@@ -1,8 +1,8 @@
-package cn.iosd.demo.s3.controller;
+package cn.iosd.base.s3.controller;
 
-import cn.iosd.starter.s3.domain.StorageObjectRequest;
-import cn.iosd.starter.s3.domain.StorageObjectResponse;
-import cn.iosd.starter.s3.service.SimpleStorageService;
+import cn.iosd.base.s3.domain.StorageObjectRequest;
+import cn.iosd.base.s3.domain.StorageObjectResponse;
+import cn.iosd.base.s3.service.SimpleStorageService;
 import cn.iosd.starter.web.domain.Response;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
@@ -43,13 +43,13 @@ public class StorageController {
 
     @Operation(summary = "创建存储桶")
     @GetMapping("/bucket")
-    public Response<Bucket> creatBucket(String bucketName) {
+    public Response<Bucket> creatBucket(@Parameter(description = "存储桶") String bucketName) {
         return Response.ok(simpleStorageService.creatBucket(bucketName));
     }
 
     @Operation(summary = "删除存储桶")
     @DeleteMapping("/bucket")
-    public Response deleteBucket(String bucketName) {
+    public Response deleteBucket(@Parameter(description = "存储桶") String bucketName) {
         simpleStorageService.deleteBucket(bucketName);
         return Response.ok();
     }
@@ -67,21 +67,28 @@ public class StorageController {
         return Response.ok(simpleStorageService.getStorageObjectNext(objectListing));
     }
 
-    @Operation(summary = "上传文件")
+    @Operation(summary = "上传文件-返回文件key")
     @PostMapping(value = "/object/upload")
     public Response<String> upload(@ModelAttribute MultipartFile file
-            , @RequestParam(value = "bucketName") String bucketName
-            , @RequestParam(value = "fileExtension") String fileExtension) throws IOException {
+            , @Parameter(description = "存储桶") @RequestParam(value = "bucketName") String bucketName
+            , @Parameter(description = "文件名后缀", example = "png") @RequestParam(value = "fileExtension") String fileExtension) throws IOException {
         String fileKey = RandomStringUtils.randomAlphabetic(12) + "." + fileExtension;
-        return Response.ok(simpleStorageService.upload(file.getContentType(), file.getSize(),
-                file.getInputStream(), bucketName, fileKey));
+        simpleStorageService.upload(file.getContentType(), file.getSize(),
+                file.getInputStream(), bucketName, fileKey);
+        return Response.ok(fileKey);
+    }
+
+    @Operation(summary = "生成带有预签名的URL，用于私有S3对象的访问")
+    @GetMapping(value = "/object/url")
+    public Response<String> fd(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
+        return Response.ok(simpleStorageService.generatePresignedUrl(bucketName, key));
     }
 
     @Operation(summary = "删除文件")
     @DeleteMapping("/object")
-    public Response<Boolean> deleteStorageObject(String bucketName
-            , String objectName) {
-        return Response.ok(simpleStorageService.deleteStorageObject(bucketName, objectName));
+    public Response deleteStorageObject(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
+        simpleStorageService.deleteStorageObject(bucketName, key);
+        return Response.ok();
     }
 
 }
