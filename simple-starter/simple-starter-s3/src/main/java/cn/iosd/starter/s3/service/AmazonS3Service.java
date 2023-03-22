@@ -10,6 +10,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
@@ -70,6 +71,19 @@ public class AmazonS3Service implements InitializingBean {
      */
     public void putObject(ObjectMetadata metadata, InputStream input, String bucket, String key) {
         this.client.putObject(new PutObjectRequest(bucket, key, input, metadata));
+    }
+
+    /**
+     * 上传公共读取的对象到指定的S3桶中
+     *
+     * @param metadata 存储对象的元数据
+     * @param input    存储对象的数据流
+     * @param bucket   存储对象的S3桶名
+     * @param key      存储对象的键
+     */
+    public void putObjectPublicRead(ObjectMetadata metadata, InputStream input, String bucket, String key) {
+        this.client.putObject(new PutObjectRequest(bucket, key, input, metadata)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
     /**
