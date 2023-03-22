@@ -36,7 +36,7 @@ public class StorageController {
     private SimpleStorageService simpleStorageService;
 
     @Operation(summary = "获取存储桶列表")
-    @GetMapping("/list")
+    @GetMapping("/bucket/list")
     public Response<List<Bucket>> getListBuckets(@Parameter(description = "存储桶") String bucketName) {
         return Response.ok(simpleStorageService.getListBuckets(bucketName));
     }
