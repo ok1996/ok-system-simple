@@ -80,7 +80,7 @@ public class StorageController {
 
     @Operation(summary = "生成带有预签名的URL，用于私有S3对象的访问")
     @GetMapping(value = "/object/url")
-    public Response<String> fd(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
+    public Response<String> generatePresignedUrl(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
         return Response.ok(simpleStorageService.generatePresignedUrl(bucketName, key));
     }
 
