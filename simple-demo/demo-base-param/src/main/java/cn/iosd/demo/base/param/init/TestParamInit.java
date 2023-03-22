@@ -27,15 +27,13 @@ public class TestParamInit implements ParamInit {
     @Override
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
         return CollUtil.newArrayList(
-                new BaseParamCodeValueVo<>().setCode(OPEN_SIMULATION_CODE).setValue(true),
-                new BaseParamCodeValueVo<>().setCode(CONTENT_DATA_CODE).setValue(
-                        ClassmateVo.builder().personList(
-                                CollUtil.newArrayList(
+                new BaseParamCodeValueVo<Boolean>().setCode(OPEN_SIMULATION_CODE).setValue(true),
+                new BaseParamCodeValueVo<ClassmateVo>().setCode(CONTENT_DATA_CODE)
+                        .setValue(ClassmateVo.builder().personList(CollUtil.newArrayList(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
-                                        ClassmateVo.Person.builder().age(14).name("小明").build()
-                                )
-                        ).build()
-                )
+                                        ClassmateVo.Person.builder().age(14).name("小明").build()))
+                                .build()
+                        )
         );
     }
 

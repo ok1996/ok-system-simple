@@ -6,7 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author ok1996
@@ -25,8 +27,7 @@ public class ParamInitUtil {
      * @return
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, Class<T> valueType) throws JsonProcessingException {
-        String str = JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue());
-        return JsonUtil.DEFAULT_INSTANCE.readValue(str, valueType);
+        return JsonUtil.DEFAULT_INSTANCE.readValue(JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue()), valueType);
     }
 
     /**
@@ -38,8 +39,7 @@ public class ParamInitUtil {
      * @return
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, TypeReference<T> valueTypeRef) throws JsonProcessingException {
-        String str = JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue());
-        return JsonUtil.DEFAULT_INSTANCE.readValue(str, valueTypeRef);
+        return JsonUtil.DEFAULT_INSTANCE.readValue(JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue()), valueTypeRef);
     }
 
     /**
@@ -53,14 +53,9 @@ public class ParamInitUtil {
      * @throws JsonProcessingException
      */
     public static <T> T getValueByCode(List<BaseParamCodeValueVo<?>> simulation, String code, Class<T> valueType) throws JsonProcessingException {
-        Optional<BaseParamCodeValueVo<?>> singleCodeValueDto = simulation.stream().filter(v ->
-                v.getCode().equals(code)
-        ).findFirst();
-        if (singleCodeValueDto.isPresent()) {
-            String str = JsonUtil.DEFAULT_INSTANCE.writeValueAsString(singleCodeValueDto.get().getValue());
-            return JsonUtil.DEFAULT_INSTANCE.readValue(str, valueType);
-        }
-        return null;
+        Map<String, Object> codeValueMap = simulation.stream()
+                .collect(Collectors.toMap(BaseParamCodeValueVo::getCode, BaseParamCodeValueVo::getValue));
+        return JsonUtil.DEFAULT_INSTANCE.readValue(JsonUtil.DEFAULT_INSTANCE.writeValueAsString(codeValueMap.getOrDefault(code, null)), valueType);
     }
 
     /**
@@ -71,7 +66,9 @@ public class ParamInitUtil {
      * @return
      */
     public static Optional<BaseParamCodeValueVo<?>> getBaseParamCodeValueVoByCode(List<BaseParamCodeValueVo<?>> simulation, String code) {
-        return simulation.stream().filter(v -> v.getCode().equals(code)).findFirst();
+        return simulation.stream()
+                .filter(v -> v.getCode().equals(code))
+                .findFirst();
     }
 
     /**
@@ -83,12 +80,10 @@ public class ParamInitUtil {
      * @return
      */
     public static boolean getBooleanValueByCodeDefaultFalse(List<BaseParamCodeValueVo<?>> simulation, String code) {
-        Optional<BaseParamCodeValueVo<?>> singleCodeValueDto = simulation.stream().filter(v ->
-                v.getCode().equals(code)
-        ).findFirst();
-        if (singleCodeValueDto.isPresent() && (Boolean) singleCodeValueDto.get().getValue()) {
-            return true;
-        }
-        return false;
+        return getBaseParamCodeValueVoByCode(simulation, code)
+                .map(BaseParamCodeValueVo::getValue)
+                .map(Boolean.class::cast)
+                .orElse(false);
     }
+
 }
