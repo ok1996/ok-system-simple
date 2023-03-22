@@ -2,7 +2,6 @@ package cn.iosd.starter.datasource.mybatis.handler;
 
 
 import cn.iosd.starter.web.utils.JsonUtil;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -12,6 +11,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * @author ok1996
@@ -27,38 +27,25 @@ public class JacksonTypeHandler extends BaseTypeHandler<JsonNode> {
     @Override
     public JsonNode getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String json = rs.getString(columnName);
-        if (json != null) {
-            return read(json);
-        } else {
-            return null;
-        }
+        return getJsonNode(json);
     }
 
     @Override
     public JsonNode getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String json = rs.getString(columnIndex);
-        if (json != null) {
-            return read(json);
-        } else {
-            return null;
-        }
+        return getJsonNode(json);
     }
 
     @Override
     public JsonNode getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String json = cs.getString(columnIndex);
-        if (json != null) {
-            return read(json);
-        } else {
-            return null;
-        }
+        return getJsonNode(json);
     }
 
-    private JsonNode read(String json) {
+    private JsonNode getJsonNode(String json) {
         try {
-            return JsonUtil.DEFAULT_INSTANCE.readTree(json);
-        } catch (JsonParseException e) {
-            return null;
+            Optional<JsonNode> jsonNode = Optional.ofNullable(JsonUtil.DEFAULT_INSTANCE.readTree(json));
+            return jsonNode.orElse(null);
         } catch (IOException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }

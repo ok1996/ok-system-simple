@@ -62,8 +62,7 @@ public class StorageController {
 
     @Operation(summary = "获取文件列表-下一页")
     @PostMapping("/object/Next")
-    public Response<StorageObjectResponse> getStorageObjectNext(
-            @RequestBody @Parameter(name = "本页对象列表信息") ObjectListing objectListing) {
+    public Response<StorageObjectResponse> getStorageObjectNext(@Parameter(name = "本页对象列表信息") @RequestBody ObjectListing objectListing) {
         return Response.ok(simpleStorageService.getStorageObjectNext(objectListing));
     }
 
@@ -73,8 +72,7 @@ public class StorageController {
             , @Parameter(description = "存储桶") @RequestParam(value = "bucketName") String bucketName
             , @Parameter(description = "文件名后缀", example = "png") @RequestParam(value = "fileExtension") String fileExtension) throws IOException {
         String fileKey = RandomStringUtils.randomAlphabetic(12) + "." + fileExtension;
-        simpleStorageService.upload(file.getContentType(), file.getSize(),
-                file.getInputStream(), bucketName, fileKey);
+        simpleStorageService.upload(file.getContentType(), file.getSize(), file.getInputStream(), bucketName, fileKey);
         return Response.ok(fileKey);
     }
 
