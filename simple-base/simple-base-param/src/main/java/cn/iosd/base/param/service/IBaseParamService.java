@@ -4,6 +4,7 @@ import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.base.param.vo.BaseParamListReqVo;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * @author ok1996
  */
-public interface IBaseParamService {
+public interface IBaseParamService extends IService<BaseParam> {
     /**
      * 查询基础参数配置
      *
@@ -36,15 +37,6 @@ public interface IBaseParamService {
      * @throws JsonProcessingException
      */
     List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException;
-
-    /**
-     * 查询基础参数配置列表
-     *
-     * @param baseParam 基础参数配置
-     * @return 基础参数配置集合
-     */
-    List<BaseParam> selectBaseParamList(BaseParamListReqVo baseParam);
-
     /**
      * 新增
      *
@@ -63,19 +55,4 @@ public interface IBaseParamService {
      */
     int updateBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException;
 
-    /**
-     * 批量删除基础参数配置
-     *
-     * @param ids 需要删除的基础参数配置主键集合
-     * @return 影响行数
-     */
-    int deleteBaseParamByIds(Long[] ids);
-
-    /**
-     * 删除基础参数配置信息
-     *
-     * @param id 基础参数配置主键
-     * @return 影响行数
-     */
-    int deleteBaseParamById(Long id);
 }

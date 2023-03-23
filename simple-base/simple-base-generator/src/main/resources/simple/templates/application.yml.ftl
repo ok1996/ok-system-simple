@@ -26,6 +26,6 @@ spring:
     locations: classpath:db/mysql
     table: ${"${"}spring.application.name}_flyway_schema_history
 # mybatis配置
-mybatis:
+mybatis-plus:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:${mapperLocations}**/*Mapper.xml

@@ -34,7 +34,6 @@
         <redisson.version>3.20.0</redisson.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>1.7.23</netty-socketio.version>
-        <pagehelper-boot.version>1.4.6</pagehelper-boot.version>
         <knife4j-openapi3.version>4.0.0</knife4j-openapi3.version>
         <aws-java-sdk-s3.version>1.12.430</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
@@ -137,13 +136,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${spring-boot-mybatis.version}</version>
-            </dependency>
-
-            <!-- 分页插件 -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper-boot.version}</version>
             </dependency>
 
             <!-- 代码生成 -->

@@ -13,7 +13,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
     </#if>
 </#if>
-
+<#if table.convert>
+import com.baomidou.mybatisplus.annotation.TableName;
+</#if>
 <#list table.fields as field>
     <#if field.propertyType=="LocalDateTime">
 import java.time.LocalDateTime;
@@ -34,6 +36,9 @@ import java.time.LocalDateTime;
     <#if chainModel>
 @Accessors(chain = true)
     </#if>
+</#if>
+<#if table.convert>
+@TableName("${schemaName}${table.name}")
 </#if>
 <#if springdoc>
 @Schema(name = "${entity}", description = "${table.comment!}")

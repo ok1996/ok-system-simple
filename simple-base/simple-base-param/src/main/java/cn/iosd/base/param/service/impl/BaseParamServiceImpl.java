@@ -8,12 +8,12 @@ import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.base.param.vo.BaseParamListReqVo;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
 import cn.iosd.starter.web.utils.JsonUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -25,30 +25,24 @@ import java.util.List;
  * @author ok1996
  */
 @Service
-public class BaseParamServiceImpl implements IBaseParamService {
-    @Autowired
-    private BaseParamMapper baseParamMapper;
+public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam> implements IBaseParamService {
 
     @Override
     public BaseParam selectBaseParamById(Long id) {
-        return baseParamMapper.selectBaseParamById(id);
+        return baseMapper.selectBaseParamById(id);
     }
 
     @Override
     public BaseParam selectBaseParamByKey(String paramKey) {
-        return baseParamMapper.selectBaseParamByKey(paramKey);
+        return baseMapper.selectBaseParamByKey(paramKey);
     }
 
     @Override
     public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException {
-        BaseParam baseParam = baseParamMapper.selectBaseParamByKey(paramKey);
+        BaseParam baseParam = baseMapper.selectBaseParamByKey(paramKey);
         return JsonUtil.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
     }
 
-    @Override
-    public List<BaseParam> selectBaseParamList(BaseParamListReqVo baseParam) {
-        return baseParamMapper.selectBaseParamList(baseParam);
-    }
 
     @Override
     public Long insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
@@ -57,7 +51,7 @@ public class BaseParamServiceImpl implements IBaseParamService {
         baseParam.setCreateTime(now);
         baseParam.setModifyTime(now);
         baseParam.setHistoryCodeValues(inputHistoryCodeValues(baseParam.getCodeValues(), null));
-        baseParamMapper.insertBaseParam(baseParam);
+        baseMapper.insertBaseParam(baseParam);
         return baseParam.getId();
     }
 
@@ -69,12 +63,12 @@ public class BaseParamServiceImpl implements IBaseParamService {
 
         JsonNode historyCodeValues = null;
         if (baseParamVo.getId() != null) {
-            historyCodeValues = baseParamMapper.selectBaseParamById(baseParamVo.getId()).getHistoryCodeValues();
+            historyCodeValues = baseMapper.selectBaseParamById(baseParamVo.getId()).getHistoryCodeValues();
         }
 
         baseParam.setHistoryCodeValues(inputHistoryCodeValues(baseParam.getCodeValues(), historyCodeValues));
 
-        return baseParamMapper.updateBaseParam(baseParam);
+        return baseMapper.updateBaseParam(baseParam);
     }
 
     /**
@@ -115,16 +109,6 @@ public class BaseParamServiceImpl implements IBaseParamService {
         codeValuesObject.put("createTime", Timestamp.valueOf(LocalDateTime.now()).getTime());
         subNodes.add(codeValuesObject);
         return new ArrayNode(JsonNodeFactory.instance, subNodes.size() > 10 ? subNodes.subList(subNodes.size() - 10, subNodes.size()) : subNodes);
-    }
-
-    @Override
-    public int deleteBaseParamByIds(Long[] ids) {
-        return baseParamMapper.deleteBaseParamByIds(ids);
-    }
-
-    @Override
-    public int deleteBaseParamById(Long id) {
-        return baseParamMapper.deleteBaseParamById(id);
     }
 
 }

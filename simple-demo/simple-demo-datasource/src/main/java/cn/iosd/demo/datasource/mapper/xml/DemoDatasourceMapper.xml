@@ -3,56 +3,5 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.iosd.demo.datasource.mapper.DemoDatasourceMapper">
-    
-    <resultMap type="cn.iosd.demo.datasource.domain.DemoDatasource" id="DemoDatasourceResult">
-        <result property="id"    column="id"    />
-        <result property="content"    column="content"    />
-    </resultMap>
 
-    <sql id="selectDemoDatasourceVo">
-        select id, content from demo_datasource
-    </sql>
-
-    <select id="selectDemoDatasourceList" parameterType="cn.iosd.demo.datasource.domain.DemoDatasource" resultMap="DemoDatasourceResult">
-        <include refid="selectDemoDatasourceVo"/>
-        <where>  
-            <if test="content != null  and content != ''"> and content = #{content}</if>
-        </where>
-    </select>
-    
-    <select id="selectDemoDatasourceById" parameterType="Long" resultMap="DemoDatasourceResult">
-        <include refid="selectDemoDatasourceVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertDemoDatasource" parameterType="cn.iosd.demo.datasource.domain.DemoDatasource">
-        insert into demo_datasource
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
-            <if test="content != null">content,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
-            <if test="content != null">#{content},</if>
-         </trim>
-    </insert>
-
-    <update id="updateDemoDatasource" parameterType="cn.iosd.demo.datasource.domain.DemoDatasource">
-        update demo_datasource
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="content != null">content = #{content},</if>
-        </trim>
-        where id = #{id}
-    </update>
-
-    <delete id="deleteDemoDatasourceById" parameterType="Long">
-        delete from demo_datasource where id = #{id}
-    </delete>
-
-    <delete id="deleteDemoDatasourceByIds" parameterType="String">
-        delete from demo_datasource where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
 </mapper>

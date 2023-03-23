@@ -3,6 +3,7 @@ package cn.iosd.starter.datasource.mybatis.handler;
 
 import cn.iosd.starter.web.utils.JsonUtil;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
+ * MyBatis 自定义类型处理器，将JsonNode类型映射为JSON字符串类型
+ *
  * @author ok1996
  */
 public class JacksonTypeHandler extends BaseTypeHandler<JsonNode> {
@@ -43,6 +46,9 @@ public class JacksonTypeHandler extends BaseTypeHandler<JsonNode> {
     }
 
     private JsonNode getJsonNode(String json) {
+        if (StringUtils.isEmpty(json)){
+            return null;
+        }
         try {
             Optional<JsonNode> jsonNode = Optional.ofNullable(JsonUtil.DEFAULT_INSTANCE.readTree(json));
             return jsonNode.orElse(null);

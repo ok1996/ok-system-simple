@@ -1,7 +1,10 @@
 package cn.iosd.starter.datasource.domain;
 
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.util.List;
 
 /**
  * 分页请求参数
@@ -17,7 +20,7 @@ public class PageRequest<T> {
     private Integer pageSize;
 
     @Schema(description = "排序")
-    private String orderBy;
+    private List<OrderItem> orders;
 
     @Schema(description = "查询条件参数")
     private T data;
@@ -38,12 +41,12 @@ public class PageRequest<T> {
         this.pageSize = pageSize;
     }
 
-    public String getOrderBy() {
-        return orderBy;
+    public List<OrderItem> getOrders() {
+        return orders;
     }
 
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
+    public void setOrders(List<OrderItem> orders) {
+        this.orders = orders;
     }
 
     public T getData() {

@@ -24,6 +24,6 @@ spring:
     baseline-on-migrate: true
     locations: classpath:db/mysql
     table: ${spring.application.name}_flyway_schema_history
-mybatis:
+mybatis-plus:
   # 配置基础参数mapper扫描
   mapperLocations: classpath*:/cn/iosd/base/param/**/*Mapper.xml
