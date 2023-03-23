@@ -68,20 +68,19 @@ public class BaseController<T> {
 
 
     private void setCreateTimeMethod(T entity) {
-        try {
-            Method setCreateTimeMethod = entity.getClass().getMethod("setCreateTime", LocalDateTime.class);
-            setCreateTimeMethod.invoke(entity, LocalDateTime.now());
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            // T实体不存在setCreateTime方法，不做处理
-        }
+        setTimeMethod(entity, "setCreateTime");
     }
 
     private void setModifyTimeMethod(T entity) {
+        setTimeMethod(entity, "setModifyTime");
+    }
+
+    private void setTimeMethod(T entity, String methodName) {
         try {
-            Method setCreateTimeMethod = entity.getClass().getMethod("setModifyTime", LocalDateTime.class);
-            setCreateTimeMethod.invoke(entity, LocalDateTime.now());
+            Method method = entity.getClass().getMethod(methodName, LocalDateTime.class);
+            method.invoke(entity, LocalDateTime.now());
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            // T实体不存在setModifyTime方法，不做处理
+            // T实体不存在方法，不做处理
         }
     }
 
