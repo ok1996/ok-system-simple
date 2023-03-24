@@ -4,6 +4,7 @@ import cn.iosd.starter.datasource.domain.PageRequest;
 import cn.iosd.starter.datasource.utils.DsConvertUtil;
 import cn.iosd.starter.web.domain.Response;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springdoc.core.annotations.ParameterObject;
@@ -58,13 +59,13 @@ public class BaseController<T> {
     @Operation(summary = "Api-查询-列表")
     @GetMapping("/api/list")
     public Response<List<T>> apiList(@ParameterObject T req) {
-        return Response.ok(service.list(DsConvertUtil.queryWrapperEqual(req)));
+        return Response.ok(service.list(Wrappers.lambdaQuery(req)));
     }
 
     @Operation(summary = "Api-查询-分页")
     @PostMapping("/api/page")
     public Response<IPage<T>> apiPage(@RequestBody PageRequest<T> req) {
-        return Response.ok(service.page(DsConvertUtil.page(req), DsConvertUtil.queryWrapperEqual(req.getData())));
+        return Response.ok(service.page(DsConvertUtil.page(req), Wrappers.lambdaQuery(req.getData())));
     }
 
     /**

@@ -1,5 +1,6 @@
 package cn.iosd.base.param.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -12,12 +13,15 @@ public class BaseParam {
     @Schema(description = "主键id")
     private Long id;
     @Schema(description = "模块名列表")
+    @TableField(typeHandler = cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler.class)
     private JsonNode moduleNames;
     @Schema(description = "参数主键")
     private String paramKey;
     @Schema(description = "参数值")
+    @TableField(typeHandler = cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler.class)
     private JsonNode codeValues;
     @Schema(description = "历史参数值")
+    @TableField(typeHandler = cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler.class)
     private JsonNode historyCodeValues;
     @Schema(description = "备注")
     private String remark;

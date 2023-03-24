@@ -5,9 +5,10 @@ import cn.iosd.base.param.mapper.BaseParamMapper;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.utils.ParamInitUtil;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
-import cn.iosd.base.param.vo.BaseParamListReqVo;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import cn.iosd.starter.datasource.utils.DsConvertUtil;
 import cn.iosd.starter.web.utils.JsonUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,30 +30,31 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
 
     @Override
     public BaseParam selectBaseParamById(Long id) {
-        return baseMapper.selectBaseParamById(id);
+        return baseMapper.selectById(id);
     }
 
     @Override
     public BaseParam selectBaseParamByKey(String paramKey) {
-        return baseMapper.selectBaseParamByKey(paramKey);
+        BaseParam baseParam = new BaseParam();
+        baseParam.setParamKey(paramKey);
+        return baseMapper.selectOne(Wrappers.lambdaQuery(baseParam));
     }
 
     @Override
     public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException {
-        BaseParam baseParam = baseMapper.selectBaseParamByKey(paramKey);
+        BaseParam baseParam = selectBaseParamByKey(paramKey);
         return JsonUtil.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
     }
 
 
     @Override
-    public Long insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public int insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
         BaseParam baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setCreateTime(now);
         baseParam.setModifyTime(now);
         baseParam.setHistoryCodeValues(inputHistoryCodeValues(baseParam.getCodeValues(), null));
-        baseMapper.insertBaseParam(baseParam);
-        return baseParam.getId();
+        return baseMapper.insert(baseParam);
     }
 
     @Override
@@ -63,12 +65,12 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
 
         JsonNode historyCodeValues = null;
         if (baseParamVo.getId() != null) {
-            historyCodeValues = baseMapper.selectBaseParamById(baseParamVo.getId()).getHistoryCodeValues();
+            historyCodeValues = baseMapper.selectById(baseParamVo.getId()).getHistoryCodeValues();
         }
 
         baseParam.setHistoryCodeValues(inputHistoryCodeValues(baseParam.getCodeValues(), historyCodeValues));
 
-        return baseMapper.updateBaseParam(baseParam);
+        return baseMapper.updateById(baseParam);
     }
 
     /**

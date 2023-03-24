@@ -41,10 +41,10 @@ public interface IBaseParamService extends IService<BaseParam> {
      * 新增
      *
      * @param baseParamVo
-     * @return 主键id
+     * @return 影响行数
      * @throws JsonProcessingException
      */
-    Long insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException;
+    int insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException;
 
     /**
      * 修改

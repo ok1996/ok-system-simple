@@ -48,7 +48,7 @@ public class BaseParamController extends BaseController<BaseParam> {
 
     @Operation(summary = "新增")
     @PostMapping
-    public Response<Long> add(@RequestBody BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public Response<Integer> add(@RequestBody BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
         return Response.ok(baseParamService.insertBaseParam(baseParamVo));
     }
 
