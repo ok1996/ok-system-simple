@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import java.util.List;
 /**
  * @author ok1996
  */
+@Component
 public class BaseController<T> {
 
     @Autowired
