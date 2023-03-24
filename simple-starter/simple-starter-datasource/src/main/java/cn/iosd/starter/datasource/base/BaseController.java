@@ -79,7 +79,7 @@ public class BaseController<T> {
      * @param value      需要设置的值
      * @param valueType  value参数的类型
      */
-    public <T> void setValue(T entity, String methodName, Object value, Class<?> valueType) {
+    private <T> void setValue(T entity, String methodName, Object value, Class<?> valueType) {
         try {
             Method method = entity.getClass().getMethod(methodName, valueType);
             method.invoke(entity, value);
