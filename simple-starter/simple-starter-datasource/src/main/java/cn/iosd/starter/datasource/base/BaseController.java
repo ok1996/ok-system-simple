@@ -31,14 +31,15 @@ public class BaseController<T> {
     @Operation(summary = "Api-新增")
     @PostMapping("/api")
     public Response<Boolean> apiSave(@RequestBody T entity) {
-        setCreateTimeMethod(entity);
+        setValue(entity, "setCreateTime", LocalDateTime.now(), LocalDateTime.class);
         return Response.ok(service.save(entity));
     }
 
     @Operation(summary = "Api-更新-Id")
-    @PutMapping("/api")
-    public Response<Boolean> apiUpdateById(@RequestBody T entity) {
-        setModifyTimeMethod(entity);
+    @PutMapping("/api/{id}")
+    public Response<Boolean> apiUpdateById(@PathVariable Long id, @RequestBody T entity) {
+        setValue(entity, "setId", id, Long.class);
+        setValue(entity, "setModifyTime", LocalDateTime.now(), LocalDateTime.class);
         return Response.ok(service.updateById(entity));
     }
 
@@ -66,19 +67,19 @@ public class BaseController<T> {
         return Response.ok(service.page(DsConvertUtil.page(req), DsConvertUtil.queryWrapperEqual(req.getData())));
     }
 
-
-    private void setCreateTimeMethod(T entity) {
-        setTimeMethod(entity, "setCreateTime");
-    }
-
-    private void setModifyTimeMethod(T entity) {
-        setTimeMethod(entity, "setModifyTime");
-    }
-
-    private void setTimeMethod(T entity, String methodName) {
+    /**
+     * 通过反射调用实体类对象中的指定方法，设置指定的值。
+     *
+     * @param <T>        方法的参数类型
+     * @param entity     需要设置值的实体类对象
+     * @param methodName 需要调用的方法名
+     * @param value      需要设置的值
+     * @param valueType  value参数的类型
+     */
+    public <T> void setValue(T entity, String methodName, Object value, Class<?> valueType) {
         try {
-            Method method = entity.getClass().getMethod(methodName, LocalDateTime.class);
-            method.invoke(entity, LocalDateTime.now());
+            Method method = entity.getClass().getMethod(methodName, valueType);
+            method.invoke(entity, value);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             // T实体不存在方法，不做处理
         }
