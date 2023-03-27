@@ -26,6 +26,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * @author ok1996
+ * @param <T> 实体
  */
 @Component
 public class BaseController<T> {
@@ -75,13 +76,13 @@ public class BaseController<T> {
     /**
      * 通过反射调用实体类对象中的指定方法，设置指定的值。
      *
-     * @param <T>        方法的参数类型
      * @param entity     需要设置值的实体类对象
      * @param methodName 需要调用的方法名
      * @param value      需要设置的值
      * @param valueType  value参数的类型
+     * @param <V>        value参数的类型
      */
-    private <T> void setValue(T entity, String methodName, Object value, Class<?> valueType) {
+    private <V> void setValue(T entity, String methodName, V value, Class<V> valueType) {
         try {
             Method method = entity.getClass().getMethod(methodName, valueType);
             method.invoke(entity, value);
