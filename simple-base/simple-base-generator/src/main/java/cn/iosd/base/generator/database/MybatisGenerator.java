@@ -46,7 +46,7 @@ public class MybatisGenerator {
     /**
      * 自定义文件输出地址前缀
      */
-    private static final String CUSTOM_FILE_PREFIX = File.separator + ".." + File.separator;
+    private static final String CUSTOM_FILE_PREFIX = "Config"+File.separator;
 
     /**
      * 代码生成函数
