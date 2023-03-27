@@ -1,14 +1,15 @@
 package cn.iosd.demo.redisson.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import cn.iosd.starter.redisson.service.RedissonService;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ok1996
@@ -37,7 +38,7 @@ public class LockController {
 
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
-    public Response decrement() throws InterruptedException {
+    public Response<?> decrement() throws InterruptedException {
         redissonService.lock(LOCK_NAME, 10L);
         if (TOTAL > 0) {
             TOTAL--;
@@ -53,7 +54,7 @@ public class LockController {
 
     @Operation(summary = "库存自减-TryLock")
     @GetMapping("decrementTryLock")
-    public Response decrementTryLock() throws InterruptedException {
+    public Response<?> decrementTryLock() throws InterruptedException {
         //锁有效时间
         Long lease = 5L;
         //等待时间
@@ -73,7 +74,7 @@ public class LockController {
 
     @Operation(summary = "库存自减-未加锁")
     @GetMapping("decrementNotLock")
-    public Response notLock() throws InterruptedException {
+    public Response<?> notLock() throws InterruptedException {
         if (TOTAL_NOT_LOCK > 0) {
             TOTAL_NOT_LOCK--;
         }

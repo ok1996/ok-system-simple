@@ -1,11 +1,12 @@
 package cn.iosd.starter.grpc.client.vo;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import io.grpc.CallOptions;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
-import java.lang.reflect.Constructor;
 
 /**
  * @author ok1996
@@ -19,14 +20,15 @@ public class GrpcChannel {
                 .build();
     }
 
-    public Object getBlockingStub(Class<?> type) {
+    public <T> T getBlockingStub(Class<T> type) {
         try {
-            Constructor c = type.getDeclaredConstructor(new Class[]{Channel.class, CallOptions.class});
-            c.setAccessible(true);
-            return c.newInstance(new Object[]{channel, CallOptions.DEFAULT});
-        } catch (Exception e) {
-            throw new RuntimeException("service接口不存在参数为Channel的构造函数", e);
+            Constructor<T> constructor = type.getDeclaredConstructor(Channel.class, CallOptions.class);
+            constructor.setAccessible(true);
+            return constructor.newInstance(channel, CallOptions.DEFAULT);
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException("无法创建指定类型的Stub", e);
         }
     }
+
 
 }

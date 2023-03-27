@@ -1,14 +1,8 @@
 package cn.iosd.base.s3.controller;
 
-import cn.iosd.base.s3.domain.StorageObjectRequest;
-import cn.iosd.base.s3.domain.StorageObjectResponse;
-import cn.iosd.base.s3.service.SimpleStorageService;
-import cn.iosd.starter.web.domain.Response;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ObjectListing;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
+import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.List;
+import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.ObjectListing;
+
+import cn.iosd.base.s3.domain.StorageObjectRequest;
+import cn.iosd.base.s3.domain.StorageObjectResponse;
+import cn.iosd.base.s3.service.SimpleStorageService;
+import cn.iosd.starter.web.domain.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author ok1996
@@ -49,7 +51,7 @@ public class StorageController {
 
     @Operation(summary = "删除存储桶")
     @DeleteMapping("/bucket")
-    public Response deleteBucket(@Parameter(description = "存储桶") String bucketName) {
+    public Response<?> deleteBucket(@Parameter(description = "存储桶") String bucketName) {
         simpleStorageService.deleteBucket(bucketName);
         return Response.ok();
     }
@@ -84,7 +86,7 @@ public class StorageController {
 
     @Operation(summary = "删除文件")
     @DeleteMapping("/object")
-    public Response deleteStorageObject(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
+    public Response<?> deleteStorageObject(@Parameter(description = "存储桶") String bucketName, @Parameter(description = "文件主键") String key) {
         simpleStorageService.deleteStorageObject(bucketName, key);
         return Response.ok();
     }

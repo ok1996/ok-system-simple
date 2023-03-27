@@ -1,13 +1,14 @@
 package cn.iosd.demo.redisson.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import cn.iosd.starter.redisson.annotation.DistributedIdempotent;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ok1996
@@ -25,7 +26,7 @@ public class AnnotationIdempotentController {
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
     @DistributedIdempotent
-    public Response decrement() {
+    public Response<?> decrement() {
         if (TOTAL > 0) {
             TOTAL--;
         }
@@ -36,7 +37,7 @@ public class AnnotationIdempotentController {
     @Operation(summary = "库存自减-请求参数变量")
     @GetMapping("decrementReqPara")
     @DistributedIdempotent(value = "#keyName", message = "请求重复！")
-    public Response decrementReqPara(String keyName) {
+    public Response<?> decrementReqPara(String keyName) {
         if (TOTAL > 0) {
             TOTAL--;
         }
