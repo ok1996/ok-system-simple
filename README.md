@@ -31,18 +31,18 @@
 | simple-base-s3        | 文件存储管理服务 | 提供文件管理服务及接口           |
 
 ## Starter自动装配模块
-| 模块名称                      | 使用场景     | 说明                                                              |
-|---------------------------|----------|-----------------------------------------------------------------|
-| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类    |
-| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等                                            |
-| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                                 |
-| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                     |
-| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                           |
-| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、<br/>通用CURD控制层、自定义JsonNode处理器           |
-| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                        |
-| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                          |
-| simple-starter-encode     | 加密       | 注解加密脱敏（加密规则有通用模板、或自定义）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）              |
-| simple-starter-dict       | 字典       | 注解字典翻译（字典支持本地文件json、或远程调用接口及自定义实现类）<br/>（服务类返回参数支持单体字段、列表、实体嵌套） |
+| 模块名称                      | 使用场景     | 说明                                                           |
+|---------------------------|----------|--------------------------------------------------------------|
+| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类 |
+| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等                                         |
+| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                              |
+| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                  |
+| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                        |
+| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、<br/>通用CURD控制层、自定义JsonNode处理器        |
+| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
+| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
+| simple-starter-encode     | 加密       | 注解加密脱敏（加密规则有通用模板、或自定义）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）           |
+| simple-starter-dict       | 字典       | 注解字典翻译（字典支持本地文件json、或调用接口及自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套） |
 
 
 
