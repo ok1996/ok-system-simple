@@ -34,7 +34,7 @@
         <redisson.version>3.20.0</redisson.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>1.7.23</netty-socketio.version>
-        <knife4j-openapi3.version>4.0.0</knife4j-openapi3.version>
+        <knife4j-openapi3.version>4.1.0</knife4j-openapi3.version>
         <aws-java-sdk-s3.version>1.12.430</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
@@ -203,6 +203,12 @@
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-encode</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-dict</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
 
