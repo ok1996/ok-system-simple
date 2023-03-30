@@ -42,7 +42,7 @@
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
 | simple-starter-encode     | 加密       | 注解加密脱敏（加密规则有通用模板、或自定义）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）           |
-| simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）    |
+| simple-starter-dict       | 字典       | 注解字典翻译（字典支持本地文件json、或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）      |
 
 
 
