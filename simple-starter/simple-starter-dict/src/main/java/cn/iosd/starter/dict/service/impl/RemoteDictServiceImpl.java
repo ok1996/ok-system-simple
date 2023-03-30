@@ -2,6 +2,7 @@ package cn.iosd.starter.dict.service.impl;
 
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,12 @@ public class RemoteDictServiceImpl implements DictService {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+    @Value("${simple.dict.remoteBaseUrl:}")
+    private String remoteBaseUrl;
+
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-        String path = dictionaryParams;
+        String path = remoteBaseUrl + dictionaryParams;
         ResponseEntity<List<DictItem>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<List<DictItem>>() {
         });
         return responseEntity.getBody();

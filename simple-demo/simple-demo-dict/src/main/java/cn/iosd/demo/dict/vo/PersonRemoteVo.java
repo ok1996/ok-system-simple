@@ -25,7 +25,7 @@ public class PersonRemoteVo {
     private String idCardText;
 
     @Schema(description = "隐藏身份-默认远程调用接口实现类字典")
-    @DictField(dictionaryParams = "http://127.0.0.1:11120/dict/remote/hideIdentity", relatedField = "hideIdentityText")
+    @DictField(dictionaryParams = "/dict/remote/hideIdentity", relatedField = "hideIdentityText")
     private Integer hideIdentity;
 
     private String hideIdentityText;

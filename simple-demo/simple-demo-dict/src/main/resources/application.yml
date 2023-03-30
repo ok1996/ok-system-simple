@@ -7,3 +7,4 @@ spring:
 simple:
   dict:
     dictImplBeanName: remoteDictServiceImpl
+    remoteBaseUrl: http://127.0.0.1:11120
