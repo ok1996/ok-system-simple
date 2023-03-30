@@ -3,3 +3,7 @@ server:
 spring:
   application:
     name: simple-demo-dict
+
+simple:
+  dict:
+    dictImplBeanName: remoteDictServiceImpl

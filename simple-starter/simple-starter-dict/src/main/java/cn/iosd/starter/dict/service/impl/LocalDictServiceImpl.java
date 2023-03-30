@@ -6,12 +6,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 从本地文件读取字典项列表
@@ -21,18 +19,22 @@ import java.util.List;
 @Service
 public class LocalDictServiceImpl implements DictService {
 
-    @Override
-    public List<DictItem> getDictItemList(String path) {
+    /**
+     * 本地字典文件目录
+     */
+    private static final String DICT_FILE_DIR = "/dict.json";
 
-        List<DictItem> dictItemList = null;
-        File file = new File(path);
-        try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+    @Override
+    public List<DictItem> getDictItemList(String dictionaryParams) {
+
+        Map<String, List<DictItem>> dictItemList = null;
+        try (InputStream inputStream = this.getClass().getResourceAsStream(DICT_FILE_DIR)) {
             ObjectMapper mapper = new ObjectMapper();
-            dictItemList = mapper.readValue(inputStream, new TypeReference<List<DictItem>>() {
+            dictItemList = mapper.readValue(inputStream, new TypeReference<Map<String, List<DictItem>>>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return dictItemList;
+        return dictItemList.get(dictionaryParams);
     }
 }

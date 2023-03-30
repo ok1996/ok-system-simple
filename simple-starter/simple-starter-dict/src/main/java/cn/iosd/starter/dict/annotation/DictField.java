@@ -19,23 +19,24 @@ import java.lang.annotation.Target;
 public @interface DictField {
 
     /**
-     * 数据获取方式实现类
-     *
-     * @return
-     */
-    String source() default "localDictServiceImpl";
-
-    /**
      * 关联字段，用于翻译字典项
      *
      * @return
      */
     String relatedField() default "";
 
+
     /**
-     * 字典文件路径或接口地址
+     * 接口实现类所需的参数
      *
      * @return
      */
-    String path();
+    String dictionaryParams();
+
+    /**
+     * 字典获取方式实现类
+     *
+     * @return
+     */
+    String dictImplBeanName() default "";
 }

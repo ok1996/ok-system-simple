@@ -19,7 +19,7 @@ public class PersonVo {
     private String name;
 
     @Schema(description = "性别")
-    @DictField(path = "E:\\..\\src\\main\\resources\\sex.json", source = "localDictServiceImpl", relatedField = "sexText")
+    @DictField(dictionaryParams = "sex", dictImplBeanName = "localDictServiceImpl", relatedField = "sexText")
     private Integer sex;
 
     private String sexText;

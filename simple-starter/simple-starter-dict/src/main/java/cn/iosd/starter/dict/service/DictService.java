@@ -10,8 +10,9 @@ import java.util.List;
 public interface DictService {
     /**
      * 获取指定类型的字典项列表
-     * @param path
+     *
+     * @param dictionaryParams
      * @return
      */
-    List<DictItem> getDictItemList(String path);
+    List<DictItem> getDictItemList(String dictionaryParams);
 }

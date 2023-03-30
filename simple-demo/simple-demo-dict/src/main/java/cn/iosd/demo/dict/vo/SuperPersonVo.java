@@ -21,7 +21,7 @@ public class SuperPersonVo {
     private PersonVo personVo;
 
     @Schema(description = "是否是领导")
-    @DictField(path = "E:\\..\\src\\main\\resources\\isALeader.json", source = "localDictServiceImpl", relatedField = "isALeaderText")
+    @DictField(dictionaryParams = "leader", dictImplBeanName = "localDictServiceImpl", relatedField = "isALeaderText")
     private Integer isALeader;
 
     private String isALeaderText;
