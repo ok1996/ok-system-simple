@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author ok1996
  */
-@Tag(name = "字典测试模块-自定义实现")
+@Tag(name = "字典测试模块-自定义远程调用接口实现类字典及默认远程调用接口实现类字典")
 @RestController
-@RequestMapping("dictRemote")
-public class DictRemoteController {
+@RequestMapping("dictCustom")
+public class DictCustomController {
     @Autowired
     private DictService service;
 

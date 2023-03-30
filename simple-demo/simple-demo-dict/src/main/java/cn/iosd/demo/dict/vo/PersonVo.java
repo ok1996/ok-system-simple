@@ -18,7 +18,7 @@ public class PersonVo {
     @Schema(description = "姓名")
     private String name;
 
-    @Schema(description = "性别")
+    @Schema(description = "性别-默认实现类的json文件调用字典")
     @DictField(dictionaryParams = "sex", dictImplBeanName = "localDictServiceImpl", relatedField = "sexText")
     private Integer sex;
 

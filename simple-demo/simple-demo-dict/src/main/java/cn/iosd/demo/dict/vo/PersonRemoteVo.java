@@ -18,14 +18,14 @@ public class PersonRemoteVo {
     @Schema(description = "姓名")
     private String name;
 
-    @Schema(description = "身份标识")
+    @Schema(description = "身份标识-自定义远程调用接口实现类字典")
     @DictField(dictionaryParams = "idCard", dictImplBeanName = "customDictServiceImpl", relatedField = "idCardText")
     private Integer idCard;
 
     private String idCardText;
 
-    @Schema(description = "隐藏身份")
-    @DictField(dictionaryParams = "hideIdentity", dictImplBeanName = "customDictServiceImpl", relatedField = "hideIdentityText")
+    @Schema(description = "隐藏身份-默认远程调用接口实现类字典")
+    @DictField(dictionaryParams = "http://127.0.0.1:11120/dict/remote/hideIdentity", relatedField = "hideIdentityText")
     private Integer hideIdentity;
 
     private String hideIdentityText;
