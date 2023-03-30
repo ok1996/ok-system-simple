@@ -19,13 +19,13 @@ public class PersonRemoteVo {
     private String name;
 
     @Schema(description = "身份标识")
-    @DictField(dictionaryParams = "idCard", dictImplBeanName = "remoteDictServiceImpl", relatedField = "idCardText")
+    @DictField(dictionaryParams = "idCard", dictImplBeanName = "customDictServiceImpl", relatedField = "idCardText")
     private Integer idCard;
 
     private String idCardText;
 
     @Schema(description = "隐藏身份")
-    @DictField(dictionaryParams = "hideIdentity", dictImplBeanName = "remoteDictServiceImpl", relatedField = "hideIdentityText")
+    @DictField(dictionaryParams = "hideIdentity", dictImplBeanName = "customDictServiceImpl", relatedField = "hideIdentityText")
     private Integer hideIdentity;
 
     private String hideIdentityText;

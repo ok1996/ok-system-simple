@@ -1,8 +1,7 @@
-package cn.iosd.demo.dict.service;
+package cn.iosd.starter.dict.service.impl;
 
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
-import cn.iosd.starter.web.domain.Response;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 /**
- * 自定义实现获取指定类型的字典项列表
+ * 调用远程接口获取字典项列表
  *
  * @author ok1996
  */
@@ -23,9 +22,9 @@ public class RemoteDictServiceImpl implements DictService {
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-        String path = "http://127.0.0.1:11120/dict/" + dictionaryParams;
-        ResponseEntity<Response<List<DictItem>>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<Response<List<DictItem>>>() {
+        String path = dictionaryParams;
+        ResponseEntity<List<DictItem>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<List<DictItem>>() {
         });
-        return responseEntity.getBody().getData();
+        return responseEntity.getBody();
     }
 }
