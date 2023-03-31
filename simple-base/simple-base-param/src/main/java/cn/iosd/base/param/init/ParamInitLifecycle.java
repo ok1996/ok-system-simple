@@ -3,6 +3,8 @@ package cn.iosd.base.param.init;
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import java.util.List;
 public class ParamInitLifecycle implements SmartLifecycle {
     private static final Logger log = LoggerFactory.getLogger(ParamInitLifecycle.class);
     @Autowired(required = false)
-    private List<ParamInit> paramInits;
+    private List<ParamInit> inits;
     @Autowired
     private IBaseParamService baseParamService;
 
@@ -43,21 +45,14 @@ public class ParamInitLifecycle implements SmartLifecycle {
     }
 
     public void init() {
-        if (this.paramInits != null) {
-            paramInits.forEach(v -> {
-                String key = v.getKey();
-                if (key == null || "".equals(key)) {
+        if (this.inits != null) {
+            this.inits.forEach(init -> {
+                String key = init.getKey();
+                if (StringUtils.isEmpty(key)) {
                     throw new IllegalArgumentException("初始化key值为空");
                 }
                 try {
-                    BaseParam baseParam = baseParamService.selectBaseParamByKey(key);
-                    if (baseParam == null) {
-                        baseParamService.insertBaseParam(initVo(v));
-                    } else if (v.restartOverride()) {
-                        BaseParamSaveReqVo saveReqVo = initVo(v);
-                        saveReqVo.setId(baseParam.getId());
-                        baseParamService.updateBaseParam(saveReqVo);
-                    }
+                    initParam(init);
                 } catch (Exception e) {
                     log.error("参数[{}]初始化失败:{}", key, e.getMessage());
                 }
@@ -65,12 +60,35 @@ public class ParamInitLifecycle implements SmartLifecycle {
         }
     }
 
-    public BaseParamSaveReqVo initVo(ParamInit service) {
+    /**
+     * 初始化参数方法
+     *
+     * @param init 需要初始化的参数
+     */
+    private void initParam(ParamInit init) throws JsonProcessingException {
+        String key = init.getKey();
+        BaseParam baseParam = baseParamService.selectBaseParamByKey(key);
+        if (baseParam == null) {
+            baseParamService.insertBaseParam(initVo(init));
+        } else if (init.restartOverride()) {
+            BaseParamSaveReqVo saveReqVo = initVo(init);
+            saveReqVo.setId(baseParam.getId());
+            baseParamService.updateBaseParam(saveReqVo);
+        }
+    }
+
+    /**
+     * 将参数转换为BaseParamSaveReqVo对象的方法
+     *
+     * @param init 需要转换的参数
+     * @return 转换后的BaseParamSaveReqVo对象
+     */
+    public BaseParamSaveReqVo initVo(ParamInit init) {
         BaseParamSaveReqVo vo = new BaseParamSaveReqVo();
-        vo.setCodeValues(service.getCodeValues());
-        vo.setModuleNames(service.getModuleNames());
-        vo.setParamKey(service.getKey());
-        vo.setRemark(service.getRemark());
+        vo.setCodeValues(init.getCodeValues());
+        vo.setModuleNames(init.getModuleNames());
+        vo.setParamKey(init.getKey());
+        vo.setRemark(init.getRemark());
         return vo;
     }
 }
