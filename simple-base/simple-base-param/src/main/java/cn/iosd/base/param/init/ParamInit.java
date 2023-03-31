@@ -11,39 +11,39 @@ import java.util.List;
  */
 public interface ParamInit {
     /**
-     * 初始化key
+     * 获取初始化参数的键。
      *
-     * @return
+     * @return 参数键
      */
     String getKey();
 
     /**
-     * 初始化配置值
+     * 获取初始化参数的配置值列表。
      *
-     * @return
+     * @return 配置值列表
      */
     List<BaseParamCodeValueVo<?>> getCodeValues();
 
     /**
-     * 是否每次启动覆盖生成
+     * 判断是否每次启动都覆盖生成。
      *
-     * @return
+     * @return true表示每次启动覆盖生成；false表示不覆盖
      */
     boolean restartOverride();
 
     /**
-     * 备注
+     * 获取备注信息。
      *
-     * @return
+     * @return 备注信息
      */
     default String getRemark() {
         return "";
     }
 
-    /**
-     * 模块列表
+    /****
+     * 获取模块名称列表。
      *
-     * @return
+     * @return 模块名称列表
      */
     default List<String> getModuleNames() {
         return null;
