@@ -19,38 +19,37 @@ public class ParamInitUtil {
     };
 
     /**
-     * ?转t
+     * 该方法用于将传入的 BaseParamCodeValueVo 对象中的 value 属性（泛型类型）转换成指定的 valueType 类型对象
      *
-     * @param paramSingleCodeValueDto
-     * @param valueType
-     * @param <T>
-     * @return
+     * @param paramSingleCodeValueDto 需要转换的 BaseParamCodeValueVo 对象
+     * @param valueType               需要转换的目标类型
+     * @return 转换后的指定类型对象
+     * @throws JsonProcessingException 如果转换过程中出现 Json 解析异常，则抛出该异常
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, Class<T> valueType) throws JsonProcessingException {
         return JsonUtil.DEFAULT_INSTANCE.readValue(JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue()), valueType);
     }
 
     /**
-     * ?转t
+     * 该方法用于将传入的 BaseParamCodeValueVo 对象中的 value 属性（泛型类型）转换成指定的 valueTypeRef 类型对象。
      *
-     * @param paramSingleCodeValueDto
-     * @param valueTypeRef
-     * @param <T>
-     * @return
+     * @param paramSingleCodeValueDto 需要转换的 BaseParamCodeValueVo 对象
+     * @param valueTypeRef            需要转换的目标类型的 TypeReference 对象
+     * @return 转换后的指定类型对象
+     * @throws JsonProcessingException 如果转换过程中出现 Json 解析异常，则抛出该异常
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, TypeReference<T> valueTypeRef) throws JsonProcessingException {
         return JsonUtil.DEFAULT_INSTANCE.readValue(JsonUtil.DEFAULT_INSTANCE.writeValueAsString(paramSingleCodeValueDto.getValue()), valueTypeRef);
     }
 
     /**
-     * 根据code获取value值
+     * 该方法用于在传入的 BaseParamCodeValueVo 列表中查找指定 code 对应的 value，并将其转换成指定类型的对象
      *
-     * @param simulation
-     * @param code
-     * @param valueType
-     * @param <T>
-     * @return
-     * @throws JsonProcessingException
+     * @param simulation BaseParamCodeValueVo 列表
+     * @param code       需要查找的 code 值
+     * @param valueType  需要转换的目标类型
+     * @return 查找到的 code 对应的 value 值转换成指定类型的对象
+     * @throws JsonProcessingException 如果转换过程中出现 Json 解析异常，则抛出该异常
      */
     public static <T> T getValueByCode(List<BaseParamCodeValueVo<?>> simulation, String code, Class<T> valueType) throws JsonProcessingException {
         Map<String, Object> codeValueMap = simulation.stream()
@@ -59,11 +58,11 @@ public class ParamInitUtil {
     }
 
     /**
-     * 从List列表中根据code获取BaseParamCodeValueVo
+     * 该方法用于在传入的 BaseParamCodeValueVo 列表中查找指定 code 对应的 BaseParamCodeValueVo 对象。
      *
-     * @param simulation 数据列表
-     * @param code
-     * @return
+     * @param simulation BaseParamCodeValueVo 列表
+     * @param code       需要查找的 code 值
+     * @return 查找到的指定 code 对应的 BaseParamCodeValueVo 对象，如果找不到则返回 Optional.empty()
      */
     public static Optional<BaseParamCodeValueVo<?>> getBaseParamCodeValueVoByCode(List<BaseParamCodeValueVo<?>> simulation, String code) {
         return simulation.stream()
@@ -72,12 +71,11 @@ public class ParamInitUtil {
     }
 
     /**
-     * 从List列表中根据code获取BaseParamCodeValueVo中的Value值（boolean类型）
-     * <p>code在数据列表中不存在时返回的默认值</p>
+     * 该方法用于在传入的 BaseParamCodeValueVo 列表中查找指定 code 对应的 BaseParamCodeValueVo 对象，然后返回该对象的 boolean 类型的值，如果找不到则返回 false。
      *
-     * @param simulation 数据列表
-     * @param code
-     * @return
+     * @param simulation BaseParamCodeValueVo 列表
+     * @param code       需要查找的 code 值
+     * @return 查找到的指定 code 对应的 BaseParamCodeValueVo 对象的 boolean 类型的值，如果找不到则返回 false
      */
     public static boolean getBooleanValueByCodeDefaultFalse(List<BaseParamCodeValueVo<?>> simulation, String code) {
         return getBaseParamCodeValueVoByCode(simulation, code)
