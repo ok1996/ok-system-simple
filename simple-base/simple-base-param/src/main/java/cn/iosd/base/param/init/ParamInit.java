@@ -40,7 +40,7 @@ public interface ParamInit {
         return "";
     }
 
-    /****
+    /**
      * 获取模块名称列表。
      *
      * @return 模块名称列表

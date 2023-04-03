@@ -37,7 +37,7 @@ public class SocketMessageServer {
      * 广播消息事件
      *
      * @param event 事件名称
-     * @param msg   消息体
+     * @param msg   消息体，可以是任何Object类型的对象
      */
     public void sendBroadcast(String event, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getBroadcastOperations().getClients();
@@ -54,11 +54,11 @@ public class SocketMessageServer {
     }
 
     /**
-     * 向指定room发送msg
+     * 向指定房间发送消息
      *
-     * @param event 事件名称
-     * @param room  编号
-     * @param msg   消息体
+     * @param event 消息事件名称
+     * @param room  房间名称
+     * @param msg   消息体，可以是任何Object类型的对象
      */
     public void sendRoom(String event, String room, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getRoomOperations(room).getClients();
@@ -75,7 +75,7 @@ public class SocketMessageServer {
     }
 
     /**
-     * 自动获取本微服务名称并发送msg
+     * 自动获取本微服务名称并向当前微服务下的所有连接发送消息
      * <p>注：会往连接applicationName参数为空的客户端发送msg
      *
      * @param event 事件名称
