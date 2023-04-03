@@ -7,7 +7,7 @@
 |----------------------|---------------------|
 | Java                 | 17                  |
 | Spring Boot          | 3.0.5               |
-| Spring Cloud         | 2022.0.1            |
+| Spring Cloud         | 2022.0.2            |
 | Spring Cloud Alibaba | 2022.0.0.0-RC1      |
 | Ok System Simple     | 2023.3.1.0-SNAPSHOT |
 
