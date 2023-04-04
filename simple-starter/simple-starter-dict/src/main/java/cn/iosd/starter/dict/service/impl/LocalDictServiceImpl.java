@@ -4,6 +4,7 @@ import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,13 +23,14 @@ public class LocalDictServiceImpl implements DictService {
     /**
      * 本地字典文件目录
      */
-    private static final String DICT_FILE_DIR = "/dict.json";
+    @Value("${simple.dict.resourceDictFileDir:/dict.json}")
+    private String resourceDictFileDir;
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
 
         Map<String, List<DictItem>> dictItemList = null;
-        try (InputStream inputStream = this.getClass().getResourceAsStream(DICT_FILE_DIR)) {
+        try (InputStream inputStream = this.getClass().getResourceAsStream(resourceDictFileDir)) {
             ObjectMapper mapper = new ObjectMapper();
             dictItemList = mapper.readValue(inputStream, new TypeReference<Map<String, List<DictItem>>>() {
             });
