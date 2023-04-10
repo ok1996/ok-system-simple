@@ -10,13 +10,24 @@ import java.util.List;
 
 /**
  * 初始化key-test数据
+ * <p>
+ * 实现了ParamInit接口，提供一些常量和方法实现
  *
  * @author ok1996
  */
 @Component
 public class TestParamInit implements ParamInit {
+    /**
+     * 参数key
+     */
     public static final String KEY = "key-test";
+    /**
+     * 是否开启模拟数据
+     */
     public static final String OPEN_SIMULATION_CODE = "openSimulation";
+    /**
+     * 存储数据code
+     */
     public static final String CONTENT_DATA_CODE = "contentData";
 
     @Override
@@ -27,7 +38,9 @@ public class TestParamInit implements ParamInit {
     @Override
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
         return CollUtil.newArrayList(
+                // 默认开启模拟数据
                 new BaseParamCodeValueVo<Boolean>().setCode(OPEN_SIMULATION_CODE).setValue(true),
+                // code为contentData，value为一个ClassmateVo对象
                 new BaseParamCodeValueVo<ClassmateVo>().setCode(CONTENT_DATA_CODE)
                         .setValue(ClassmateVo.builder().personList(CollUtil.newArrayList(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
