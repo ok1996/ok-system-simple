@@ -6,7 +6,7 @@ import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.utils.ParamInitUtil;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
-import cn.iosd.starter.web.utils.JsonUtil;
+import cn.iosd.starter.web.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +42,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
     @Override
     public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException {
         BaseParam baseParam = selectBaseParamByKey(paramKey);
-        return JsonUtil.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
+        return JsonMapper.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
     }
 
 
@@ -81,8 +81,8 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
      */
     public BaseParam convertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
         BaseParam baseParam = new BaseParam();
-        JsonNode moduleNames = JsonUtil.convertObject(baseParamVo.getModuleNames(), JsonNode.class);
-        JsonNode codeValues = JsonUtil.convertObject(baseParamVo.getCodeValues(), JsonNode.class);
+        JsonNode moduleNames = JsonMapper.convertObject(baseParamVo.getModuleNames(), JsonNode.class);
+        JsonNode codeValues = JsonMapper.convertObject(baseParamVo.getCodeValues(), JsonNode.class);
         baseParam.setId(baseParamVo.getId());
         baseParam.setModuleNames(moduleNames);
         baseParam.setCodeValues(codeValues);

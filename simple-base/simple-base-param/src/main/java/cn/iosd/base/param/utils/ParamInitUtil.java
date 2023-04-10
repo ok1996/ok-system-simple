@@ -1,7 +1,7 @@
 package cn.iosd.base.param.utils;
 
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
-import cn.iosd.starter.web.utils.JsonUtil;
+import cn.iosd.starter.web.utils.JsonMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -27,7 +27,7 @@ public class ParamInitUtil {
      * @throws JsonProcessingException 如果转换过程中出现 Json 解析异常，则抛出该异常
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, Class<T> valueType) throws JsonProcessingException {
-        return JsonUtil.convertObject(paramSingleCodeValueDto.getValue(), valueType);
+        return JsonMapper.convertObject(paramSingleCodeValueDto.getValue(), valueType);
     }
 
     /**
@@ -39,7 +39,7 @@ public class ParamInitUtil {
      * @throws JsonProcessingException 如果转换过程中出现 Json 解析异常，则抛出该异常
      */
     public static <T> T readValue(BaseParamCodeValueVo<?> paramSingleCodeValueDto, TypeReference<T> valueTypeRef) throws JsonProcessingException {
-        return JsonUtil.convertObject(paramSingleCodeValueDto.getValue(), valueTypeRef);
+        return JsonMapper.convertObject(paramSingleCodeValueDto.getValue(), valueTypeRef);
     }
 
     /**
@@ -54,7 +54,7 @@ public class ParamInitUtil {
     public static <T> T getValueByCode(List<BaseParamCodeValueVo<?>> simulation, String code, Class<T> valueType) throws JsonProcessingException {
         Map<String, Object> codeValueMap = simulation.stream()
                 .collect(Collectors.toMap(BaseParamCodeValueVo::getCode, BaseParamCodeValueVo::getValue));
-        return JsonUtil.convertObject(codeValueMap.getOrDefault(code, null), valueType);
+        return JsonMapper.convertObject(codeValueMap.getOrDefault(code, null), valueType);
     }
 
     /**

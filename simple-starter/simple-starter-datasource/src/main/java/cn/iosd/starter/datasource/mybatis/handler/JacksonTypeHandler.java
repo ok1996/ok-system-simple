@@ -1,7 +1,7 @@
 package cn.iosd.starter.datasource.mybatis.handler;
 
 
-import cn.iosd.starter.web.utils.JsonUtil;
+import cn.iosd.starter.web.utils.JsonMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
@@ -50,7 +50,7 @@ public class JacksonTypeHandler extends BaseTypeHandler<JsonNode> {
             return null;
         }
         try {
-            Optional<JsonNode> jsonNode = Optional.ofNullable(JsonUtil.getObjectMapper().readTree(json));
+            Optional<JsonNode> jsonNode = Optional.ofNullable(JsonMapper.getObjectMapper().readTree(json));
             return jsonNode.orElse(null);
         } catch (IOException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
