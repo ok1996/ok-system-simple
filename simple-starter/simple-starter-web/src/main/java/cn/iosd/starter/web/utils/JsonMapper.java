@@ -26,7 +26,7 @@ public class JsonMapper {
      * <p>
      * 注意：非线程安全的，使用时需要注意多线程环境下的并发访问问题。
      */
-    private static final ObjectMapper objectMapper = new ObjectMapper()
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
@@ -37,7 +37,7 @@ public class JsonMapper {
             .registerModule(new SimpleModule());
 
     public static ObjectMapper getObjectMapper() {
-        return objectMapper;
+        return OBJECT_MAPPER;
     }
 
     /**
@@ -48,7 +48,7 @@ public class JsonMapper {
      * @return 转换后的对象
      */
     public static <T> T convertObject(Object obj, Class<T> clazz) {
-        return objectMapper.convertValue(obj, clazz);
+        return OBJECT_MAPPER.convertValue(obj, clazz);
     }
 
     /**
@@ -59,7 +59,7 @@ public class JsonMapper {
      * @return 转换后的对象
      */
     public static <T> T convertObject(Object obj, TypeReference<T> valueTypeRef) {
-        return objectMapper.convertValue(obj, valueTypeRef);
+        return OBJECT_MAPPER.convertValue(obj, valueTypeRef);
     }
 }
 
