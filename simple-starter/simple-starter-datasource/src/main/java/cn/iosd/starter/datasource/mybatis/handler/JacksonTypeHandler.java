@@ -50,7 +50,7 @@ public class JacksonTypeHandler extends BaseTypeHandler<JsonNode> {
             return null;
         }
         try {
-            Optional<JsonNode> jsonNode = Optional.ofNullable(JsonUtil.DEFAULT_INSTANCE.readTree(json));
+            Optional<JsonNode> jsonNode = Optional.ofNullable(JsonUtil.getObjectMapper().readTree(json));
             return jsonNode.orElse(null);
         } catch (IOException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
