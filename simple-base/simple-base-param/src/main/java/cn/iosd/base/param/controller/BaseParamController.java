@@ -5,7 +5,6 @@ import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
 import cn.iosd.starter.datasource.base.BaseController;
 import cn.iosd.starter.web.domain.Response;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +37,13 @@ public class BaseParamController extends BaseController<BaseParam> {
 
     @Operation(summary = "新增")
     @PostMapping
-    public Response<Integer> add(@RequestBody BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public Response<Integer> add(@RequestBody BaseParamSaveReqVo baseParamVo) {
         return Response.ok(baseParamService.insertBaseParam(baseParamVo));
     }
 
     @Operation(summary = "修改")
     @PutMapping
-    public Response<Integer> edit(@RequestBody BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public Response<Integer> edit(@RequestBody BaseParamSaveReqVo baseParamVo) {
         return Response.ok(baseParamService.updateBaseParam(baseParamVo));
     }
 

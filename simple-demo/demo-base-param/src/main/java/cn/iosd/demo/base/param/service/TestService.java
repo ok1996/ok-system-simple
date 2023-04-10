@@ -23,9 +23,8 @@ public class TestService {
     /**
      * 获取同学列表信息
      * @return 返回同学列表信息的ClassmateVo对象
-     * @throws JsonProcessingException JSON解析异常
      */
-    public ClassmateVo classmateList() throws JsonProcessingException {
+    public ClassmateVo classmateList() {
         if (baseParamService != null) {
             // 从基础参数服务中获取基础参数码值对象的列表
             List<BaseParamCodeValueVo<?>> simulation = baseParamService.selectCodeValueVoParamByKey(TestParamInit.KEY);

@@ -9,7 +9,6 @@ import cn.iosd.base.param.vo.BaseParamSaveReqVo;
 import cn.iosd.starter.web.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -40,14 +39,14 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
     }
 
     @Override
-    public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException {
+    public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) {
         BaseParam baseParam = selectBaseParamByKey(paramKey);
         return JsonMapper.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
     }
 
 
     @Override
-    public int insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public int insertBaseParam(BaseParamSaveReqVo baseParamVo) {
         BaseParam baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setCreateTime(now);
@@ -57,7 +56,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
     }
 
     @Override
-    public int updateBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public int updateBaseParam(BaseParamSaveReqVo baseParamVo) {
         BaseParam baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setModifyTime(now);
@@ -77,9 +76,8 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
      *
      * @param baseParamVo
      * @return
-     * @throws JsonProcessingException
      */
-    public BaseParam convertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException {
+    public BaseParam convertBaseParam(BaseParamSaveReqVo baseParamVo) {
         BaseParam baseParam = new BaseParam();
         JsonNode moduleNames = JsonMapper.convertObject(baseParamVo.getModuleNames(), JsonNode.class);
         JsonNode codeValues = JsonMapper.convertObject(baseParamVo.getCodeValues(), JsonNode.class);

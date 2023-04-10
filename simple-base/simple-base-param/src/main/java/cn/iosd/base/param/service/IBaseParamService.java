@@ -1,13 +1,11 @@
 package cn.iosd.base.param.service;
 
-import java.util.List;
-
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author ok1996
@@ -34,25 +32,23 @@ public interface IBaseParamService extends IService<BaseParam> {
      *
      * @param paramKey
      * @return
-     * @throws JsonProcessingException
      */
-    List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) throws JsonProcessingException;
+    List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey);
+
     /**
      * 新增
      *
      * @param baseParamVo
      * @return 影响行数
-     * @throws JsonProcessingException
      */
-    int insertBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException;
+    int insertBaseParam(BaseParamSaveReqVo baseParamVo);
 
     /**
      * 修改
      *
      * @param baseParamVo
      * @return 影响行数
-     * @throws JsonProcessingException
      */
-    int updateBaseParam(BaseParamSaveReqVo baseParamVo) throws JsonProcessingException;
+    int updateBaseParam(BaseParamSaveReqVo baseParamVo);
 
 }

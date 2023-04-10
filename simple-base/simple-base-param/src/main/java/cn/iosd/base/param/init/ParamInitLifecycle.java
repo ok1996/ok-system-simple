@@ -3,7 +3,6 @@ package cn.iosd.base.param.init;
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +50,7 @@ public class ParamInitLifecycle implements SmartLifecycle {
                 if (StringUtils.isEmpty(key)) {
                     throw new IllegalArgumentException("初始化key值为空");
                 }
-                try {
-                    initParam(init);
-                } catch (Exception e) {
-                    log.error("参数[{}]初始化失败:{}", key, e.getMessage());
-                }
+                initParam(init);
             });
         }
     }
@@ -65,7 +60,7 @@ public class ParamInitLifecycle implements SmartLifecycle {
      *
      * @param init 需要初始化的参数
      */
-    private void initParam(ParamInit init) throws JsonProcessingException {
+    private void initParam(ParamInit init) {
         String key = init.getKey();
         BaseParam baseParam = baseParamService.selectBaseParamByKey(key);
         if (baseParam == null) {
