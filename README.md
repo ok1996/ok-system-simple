@@ -1,8 +1,10 @@
 ## Links
+
 - [文档详情](https://ok96.cn/pages/8e9dc3/)
 - [版本说明](https://ok96.cn/pages/ae03ef/)
 
 ## 核心依赖
+
 | 依赖                   | 版本                  |
 |----------------------|---------------------|
 | Java                 | 17                  |
@@ -12,8 +14,10 @@
 | Ok System Simple     | 2023.3.1.0-SNAPSHOT |
 
 ## 仓库地址
+
 例 simple-starter-web  
 最新版本号 2023.3.0.0
+
 ~~~
     <dependencies>
         <dependency>
@@ -23,7 +27,9 @@
         </dependency>
     </dependencies>
 ~~~
+
 ## Base服务类模块
+
 | 模块名称                  | 使用场景     | 说明                    |
 |-----------------------|----------|-----------------------|
 | simple-base-param     | 基础配置     | 启动自动初始化配置、可选覆盖生成、开放接口 |
@@ -31,6 +37,7 @@
 | simple-base-s3        | 文件存储管理服务 | 提供文件管理服务及接口           |
 
 ## Starter自动装配模块
+
 | 模块名称                      | 使用场景     | 说明                                                           |
 |---------------------------|----------|--------------------------------------------------------------|
 | simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类 |
@@ -41,7 +48,7 @@
 | simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、<br/>通用CURD控制层、自定义JsonNode处理器        |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
-| simple-starter-encode     | 加密       | 注解加密脱敏（加密规则有通用模板、或自定义）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）           |
+| simple-starter-encode     | 加密       | 注解：加密脱敏（加密规则有通用模板、或自定义）<br/>注解：接口请求参数或返回参数Rsa加密解密            |
 | simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）    |
 
 
