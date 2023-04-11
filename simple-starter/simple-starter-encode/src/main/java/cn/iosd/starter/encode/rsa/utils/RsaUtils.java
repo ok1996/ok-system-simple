@@ -3,6 +3,8 @@ package cn.iosd.starter.encode.rsa.utils;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -21,7 +23,7 @@ public class RsaUtils {
 
     private static final String RSA = "RSA";
 
-    private static final int KEY_SIZE = 4096;
+    private static final int KEY_SIZE = 2048;
 
     /**
      * 生成 RSA 密钥对
@@ -48,8 +50,19 @@ public class RsaUtils {
         PublicKey key = getPublicKey(publicKey);
         Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] bytes = cipher.doFinal(data.getBytes());
-        return Base64.encodeBase64String(bytes);
+        byte[] dataBytes = data.getBytes();
+        //每一段的长度
+        int blockSize = KEY_SIZE / 8 - 11;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        for (int i = 0; i < dataBytes.length; i += blockSize) {
+            int length = Math.min(blockSize, dataBytes.length - i);
+            byte[] blockBytes = new byte[length];
+            System.arraycopy(dataBytes, i, blockBytes, 0, length);
+            byte[] encryptedBytes = cipher.doFinal(blockBytes);
+            outputStream.write(encryptedBytes);
+        }
+        byte[] encryptedBytes = outputStream.toByteArray();
+        return Base64.encodeBase64String(encryptedBytes);
     }
 
     /**
@@ -64,8 +77,26 @@ public class RsaUtils {
         PrivateKey key = getPrivateKey(privateKey);
         Cipher cipher = Cipher.getInstance(RSA);
         cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] bytes = Base64.decodeBase64(data);
-        return new String(cipher.doFinal(bytes));
+        byte[] dataBytes = Base64.decodeBase64(data);
+        int inputLength = dataBytes.length;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        int offset = 0;
+        byte[] cache;
+        int i = 0;
+        // 对数据分段解密
+        while (inputLength - offset > 0) {
+            if (inputLength - offset > KEY_SIZE / 8) {
+                cache = cipher.doFinal(dataBytes, offset, KEY_SIZE / 8);
+            } else {
+                cache = cipher.doFinal(dataBytes, offset, inputLength - offset);
+            }
+            outputStream.write(cache, 0, cache.length);
+            i++;
+            offset = i * KEY_SIZE / 8;
+        }
+        byte[] decryptedBytes = outputStream.toByteArray();
+        outputStream.close();
+        return new String(decryptedBytes, StandardCharsets.UTF_8);
     }
 
     /**
