@@ -249,6 +249,9 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
@@ -319,6 +322,9 @@
                             <source>${java.version}</source>
                             <target>${java.version}</target>
                             <encoding>${project.build.sourceEncoding}</encoding>
+                            <compilerArgs>
+                                <arg>-parameters</arg>
+                            </compilerArgs>
                         </configuration>
                     </plugin>
                     <plugin>
