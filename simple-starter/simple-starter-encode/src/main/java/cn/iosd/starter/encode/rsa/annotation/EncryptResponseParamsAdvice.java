@@ -62,7 +62,7 @@ public class EncryptResponseParamsAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private Object encrypt(Object responseObj) {
-        return Optional.of(rsaProperties.getPublicKey())
+        return Optional.ofNullable(rsaProperties.getPublicKey())
                 .filter(StringUtils::isNotBlank)
                 .map(pubKey -> {
                     try {
@@ -76,8 +76,7 @@ public class EncryptResponseParamsAdvice implements ResponseBodyAdvice<Object> {
                     return responseObj;
                 })
                 .orElseGet(() -> {
-                    log.info("simple.encode.rsa.publicKey is blank");
-                    return responseObj;
+                    throw new IllegalArgumentException("publicKey must not be null");
                 });
     }
 
