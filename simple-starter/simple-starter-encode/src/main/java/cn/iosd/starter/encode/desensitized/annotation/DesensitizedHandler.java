@@ -72,7 +72,7 @@ public class DesensitizedHandler {
             case CUSTOM_BROADSIDE_CLEAR_TEXT -> deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
             case CUSTOM_BROADSIDE_MASK_TEXT -> deStr = DesensitizedUtils.maskValue(value, prefixLen, suffixLen);
             default ->
-                    deStr = DesensitizedUtils.desensitizeMap.getOrDefault(sensitiveRule, Function.identity()).apply(value);
+                    deStr = DesensitizedUtils.DESENSITIZE_MAP.getOrDefault(sensitiveRule, Function.identity()).apply(value);
         }
         return deStr;
     }

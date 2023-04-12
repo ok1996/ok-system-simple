@@ -21,8 +21,8 @@ public class SuperPersonVo {
     private PersonVo personVo;
 
     @Schema(description = "是否是领导-默认实现类的json文件调用字典")
-    @DictField(dictionaryParams = "leader", dictImplBeanName = "localDictServiceImpl", relatedField = "isALeaderText")
-    private Integer isALeader;
+    @DictField(dictionaryParams = "leader", dictImplBeanName = "localDictServiceImpl", relatedField = "isLeaderText")
+    private Integer isLeader;
 
-    private String isALeaderText;
+    private String isLeaderText;
 }

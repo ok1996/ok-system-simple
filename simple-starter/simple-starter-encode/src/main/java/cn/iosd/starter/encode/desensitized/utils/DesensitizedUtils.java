@@ -21,17 +21,17 @@ public class DesensitizedUtils {
     /**
      * 函数式接口
      */
-    public static final Map<SensitiveRule, Function<String, String>> desensitizeMap = new EnumMap<>(SensitiveRule.class);
+    public static final Map<SensitiveRule, Function<String, String>> DESENSITIZE_MAP = new EnumMap<>(SensitiveRule.class);
 
     static {
-        desensitizeMap.put(SensitiveRule.CHINESE_NAME, DesensitizedUtils::chineseName);
-        desensitizeMap.put(SensitiveRule.ID_CARD, DesensitizedUtils::idCardNum);
-        desensitizeMap.put(SensitiveRule.FIXED_PHONE, DesensitizedUtils::fixedPhone);
-        desensitizeMap.put(SensitiveRule.MOBILE_PHONE, DesensitizedUtils::mobilePhone);
-        desensitizeMap.put(SensitiveRule.ADDRESS, DesensitizedUtils::address);
-        desensitizeMap.put(SensitiveRule.EMAIL, DesensitizedUtils::email);
-        desensitizeMap.put(SensitiveRule.BANK_CARD, DesensitizedUtils::bankCard);
-        desensitizeMap.put(SensitiveRule.PASSWORD, DesensitizedUtils::password);
+        DESENSITIZE_MAP.put(SensitiveRule.CHINESE_NAME, DesensitizedUtils::chineseName);
+        DESENSITIZE_MAP.put(SensitiveRule.ID_CARD, DesensitizedUtils::idCardNum);
+        DESENSITIZE_MAP.put(SensitiveRule.FIXED_PHONE, DesensitizedUtils::fixedPhone);
+        DESENSITIZE_MAP.put(SensitiveRule.MOBILE_PHONE, DesensitizedUtils::mobilePhone);
+        DESENSITIZE_MAP.put(SensitiveRule.ADDRESS, DesensitizedUtils::address);
+        DESENSITIZE_MAP.put(SensitiveRule.EMAIL, DesensitizedUtils::email);
+        DESENSITIZE_MAP.put(SensitiveRule.BANK_CARD, DesensitizedUtils::bankCard);
+        DESENSITIZE_MAP.put(SensitiveRule.PASSWORD, DesensitizedUtils::password);
     }
 
 

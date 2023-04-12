@@ -37,7 +37,7 @@ public class DictService {
     public SuperPersonVo getSuperPerson() {
         return SuperPersonVo.builder()
                 .personVo(PersonVo.builder().name("张三").sex(1).build())
-                .isALeader(1)
+                .isLeader(1)
                 .build();
     }
 
@@ -46,11 +46,11 @@ public class DictService {
         List<SuperPersonVo> list = new ArrayList<>();
         list.add(SuperPersonVo.builder()
                 .personVo(PersonVo.builder().name("张三").sex(1).build())
-                .isALeader(1)
+                .isLeader(1)
                 .build());
         list.add(SuperPersonVo.builder()
                 .personVo(PersonVo.builder().name("张四").sex(2).build())
-                .isALeader(2)
+                .isLeader(2)
                 .build());
         return list;
     }
@@ -61,14 +61,16 @@ public class DictService {
         String label2 = "";
         String value1 = "1";
         String value2 = "2";
-        if ("idCard".equals(param)) {
+        String idCard = "idCard";
+        Integer itemSize = 2;
+        if (idCard.equals(param)) {
             label1 = "护照";
             label2 = "驾照";
         } else {
             label1 = "普通人";
             label2 = "超人";
         }
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= itemSize; i++) {
             DictItem item = new DictItem();
             item.setLabel(i == 1 ? label1 : label2);
             item.setValue(i == 1 ? value1 : value2);
