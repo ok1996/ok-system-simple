@@ -1,8 +1,14 @@
 package cn.iosd.base.s3.controller;
 
-import java.io.IOException;
-import java.util.List;
-
+import cn.iosd.base.s3.domain.StorageObjectRequest;
+import cn.iosd.base.s3.domain.StorageObjectResponse;
+import cn.iosd.base.s3.service.SimpleStorageService;
+import cn.iosd.starter.web.domain.Response;
+import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.ObjectListing;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,20 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ObjectListing;
-
-import cn.iosd.base.s3.domain.StorageObjectRequest;
-import cn.iosd.base.s3.domain.StorageObjectResponse;
-import cn.iosd.base.s3.service.SimpleStorageService;
-import cn.iosd.starter.web.domain.Response;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author ok1996
@@ -71,8 +68,8 @@ public class StorageController {
     @Operation(summary = "上传文件-返回文件key")
     @PostMapping(value = "/object/upload")
     public Response<String> upload(@ModelAttribute MultipartFile file
-            , @Parameter(description = "存储桶") @RequestParam(value = "bucketName") String bucketName
-            , @Parameter(description = "文件名后缀", example = "png") @RequestParam(value = "fileExtension") String fileExtension) throws IOException {
+            , @Parameter(description = "存储桶") String bucketName
+            , @Parameter(description = "文件名后缀", example = "png") String fileExtension) throws IOException {
         String fileKey = RandomStringUtils.randomAlphabetic(12) + "." + fileExtension;
         simpleStorageService.upload(file.getContentType(), file.getSize(), file.getInputStream(), bucketName, fileKey);
         return Response.ok(fileKey);

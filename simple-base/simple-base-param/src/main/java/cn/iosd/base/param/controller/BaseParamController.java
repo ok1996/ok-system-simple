@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,8 +27,7 @@ public class BaseParamController extends BaseController<BaseParam> {
 
     @Operation(summary = "获取详细信息")
     @GetMapping(value = "/info")
-    public Response<BaseParam> getInfo(@RequestParam(value = "id", required = false) Long id
-            , @RequestParam(value = "paramKey", required = false) String paramKey) {
+    public Response<BaseParam> getInfo(Long id, String paramKey) {
         return Response.ok(id != null ?
                 baseParamService.selectBaseParamById(id) :
                 baseParamService.selectBaseParamByKey(paramKey));

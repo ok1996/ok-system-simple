@@ -23,13 +23,13 @@ public class MessageController {
 
     @Operation(summary = "往Hello服务端发送消息")
     @GetMapping("/sendHello")
-    public Response<String> sendHello(@RequestParam(name = "message", required = true) String message) {
+    public Response<String> sendHello(String message) {
         return Response.ok(service.sendHelloMessage(message));
     }
 
     @Operation(summary = "往Person服务端发送消息")
     @GetMapping("/sendPerson")
-    public Response<String> sendPerson(@RequestParam(name = "message", required = true) String message) {
+    public Response<String> sendPerson(String message) {
         return Response.ok(service.sendPersonMessage(message));
     }
 
