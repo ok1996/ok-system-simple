@@ -1,6 +1,6 @@
 package cn.iosd.starter.socket.config;
 
-import cn.iosd.starter.redisson.service.RedissonLockService;
+import cn.iosd.starter.redisson.service.RedissonManager;
 import cn.iosd.starter.socket.handler.NettyExceptionListener;
 import cn.iosd.starter.socket.properties.SocketProperties;
 import com.corundumstudio.socketio.AckMode;
@@ -33,7 +33,7 @@ public class NettySocketConfig {
     private NettyExceptionListener nettyExceptionListener;
 
     @Autowired(required = false)
-    private RedissonLockService redissonLockService;
+    private RedissonManager redissonManager;
 
     @Autowired(required = false)
     private AuthorizationListener authorizationListener;
@@ -54,7 +54,7 @@ public class NettySocketConfig {
         // Ping消息超时时间（毫秒），默认60000，这个时间间隔内没有接收到心跳消息就会发送超时事件
         config.setPingTimeout(socketProperties.getPingTimeout());
         // 基于redisson
-        if (redissonLockService != null) {
+        if (redissonManager != null) {
             config.setStoreFactory(createRedissonStoreFactory());
             log.info("SocketIOServer开启Redis集群模式");
         }
@@ -89,7 +89,7 @@ public class NettySocketConfig {
     }
 
     private RedissonStoreFactory createRedissonStoreFactory() {
-        RedissonStoreFactory redissonStoreFactory = new RedissonStoreFactory(redissonLockService.getRedissonManager().getRedisson());
+        RedissonStoreFactory redissonStoreFactory = new RedissonStoreFactory(redissonManager.getRedisson());
         return redissonStoreFactory;
     }
 }
