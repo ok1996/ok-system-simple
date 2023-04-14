@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.iosd.starter.redisson.service.RedissonService;
+import cn.iosd.starter.redisson.service.RedissonLockService;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/lock")
 public class LockController {
     @Autowired(required = false)
-    private RedissonService redissonService;
+    private RedissonLockService redissonLockService;
 
     /**
      * 商品库存
@@ -39,15 +39,15 @@ public class LockController {
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
     public Response<?> decrement() throws InterruptedException {
-        redissonService.lock(LOCK_NAME, 10L);
+        redissonLockService.lock(LOCK_NAME, 10L);
         if (TOTAL > 0) {
             TOTAL--;
         }
         Thread.sleep(50);
         log.info("===lock===减完库存后,当前库存===" + TOTAL);
         //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
-        if (redissonService.isHeldByCurrentThread(LOCK_NAME)) {
-            redissonService.unlock(LOCK_NAME);
+        if (redissonLockService.isHeldByCurrentThread(LOCK_NAME)) {
+            redissonLockService.unlock(LOCK_NAME);
         }
         return Response.ok();
     }
@@ -59,12 +59,12 @@ public class LockController {
         Long lease = 5L;
         //等待时间
         Long wait = 200L;
-        if (redissonService.tryLock(TRY_LOCK_NAME, lease, wait)) {
+        if (redissonLockService.tryLock(TRY_LOCK_NAME, lease, wait)) {
             if (TOTAL > 0) {
                 TOTAL--;
             }
             Thread.sleep(50);
-            redissonService.unlock(TRY_LOCK_NAME);
+            redissonLockService.unlock(TRY_LOCK_NAME);
             log.info("====tryLock===减完库存后,当前库存===" + TOTAL);
         } else {
             log.info("[ExecutorRedisson]获取锁失败");

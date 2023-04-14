@@ -1,6 +1,6 @@
 package cn.iosd.starter.redisson.annotation;
 
-import cn.iosd.starter.redisson.service.RedissonService;
+import cn.iosd.starter.redisson.service.RedissonLockService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +26,7 @@ public class DistributedLockHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedLockHandler.class);
 
     @Autowired
-    RedissonService redissonService;
+    RedissonLockService redissonLockService;
 
     public final static String LOCK_NAME_APPEND = "RedissonLock:";
 
@@ -36,7 +36,7 @@ public class DistributedLockHandler {
         int leaseTime = distributedLock.leaseTime();
 
         log.info("[开始]执行RedisLock环绕通知,获取Redis分布式锁[{}]开始", lockName);
-        RLock lock = redissonService.getLock(lockName);
+        RLock lock = redissonLockService.getLock(lockName);
 
         boolean isLocked = false;
         try {

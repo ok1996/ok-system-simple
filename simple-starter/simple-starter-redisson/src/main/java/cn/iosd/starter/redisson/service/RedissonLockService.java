@@ -6,16 +6,14 @@ import org.redisson.api.RLock;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Redisson二次封装
+ * Redisson 分布式锁服务类，用于管理 Redisson RLock
  *
  * @author ok1996
  */
-public class RedissonService {
-    private RedissonManager redissonManager;
+public class RedissonLockService {
     private Redisson redisson;
 
-    public RedissonService(RedissonManager redissonManager) {
-        this.redissonManager = redissonManager;
+    public RedissonLockService(RedissonManager redissonManager) {
         this.redisson = redissonManager.getRedisson();
     }
 
@@ -109,15 +107,8 @@ public class RedissonService {
         return rLock.isHeldByCurrentThread();
     }
 
-    public RedissonManager getRedissonManager() {
-        return redissonManager;
-    }
-
-    public void setRedissonManager(RedissonManager redissonManager) {
-        this.redissonManager = redissonManager;
-    }
-
     public RLock getLock(String name) {
         return redisson.getLock(name);
     }
+
 }

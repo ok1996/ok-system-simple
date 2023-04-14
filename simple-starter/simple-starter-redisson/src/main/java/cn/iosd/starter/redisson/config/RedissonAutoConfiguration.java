@@ -1,8 +1,9 @@
 package cn.iosd.starter.redisson.config;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
+import cn.iosd.starter.redisson.service.RedissonCacheService;
 import cn.iosd.starter.redisson.service.RedissonManager;
-import cn.iosd.starter.redisson.service.RedissonService;
+import cn.iosd.starter.redisson.service.RedissonLockService;
 import org.redisson.Redisson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +28,16 @@ public class RedissonAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @Order(value = 2)
-    public RedissonService redissonLock(RedissonManager redissonManager) {
-        RedissonService redissonLock = new RedissonService(redissonManager);
+    public RedissonLockService redissonLock(RedissonManager redissonManager) {
+        RedissonLockService redissonLock = new RedissonLockService(redissonManager);
+        return redissonLock;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @Order(value = 2)
+    public RedissonCacheService redissonCache(RedissonManager redissonManager) {
+        RedissonCacheService redissonLock = new RedissonCacheService(redissonManager);
         return redissonLock;
     }
 
