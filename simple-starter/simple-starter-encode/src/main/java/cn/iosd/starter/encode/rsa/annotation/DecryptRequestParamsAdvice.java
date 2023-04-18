@@ -1,7 +1,9 @@
 package cn.iosd.starter.encode.rsa.annotation;
 
 import cn.iosd.starter.encode.rsa.properties.RsaProperties;
+import cn.iosd.starter.encode.rsa.utils.JsonMapper;
 import cn.iosd.starter.encode.rsa.utils.RsaUtils;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.MethodParameter;
@@ -49,6 +51,21 @@ public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        RsaProperties.TimestampValidation timestampValidation = rsaProperties.getTimestampValidation();
+        if (timestampValidation.getEnabled()) {
+            JsonNode contentsDecryptedJsonNode = JsonMapper.getObjectMapper().readTree(contentsDecrypt);
+            JsonNode timestampJsonNode = contentsDecryptedJsonNode.get(RsaProperties.TimestampValidation.TIMESTAMP);
+            if (timestampJsonNode == null) {
+                throw new RuntimeException("The request timestamp is missing");
+            }
+            long timestamp = timestampJsonNode.asLong();
+            long requestExpirationTime = timestamp + timestampValidation.getExpiryMillis();
+            if (System.currentTimeMillis() > requestExpirationTime) {
+                throw new RuntimeException("The request timestamp has expired");
+            }
+        }
+
 
         return new DecryptRequestParamsInputMessage(inputMessage, contentsDecrypt);
     }

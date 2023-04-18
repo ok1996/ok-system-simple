@@ -11,6 +11,9 @@ simple:
     rsa:
       secureParams:
         enabled: true
+      timestampValidation:
+        enabled: true
+        expiryMillis: 60000
       publicKey: |
         MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6ewfgrp97KoD7beFHnzl
         x3Ln1kvH/6svv7NqswrXqh3xAvqvSpSJ87Z4EbMWzQyuzpAV0lJfwKzUMgIBn+6E
