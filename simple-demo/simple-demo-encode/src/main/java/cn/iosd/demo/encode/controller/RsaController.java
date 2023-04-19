@@ -33,10 +33,17 @@ public class RsaController {
         return Response.ok(reqString);
     }
 
-    @Operation(summary = "注解测试-请求参数解密")
+    @Operation(summary = "注解测试-请求参数解密-POST")
     @DecryptRequestParams
     @PostMapping(value = "/decryptRequestParams")
     public Response<PersonVo> decryptRequestParams(@RequestBody PersonVo vo) {
+        return Response.ok(vo);
+    }
+
+    @Operation(summary = "注解测试-请求参数解密-GET")
+    @DecryptRequestParams
+    @GetMapping(value = "/decryptRequestParams")
+    public Response<PersonVo> decryptRequestParamsGet(PersonVo vo) {
         return Response.ok(vo);
     }
 

@@ -1,5 +1,8 @@
 package cn.iosd.starter.encode.rsa.utils;
 
+import cn.iosd.starter.encode.rsa.properties.RsaProperties;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -124,4 +127,27 @@ public class RsaUtils {
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
         return KeyFactory.getInstance(RSA).generatePrivate(keySpec);
     }
+
+    /**
+     * 时间戳校验方法
+     *
+     * @param timestampValidation 校验配置参数
+     * @param contentsDecrypt     加密文本
+     * @throws JsonProcessingException 解析异常抛出
+     */
+    public static void timestampValidation(RsaProperties.TimestampValidation timestampValidation, String contentsDecrypt) throws JsonProcessingException {
+        if (timestampValidation.getEnabled()) {
+            JsonNode contentsDecryptedJsonNode = JsonMapper.getObjectMapper().readTree(contentsDecrypt);
+            JsonNode timestampJsonNode = contentsDecryptedJsonNode.get(RsaProperties.TimestampValidation.TIMESTAMP);
+            if (timestampJsonNode == null) {
+                throw new RuntimeException("The request timestamp is missing");
+            }
+            long timestamp = timestampJsonNode.asLong();
+            long requestExpirationTime = timestamp + timestampValidation.getExpiryMillis();
+            if (System.currentTimeMillis() > requestExpirationTime) {
+                throw new RuntimeException("The request timestamp has expired");
+            }
+        }
+    }
+
 }

@@ -1,9 +1,7 @@
 package cn.iosd.starter.encode.rsa.annotation;
 
 import cn.iosd.starter.encode.rsa.properties.RsaProperties;
-import cn.iosd.starter.encode.rsa.utils.JsonMapper;
 import cn.iosd.starter.encode.rsa.utils.RsaUtils;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.MethodParameter;
@@ -24,6 +22,8 @@ import java.util.stream.Collectors;
 
 /**
  * 解密请求参数
+ * <p>
+ * 对 RequestBody 进行处理
  *
  * @author ok1996
  */
@@ -34,8 +34,8 @@ public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
     private RsaProperties rsaProperties;
 
     @Override
-    public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return methodParameter.getMethodAnnotation(DecryptRequestParams.class) != null;
+    public boolean supports(MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+        return parameter.getMethodAnnotation(DecryptRequestParams.class) != null;
     }
 
     @Override
@@ -52,20 +52,7 @@ public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
             throw new RuntimeException(e);
         }
 
-        RsaProperties.TimestampValidation timestampValidation = rsaProperties.getTimestampValidation();
-        if (timestampValidation.getEnabled()) {
-            JsonNode contentsDecryptedJsonNode = JsonMapper.getObjectMapper().readTree(contentsDecrypt);
-            JsonNode timestampJsonNode = contentsDecryptedJsonNode.get(RsaProperties.TimestampValidation.TIMESTAMP);
-            if (timestampJsonNode == null) {
-                throw new RuntimeException("The request timestamp is missing");
-            }
-            long timestamp = timestampJsonNode.asLong();
-            long requestExpirationTime = timestamp + timestampValidation.getExpiryMillis();
-            if (System.currentTimeMillis() > requestExpirationTime) {
-                throw new RuntimeException("The request timestamp has expired");
-            }
-        }
-
+        RsaUtils.timestampValidation(rsaProperties.getTimestampValidation(), contentsDecrypt);
 
         return new DecryptRequestParamsInputMessage(inputMessage, contentsDecrypt);
     }

@@ -9,6 +9,10 @@ import java.lang.annotation.Target;
 
 /**
  * 对接口的请求参数解密
+ * <p>
+ * 注：支持RequestBody、URL查询参数
+ * </p>
+ * RequestBody 请求无需字段名称，URL查询参数请求默认字段encryptedData
  *
  * @author ok1996
  */

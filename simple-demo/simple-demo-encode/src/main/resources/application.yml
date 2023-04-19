@@ -11,6 +11,7 @@ simple:
     rsa:
       secureParams:
         enabled: true
+        urlField: encryptedData
       timestampValidation:
         enabled: true
         expiryMillis: 60000

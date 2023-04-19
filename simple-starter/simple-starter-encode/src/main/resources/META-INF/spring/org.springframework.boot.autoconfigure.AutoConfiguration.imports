@@ -2,3 +2,5 @@ cn.iosd.starter.encode.desensitized.annotation.DesensitizedHandler
 cn.iosd.starter.encode.rsa.annotation.EncryptResponseParamsAdvice
 cn.iosd.starter.encode.rsa.annotation.DecryptRequestParamsAdvice
 cn.iosd.starter.encode.rsa.properties.RsaProperties
+cn.iosd.starter.encode.rsa.annotation.DecryptRequestParamsResolve
+cn.iosd.starter.encode.rsa.config.DecryptRequestParamsConverterConfig
