@@ -1,4 +1,4 @@
-package cn.iosd.starter.web.utils;
+package cn.iosd.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -61,6 +61,5 @@ public class JsonMapper {
     public static <T> T convertObject(Object obj, TypeReference<T> valueTypeRef) {
         return OBJECT_MAPPER.convertValue(obj, valueTypeRef);
     }
+
 }
-
-

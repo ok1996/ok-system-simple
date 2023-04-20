@@ -1,8 +1,8 @@
 package cn.iosd.starter.encode.rsa.annotation;
 
 import cn.iosd.starter.encode.rsa.properties.RsaProperties;
-import cn.iosd.starter.encode.rsa.utils.JsonMapper;
 import cn.iosd.starter.encode.rsa.utils.RsaUtils;
+import cn.iosd.utils.JsonMapperThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
@@ -50,8 +50,6 @@ public class DecryptRequestParamsResolve implements HandlerMethodArgumentResolve
 
         RsaUtils.timestampValidation(rsaProperties.getTimestampValidation(), contentsDecrypt);
 
-        // 将解密后的内容转换成控制器方法参数的类型
-        Class<?> clazz = parameter.getParameterType();
-        return JsonMapper.getObjectMapper().readValue(contentsDecrypt, clazz);
+        return JsonMapperThreadLocal.getObjectMapper().readValue(contentsDecrypt, parameter.getParameterType());
     }
 }

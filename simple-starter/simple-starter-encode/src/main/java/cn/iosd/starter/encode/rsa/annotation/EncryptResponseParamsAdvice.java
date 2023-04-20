@@ -1,8 +1,8 @@
 package cn.iosd.starter.encode.rsa.annotation;
 
 import cn.iosd.starter.encode.rsa.properties.RsaProperties;
-import cn.iosd.starter.encode.rsa.utils.JsonMapper;
 import cn.iosd.starter.encode.rsa.utils.RsaUtils;
+import cn.iosd.utils.JsonMapperThreadLocal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -66,7 +66,7 @@ public class EncryptResponseParamsAdvice implements ResponseBodyAdvice<Object> {
                 .filter(StringUtils::isNotBlank)
                 .map(pubKey -> {
                     try {
-                        String content = JsonMapper.getObjectMapper().writeValueAsString(responseObj);
+                        String content = JsonMapperThreadLocal.getObjectMapper().writeValueAsString(responseObj);
                         return RsaUtils.encrypt(content, pubKey);
                     } catch (JsonProcessingException e) {
                         log.error("Failed to convert object to JSON string: {}", e.getMessage());

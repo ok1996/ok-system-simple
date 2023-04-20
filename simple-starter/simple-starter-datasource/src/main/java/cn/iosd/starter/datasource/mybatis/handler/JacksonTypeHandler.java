@@ -1,7 +1,7 @@
 package cn.iosd.starter.datasource.mybatis.handler;
 
 
-import cn.iosd.starter.web.utils.JsonMapper;
+import cn.iosd.utils.JsonMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;

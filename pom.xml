@@ -229,6 +229,12 @@
                 <artifactId>simple-base-s3</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-utils-jackson</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -236,6 +242,7 @@
         <module>simple-demo</module>
         <module>simple-starter</module>
         <module>simple-base</module>
+        <module>simple-utils</module>
     </modules>
     <packaging>pom</packaging>
 
