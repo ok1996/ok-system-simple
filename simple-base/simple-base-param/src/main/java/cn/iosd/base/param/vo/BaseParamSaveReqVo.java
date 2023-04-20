@@ -10,11 +10,11 @@ import java.util.List;
 public class BaseParamSaveReqVo {
     @Schema(description = "主键id")
     private Long id;
-    @Schema(description = "模块名列表 eg: [\"demo\",\"test\"]")
+    @Schema(description = "模块名列表",example = "[\"demo\",\"test\"]")
     private List<String> moduleNames;
     @Schema(description = "参数主键")
     private String paramKey;
-    @Schema(description = "参数值 eg: [{\"code\":\"age\",\"value\":100},{\"code\":\"sex\",\"value\":\"女性\"}]")
+    @Schema(description = "参数值",example = "[{\"code\":\"age\",\"value\":100},{\"code\":\"sex\",\"value\":\"女性\"}]")
     private List<BaseParamCodeValueVo<?>> codeValues;
     @Schema(description = "备注")
     private String remark;
