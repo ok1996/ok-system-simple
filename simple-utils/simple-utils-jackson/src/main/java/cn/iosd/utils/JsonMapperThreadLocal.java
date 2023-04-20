@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 /**
  * 提供 Json 序列化和反序列化功能的工具类。
  * <p>
- * 注：使用ThreadLocal来保存ObjectMapper对象，确保每个线程都使用自己的ObjectMapper对象
+ * 注：线程安全，使用ThreadLocal来保存ObjectMapper对象，确保每个线程都使用自己的ObjectMapper对象
  *
  * @author ok1996
  */
