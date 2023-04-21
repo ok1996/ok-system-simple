@@ -60,7 +60,7 @@ public class DictAspect {
     public Object translateDict(ProceedingJoinPoint joinPoint) throws Throwable {
         // 获取目标对象
         Object responseObj = joinPoint.proceed();
-        translateDictObjects(responseObj);
+        translateDictObjects(responseObj, false, new HashMap<>());
         return responseObj;
     }
 
@@ -68,13 +68,15 @@ public class DictAspect {
     /**
      * 将对象进行字典转换
      *
-     * @param responseObj 对象
+     * @param responseObj      对象
+     * @param tempCacheEnabled 获取字典项列表接口返回的数据是否开启临时缓存
+     * @param cache            临时缓存数据
      * @throws IllegalAccessException
      */
-    private void translateDictObjects(Object responseObj) throws IllegalAccessException {
+    private void translateDictObjects(Object responseObj, boolean tempCacheEnabled, Map<String, List<DictItem>> cache) throws IllegalAccessException {
         if (responseObj instanceof List<?>) {
             for (Object singleObj : (List<?>) responseObj) {
-                translateDictObjects(singleObj);
+                translateDictObjects(singleObj, true, cache);
             }
         }
 
@@ -87,7 +89,16 @@ public class DictAspect {
                     break;
                 }
                 // 获取字典项列表
-                List<DictItem> dictItemList = dictService.getDictItemList(dictFieldAnnotation.dictionaryParams());
+                List<DictItem> dictItemList = null;
+                if (tempCacheEnabled) {
+                    dictItemList = cache.get(dictFieldAnnotation.dictionaryParams());
+                }
+                if (dictItemList == null) {
+                    dictItemList = dictService.getDictItemList(dictFieldAnnotation.dictionaryParams());
+                    if (tempCacheEnabled) {
+                        cache.put(dictFieldAnnotation.dictionaryParams(), dictItemList);
+                    }
+                }
                 if (dictItemList == null || dictItemList.size() == 0) {
                     break;
                 }
@@ -111,8 +122,9 @@ public class DictAspect {
             } else if (field.isAnnotationPresent(DictEntity.class)) {
                 field.setAccessible(true);
                 Object fieldValue = field.get(responseObj);
-                translateDictObjects(fieldValue);
+                translateDictObjects(fieldValue, true, cache);
             }
         }
     }
+
 }
