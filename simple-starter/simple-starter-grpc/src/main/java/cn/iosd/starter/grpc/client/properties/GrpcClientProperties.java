@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Configuration
 @ConfigurationProperties("simple.grpc.client")
 public class GrpcClientProperties {
-
+    private Long timeout = 5000L;
     private Map<String, GrpcChannelProperties> channel = new ConcurrentHashMap<>();
 
     public Map<String, GrpcChannelProperties> getChannel() {
@@ -21,5 +21,13 @@ public class GrpcClientProperties {
 
     public void setChannel(Map<String, GrpcChannelProperties> channel) {
         this.channel = channel;
+    }
+
+    public Long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Long timeout) {
+        this.timeout = timeout;
     }
 }

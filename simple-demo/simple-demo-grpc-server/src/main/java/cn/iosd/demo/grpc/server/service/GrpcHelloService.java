@@ -1,10 +1,10 @@
 package cn.iosd.demo.grpc.server.service;
 
 
-import cn.iosd.starter.grpc.server.annotation.GrpcService;
 import cn.iosd.demo.grpc.proto.hello.HelloReply;
 import cn.iosd.demo.grpc.proto.hello.HelloRequest;
 import cn.iosd.demo.grpc.proto.hello.SimpleGrpc;
+import cn.iosd.starter.grpc.server.annotation.GrpcService;
 import io.grpc.stub.StreamObserver;
 
 /**

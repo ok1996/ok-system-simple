@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GrpcDemoClientService {
 
-    @GrpcClient(value = "grpc-server-hello")
+    @GrpcClient(value = "grpc-server-hello", timeout = 10000)
     private SimpleGrpc.SimpleBlockingStub simpleStub;
 
     @GrpcClient(value = "grpc-server-person")

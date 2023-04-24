@@ -23,7 +23,16 @@ public @interface GrpcClient {
     /**
      * 获取 simple.grpc.client.channel.{value}.address 配置项
      *
-     * @return
+     * @return {value}值
      */
     String value();
+
+    /**
+     * 设置Grpc调用超时时间-单位毫秒，默认5000毫秒
+     * <p>
+     * 优先级高于配置项 simple.grpc.client.timeout
+     *
+     * @return 超时时间
+     */
+    long timeout() default -1;
 }

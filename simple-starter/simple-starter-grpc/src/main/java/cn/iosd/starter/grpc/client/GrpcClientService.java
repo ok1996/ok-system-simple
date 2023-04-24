@@ -51,7 +51,15 @@ public class GrpcClientService implements InitializingBean {
             }
 
             GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
-            GrpcChannel client = new GrpcChannel(properties.getAddress());
+
+            long timeout;
+            if (-1 != annotation.timeout()) {
+                timeout = annotation.timeout();
+            } else {
+                timeout = grpcClientProperties.getTimeout();
+            }
+
+            GrpcChannel client = new GrpcChannel(properties.getAddress(), timeout);
             Object object = client.getBlockingStub(type);
 
             boolean accessible = field.canAccess(bean);
@@ -59,7 +67,7 @@ public class GrpcClientService implements InitializingBean {
 
             try {
                 field.set(bean, object);
-                log.info("完成 {} 的 GrpcChannel 装配", annotation.value());
+                log.info("完成 {} 的 GrpcChannel 装配;调用超时时间为 {} 毫秒", annotation.value(), timeout);
             } catch (IllegalAccessException e) {
                 String message = String.format("对象 %s 注入配置 GrpcChannel 异常：", bean.getClass().getSimpleName());
                 log.error(message, e);
