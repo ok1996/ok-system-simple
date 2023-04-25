@@ -11,19 +11,19 @@
 | Spring Boot          | 3.0.6          |
 | Spring Cloud         | 2022.0.2       |
 | Spring Cloud Alibaba | 2022.0.0.0-RC1 |
-| Ok System Simple     | 2022.3.2.0     |
+| Ok System Simple     | 2023.3.2.1     |
 
 ## 仓库地址
 
 例 simple-starter-web  
-最新版本号 2023.3.2.0
+最新版本号 2023.3.2.1
 
 ~~~
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
-            <version>2023.3.2.0</version>
+            <version>2023.3.2.1</version>
         </dependency>
     </dependencies>
 ~~~
