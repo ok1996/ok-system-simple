@@ -1,2 +1,3 @@
 cn.iosd.starter.datasource.config.MybatisPlusConfig
 cn.iosd.starter.datasource.mybatis.handler.JacksonTypeHandler
+cn.iosd.starter.datasource.config.MapperLocationsAutoConfiguration
