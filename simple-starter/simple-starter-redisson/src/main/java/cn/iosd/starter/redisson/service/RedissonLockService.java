@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author ok1996
  */
 public class RedissonLockService {
-    private Redisson redisson;
+    private final Redisson redisson;
 
     public RedissonLockService(RedissonManager redissonManager) {
         this.redisson = redissonManager.getRedisson();

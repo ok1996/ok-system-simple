@@ -4,8 +4,6 @@ import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamSaveReqVo;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
@@ -17,7 +15,6 @@ import java.util.List;
  */
 @Component
 public class ParamInitLifecycle implements SmartLifecycle {
-    private static final Logger log = LoggerFactory.getLogger(ParamInitLifecycle.class);
     @Autowired(required = false)
     private List<ParamInit> inits;
     @Autowired

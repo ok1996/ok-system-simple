@@ -1,11 +1,9 @@
 package cn.iosd.demo.redisson.controller;
 
-import cn.iosd.demo.redisson.vo.PersonVo;
-import cn.iosd.starter.redisson.service.RedissonCacheService;
-import cn.iosd.starter.web.domain.Response;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import cn.iosd.demo.redisson.vo.PersonVo;
+import cn.iosd.starter.redisson.service.RedissonCacheService;
+import cn.iosd.starter.web.domain.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author ok1996
  */
-@Slf4j
 @RestController
 @Tag(name = "缓存的常用操作")
 @RequestMapping("/cache")
@@ -65,7 +64,7 @@ public class RedissonCacheController {
     @Operation(summary = "Map-保存")
     @PostMapping("/map/{key}")
     public Response<?> setMap(@PathVariable String key, @RequestBody PersonVo value) {
-        Map save = new HashMap(2);
+        Map<String, Object> save = new HashMap<>(2);
         save.put(key, value);
         redissonCacheService.setMap(key, save);
         return Response.ok();

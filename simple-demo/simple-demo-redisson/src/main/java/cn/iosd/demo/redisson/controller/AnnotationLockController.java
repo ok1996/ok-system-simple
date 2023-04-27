@@ -1,13 +1,14 @@
 package cn.iosd.demo.redisson.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import cn.iosd.starter.redisson.annotation.DistributedLock;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ok1996
@@ -26,7 +27,7 @@ public class AnnotationLockController {
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
     @DistributedLock(value = "demo-redisson:decrement", leaseTime = 105)
-    public Response decrement() {
+    public Response<?> decrement() {
         if (TOTAL > 0) {
             TOTAL--;
         }

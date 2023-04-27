@@ -1,13 +1,14 @@
 package cn.iosd.starter.redisson.service;
 
+import java.time.Instant;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.redisson.Redisson;
 import org.redisson.api.RBucket;
 import org.redisson.api.RList;
 import org.redisson.api.RMap;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Redisson 缓存服务类，用于封装 Redisson 对象缓存的常用操作
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @author ok1996
  */
 public class RedissonCacheService {
-    private Redisson redisson;
+    private final Redisson redisson;
 
     public RedissonCacheService(RedissonManager redissonManager) {
         this.redisson = redissonManager.getRedisson();
@@ -49,6 +50,7 @@ public class RedissonCacheService {
      * 从缓存中获取值
      *
      * @param key 缓存键
+     * @param <V> Redis 中存储的值的数据类型
      * @return 缓存值
      */
     public <V> V getObject(String key) {
@@ -74,17 +76,19 @@ public class RedissonCacheService {
      * @param key  缓存键
      * @param list 缓存值（List类型）
      * @param ttl  过期时间（单位：秒）
+     * @param <V>  List 对象的数据类型
      */
     public <V> void setList(String key, List<V> list, long ttl) {
         RList<V> rList = redisson.getList(key);
         rList.addAll(list);
-        rList.expire(ttl, TimeUnit.SECONDS);
+        rList.expire(Instant.now().plusSeconds(ttl));
     }
 
     /**
      * 将列表存储到缓存中-永久保存
      *
      * @param key  缓存键
+     * @param <V>  List 对象的数据类型
      * @param list 缓存值（List类型）
      */
     public <V> void setList(String key, List<V> list) {
@@ -96,6 +100,7 @@ public class RedissonCacheService {
      * 从缓存中获取列表
      *
      * @param key 缓存键
+     * @param <V> List 对象的数据类型
      * @return 缓存值（List类型）
      */
     public <V> List<V> getList(String key) {
@@ -121,17 +126,21 @@ public class RedissonCacheService {
      * @param key 缓存键
      * @param map 缓存值（Map类型）
      * @param ttl 过期时间（单位：秒）
+     * @param <K> Map 对象的键的数据类型
+     * @param <V> Map 对象的值的数据类型
      */
     public <K, V> void setMap(String key, Map<K, V> map, long ttl) {
         RMap<K, V> rMap = redisson.getMap(key);
         rMap.putAll(map);
-        rMap.expire(ttl, TimeUnit.SECONDS);
+        rMap.expire(Instant.now().plusSeconds(ttl));
     }
 
     /**
      * 将哈希存储到缓存中-永久保存
      *
      * @param key 缓存键
+     * @param <K> Map 对象的键的数据类型
+     * @param <V> Map 对象的值的数据类型
      * @param map 缓存值（Map类型）
      */
     public <K, V> void setMap(String key, Map<K, V> map) {
@@ -143,6 +152,8 @@ public class RedissonCacheService {
      * 从缓存中获取哈希
      *
      * @param key 缓存键
+     * @param <K> Map 对象的键的数据类型
+     * @param <V> Map 对象的值的数据类型
      * @return 缓存值（Map类型）
      */
     public <K, V> Map<K, V> getMap(String key) {
