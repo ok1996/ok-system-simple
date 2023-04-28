@@ -24,7 +24,7 @@ public class TestController {
 
     @Operation(summary = "获取同班同学列表")
     @GetMapping(value = "/classmateList")
-    public Response<ClassmateVo> classmateList() throws JsonProcessingException {
+    public Response<ClassmateVo> classmateList() {
         return Response.ok(service.classmateList());
     }
 }

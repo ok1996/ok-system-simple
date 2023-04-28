@@ -51,8 +51,7 @@ public class DictAspect {
         if (StringUtils.isBlank(name)) {
             return dictServiceMap.get(dictImplBeanName);
         }
-        DictService service = dictServiceMap.get(name);
-        return service;
+        return dictServiceMap.get(name);
     }
 
 
