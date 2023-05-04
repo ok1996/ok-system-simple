@@ -59,7 +59,7 @@ public class DictAspect {
     public Object translateDict(ProceedingJoinPoint joinPoint) throws Throwable {
         // 获取目标对象
         Object responseObj = joinPoint.proceed();
-        translateDictObjects(responseObj, false, new HashMap<>());
+        translateDictObjects(responseObj, false, new HashMap<>(16));
         return responseObj;
     }
 

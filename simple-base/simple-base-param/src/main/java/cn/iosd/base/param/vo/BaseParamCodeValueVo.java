@@ -25,6 +25,7 @@ public class BaseParamCodeValueVo<V> {
         return this;
     }
 
+    @Override
     public String toString() {
         return "BaseParamCodeValueVo(code=" + this.getCode() + ", value=" + this.getValue() + ")";
     }

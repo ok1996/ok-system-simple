@@ -4,6 +4,7 @@ import cn.iosd.starter.grpc.client.annotation.GrpcClient;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
@@ -21,11 +22,16 @@ public class InitializeGrpcClientBeans implements BeanPostProcessor {
         return grpcClientBeans;
     }
 
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    @Override
+    public Object postProcessAfterInitialization(@Nullable Object bean,@Nullable String beanName) throws BeansException {
         return bean;
     }
 
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    @Override
+    public Object postProcessBeforeInitialization(@Nullable Object bean, @Nullable String beanName) throws BeansException {
+        if (bean == null) {
+            return null;
+        }
         Stream.of(bean.getClass().getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(GrpcClient.class))
                 .forEach(field -> {
