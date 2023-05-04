@@ -5,6 +5,7 @@ import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
+import io.grpc.ManagedChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -59,8 +60,8 @@ public class GrpcClientService implements InitializingBean {
                 timeout = grpcClientProperties.getTimeout();
             }
 
-            GrpcChannel client = new GrpcChannel(properties.getAddress(), timeout);
-            Object object = client.getBlockingStub(type);
+            ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout);
+            Object object = GrpcChannel.getBlockingStub(client, type);
 
             boolean accessible = field.canAccess(bean);
             ReflectionUtils.makeAccessible(field);
