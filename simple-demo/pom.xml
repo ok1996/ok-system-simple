@@ -29,7 +29,7 @@
         <module>simple-demo-cloud</module>
         <module>demo-base-param</module>
         <module>demo-base-generator</module>
-        <module>simple-demo-encode</module>
+        <module>simple-demo-encrypt</module>
         <module>demo-base-s3</module>
         <module>simple-demo-dict</module>
     </modules>

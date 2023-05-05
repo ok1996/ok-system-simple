@@ -25,7 +25,7 @@
         <module>simple-starter-datasource</module>
         <module>simple-starter-freemarker</module>
         <module>simple-starter-cloud</module>
-        <module>simple-starter-encode</module>
+        <module>simple-starter-encrypt</module>
         <module>simple-starter-dict</module>
     </modules>
 

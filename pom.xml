@@ -202,7 +202,7 @@
 
             <dependency>
                 <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-encode</artifactId>
+                <artifactId>simple-starter-encrypt</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>
 
