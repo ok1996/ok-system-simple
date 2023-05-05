@@ -36,7 +36,9 @@ public class JsonMapperThreadLocal {
                     .registerModule(new SimpleModule()));
 
     public static ObjectMapper getObjectMapper() {
-        return OBJECT_MAPPER_THREAD_LOCAL.get();
+        ObjectMapper objectMapper=OBJECT_MAPPER_THREAD_LOCAL.get();
+        OBJECT_MAPPER_THREAD_LOCAL.remove();
+        return objectMapper;
     }
 
 
