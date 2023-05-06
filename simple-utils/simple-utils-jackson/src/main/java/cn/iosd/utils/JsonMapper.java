@@ -45,6 +45,7 @@ public class JsonMapper {
      *
      * @param obj   要转换的对象
      * @param clazz 目标类型的Class对象
+     * @param <T>   转换后的对象类型
      * @return 转换后的对象
      */
     public static <T> T convertObject(Object obj, Class<T> clazz) {
@@ -56,6 +57,7 @@ public class JsonMapper {
      *
      * @param obj          要转换的对象
      * @param valueTypeRef 目标类型的TypeReference对象
+     * @param <T>          转换后的对象类型
      * @return 转换后的对象
      */
     public static <T> T convertObject(Object obj, TypeReference<T> valueTypeRef) {

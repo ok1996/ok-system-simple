@@ -2,15 +2,14 @@ package cn.iosd.starter.web.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.io.Serializable;
-
 /**
+ * 响应信息主体
+ *
+ * @param <T> 响应体数据类型
  * @author ok1996
  */
 @Schema(description = "响应信息主体")
-public class Response<T> implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class Response<T> {
     /**
      * 成功
      */
