@@ -19,7 +19,7 @@ public class MybatisGenerator {
     /**
      * 依赖模块版本号
      */
-    private static final String SIMPLE_VERSION = "2023.3.3.0-SNAPSHOT";
+    private static final String SIMPLE_VERSION = "2022.3.3.0-SNAPSHOT";
 
     /**
      * 文件输出地址前缀
@@ -84,13 +84,13 @@ public class MybatisGenerator {
         String configPackage = packageParent + ".config";
         String mapperLocations = "/" + packageName.replace(".", "/") + "/" + moduleName + "/";
 
-        Map<String, String> customFile = Map.of(
-                customFilePrefix + "config/" + capitalizedModuleName + "AutoConfig.java", TEMPLATES_DIR_CONFIG,
-                customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML,
-                customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML,
-                customFilePrefix + "pom.xml", TEMPLATES_DIR_POM,
-                customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION
-        );
+        Map<String, String> customFile = new HashMap<>();
+        customFile.put(customFilePrefix + "config/" + capitalizedModuleName + "AutoConfig.java", TEMPLATES_DIR_CONFIG);
+        customFile.put(customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML);
+        customFile.put(customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML);
+        customFile.put(customFilePrefix + "pom.xml", TEMPLATES_DIR_POM);
+        customFile.put(customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION);
+
 
         // 定制模版传参
         Map<String, Object> customMap = new HashMap<>(16);

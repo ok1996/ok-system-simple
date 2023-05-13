@@ -11,11 +11,6 @@ import java.util.List;
 public class GrpcClientBeans {
     private final List<GrpcClientBean> injections = new ArrayList<>();
 
-
-    public record GrpcClientBean(Object bean, GrpcClient client, Field field) {
-
-    }
-
     public GrpcClientBeans add(final GrpcClientBean injection) {
         this.injections.add(injection);
         return this;

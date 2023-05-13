@@ -6,14 +6,14 @@
 
     <groupId>cn.iosd</groupId>
     <artifactId>ok-system-simple</artifactId>
-    <version>2023.3.3.0-SNAPSHOT</version>
+    <version>2022.3.3.0-SNAPSHOT</version>
 
     <name>ok-system-simple</name>
     <description>Ok System Simple</description>
     <url>https://github.com/ok1996/ok-system-simple</url>
 
     <properties>
-        <ok-system-simple.version>2023.3.3.0-SNAPSHOT</ok-system-simple.version>
+        <ok-system-simple.version>2022.3.3.0-SNAPSHOT</ok-system-simple.version>
 
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -24,10 +24,10 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <java.version>17</java.version>
-        <spring-boot.version>3.0.6</spring-boot.version>
-        <spring-cloud.version>2022.0.2</spring-cloud.version>
-        <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
+        <java.version>8</java.version>
+        <spring-boot.version>2.7.11</spring-boot.version>
+        <spring-cloud.version>2021.0.6</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
         <p6spy.version>3.9.1</p6spy.version>
         <io-grpc.version>1.55.1</io-grpc.version>
@@ -36,9 +36,9 @@
         <netty-socketio.version>1.7.25</netty-socketio.version>
         <knife4j-openapi3.version>4.1.0</knife4j-openapi3.version>
         <aws-java-sdk-s3.version>1.12.446</aws-java-sdk-s3.version>
+        <springdoc-openapi.version>1.7.0</springdoc-openapi.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
-        <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -73,8 +73,8 @@
 
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${springdoc-openapi-starter.version}</version>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc-openapi.version}</version>
             </dependency>
 
             <dependency>

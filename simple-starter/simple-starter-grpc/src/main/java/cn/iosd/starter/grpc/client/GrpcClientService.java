@@ -4,6 +4,7 @@ import cn.iosd.starter.grpc.client.annotation.GrpcClient;
 import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
+import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import io.grpc.ManagedChannel;
 import org.slf4j.Logger;
@@ -38,13 +39,13 @@ public class GrpcClientService implements InitializingBean {
         }
 
         GrpcClientBeans grpcClientBeans = beanInjection.getGrpcClientBeans();
-        List<GrpcClientBeans.GrpcClientBean> grpcClientBeanList = grpcClientBeans.getInjections();
+        List<GrpcClientBean> grpcClientBeanList = grpcClientBeans.getInjections();
 
-        for (GrpcClientBeans.GrpcClientBean grpcClientBean : grpcClientBeanList) {
-            GrpcClient annotation = grpcClientBean.client();
-            Class<?> type = grpcClientBean.field().getType();
-            Field field = grpcClientBean.field();
-            Object bean = grpcClientBean.bean();
+        for (GrpcClientBean grpcClientBean : grpcClientBeanList) {
+            GrpcClient annotation = grpcClientBean.getClient();
+            Class<?> type = grpcClientBean.getField().getType();
+            Field field = grpcClientBean.getField();
+            Object bean = grpcClientBean.getBean();
 
             if (grpcClientProperties.getChannel() == null || grpcClientProperties.getChannel().get(annotation.value()) == null) {
                 log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
@@ -63,7 +64,7 @@ public class GrpcClientService implements InitializingBean {
             ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout);
             Object object = GrpcChannel.getBlockingStub(client, type);
 
-            boolean accessible = field.canAccess(bean);
+            boolean accessible = field.isAccessible();
             ReflectionUtils.makeAccessible(field);
 
             try {

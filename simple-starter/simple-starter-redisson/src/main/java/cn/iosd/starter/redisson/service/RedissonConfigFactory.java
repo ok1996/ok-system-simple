@@ -24,13 +24,24 @@ public class RedissonConfigFactory {
 
     public Config createConfig(RedissonProperties redissonProperties) {
         String connectionType = redissonProperties.getType();
-        RedissonConfigService redissonConfigService = switch (connectionType) {
-            case "standalone" -> new StandaloneConfigImpl();
-            case "sentinel" -> new SentinelConfigImpl();
-            case "cluster" -> new ClusterConfigImpl();
-            case "masterSlave" -> new MasterSlaveConfigImpl();
-            default -> throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
-        };
+        RedissonConfigService redissonConfigService;
+        switch (connectionType) {
+            case "standalone":
+                redissonConfigService = new StandaloneConfigImpl();
+                break;
+            case "sentinel":
+                redissonConfigService = new SentinelConfigImpl();
+                break;
+            case "cluster":
+                redissonConfigService = new ClusterConfigImpl();
+                break;
+            case "masterSlave":
+                redissonConfigService = new MasterSlaveConfigImpl();
+                break;
+            default:
+                throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
+        }
+
         return redissonConfigService.createRedissonConfig(redissonProperties);
     }
 }

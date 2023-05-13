@@ -5,11 +5,11 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -63,7 +63,7 @@ public class BaseController<T> {
 
     @Operation(summary = "Api-查询-列表")
     @GetMapping("/api/list")
-    public Response<List<T>> apiList(@ParameterObject T req) {
+    public Response<List<T>> apiList(@ModelAttribute T req) {
         return Response.ok(service.list(Wrappers.lambdaQuery(req)));
     }
 

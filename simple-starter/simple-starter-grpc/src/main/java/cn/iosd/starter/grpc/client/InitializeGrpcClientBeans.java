@@ -1,6 +1,7 @@
 package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
+import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -36,7 +37,7 @@ public class InitializeGrpcClientBeans implements BeanPostProcessor {
                 .filter(field -> field.isAnnotationPresent(GrpcClient.class))
                 .forEach(field -> {
                     GrpcClient annotation = field.getAnnotation(GrpcClient.class);
-                    GrpcClientBeans.GrpcClientBean registry = new GrpcClientBeans.GrpcClientBean(bean, annotation, field);
+                    GrpcClientBean registry = new GrpcClientBean(bean, annotation, field);
                     grpcClientBeans.add(registry);
                 });
         return bean;

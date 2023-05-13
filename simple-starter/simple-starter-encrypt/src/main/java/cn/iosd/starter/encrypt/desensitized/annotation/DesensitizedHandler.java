@@ -69,10 +69,15 @@ public class DesensitizedHandler {
     private String desensitize(String value, SensitiveRule sensitiveRule, int prefixLen, int suffixLen) {
         String deStr;
         switch (sensitiveRule) {
-            case CUSTOM_BROADSIDE_CLEAR_TEXT -> deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
-            case CUSTOM_BROADSIDE_MASK_TEXT -> deStr = DesensitizedUtils.maskValue(value, prefixLen, suffixLen);
-            default ->
-                    deStr = DesensitizedUtils.DESENSITIZE_MAP.getOrDefault(sensitiveRule, Function.identity()).apply(value);
+            case CUSTOM_BROADSIDE_CLEAR_TEXT:
+                deStr = DesensitizedUtils.desValue(value, prefixLen, suffixLen);
+                break;
+            case CUSTOM_BROADSIDE_MASK_TEXT:
+                deStr = DesensitizedUtils.maskValue(value, prefixLen, suffixLen);
+                break;
+            default:
+                deStr = DesensitizedUtils.DESENSITIZE_MAP.getOrDefault(sensitiveRule, Function.identity()).apply(value);
+                break;
         }
         return deStr;
     }

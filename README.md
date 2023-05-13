@@ -7,11 +7,11 @@
 
 | 依赖                   | 版本                  |
 |----------------------|---------------------|
-| Java                 | 17                  |
-| Spring Boot          | 3.0.6               |
-| Spring Cloud         | 2022.0.2            |
-| Spring Cloud Alibaba | 2022.0.0.0-RC2      |
-| Ok System Simple     | 2023.3.3.0-SNAPSHOT |
+| Java                 | 8                   |
+| Spring Boot          | 2.7.11              |
+| Spring Cloud         | 2021.0.6            |
+| Spring Cloud Alibaba | 2021.0.4.0          |
+| Ok System Simple     | 2022.3.3.0-SNAPSHOT |
 
 ## 仓库地址
 

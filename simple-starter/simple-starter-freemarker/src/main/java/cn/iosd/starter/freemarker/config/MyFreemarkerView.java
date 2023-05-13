@@ -1,6 +1,6 @@
 package cn.iosd.starter.freemarker.config;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 
 import java.util.Map;
