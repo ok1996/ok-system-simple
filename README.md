@@ -5,25 +5,25 @@
 
 ## 核心依赖
 
-| 依赖                   | 版本                  |
-|----------------------|---------------------|
-| Java                 | 8                   |
-| Spring Boot          | 2.7.11              |
-| Spring Cloud         | 2021.0.6            |
-| Spring Cloud Alibaba | 2021.0.4.0          |
-| Ok System Simple     | 2022.3.3.0-SNAPSHOT |
+| 依赖                   | 版本         |
+|----------------------|------------|
+| Java                 | 8          |
+| Spring Boot          | 2.7.11     |
+| Spring Cloud         | 2021.0.6   |
+| Spring Cloud Alibaba | 2021.0.4.0 |
+| Ok System Simple     | 2022.3.3.0 |
 
 ## 仓库地址
 
 例 simple-starter-web  
-最新版本号 2023.3.2.1
+最新版本号 2022.3.3.0
 
 ~~~
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
-            <version>2023.3.2.1</version>
+            <version>2022.3.0.0</version>
         </dependency>
     </dependencies>
 ~~~
