@@ -45,3 +45,4 @@ nbdist/
 !*/build/*.html
 !*/build/*.xml
 .mvn/
+*.DS_Store
