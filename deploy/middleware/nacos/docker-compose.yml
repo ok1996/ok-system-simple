@@ -1,7 +1,7 @@
 version: '3' 
 services:
   nacos-server:
-    image: nacos/nacos-server:v2.2.0
+    image: nacos/nacos-server:v2.2.2
     container_name: nacos-server
     ports:
       - "8848:8848"
@@ -18,4 +18,7 @@ services:
       MYSQL_SERVICE_DB_NAME: nacos
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: password
+      NACOS_AUTH_TOKEN: SecretKey012345678901234567890123456789012345678901234567890123456789
+      NACOS_AUTH_IDENTITY_KEY: serverIdentity
+      NACOS_AUTH_IDENTITY_VALUE: security
 
