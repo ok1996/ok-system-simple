@@ -6,15 +6,15 @@
 
 <p>
   <a href="https://central.sonatype.com/search?q=g%3Acn.iosd+a%3Asimple-starter">
-    <img alt="maven" src="https://img.shields.io/maven-central/v/cn.iosd/simple-starter.svg?style=flat-square">
+    <img alt="maven" src="https://img.shields.io/maven-central/v/cn.iosd/simple-starter.svg?style=flat-square&logo=apachemaven">
   </a>
 
   <a href="https://www.apache.org/licenses/LICENSE-2.0">
-    <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square">
+    <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square&logo=apache">
   </a>
 
   <a href="https://github.com/ok1996/ok-system-simple/releases">
-    <img alt="releases" src="https://img.shields.io/github/release/ok1996/ok-system-simple.svg">
+    <img alt="releases" src="https://img.shields.io/github/release/ok1996/ok-system-simple.svg?style=flat-square&logo=semanticrelease">
   </a>
 </p>
 
