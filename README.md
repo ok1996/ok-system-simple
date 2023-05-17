@@ -2,6 +2,21 @@
 
 - [文档详情](https://ok96.cn/pages/8e9dc3/)
 - [版本说明](https://ok96.cn/pages/ae03ef/)
+- [中央仓库](https://mvnrepository.com/search?q=cn.iosd) 
+
+<p>
+  <a href="https://central.sonatype.com/search?q=g%3Acn.iosd+a%3Asimple-starter">
+    <img alt="maven" src="https://img.shields.io/maven-central/v/cn.iosd/simple-starter.svg?style=flat-square">
+  </a>
+
+  <a href="https://www.apache.org/licenses/LICENSE-2.0">
+    <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square">
+  </a>
+
+  <a href="https://github.com/ok1996/ok-system-simple/releases">
+    <img alt="releases" src="https://img.shields.io/github/release/ok1996/ok-system-simple.svg">
+  </a>
+</p>
 
 ## 核心依赖
 
@@ -12,21 +27,6 @@
 | Spring Cloud         | 2022.0.2            |
 | Spring Cloud Alibaba | 2022.0.0.0-RC2      |
 | Ok System Simple     | 2023.3.4.0-SNAPSHOT |
-
-## 仓库地址
-
-例 simple-starter-web  
-最新版本号 2023.3.3.0
-
-~~~
-    <dependencies>
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-web</artifactId>
-            <version>2023.3.3.0</version>
-        </dependency>
-    </dependencies>
-~~~
 
 ## Starter自动装配模块
 
