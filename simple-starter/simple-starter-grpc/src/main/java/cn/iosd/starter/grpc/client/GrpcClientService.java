@@ -1,6 +1,7 @@
 package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
+import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
 import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
@@ -31,6 +32,9 @@ public class GrpcClientService implements InitializingBean {
     @Autowired
     private InitializeGrpcClientBeans beanInjection;
 
+    @Autowired(required = false)
+    private ClientCallStartHeaders clientCallStartHeaders;
+
     @Override
     public void afterPropertiesSet() {
         if (beanInjection == null || beanInjection.getGrpcClientBeans() == null) {
@@ -60,7 +64,7 @@ public class GrpcClientService implements InitializingBean {
                 timeout = grpcClientProperties.getTimeout();
             }
 
-            ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout);
+            ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout, clientCallStartHeaders);
             Object object = GrpcChannel.getBlockingStub(client, type);
 
             boolean accessible = field.canAccess(bean);

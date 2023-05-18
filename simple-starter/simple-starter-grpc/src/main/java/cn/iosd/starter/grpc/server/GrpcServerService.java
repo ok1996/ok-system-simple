@@ -1,6 +1,8 @@
 package cn.iosd.starter.grpc.server;
 
 import cn.iosd.starter.grpc.server.annotation.GrpcService;
+import cn.iosd.starter.grpc.server.interceptor.CustomServerInterceptor;
+import cn.iosd.starter.grpc.server.interceptor.ServiceCallStartHeaders;
 import cn.iosd.starter.grpc.server.properties.GrpcServerProperties;
 import io.grpc.BindableService;
 import io.grpc.Server;
@@ -30,9 +32,12 @@ import java.util.Map;
 @Service
 public class GrpcServerService implements InitializingBean, ApplicationContextAware {
     private static final Logger log = LoggerFactory.getLogger(GrpcServerService.class);
-    
+
     @Autowired
     private GrpcServerProperties grpcServerProperties;
+
+    @Autowired(required = false)
+    private ServiceCallStartHeaders serviceCallStartHeaders;
 
     private Server server;
 
@@ -46,11 +51,11 @@ public class GrpcServerService implements InitializingBean, ApplicationContextAw
     @Override
     public void afterPropertiesSet() throws IOException {
         GrpcServerService server = new GrpcServerService();
-        server.start(grpcServerProperties.getPort());
+        server.start(grpcServerProperties.getPort(), serviceCallStartHeaders);
         log.info("GrpcServer start port:{}", grpcServerProperties.getPort());
     }
 
-    private void start(final int port) throws IOException {
+    private void start(final int port, ServiceCallStartHeaders serviceCallStartHeaders) throws IOException {
         ServerBuilder<?> serverBuilder = ServerBuilder.forPort(port);
         if (context != null) {
             Map<String, Object> beansWithAnnotationMap = context.getBeansWithAnnotation(GrpcService.class);
@@ -63,6 +68,8 @@ public class GrpcServerService implements InitializingBean, ApplicationContextAw
                 }
             });
         }
+        CustomServerInterceptor customServerInterceptor = new CustomServerInterceptor(serviceCallStartHeaders);
+        serverBuilder.intercept(customServerInterceptor);
         this.server = serverBuilder.build();
         this.server.start();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
