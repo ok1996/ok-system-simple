@@ -23,54 +23,51 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
     private static final Logger log = LoggerFactory.getLogger(DatabaseInitializer.class);
 
     private static volatile boolean RUN = false;
-    private static final String STR_FALSE = "false";
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         if (!RUN) {
-            String autoCreate = applicationContext.getEnvironment().getProperty("simple.datasource.autoCreateDatabase");
-            if (!STR_FALSE.equalsIgnoreCase(autoCreate)) {
-                String url = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.url");
-                String username = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.username");
-                String password = applicationContext.getEnvironment().getProperty("spring.datasource.dynamic.datasource.master.password");
+            String autoCreate = getPropertyValue(applicationContext, "simple.datasource.autoCreateDatabase");
+            if (!Boolean.parseBoolean(autoCreate)) {
+                String url = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.url");
+                String username = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.username");
+                String password = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.password");
                 if (StringUtils.isAnyBlank(url, username, password)) {
                     return;
                 }
-                try {
-                    initDatabase(url, username, password);
-                } catch (Exception e) {
-                    log.error("数据库初始化失败", e.getMessage(), e);
-                }
+                initDatabase(url, username, password);
             }
             RUN = true;
         }
     }
 
-    private void initDatabase(String url, String username, String password) throws SQLException {
+    /**
+     * 获取指定配置属性的值
+     *
+     * @param applicationContext 应用程序上下文
+     * @param propertyName       配置属性名
+     * @return 配置属性的值
+     */
+    private String getPropertyValue(ConfigurableApplicationContext applicationContext, String propertyName) {
+        return applicationContext.getEnvironment().getProperty(propertyName);
+    }
+
+    private void initDatabase(String url, String username, String password) {
         String database = parseDatabaseName(url);
         url = removeDatabaseName(url, database);
         log.info("AutoCreateDatabase：初始化数据库,数据库名:{},连接地址:{} ", database, url);
 
         String mysql = ":mysql:";
-        StringBuffer createDataBaseSql = new StringBuffer();
+        String createDataBaseSql = "";
         if (url.contains(mysql)) {
-            createDataBaseSql.append("create database if not exists `")
-                    .append(database)
-                    .append("` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci");
+            createDataBaseSql = "create database if not exists `" + database + "` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci";
         }
-
-        Connection conn = DriverManager.getConnection(url, username, password);
-        Statement stat = conn.createStatement();
-
-        try {
-            stat.executeUpdate(createDataBaseSql.toString());
-        } catch (Exception e) {
-            log.error("创建数据库失败:{}", e.getMessage(), e);
-        } finally {
-            stat.close();
-            conn.close();
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stat = conn.createStatement()) {
+            stat.executeUpdate(createDataBaseSql);
+        } catch (SQLException e) {
+            log.error("创建数据库失败: {}", e.getMessage(), e);
         }
-
     }
 
     /**
