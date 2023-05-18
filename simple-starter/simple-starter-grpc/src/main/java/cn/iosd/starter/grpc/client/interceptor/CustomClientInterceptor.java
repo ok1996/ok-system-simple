@@ -35,7 +35,7 @@ public class CustomClientInterceptor implements ClientInterceptor {
         if (clientCallStartHeaders == null || clientCallStartHeaders.headers().isEmpty()) {
             return channel.newCall(method, newCallOptions);
         }
-        return new ForwardingClientCall.SimpleForwardingClientCall<>(channel.newCall(method, newCallOptions)) {
+        return new ForwardingClientCall.SimpleForwardingClientCall<ReqT, RespT>(channel.newCall(method, newCallOptions)) {
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 // 在请求开始前设置头部信息

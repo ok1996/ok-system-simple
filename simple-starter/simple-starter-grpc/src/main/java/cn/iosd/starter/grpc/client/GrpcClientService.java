@@ -8,7 +8,7 @@ import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import io.grpc.ManagedChannel;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
