@@ -35,4 +35,11 @@ public @interface GrpcClient {
      * @return 超时时间
      */
     long timeout() default -1;
+
+    /**
+     * Grpc设置请求头实现类名称，当实现类只有一个时可为空
+     *
+     * @return 实现类名称
+     */
+    String headerBeanName() default "";
 }
