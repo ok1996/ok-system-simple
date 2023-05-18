@@ -5,13 +5,13 @@
 
 ## 核心依赖
 
-| 依赖                   | 版本         |
-|----------------------|------------|
-| Java                 | 8          |
-| Spring Boot          | 2.7.11     |
-| Spring Cloud         | 2021.0.6   |
-| Spring Cloud Alibaba | 2021.0.4.0 |
-| Ok System Simple     | 2022.3.3.0 |
+| 依赖                   | 版本                  |
+|----------------------|---------------------|
+| Java                 | 8                   |
+| Spring Boot          | 2.7.11              |
+| Spring Cloud         | 2021.0.6            |
+| Spring Cloud Alibaba | 2021.0.4.0          |
+| Ok System Simple     | 2022.3.4.0-SNAPSHOT |
 
 ## 仓库地址
 
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
-            <version>2022.3.0.0</version>
+            <version>2022.3.3.0</version>
         </dependency>
     </dependencies>
 ~~~
