@@ -8,15 +8,21 @@ import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import io.grpc.ManagedChannel;
+import jakarta.annotation.PostConstruct;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 涉及的Bean对象注入GrpcChannel
@@ -33,8 +39,24 @@ public class GrpcClientService implements InitializingBean {
     @Autowired
     private InitializeGrpcClientBeans beanInjection;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @Autowired(required = false)
-    private ClientCallStartHeaders clientCallStartHeaders;
+    private List<ClientCallStartHeaders> clientCallStartHeadersList;
+
+    private Map<String, ClientCallStartHeaders> clientCallStartHeadersMap = new HashMap<>();
+
+    /**
+     * 初始化时将ClientCallStartHeaders对象与beanName进行关联
+     */
+    @PostConstruct
+    public void init() {
+        for (ClientCallStartHeaders service : clientCallStartHeadersList) {
+            String beanName = applicationContext.getBeanNamesForType(service.getClass())[0];
+            clientCallStartHeadersMap.put(beanName, service);
+        }
+    }
 
     @Override
     public void afterPropertiesSet() {
@@ -64,8 +86,16 @@ public class GrpcClientService implements InitializingBean {
             } else {
                 timeout = grpcClientProperties.getTimeout();
             }
-
-            ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout, clientCallStartHeaders);
+            ClientCallStartHeaders headers = null;
+            if (!CollectionUtils.isEmpty(clientCallStartHeadersList)) {
+                if (clientCallStartHeadersList.size() == 1 && StringUtils.isBlank(annotation.headerBeanName())) {
+                    headers = clientCallStartHeadersList.get(0);
+                } else {
+                    String beanName = annotation.headerBeanName();
+                    headers = StringUtils.isNotBlank(beanName) ? clientCallStartHeadersMap.get(beanName) : null;
+                }
+            }
+            ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout, headers);
             Object object = GrpcChannel.getBlockingStub(client, type);
 
             boolean accessible = field.isAccessible();
@@ -73,7 +103,7 @@ public class GrpcClientService implements InitializingBean {
 
             try {
                 field.set(bean, object);
-                log.info("完成 {} 的 GrpcChannel 装配;调用超时时间为 {} 毫秒", annotation.value(), timeout);
+                log.info("完成 {} 的 GrpcChannel 装配;调用超时时间为 {} 毫秒;headers为 {}", annotation.value(), timeout, headers);
             } catch (IllegalAccessException e) {
                 String message = String.format("对象 %s 注入配置 GrpcChannel 异常：", bean.getClass().getSimpleName());
                 log.error(message, e);

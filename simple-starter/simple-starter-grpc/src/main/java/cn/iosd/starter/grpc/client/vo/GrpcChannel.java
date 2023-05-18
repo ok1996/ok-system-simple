@@ -1,7 +1,7 @@
 package cn.iosd.starter.grpc.client.vo;
 
-import cn.iosd.starter.grpc.client.interceptor.CustomClientInterceptor;
 import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
+import cn.iosd.starter.grpc.client.interceptor.CustomClientInterceptor;
 import io.grpc.CallOptions;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
@@ -20,7 +20,7 @@ public class GrpcChannel {
     private static final ConcurrentHashMap<String, Object> STUBS = new ConcurrentHashMap<>();
 
     public static ManagedChannel getChannel(String target, long timeout, ClientCallStartHeaders headers) {
-        String key = target + timeout;
+        String key = target + timeout + headers;
         CHANNELS.computeIfAbsent(key, k -> ManagedChannelBuilder.forTarget(target)
                 .usePlaintext()
                 .intercept(new CustomClientInterceptor(timeout, TimeUnit.MILLISECONDS, headers))
