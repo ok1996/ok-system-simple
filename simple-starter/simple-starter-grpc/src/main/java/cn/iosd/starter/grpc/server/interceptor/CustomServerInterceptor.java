@@ -13,7 +13,7 @@ import io.grpc.Status;
  */
 public class CustomServerInterceptor implements ServerInterceptor {
 
-    private ServiceCallStartHeaders serviceCallStartHeaders;
+    private final ServiceCallStartHeaders serviceCallStartHeaders;
 
     public CustomServerInterceptor(ServiceCallStartHeaders serviceCallStartHeaders) {
         this.serviceCallStartHeaders = serviceCallStartHeaders;
