@@ -1,13 +1,13 @@
 package cn.iosd.starter.socket.config;
 
 import cn.iosd.starter.redisson.service.RedissonManager;
-import cn.iosd.starter.socket.handler.NettyExceptionListener;
 import cn.iosd.starter.socket.properties.SocketProperties;
 import com.corundumstudio.socketio.AckMode;
 import com.corundumstudio.socketio.AuthorizationListener;
 import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
+import com.corundumstudio.socketio.listener.ExceptionListener;
 import com.corundumstudio.socketio.store.RedissonStoreFactory;
 import com.corundumstudio.socketio.store.pubsub.PubSubStore;
 import org.slf4j.Logger;
@@ -29,8 +29,8 @@ public class NettySocketConfig {
     @Autowired
     private SocketProperties socketProperties;
 
-    @Autowired
-    private NettyExceptionListener nettyExceptionListener;
+    @Autowired(required = false)
+    private ExceptionListener exceptionListener;
 
     @Autowired(required = false)
     private RedissonManager redissonManager;
@@ -59,7 +59,9 @@ public class NettySocketConfig {
             log.info("SocketIOServer开启Redis集群模式");
         }
         //异常处理
-        config.setExceptionListener(nettyExceptionListener);
+        if(exceptionListener!=null){
+            config.setExceptionListener(exceptionListener);
+        }
         //手动确认
         config.setAckMode(AckMode.MANUAL);
 
