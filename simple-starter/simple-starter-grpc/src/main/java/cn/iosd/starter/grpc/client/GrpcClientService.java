@@ -107,7 +107,6 @@ public class GrpcClientService implements InitializingBean {
             } catch (IllegalAccessException e) {
                 String message = String.format("对象 %s 注入配置 GrpcChannel 异常：", bean.getClass().getSimpleName());
                 log.error(message, e);
-                throw new IllegalStateException(message, e);
             } finally {
                 field.setAccessible(accessible);
             }
