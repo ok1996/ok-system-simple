@@ -91,7 +91,6 @@ public class NettySocketConfig {
     }
 
     private RedissonStoreFactory createRedissonStoreFactory() {
-        RedissonStoreFactory redissonStoreFactory = new RedissonStoreFactory(redissonManager.getRedisson());
-        return redissonStoreFactory;
+        return new RedissonStoreFactory(redissonManager.getRedisson());
     }
 }
