@@ -28,7 +28,7 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
     public void initialize(ConfigurableApplicationContext applicationContext) {
         if (!RUN) {
             String autoCreate = getPropertyValue(applicationContext, "simple.datasource.autoCreateDatabase");
-            if (!Boolean.parseBoolean(autoCreate)) {
+            if (StringUtils.isBlank(autoCreate) || Boolean.parseBoolean(autoCreate)) {
                 String url = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.url");
                 String username = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.username");
                 String password = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.password");
