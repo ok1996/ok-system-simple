@@ -35,7 +35,7 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>2.0.2</netty-socketio.version>
         <knife4j-openapi3.version>4.1.0</knife4j-openapi3.version>
-        <aws-java-sdk-s3.version>1.12.446</aws-java-sdk-s3.version>
+        <aws-java-sdk-s3.version>1.12.469</aws-java-sdk-s3.version>
         <springdoc-openapi.version>1.7.0</springdoc-openapi.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
