@@ -57,6 +57,8 @@ public class NettySocketConfig {
         if (redissonManager != null) {
             config.setStoreFactory(createRedissonStoreFactory());
             log.info("SocketIOServer开启Redis集群模式");
+        }else {
+            log.info("SocketIOServer使用单机模式");
         }
         //异常处理
         if(exceptionListener!=null){
