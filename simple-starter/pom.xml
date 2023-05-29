@@ -27,6 +27,7 @@
         <module>simple-starter-cloud</module>
         <module>simple-starter-encrypt</module>
         <module>simple-starter-dict</module>
+        <module>simple-starter-email</module>
     </modules>
 
     <profiles>

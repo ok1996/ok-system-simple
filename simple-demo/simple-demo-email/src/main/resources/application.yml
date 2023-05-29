@@ -1,0 +1,13 @@
+server:
+  port: 11130
+spring:
+  application:
+    name: simple-demo-email
+
+simple:
+  email:
+    smtpHost:
+    smtpPort:
+    username:
+    password:
+    fromEmail:

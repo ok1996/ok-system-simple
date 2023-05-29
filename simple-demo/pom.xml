@@ -32,6 +32,7 @@
         <module>simple-demo-encrypt</module>
         <module>demo-base-s3</module>
         <module>simple-demo-dict</module>
+        <module>simple-demo-email</module>
     </modules>
 
     <build>
