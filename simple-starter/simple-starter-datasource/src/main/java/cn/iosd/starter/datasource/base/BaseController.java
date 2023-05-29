@@ -1,32 +1,30 @@
 package cn.iosd.starter.datasource.base;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.util.List;
-
+import cn.iosd.starter.datasource.domain.PageRequest;
+import cn.iosd.starter.datasource.utils.DsConvertUtil;
+import cn.iosd.starter.web.domain.Response;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import cn.iosd.starter.datasource.domain.PageRequest;
-import cn.iosd.starter.datasource.utils.DsConvertUtil;
-import cn.iosd.starter.web.domain.Response;
-import io.swagger.v3.oas.annotations.Operation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
- * @author ok1996
  * @param <T> 实体
+ * @author ok1996
  */
 @Component
 public class BaseController<T> {
@@ -63,7 +61,7 @@ public class BaseController<T> {
 
     @Operation(summary = "Api-查询-列表")
     @GetMapping("/api/list")
-    public Response<List<T>> apiList(@ModelAttribute T req) {
+    public Response<List<T>> apiList(@ParameterObject T req) {
         return Response.ok(service.list(Wrappers.lambdaQuery(req)));
     }
 
