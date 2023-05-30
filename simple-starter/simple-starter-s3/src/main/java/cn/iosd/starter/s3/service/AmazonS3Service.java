@@ -54,7 +54,7 @@ public class AmazonS3Service implements InitializingBean {
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(s3Properties.getEndpoint(), Regions.CN_NORTH_1.getName()))
                 .enablePathStyleAccess()
                 .build();
-        log.info("AmazonS3完成配置");
+        log.info("AmazonS3完成配置,endpoint:{}",s3Properties.getEndpoint());
     }
 
     public AmazonS3 getClient() {
