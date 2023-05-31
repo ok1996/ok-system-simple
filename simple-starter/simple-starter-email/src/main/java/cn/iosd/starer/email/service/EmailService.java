@@ -1,6 +1,7 @@
 package cn.iosd.starer.email.service;
 
 import cn.iosd.starer.email.properties.EmailProperties;
+import cn.iosd.starer.email.vo.EmailConfigVo;
 import jakarta.mail.Authenticator;
 import jakarta.mail.BodyPart;
 import jakarta.mail.Message;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -32,106 +32,22 @@ public class EmailService {
     private EmailProperties properties;
 
     /**
-     * 发送电子邮件给单个收件人。
-     *
-     * @param toEmail 收件人的电子邮件地址
-     * @param subject 邮件主题
-     * @param content 邮件内容
-     * @param isHtml  指示邮件内容是否为HTML格式
-     * @throws MessagingException 发送邮件时可能抛出的异常
-     * @throws IOException        读取附件文件时可能抛出的异常
-     */
-    public void sendEmail(String toEmail, String subject, String content, boolean isHtml) throws MessagingException, IOException {
-        List<String> toEmails = new ArrayList<>();
-        toEmails.add(toEmail);
-        sendEmailCore(toEmails, null, null, subject, content, isHtml, null, null);
-    }
-
-    /**
-     * 发送电子邮件给多个收件人。
-     *
-     * @param toEmails 收件人的电子邮件地址列表
-     * @param subject  邮件主题
-     * @param content  邮件内容
-     * @param isHtml   指示邮件内容是否为HTML格式
-     * @throws MessagingException 发送邮件时可能抛出的异常
-     * @throws IOException        读取附件文件时可能抛出的异常
-     */
-    public void sendEmail(List<String> toEmails, String subject, String content, boolean isHtml) throws MessagingException, IOException {
-        sendEmailCore(toEmails, null, null, subject, content, isHtml, null, null);
-    }
-
-    /**
-     * 发送电子邮件给单个收件人，并附加文件作为附件。
-     *
-     * @param toEmail     收件人的电子邮件地址
-     * @param subject     邮件主题
-     * @param content     邮件内容
-     * @param isHtml      指示邮件内容是否为HTML格式
-     * @param attachments 附件文件的路径列表
-     * @throws MessagingException 发送邮件时可能抛出的异常
-     * @throws IOException        读取附件文件时可能抛出的异常
-     */
-    public void sendEmailWithAttachments(String toEmail, String subject, String content, boolean isHtml, List<String> attachments) throws MessagingException, IOException {
-        List<String> toEmails = new ArrayList<>();
-        toEmails.add(toEmail);
-        sendEmailCore(toEmails, null, null, subject, content, isHtml, attachments, null);
-    }
-
-    /**
-     * 发送电子邮件给多个收件人，并抄送给指定的邮箱。
-     *
-     * @param toEmails 收件人的电子邮件地址列表
-     * @param ccEmails 抄送人的电子邮件地址列表
-     * @param subject  邮件主题
-     * @param content  邮件内容
-     * @param isHtml   指示邮件内容是否为HTML格式
-     * @throws MessagingException 发送邮件时可能抛出的异常
-     * @throws IOException        读取附件文件时可能抛出的异常
-     */
-    public void sendEmailWithCc(List<String> toEmails, List<String> ccEmails, String subject, String content, boolean isHtml) throws MessagingException, IOException {
-        sendEmailCore(toEmails, ccEmails, null, subject, content, isHtml, null, null);
-    }
-
-    /**
-     * 发送电子邮件核心方法
-     *
-     * @param toEmails     收件人的电子邮件地址列表
-     * @param ccEmails     抄送人的电子邮件地址列表
-     * @param bccEmails    密送人的电子邮件地址列表
-     * @param subject      邮件主题
-     * @param content      邮件内容
-     * @param isHtml       指示邮件内容是否为HTML格式
-     * @param attachments  附件文件的路径列表
-     * @param inlineImages 内联图片的路径和CID映射
-     * @throws MessagingException 发送邮件时可能抛出的异常
-     * @throws IOException        读取附件文件时可能抛出的异常
-     */
-    public void sendEmailCore(List<String> toEmails, List<String> ccEmails, List<String> bccEmails, String subject, String content, boolean isHtml, List<String> attachments, Map<String, String> inlineImages) throws MessagingException, IOException {
-        Session session = createSession();
-        Message message = createMessage(session, toEmails, ccEmails, bccEmails, subject, content, isHtml, attachments, inlineImages);
-        Transport.send(message);
-    }
-
-    /**
      * 创建邮件会话对象。
      *
      * @return 邮件会话对象
      */
-    private Session createSession() {
+    private Session createSession(EmailConfigVo config) {
         Properties props = new Properties();
-        props.put("mail.smtp.auth", properties.getSmtpAuthEnable());
-        props.put("mail.smtp.starttls.enable", properties.getSmtpStarttlsEnable());
-        props.put("mail.smtp.host", properties.getSmtpHost());
-        props.put("mail.smtp.port", properties.getSmtpPort());
-
+        props.put("mail.smtp.auth", config.getSmtpAuthEnable());
+        props.put("mail.smtp.starttls.enable", config.getSmtpStarttlsEnable());
+        props.put("mail.smtp.host", config.getSmtpHost());
+        props.put("mail.smtp.port", config.getSmtpPort());
         Authenticator authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(properties.getUsername(), properties.getPassword());
+                return new PasswordAuthentication(config.getUsername(), config.getPassword());
             }
         };
-
         return Session.getInstance(props, authenticator);
     }
 
@@ -147,13 +63,14 @@ public class EmailService {
      * @param isHtml       指示邮件内容是否为HTML格式
      * @param attachments  附件文件的路径列表
      * @param inlineImages 内联图片的路径和CID映射
+     * @param fromEmail    发件人邮箱地址
      * @return 邮件消息对象
      * @throws MessagingException 创建邮件消息时可能抛出的异常
      * @throws IOException        读取附件文件时可能抛出的异常
      */
-    private Message createMessage(Session session, List<String> toEmails, List<String> ccEmails, List<String> bccEmails, String subject, String content, boolean isHtml, List<String> attachments, Map<String, String> inlineImages) throws MessagingException, IOException {
+    private Message createMessage(Session session, List<String> toEmails, List<String> ccEmails, List<String> bccEmails, String subject, String content, boolean isHtml, List<String> attachments, Map<String, String> inlineImages, String fromEmail) throws MessagingException, IOException {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(properties.getFromEmail()));
+        message.setFrom(new InternetAddress(fromEmail));
 
         for (String toEmail : toEmails) {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
@@ -202,4 +119,46 @@ public class EmailService {
         }
         return message;
     }
+
+    /**
+     * 发送电子邮件方法-发件人邮件配置参数使用工程配置项
+     *
+     * @param toEmails     收件人的电子邮件地址列表
+     * @param ccEmails     抄送人的电子邮件地址列表
+     * @param bccEmails    密送人的电子邮件地址列表
+     * @param subject      邮件主题
+     * @param content      邮件内容
+     * @param isHtml       指示邮件内容是否为HTML格式
+     * @param attachments  附件文件的路径列表
+     * @param inlineImages 内联图片的路径和CID映射
+     * @throws MessagingException 发送邮件时可能抛出的异常
+     * @throws IOException        读取附件文件时可能抛出的异常
+     */
+    public void sendEmail(List<String> toEmails, List<String> ccEmails, List<String> bccEmails, String subject, String content, boolean isHtml, List<String> attachments, Map<String, String> inlineImages)
+            throws MessagingException, IOException {
+        sendEmail(toEmails, ccEmails, bccEmails, subject, content, isHtml, attachments, inlineImages, properties.getConfig());
+    }
+
+    /**
+     * 发送电子邮件方法
+     *
+     * @param toEmails      收件人的电子邮件地址列表
+     * @param ccEmails      抄送人的电子邮件地址列表
+     * @param bccEmails     密送人的电子邮件地址列表
+     * @param subject       邮件主题
+     * @param content       邮件内容
+     * @param isHtml        指示邮件内容是否为HTML格式
+     * @param attachments   附件文件的路径列表
+     * @param inlineImages  内联图片的路径和CID映射
+     * @param emailConfigVo 发件人邮件配置参数
+     * @throws MessagingException 发送邮件时可能抛出的异常
+     * @throws IOException        读取附件文件时可能抛出的异常
+     */
+    public void sendEmail(List<String> toEmails, List<String> ccEmails, List<String> bccEmails, String subject, String content, boolean isHtml, List<String> attachments, Map<String, String> inlineImages, EmailConfigVo emailConfigVo)
+            throws MessagingException, IOException {
+        Session session = createSession(emailConfigVo);
+        Message message = createMessage(session, toEmails, ccEmails, bccEmails, subject, content, isHtml, attachments, inlineImages, emailConfigVo.getFromEmail());
+        Transport.send(message);
+    }
+
 }

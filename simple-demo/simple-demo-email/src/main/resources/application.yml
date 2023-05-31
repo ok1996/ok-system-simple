@@ -6,8 +6,9 @@ spring:
 
 simple:
   email:
-    smtpHost:
-    smtpPort:
-    username:
-    password:
-    fromEmail:
+    config:
+      smtpHost:
+      smtpPort:
+      username:
+      password:
+      fromEmail:
