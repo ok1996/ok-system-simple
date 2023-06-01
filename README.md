@@ -1,8 +1,26 @@
+## 这个项目是做什么的？
+
+基于SpringBoot提供常用的自动装配模块，能快速提供各模块所需的服务
+
+## 该如何开始？
+
+找到对应所需的starter模块，引入依赖  
+例，需要快速集成一个拥有Web应用和集成接口文档的服务   
+引入依赖
+~~~
+    <dependencies>
+        <dependency>
+            <groupId>cn.iosd</groupId>
+            <artifactId>simple-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+~~~
+
 ## Links
 
 - [文档详情](https://ok96.cn/pages/8e9dc3/)
 - [版本说明](https://ok96.cn/pages/ae03ef/)
-- [中央仓库](https://mvnrepository.com/search?q=cn.iosd) 
+- [中央仓库](https://mvnrepository.com/search?q=cn.iosd)
 
 <p>
   <a href="https://central.sonatype.com/search?q=g%3Acn.iosd+a%3Asimple-starter">
