@@ -34,6 +34,11 @@
   <a href="https://github.com/ok1996/ok-system-simple/releases">
     <img alt="releases" src="https://img.shields.io/github/release/ok1996/ok-system-simple.svg?style=flat-square&logo=semanticrelease">
   </a>
+
+  <a href="https://app.codacy.com/gh/ok1996/ok-system-simple/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
+    <img src="https://app.codacy.com/project/badge/Grade/32f59a4b8afd4035a0da527009690541"/>
+  </a>
+
 </p>
 
 ## 核心依赖
