@@ -11,13 +11,11 @@ import org.redisson.config.Config;
  * @author ok1996
  */
 public class RedissonManager {
-    private Config config;
-
     private Redisson redisson;
 
     public RedissonManager(RedissonProperties redissonProperties) {
         try {
-            config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
+            Config config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
             redisson = (Redisson) Redisson.create(config);
         } catch (Exception e) {
             throw new IllegalArgumentException("Redisson init error. Please check the configuration");
