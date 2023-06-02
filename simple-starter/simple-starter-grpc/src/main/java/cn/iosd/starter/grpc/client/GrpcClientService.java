@@ -51,6 +51,9 @@ public class GrpcClientService implements InitializingBean {
      */
     @PostConstruct
     public void init() {
+        if (CollectionUtils.isEmpty(clientCallStartHeadersList)) {
+            return;
+        }
         for (ClientCallStartHeaders service : clientCallStartHeadersList) {
             String beanName = applicationContext.getBeanNamesForType(service.getClass())[0];
             clientCallStartHeadersMap.put(beanName, service);
