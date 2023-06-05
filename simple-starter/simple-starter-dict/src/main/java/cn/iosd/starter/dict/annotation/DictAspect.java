@@ -101,7 +101,7 @@ public class DictAspect {
                 if (dictItemList == null || dictItemList.size() == 0) {
                     break;
                 }
-                field.setAccessible(true);
+                ReflectionUtils.makeAccessible(field);
                 // 获取目标字段值
                 Object fieldValue = field.get(responseObj);
                 // 查找关联字段，翻译字典项
@@ -119,7 +119,7 @@ public class DictAspect {
                     }
                 }
             } else if (field.isAnnotationPresent(DictEntity.class)) {
-                field.setAccessible(true);
+                ReflectionUtils.makeAccessible(field);
                 Object fieldValue = field.get(responseObj);
                 translateDictObjects(fieldValue, true, cache);
             }
