@@ -40,11 +40,11 @@ public class TestService {
         }
         // 获取存储的模拟数据，并将其转换为对应的实体类
         Optional<BaseParamCodeValueVo<?>> contentData = ParamInitUtil.getBaseParamCodeValueVoByCode(simulation, TestParamInit.CONTENT_DATA_CODE);
-        if (!contentData.isPresent()) {
-            log.error("模拟数据不存在", TestParamInit.KEY);
-            return null;
+        if (contentData.isPresent()) {
+            return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
         }
-        return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
+        log.error("模拟数据不存在,key:{}", TestParamInit.KEY);
+        return null;
     }
 
 }
