@@ -14,8 +14,20 @@ import java.util.stream.Collectors;
  */
 public class ParamInitUtil {
 
-    public static final TypeReference<List<BaseParamCodeValueVo<?>>> CODE_VALUES_TYPE_REFERENCE = new TypeReference<List<BaseParamCodeValueVo<?>>>() {
-    };
+    /**
+     * BaseParamCodeValueVo类型
+     */
+    public static final TypeReference<List<BaseParamCodeValueVo<?>>> CODE_VALUES_TYPE_REFERENCE = new TypeReference<List<BaseParamCodeValueVo<?>>>() {};
+
+    /**
+     * 是否开启模拟数据-字段Key
+     */
+    public static final String OPEN_SIMULATION_CODE = "openSimulation";
+
+    /**
+     * 存储数据-字段Key
+     */
+    public static final String CONTENT_DATA_CODE = "contentData";
 
     /**
      * 该方法用于将传入的 BaseParamCodeValueVo 对象中的 value 属性（泛型类型）转换成指定的 valueType 类型对象

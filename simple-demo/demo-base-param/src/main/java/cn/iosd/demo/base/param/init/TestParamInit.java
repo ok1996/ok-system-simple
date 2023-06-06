@@ -2,6 +2,7 @@ package cn.iosd.demo.base.param.init;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iosd.base.param.init.ParamInit;
+import cn.iosd.base.param.utils.ParamInitUtil;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import org.springframework.stereotype.Component;
@@ -21,14 +22,6 @@ public class TestParamInit implements ParamInit {
      * 参数key
      */
     public static final String KEY = "key-test";
-    /**
-     * 是否开启模拟数据
-     */
-    public static final String OPEN_SIMULATION_CODE = "openSimulation";
-    /**
-     * 存储数据code
-     */
-    public static final String CONTENT_DATA_CODE = "contentData";
 
     @Override
     public String getKey() {
@@ -39,9 +32,9 @@ public class TestParamInit implements ParamInit {
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
         return CollUtil.newArrayList(
                 // 默认开启模拟数据
-                new BaseParamCodeValueVo<Boolean>().setCode(OPEN_SIMULATION_CODE).setValue(true),
+                new BaseParamCodeValueVo<Boolean>().setCode(ParamInitUtil.OPEN_SIMULATION_CODE).setValue(true),
                 // code为contentData，value为一个ClassmateVo对象
-                new BaseParamCodeValueVo<ClassmateVo>().setCode(CONTENT_DATA_CODE)
+                new BaseParamCodeValueVo<ClassmateVo>().setCode(ParamInitUtil.CONTENT_DATA_CODE)
                         .setValue(ClassmateVo.builder().personList(CollUtil.newArrayList(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
                                         ClassmateVo.Person.builder().age(14).name("小明").build()))
