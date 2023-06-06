@@ -2,6 +2,8 @@ package cn.iosd.starter.encrypt.rsa.annotation;
 
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.MethodParameter;
@@ -30,6 +32,9 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 @ConditionalOnProperty(name = "simple.encrypt.rsa.secureParams.enabled", havingValue = "true", matchIfMissing = true)
 public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
+
+    private static final Logger log = LoggerFactory.getLogger(DecryptRequestParamsAdvice.class);
+
     @Autowired
     private RsaProperties rsaProperties;
 
@@ -49,7 +54,7 @@ public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
         try {
             contentsDecrypt = RsaUtils.decrypt(content, privateKey);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("RsaUtils解密发生异常:", e);
         }
 
         RsaUtils.timestampValidation(rsaProperties.getTimestampValidation(), contentsDecrypt);
