@@ -83,3 +83,13 @@
 |----------------------|--------|------------------------|
 | simple-utils-jackson | Json工具 | 提供 Json 序列化和反序列化功能的工具类 |
 
+## 鸣谢
+
+感谢 JetBrains [OpenSourceSupport](https://jb.gg/OpenSourceSupport) 所提供的支持
+
+<div>
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="200" height="200"/>
+
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA_icon.svg" width="175" height="175"/>
+</div>
+
