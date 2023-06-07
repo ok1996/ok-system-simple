@@ -54,15 +54,15 @@ public class DatabaseInitializer implements ApplicationContextInitializer<Config
 
     private void initDatabase(String url, String username, String password) {
         String database = parseDatabaseName(url);
-        url = removeDatabaseName(url, database);
-        log.info("AutoCreateDatabase：初始化数据库,数据库名:{},连接地址:{} ", database, url);
+        String urlSimplify = removeDatabaseName(url, database);
+        log.info("AutoCreateDatabase：初始化数据库,数据库名:{},连接地址:{} ", database, urlSimplify);
 
         String mysql = ":mysql:";
         String createDataBaseSql = "";
-        if (url.contains(mysql)) {
+        if (urlSimplify.contains(mysql)) {
             createDataBaseSql = "create database if not exists `" + database + "` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci";
         }
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = DriverManager.getConnection(urlSimplify, username, password);
              Statement stat = conn.createStatement()) {
             stat.executeUpdate(createDataBaseSql);
         } catch (SQLException e) {
