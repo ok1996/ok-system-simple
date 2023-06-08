@@ -14,13 +14,12 @@ import java.util.List;
 
 /**
  * 自动配置 MybatisPlus 的 mapper-locations 属性，通过实现 MapperLocationsProvider 接口获取配置值
- * 注：会覆盖掉配置文件中的 mapperLocations 属性值
  *
  * @author ok1996
  */
 @Configuration
 @AutoConfigureAfter(MybatisPlusAutoConfiguration.class)
-@ConditionalOnProperty(name = "simple.datasource.locations.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "simple.datasource.locations.enabled", havingValue = "true", matchIfMissing = true)
 public class MapperLocationsAutoConfiguration {
     @Autowired(required = false)
     private List<MapperLocationsProvider> providers;
@@ -35,11 +34,15 @@ public class MapperLocationsAutoConfiguration {
     @Bean
     public MybatisPlusPropertiesCustomizer mybatisPlusPropertiesCustomizer() {
         return (properties) -> {
-            List<String> mapperLocations = new ArrayList<>();
             if (providers != null) {
+                List<String> mapperLocations = new ArrayList<>();
                 for (MapperLocationsProvider provider : providers) {
-                    mapperLocations.addAll(provider.getMapperLocations());
+                    List<String> locations = provider.getMapperLocations();
+                    if (locations != null && !locations.isEmpty()) {
+                        mapperLocations.addAll(locations);
+                    }
                 }
+                mapperLocations.addAll(List.of(properties.getMapperLocations()));
                 properties.setMapperLocations(mapperLocations.toArray(new String[0]));
             }
         };
