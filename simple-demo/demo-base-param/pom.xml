@@ -24,11 +24,6 @@
             <groupId>cn.iosd</groupId>
             <artifactId>simple-base-param</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.8.10</version>
-        </dependency>
     </dependencies>
 
     <build>
