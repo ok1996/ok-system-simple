@@ -35,9 +35,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.imports</include>
-                </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
     </build>

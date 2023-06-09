@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS base_param
+CREATE TABLE base_param
 (
     id                  bigint       NOT NULL COMMENT '主键',
     module_names        json                  DEFAULT NULL COMMENT '模块名列表',
