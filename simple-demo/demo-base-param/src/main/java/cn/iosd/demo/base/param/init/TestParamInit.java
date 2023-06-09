@@ -1,6 +1,5 @@
 package cn.iosd.demo.base.param.init;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.iosd.base.param.init.ParamInit;
 import cn.iosd.base.param.utils.ParamInitUtil;
 import cn.iosd.base.param.vo.BaseParamCodeValueVo;
@@ -30,16 +29,13 @@ public class TestParamInit implements ParamInit {
 
     @Override
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
-        return CollUtil.newArrayList(
-                // 默认开启模拟数据
+        return List.of(
                 new BaseParamCodeValueVo<Boolean>().setCode(ParamInitUtil.OPEN_SIMULATION_CODE).setValue(true),
-                // code为contentData，value为一个ClassmateVo对象
                 new BaseParamCodeValueVo<ClassmateVo>().setCode(ParamInitUtil.CONTENT_DATA_CODE)
-                        .setValue(ClassmateVo.builder().personList(CollUtil.newArrayList(
+                        .setValue(ClassmateVo.builder().personList(List.of(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
                                         ClassmateVo.Person.builder().age(14).name("小明").build()))
-                                .build()
-                        )
+                                .build())
         );
     }
 
@@ -55,6 +51,6 @@ public class TestParamInit implements ParamInit {
 
     @Override
     public List<String> getModuleNames() {
-        return CollUtil.newArrayList("模块分类1", "分类1-1");
+        return List.of("模块分类1", "分类1-1");
     }
 }
