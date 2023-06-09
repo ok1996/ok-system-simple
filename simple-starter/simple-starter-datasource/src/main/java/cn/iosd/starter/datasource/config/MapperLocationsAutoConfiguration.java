@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class MapperLocationsAutoConfiguration {
                         mapperLocations.addAll(locations);
                     }
                 }
-                mapperLocations.addAll(List.of(properties.getMapperLocations()));
+                mapperLocations.addAll(Arrays.asList(properties.getMapperLocations()));
                 properties.setMapperLocations(mapperLocations.toArray(new String[0]));
             }
         };

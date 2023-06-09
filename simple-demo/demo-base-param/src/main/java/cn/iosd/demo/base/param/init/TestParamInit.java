@@ -6,6 +6,7 @@ import cn.iosd.base.param.vo.BaseParamCodeValueVo;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,10 +30,10 @@ public class TestParamInit implements ParamInit {
 
     @Override
     public List<BaseParamCodeValueVo<?>> getCodeValues() {
-        return List.of(
+        return Arrays.asList(
                 new BaseParamCodeValueVo<Boolean>().setCode(ParamInitUtil.OPEN_SIMULATION_CODE).setValue(true),
                 new BaseParamCodeValueVo<ClassmateVo>().setCode(ParamInitUtil.CONTENT_DATA_CODE)
-                        .setValue(ClassmateVo.builder().personList(List.of(
+                        .setValue(ClassmateVo.builder().personList(Arrays.asList(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
                                         ClassmateVo.Person.builder().age(14).name("小明").build()))
                                 .build())
@@ -51,6 +52,6 @@ public class TestParamInit implements ParamInit {
 
     @Override
     public List<String> getModuleNames() {
-        return List.of("模块分类1", "分类1-1");
+        return Arrays.asList("模块分类1", "分类1-1");
     }
 }
