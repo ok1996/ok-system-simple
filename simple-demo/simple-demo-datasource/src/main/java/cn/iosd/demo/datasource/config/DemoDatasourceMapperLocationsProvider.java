@@ -3,6 +3,7 @@ package cn.iosd.demo.datasource.config;
 import cn.iosd.starter.datasource.mybatis.provider.MapperLocationsProvider;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,6 +15,6 @@ import java.util.List;
 public class DemoDatasourceMapperLocationsProvider implements MapperLocationsProvider {
     @Override
     public List<String> getMapperLocations() {
-        return List.of("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml");
+        return Arrays.asList("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml");
     }
 }
