@@ -32,7 +32,7 @@
         <p6spy.version>3.9.1</p6spy.version>
         <io-grpc.version>1.55.1</io-grpc.version>
         <redisson.version>3.21.3</redisson.version>
-        <jakarta-mail.version>2.0.1</jakarta-mail.version>
+        <javax-mail.version>1.6.2</javax-mail.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>2.0.2</netty-socketio.version>
         <knife4j-openapi3.version>4.1.0</knife4j-openapi3.version>
@@ -155,8 +155,8 @@
 
             <dependency>
                 <groupId>com.sun.mail</groupId>
-                <artifactId>jakarta.mail</artifactId>
-                <version>${jakarta-mail.version}</version>
+                <artifactId>javax.mail</artifactId>
+                <version>${javax-mail.version}</version>
             </dependency>
 
             <dependency>
