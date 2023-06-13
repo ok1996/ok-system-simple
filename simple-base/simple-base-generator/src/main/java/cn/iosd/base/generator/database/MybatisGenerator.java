@@ -44,10 +44,11 @@ public class MybatisGenerator {
     private static final String TEMPLATES_DIR_POM = TEMPLATES_DIR_TEMPLATES + "pom.xml.ftl";
     private static final String TEMPLATES_DIR_APPLICATION = TEMPLATES_DIR_TEMPLATES + "application.java.ftl";
     private static final String TEMPLATES_DIR_IMPORTS = TEMPLATES_DIR_TEMPLATES + "imports.ftl";
+    private static final String TEMPLATES_DIR_EMPTY_FILE = TEMPLATES_DIR_TEMPLATES + "emptyFile.ftl";
     /**
      * 自定义文件输出地址前缀
      */
-    private static final String CUSTOM_FILE_PREFIX = "Config"+File.separator;
+    private static final String CUSTOM_FILE_PREFIX = "Config" + File.separator;
 
     /**
      * 代码生成函数
@@ -91,6 +92,7 @@ public class MybatisGenerator {
         customFile.put(customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML);
         customFile.put(customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML);
         customFile.put(customFilePrefix + "resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports", TEMPLATES_DIR_IMPORTS);
+        customFile.put(customFilePrefix + "resources/db/mysql/" + moduleName +"/V0.1_init_baseline_on_migrate.sql", TEMPLATES_DIR_EMPTY_FILE);
         customFile.put(customFilePrefix + "pom.xml", TEMPLATES_DIR_POM);
         customFile.put(customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION);
 
