@@ -1,0 +1,1 @@
+${packageConfig}.${ModuleName}AutoConfig
