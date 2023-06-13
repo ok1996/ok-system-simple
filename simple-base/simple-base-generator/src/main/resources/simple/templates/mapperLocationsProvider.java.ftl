@@ -1,4 +1,4 @@
-package cn.iosd.demo.datasource.config;
+package ${packageConfig};
 
 import cn.iosd.starter.datasource.mybatis.provider.MapperLocationsProvider;
 import org.springframework.stereotype.Component;

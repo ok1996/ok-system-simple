@@ -18,7 +18,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan("${package.Mapper}")
-@ComponentScan(value = {"${package.Mapper}"})
+@ComponentScan(value = {"${packageParent}"})
 @ConditionalOnProperty(value = "simple.scan.enabled", havingValue = "true", matchIfMissing = true)
 public class ${ModuleName}AutoConfig {
 
