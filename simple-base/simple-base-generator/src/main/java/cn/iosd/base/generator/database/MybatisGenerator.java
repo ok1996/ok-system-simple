@@ -19,7 +19,7 @@ public class MybatisGenerator {
     /**
      * 依赖模块版本号
      */
-    private static final String SIMPLE_VERSION = "2023.3.6.0-SNAPSHOT";
+    private static final String SIMPLE_VERSION = "2023.3.5.1-SNAPSHOT";
 
     /**
      * 文件输出地址前缀
