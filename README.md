@@ -51,7 +51,7 @@
 | Spring Boot          | 2.7.12     |
 | Spring Cloud         | 2021.0.7   |
 | Spring Cloud Alibaba | 2021.0.4.0 |
-| Ok System Simple     | 2022.3.5.0 |
+| Ok System Simple     | 2022.3.5.1 |
 
 ## Starter自动装配模块
 
