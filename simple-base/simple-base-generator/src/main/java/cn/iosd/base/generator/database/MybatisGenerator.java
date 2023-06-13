@@ -19,7 +19,7 @@ public class MybatisGenerator {
     /**
      * 依赖模块版本号
      */
-    private static final String SIMPLE_VERSION = "2023.3.5.1";
+    private static final String SIMPLE_VERSION = "2023.3.5.2";
 
     /**
      * 文件输出地址前缀
@@ -92,7 +92,7 @@ public class MybatisGenerator {
                 customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML,
                 customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML,
                 customFilePrefix + "resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports", TEMPLATES_DIR_IMPORTS,
-                customFilePrefix + "resources/db/mysql/" + moduleName +"/V0.1_init_baseline_on_migrate.sql", TEMPLATES_DIR_EMPTY_FILE,
+                customFilePrefix + "resources/db/mysql/" + moduleName +"/V1.0__init_baseline_on_migrate.sql", TEMPLATES_DIR_EMPTY_FILE,
                 customFilePrefix + "pom.xml", TEMPLATES_DIR_POM,
                 customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION
         );
