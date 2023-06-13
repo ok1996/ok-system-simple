@@ -37,13 +37,13 @@ public class MybatisGenerator {
     private static final String TEMPLATES_DIR_SERVICE = TEMPLATES_DIR_TEMPLATES + "service.java";
     private static final String TEMPLATES_DIR_SERVICE_IMPL = TEMPLATES_DIR_TEMPLATES + "serviceImpl.java";
     private static final String TEMPLATES_DIR_CONFIG = TEMPLATES_DIR_TEMPLATES + "config.java.ftl";
+    private static final String TEMPLATES_DIR_MAPPER_LOCATIONS_PROVIDER = TEMPLATES_DIR_TEMPLATES + "mapperLocationsProvider.java.ftl";
 
     private static final String TEMPLATES_DIR_YML = TEMPLATES_DIR_TEMPLATES + "application.yml.ftl";
     private static final String TEMPLATES_DIR_CONFIG_YML = TEMPLATES_DIR_TEMPLATES + "configApplication.yml.ftl";
     private static final String TEMPLATES_DIR_POM = TEMPLATES_DIR_TEMPLATES + "pom.xml.ftl";
     private static final String TEMPLATES_DIR_APPLICATION = TEMPLATES_DIR_TEMPLATES + "application.java.ftl";
-    private static final String TEMPLATES_DIR_MAPPER_LOCATIONS_PROVIDER = TEMPLATES_DIR_TEMPLATES + "mapperLocationsProvider.java.ftl";
-
+    private static final String TEMPLATES_DIR_IMPORTS = TEMPLATES_DIR_TEMPLATES + "imports.ftl";
     /**
      * 自定义文件输出地址前缀
      */
@@ -90,6 +90,7 @@ public class MybatisGenerator {
                 customFilePrefix + "config/" + capitalizedModuleName + "MapperLocationsProvider.java", TEMPLATES_DIR_MAPPER_LOCATIONS_PROVIDER,
                 customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML,
                 customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML,
+                customFilePrefix + "resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports", TEMPLATES_DIR_IMPORTS,
                 customFilePrefix + "pom.xml", TEMPLATES_DIR_POM,
                 customFilePrefix + capitalizedModuleName + "Application.java", TEMPLATES_DIR_APPLICATION
         );
