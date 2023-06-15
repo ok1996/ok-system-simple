@@ -141,12 +141,12 @@ public class RsaUtils {
             JsonNode contentsDecryptedJsonNode = JsonMapperThreadLocal.getObjectMapper().readTree(contentsDecrypt);
             JsonNode timestampJsonNode = contentsDecryptedJsonNode.get(RsaProperties.TimestampValidation.TIMESTAMP);
             if (timestampJsonNode == null) {
-                throw new RuntimeException("The request timestamp is missing");
+                throw new IllegalArgumentException("The request timestamp is missing");
             }
             long timestamp = timestampJsonNode.asLong();
             long requestExpirationTime = timestamp + timestampValidation.getExpiryMillis();
             if (System.currentTimeMillis() > requestExpirationTime) {
-                throw new RuntimeException("The request timestamp has expired");
+                throw new IllegalArgumentException("The request timestamp has expired");
             }
         }
     }
