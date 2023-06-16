@@ -65,22 +65,19 @@ public class GrpcClientService implements InitializingBean {
         if (beanInjection == null || beanInjection.getGrpcClientBeans() == null) {
             return;
         }
-
         GrpcClientBeans grpcClientBeans = beanInjection.getGrpcClientBeans();
         List<GrpcClientBeans.GrpcClientBean> grpcClientBeanList = grpcClientBeans.getInjections();
 
         for (GrpcClientBeans.GrpcClientBean grpcClientBean : grpcClientBeanList) {
             GrpcClient annotation = grpcClientBean.client();
+            String annotationValue = annotation.value();
+            if (grpcClientProperties.getChannel() == null || grpcClientProperties.getChannel().get(annotationValue) == null) {
+                log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotationValue);
+                continue;
+            }
             Class<?> type = grpcClientBean.field().getType();
             Field field = grpcClientBean.field();
             Object bean = grpcClientBean.bean();
-
-            if (grpcClientProperties.getChannel() == null || grpcClientProperties.getChannel().get(annotation.value()) == null) {
-                log.error("配置文件缺失请核查，GrpcChannel未装配值：{}", annotation.value());
-                continue;
-            }
-
-            GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotation.value());
 
             long timeout;
             if (-1 != annotation.timeout()) {
@@ -97,15 +94,16 @@ public class GrpcClientService implements InitializingBean {
                     headers = StringUtils.isNotBlank(beanName) ? clientCallStartHeadersMap.get(beanName) : null;
                 }
             }
+
+            GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotationValue);
             ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout, headers);
             Object object = GrpcChannel.getBlockingStub(client, type);
 
             boolean accessible = field.canAccess(bean);
             ReflectionUtils.makeAccessible(field);
-
             try {
                 field.set(bean, object);
-                log.info("完成 {} 的 GrpcChannel 装配;调用超时时间为 {} 毫秒;headers为 {}", annotation.value(), timeout, headers);
+                log.info("完成 {} 的 GrpcChannel 装配;调用超时时间为 {} 毫秒;headers为 {}", annotationValue, timeout, headers);
             } catch (IllegalAccessException e) {
                 String message = String.format("对象 %s 注入配置 GrpcChannel 异常：", bean.getClass().getSimpleName());
                 log.error(message, e);
