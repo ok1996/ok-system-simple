@@ -22,14 +22,24 @@
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
-            <version>${simpleVersion}</version>
         </dependency>
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-datasource</artifactId>
-            <version>${simpleVersion}</version>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-dependencies</artifactId>
+                <version>${simpleVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <resources>
