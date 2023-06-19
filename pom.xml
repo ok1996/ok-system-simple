@@ -73,6 +73,14 @@
             </dependency>
 
             <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-dependencies</artifactId>
+                <version>${ok-system-simple.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${springdoc-openapi-starter.version}</version>
@@ -158,96 +166,6 @@
                 <artifactId>jakarta.mail</artifactId>
                 <version>${jakarta-mail.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-web</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-redisson</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-s3</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-socket</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-grpc</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-datasource</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-freemarker</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-cloud</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-encrypt</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-dict</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-email</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-base-param</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-base-generator</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-base-s3</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-utils-jackson</artifactId>
-                <version>${ok-system-simple.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -256,6 +174,7 @@
         <module>simple-starter</module>
         <module>simple-base</module>
         <module>simple-utils</module>
+        <module>simple-dependencies</module>
     </modules>
     <packaging>pom</packaging>
 
