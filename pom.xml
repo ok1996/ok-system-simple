@@ -30,7 +30,7 @@
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
         <p6spy.version>3.9.1</p6spy.version>
-        <io-grpc.version>1.55.1</io-grpc.version>
+        <io-grpc.version>1.56.0</io-grpc.version>
         <redisson.version>3.21.3</redisson.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
