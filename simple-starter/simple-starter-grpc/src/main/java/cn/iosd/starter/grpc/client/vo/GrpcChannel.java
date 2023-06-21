@@ -6,6 +6,7 @@ import io.grpc.CallOptions;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +38,7 @@ public class GrpcChannel {
         Object stub = STUBS.computeIfAbsent(key, k -> {
             try {
                 Constructor<T> constructor = type.getDeclaredConstructor(Channel.class, CallOptions.class);
-                constructor.setAccessible(true);
+                ReflectionUtils.makeAccessible(constructor);
                 return constructor.newInstance(channel, CallOptions.DEFAULT);
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
                      InvocationTargetException e) {
