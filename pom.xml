@@ -45,6 +45,15 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+            <!-- SimpleDependencies 依赖配置 -->
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-dependencies</artifactId>
+                <version>${ok-system-simple.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- SpringBoot 依赖配置 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -73,9 +82,9 @@
             </dependency>
 
             <dependency>
-                <groupId>cn.iosd</groupId>
-                <artifactId>simple-dependencies</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>${io-grpc.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -111,24 +120,6 @@
             </dependency>
 
             <dependency>
-                <groupId>io.grpc</groupId>
-                <artifactId>grpc-protobuf</artifactId>
-                <version>${io-grpc.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.grpc</groupId>
-                <artifactId>grpc-stub</artifactId>
-                <version>${io-grpc.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.grpc</groupId>
-                <artifactId>grpc-netty-shaded</artifactId>
-                <version>${io-grpc.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic-datasource.version}</version>
@@ -154,7 +145,6 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
-            <!-- 代码生成 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
