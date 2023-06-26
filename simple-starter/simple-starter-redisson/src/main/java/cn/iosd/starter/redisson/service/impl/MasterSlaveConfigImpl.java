@@ -1,7 +1,6 @@
 package cn.iosd.starter.redisson.service.impl;
 
 
-import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +37,7 @@ public class MasterSlaveConfigImpl implements RedissonConfigService {
             //设置从节点，移除第一个节点，默认第一个为主节点
             List<String> slaveList = new ArrayList<>();
             for (String addrToken : addrTokens) {
-                slaveList.add(RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue() + addrToken);
+                slaveList.add(RedissonProperties.REDIS_CONNECTION_PREFIX + addrToken);
             }
             slaveList.remove(0);
             String[] applyIdStr = slaveList.toArray(new String[slaveList.size()]);

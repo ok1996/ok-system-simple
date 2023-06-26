@@ -1,6 +1,5 @@
 package cn.iosd.starter.redisson.service.impl;
 
-import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +33,7 @@ public class SentinelConfigImpl implements RedissonConfigService {
             }
             //设置sentinel节点的服务IP和端口
             for (int i = 1; i < addrTokens.length; i++) {
-                config.useSentinelServers().addSentinelAddress(RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue() + addrTokens[i]);
+                config.useSentinelServers().addSentinelAddress(RedissonProperties.REDIS_CONNECTION_PREFIX + addrTokens[i]);
             }
             log.info("初始化[哨兵部署]方式 连接地址:" + address);
         } catch (Exception e) {

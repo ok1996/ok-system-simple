@@ -1,6 +1,5 @@
 package cn.iosd.starter.redisson.service.impl;
 
-import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +25,7 @@ public class ClusterConfigImpl implements RedissonConfigService {
             //设置cluster节点的服务IP和端口
             for (int i = 0; i < addrTokens.length; i++) {
                 config.useClusterServers()
-                        .addNodeAddress(RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue()
+                        .addNodeAddress(RedissonProperties.REDIS_CONNECTION_PREFIX
                                 + addrTokens[i]);
                 if (StringUtils.isNotBlank(password)) {
                     config.useClusterServers().setPassword(password);

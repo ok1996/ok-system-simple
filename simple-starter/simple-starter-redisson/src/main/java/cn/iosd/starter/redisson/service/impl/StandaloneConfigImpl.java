@@ -1,6 +1,5 @@
 package cn.iosd.starter.redisson.service.impl;
 
-import cn.iosd.starter.redisson.constant.RedisConnectionUrl;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +22,7 @@ public class StandaloneConfigImpl implements RedissonConfigService {
             String address = redissonProperties.getAddress();
             String password = redissonProperties.getPassword();
             Integer database = redissonProperties.getDatabase();
-            String redisAddr = RedisConnectionUrl.REDIS_CONNECTION_PREFIX.getValue() + address;
+            String redisAddr = RedissonProperties.REDIS_CONNECTION_PREFIX + address;
             config.useSingleServer().setAddress(redisAddr);
             config.useSingleServer().setDatabase(database);
             if (StringUtils.isNotBlank(password)) {
