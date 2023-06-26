@@ -2,8 +2,8 @@ package cn.iosd.starter.redisson.config;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonCacheService;
-import cn.iosd.starter.redisson.service.RedissonManager;
 import cn.iosd.starter.redisson.service.RedissonLockService;
+import cn.iosd.starter.redisson.service.RedissonManager;
 import org.redisson.Redisson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,27 +29,23 @@ public class RedissonAutoConfiguration {
     @ConditionalOnMissingBean
     @Order(value = 2)
     public RedissonLockService redissonLock(RedissonManager redissonManager) {
-        RedissonLockService redissonLock = new RedissonLockService(redissonManager);
-        return redissonLock;
+        return new RedissonLockService(redissonManager);
     }
 
     @Bean
     @ConditionalOnMissingBean
     @Order(value = 2)
     public RedissonCacheService redissonCache(RedissonManager redissonManager) {
-        RedissonCacheService redissonLock = new RedissonCacheService(redissonManager);
-        return redissonLock;
+        return new RedissonCacheService(redissonManager);
     }
 
     @Bean
     @ConditionalOnMissingBean
     @Order(value = 1)
     public RedissonManager redissonManager(RedissonProperties redissonProperties) {
-        RedissonManager redissonManager =
-                new RedissonManager(redissonProperties);
         log.info("[RedissonManager]组装完毕,当前连接方式:" + redissonProperties.getType() +
                 ",连接地址:" + redissonProperties.getAddress());
-        return redissonManager;
+        return new RedissonManager(redissonProperties);
     }
 }
 

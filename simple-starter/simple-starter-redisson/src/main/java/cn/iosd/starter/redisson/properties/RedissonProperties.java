@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties("simple.redisson")
 public class RedissonProperties {
+    /**
+     * Redis地址配置前缀
+     */
+    public static final String REDIS_CONNECTION_PREFIX = "redis://";
+
     private String address;
 
     private String type;
