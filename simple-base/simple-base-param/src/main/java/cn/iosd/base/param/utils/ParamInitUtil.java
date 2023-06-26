@@ -92,4 +92,13 @@ public class ParamInitUtil {
                 .orElse(false);
     }
 
+    /**
+     * 该方法用于在传入的 BaseParamCodeValueVo 列表中查找 是否开启模拟数据code 对应的 BaseParamCodeValueVo 对象，然后返回该对象的 boolean 类型的值，如果找不到则返回 false。
+     *
+     * @param simulation BaseParamCodeValueVo 列表
+     * @return 查找到 是否开启模拟数据code 对应的 BaseParamCodeValueVo 对象的 boolean 类型的值，如果找不到则返回 false
+     */
+    public static boolean getBooleanValueByOpenSimulationCodeDefaultFalse(List<BaseParamCodeValueVo<?>> simulation) {
+        return getBooleanValueByCodeDefaultFalse(simulation, OPEN_SIMULATION_CODE);
+    }
 }
