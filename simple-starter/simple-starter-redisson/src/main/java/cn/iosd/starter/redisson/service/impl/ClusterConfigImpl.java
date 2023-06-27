@@ -18,24 +18,19 @@ public class ClusterConfigImpl implements RedissonConfigService {
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
         Config config = new Config();
-        try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            String[] addrTokens = address.split(",");
-            //设置cluster节点的服务IP和端口
-            for (int i = 0; i < addrTokens.length; i++) {
-                config.useClusterServers()
-                        .addNodeAddress(RedissonProperties.REDIS_CONNECTION_PREFIX
-                                + addrTokens[i]);
-                if (StringUtils.isNotBlank(password)) {
-                    config.useClusterServers().setPassword(password);
-                }
-            }
-            log.info("初始化[集群部署]方式 连接地址:" + address);
-        } catch (Exception e) {
-            log.error("初始化[集群部署]方式 异常：", e);
-            e.printStackTrace();
+        String address = redissonProperties.getAddress();
+        String password = redissonProperties.getPassword();
+        String[] addrTokens = address.split(",");
+        for (String addrToken : addrTokens) {
+            config.useClusterServers().addNodeAddress(
+                    RedissonProperties.REDIS_CONNECTION_PREFIX + addrToken
+            );
         }
+        if (StringUtils.isNotBlank(password)) {
+            config.useClusterServers().setPassword(password);
+        }
+        log.info("初始化[集群部署]方式 连接地址:{}", address);
         return config;
     }
+
 }

@@ -22,31 +22,27 @@ public class MasterSlaveConfigImpl implements RedissonConfigService {
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
         Config config = new Config();
-        try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            Integer database = redissonProperties.getDatabase();
-            String[] addrTokens = address.split(",");
-            String masterNodeAddr = addrTokens[0];
-            //设置主节点ip
-            config.useMasterSlaveServers().setMasterAddress(masterNodeAddr);
-            if (StringUtils.isNotBlank(password)) {
-                config.useMasterSlaveServers().setPassword(password);
-            }
-            config.useMasterSlaveServers().setDatabase(database);
-            //设置从节点，移除第一个节点，默认第一个为主节点
-            List<String> slaveList = new ArrayList<>();
-            for (String addrToken : addrTokens) {
-                slaveList.add(RedissonProperties.REDIS_CONNECTION_PREFIX + addrToken);
-            }
-            slaveList.remove(0);
-            String[] applyIdStr = slaveList.toArray(new String[slaveList.size()]);
-            config.useMasterSlaveServers().addSlaveAddress(applyIdStr);
-            log.info("初始化[主从部署]方式 连接地址:" + address);
-        } catch (Exception e) {
-            log.error("初始化[主从部署]方式 异常：", e);
-            e.printStackTrace();
+
+        String address = redissonProperties.getAddress();
+        String password = redissonProperties.getPassword();
+        Integer database = redissonProperties.getDatabase();
+        String[] addrTokens = address.split(",");
+        String masterNodeAddr = addrTokens[0];
+        //设置主节点ip
+        config.useMasterSlaveServers().setMasterAddress(masterNodeAddr);
+        if (StringUtils.isNotBlank(password)) {
+            config.useMasterSlaveServers().setPassword(password);
         }
+        config.useMasterSlaveServers().setDatabase(database);
+        //设置从节点，移除第一个节点，默认第一个为主节点
+        List<String> slaveList = new ArrayList<>();
+        for (String addrToken : addrTokens) {
+            slaveList.add(RedissonProperties.REDIS_CONNECTION_PREFIX + addrToken);
+        }
+        slaveList.remove(0);
+        String[] applyIdStr = slaveList.toArray(new String[slaveList.size()]);
+        config.useMasterSlaveServers().addSlaveAddress(applyIdStr);
+        log.info("初始化[主从部署]方式 连接地址:" + address);
         return config;
     }
 
