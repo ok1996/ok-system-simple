@@ -18,20 +18,16 @@ public class StandaloneConfigImpl implements RedissonConfigService {
     @Override
     public Config createRedissonConfig(RedissonProperties redissonProperties) {
         Config config = new Config();
-        try {
-            String address = redissonProperties.getAddress();
-            String password = redissonProperties.getPassword();
-            Integer database = redissonProperties.getDatabase();
-            String redisAddr = RedissonProperties.REDIS_CONNECTION_PREFIX + address;
-            config.useSingleServer().setAddress(redisAddr);
-            config.useSingleServer().setDatabase(database);
-            if (StringUtils.isNotBlank(password)) {
-                config.useSingleServer().setPassword(password);
-            }
-            log.info("初始化[单体部署]方式 连接地址:" + address);
-        } catch (Exception e) {
-            log.error("初始化[单体部署]方式 异常：", e);
+        String address = redissonProperties.getAddress();
+        String password = redissonProperties.getPassword();
+        Integer database = redissonProperties.getDatabase();
+        String redisAddr = RedissonProperties.REDIS_CONNECTION_PREFIX + address;
+        config.useSingleServer().setAddress(redisAddr);
+        config.useSingleServer().setDatabase(database);
+        if (StringUtils.isNotBlank(password)) {
+            config.useSingleServer().setPassword(password);
         }
+        log.info("初始化[单体部署]方式 连接地址:" + address);
         return config;
     }
 }
