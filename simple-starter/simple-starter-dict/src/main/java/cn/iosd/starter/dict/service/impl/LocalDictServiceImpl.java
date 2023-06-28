@@ -26,14 +26,18 @@ public class LocalDictServiceImpl implements DictService {
     @Value("${simple.dict.resourceDictFileDir:/dict.json}")
     private String resourceDictFileDir;
 
+    /**
+     * 用于反序列化字典项的类型引用
+     */
+    public static final TypeReference<Map<String, List<DictItem>>> TYPE_DICT_ITEM = new TypeReference<Map<String, List<DictItem>>>() {
+    };
+
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-
         Map<String, List<DictItem>> dictItemList = null;
         try (InputStream inputStream = this.getClass().getResourceAsStream(resourceDictFileDir)) {
             ObjectMapper mapper = new ObjectMapper();
-            dictItemList = mapper.readValue(inputStream, new TypeReference<Map<String, List<DictItem>>>() {
-            });
+            dictItemList = mapper.readValue(inputStream, TYPE_DICT_ITEM);
         } catch (IOException e) {
             e.printStackTrace();
         }

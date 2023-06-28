@@ -24,11 +24,16 @@ public class RemoteDictServiceImpl implements DictService {
     @Value("${simple.dict.remoteBaseUrl:}")
     private String remoteBaseUrl;
 
+    /**
+     * 用于反序列化字典项的类型引用
+     */
+    public static final ParameterizedTypeReference<List<DictItem>> TYPE_DICT_ITEM = new ParameterizedTypeReference<List<DictItem>>() {
+    };
+
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
         String path = remoteBaseUrl + dictionaryParams;
-        ResponseEntity<List<DictItem>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<List<DictItem>>() {
-        });
+        ResponseEntity<List<DictItem>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, TYPE_DICT_ITEM);
         return responseEntity.getBody();
     }
 }
