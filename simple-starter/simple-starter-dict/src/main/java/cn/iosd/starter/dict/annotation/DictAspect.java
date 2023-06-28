@@ -88,16 +88,7 @@ public class DictAspect {
                     break;
                 }
                 // 获取字典项列表
-                List<DictItem> dictItemList = null;
-                if (tempCacheEnabled) {
-                    dictItemList = cache.get(dictFieldAnnotation.dictionaryParams());
-                }
-                if (dictItemList == null) {
-                    dictItemList = dictService.getDictItemList(dictFieldAnnotation.dictionaryParams());
-                    if (tempCacheEnabled) {
-                        cache.put(dictFieldAnnotation.dictionaryParams(), dictItemList);
-                    }
-                }
+                List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), tempCacheEnabled, cache);
                 if (dictItemList == null || dictItemList.size() == 0) {
                     break;
                 }
@@ -126,4 +117,29 @@ public class DictAspect {
         }
     }
 
+    /**
+     * 获取缓存的字典项列表，如果缓存不存在，则从字典服务中获取，并将结果放入缓存
+     *
+     * @param dictService      对应服务类
+     * @param dictionaryParams 字典参数
+     * @param tempCacheEnabled 是否启用临时缓存
+     * @param cache            临时缓存对象
+     * @return 字典项列表
+     */
+    private List<DictItem> getCachedDictItemList(DictService dictService, String dictionaryParams, boolean tempCacheEnabled, Map<String, List<DictItem>> cache) {
+        List<DictItem> dictItemList = null;
+        // 尝试从缓存中获取字典项列表
+        if (tempCacheEnabled) {
+            dictItemList = cache.get(dictionaryParams);
+        }
+        // 如果缓存不存在，则从字典服务中获取字典项列表
+        if (dictItemList == null) {
+            dictItemList = dictService.getDictItemList(dictionaryParams);
+            // 如果启用了临时缓存，则将字典项列表放入缓存
+            if (tempCacheEnabled) {
+                cache.put(dictionaryParams, dictItemList);
+            }
+        }
+        return dictItemList;
+    }
 }
