@@ -2,7 +2,7 @@ package cn.iosd.demo.base.param.init;
 
 import cn.iosd.base.param.init.ParamInit;
 import cn.iosd.base.param.utils.ParamInitUtil;
-import cn.iosd.base.param.vo.BaseParamCodeValueVo;
+import cn.iosd.base.param.vo.CodeValue;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import org.springframework.stereotype.Component;
 
@@ -28,10 +28,10 @@ public class TestParamInit implements ParamInit {
     }
 
     @Override
-    public List<BaseParamCodeValueVo<?>> getCodeValues() {
+    public List<CodeValue<?>> getCodeValues() {
         return List.of(
-                new BaseParamCodeValueVo<Boolean>().setCode(ParamInitUtil.OPEN_SIMULATION_CODE).setValue(true),
-                new BaseParamCodeValueVo<ClassmateVo>().setCode(ParamInitUtil.CONTENT_DATA_CODE)
+                new CodeValue<Boolean>().setCode(ParamInitUtil.OPEN_SIMULATION_CODE).setValue(true),
+                new CodeValue<ClassmateVo>().setCode(ParamInitUtil.CONTENT_DATA_CODE)
                         .setValue(ClassmateVo.builder().personList(List.of(
                                         ClassmateVo.Person.builder().age(12).name("小库").build(),
                                         ClassmateVo.Person.builder().age(14).name("小明").build()))
