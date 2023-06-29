@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author ok1996
  */
-public class BaseParamSaveReqVo {
+public class BaseParamVo {
     @Schema(description = "主键id")
     private Long id;
     @Schema(description = "模块名列表",example = "[\"demo\",\"test\"]")
@@ -15,7 +15,7 @@ public class BaseParamSaveReqVo {
     @Schema(description = "参数主键")
     private String paramKey;
     @Schema(description = "参数值",example = "[{\"code\":\"age\",\"value\":100},{\"code\":\"sex\",\"value\":\"女性\"}]")
-    private List<BaseParamCodeValueVo<?>> codeValues;
+    private List<CodeValue<?>> codeValues;
     @Schema(description = "备注")
     private String remark;
 
@@ -43,11 +43,11 @@ public class BaseParamSaveReqVo {
         this.paramKey = paramKey;
     }
 
-    public List<BaseParamCodeValueVo<?>> getCodeValues() {
+    public List<CodeValue<?>> getCodeValues() {
         return codeValues;
     }
 
-    public void setCodeValues(List<BaseParamCodeValueVo<?>> codeValues) {
+    public void setCodeValues(List<CodeValue<?>> codeValues) {
         this.codeValues = codeValues;
     }
 

@@ -3,7 +3,7 @@ package cn.iosd.base.param.vo;
 /**
  * @author ok1996
  */
-public class BaseParamCodeValueVo<V> {
+public class CodeValue<V> {
     private String code;
     private V value;
 
@@ -15,18 +15,18 @@ public class BaseParamCodeValueVo<V> {
         return this.value;
     }
 
-    public BaseParamCodeValueVo<V> setCode(final String code) {
+    public CodeValue<V> setCode(final String code) {
         this.code = code;
         return this;
     }
 
-    public BaseParamCodeValueVo<V> setValue(final V value) {
+    public CodeValue<V> setValue(final V value) {
         this.value = value;
         return this;
     }
 
     @Override
     public String toString() {
-        return "BaseParamCodeValueVo(code=" + this.getCode() + ", value=" + this.getValue() + ")";
+        return "CodeValue(code=" + this.getCode() + ", value=" + this.getValue() + ")";
     }
 }

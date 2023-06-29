@@ -4,8 +4,8 @@ import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.mapper.BaseParamMapper;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.utils.ParamInitUtil;
-import cn.iosd.base.param.vo.BaseParamCodeValueVo;
-import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import cn.iosd.base.param.vo.CodeValue;
+import cn.iosd.base.param.vo.BaseParamVo;
 import cn.iosd.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -39,14 +39,14 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
     }
 
     @Override
-    public List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey) {
+    public List<CodeValue<?>> selectCodeValueVoParamByKey(String paramKey) {
         BaseParam baseParam = selectBaseParamByKey(paramKey);
         return JsonMapper.convertObject(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
     }
 
 
     @Override
-    public int insertBaseParam(BaseParamSaveReqVo baseParamVo) {
+    public int insertBaseParam(BaseParamVo baseParamVo) {
         BaseParam baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setCreateTime(now);
@@ -56,7 +56,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
     }
 
     @Override
-    public int updateBaseParam(BaseParamSaveReqVo baseParamVo) {
+    public int updateBaseParam(BaseParamVo baseParamVo) {
         BaseParam baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setModifyTime(now);
@@ -77,7 +77,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
      * @param baseParamVo
      * @return
      */
-    public BaseParam convertBaseParam(BaseParamSaveReqVo baseParamVo) {
+    public BaseParam convertBaseParam(BaseParamVo baseParamVo) {
         BaseParam baseParam = new BaseParam();
         JsonNode moduleNames = JsonMapper.convertObject(baseParamVo.getModuleNames(), JsonNode.class);
         JsonNode codeValues = JsonMapper.convertObject(baseParamVo.getCodeValues(), JsonNode.class);

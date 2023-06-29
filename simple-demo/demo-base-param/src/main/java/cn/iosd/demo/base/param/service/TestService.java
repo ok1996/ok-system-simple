@@ -2,7 +2,7 @@ package cn.iosd.demo.base.param.service;
 
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.utils.ParamInitUtil;
-import cn.iosd.base.param.vo.BaseParamCodeValueVo;
+import cn.iosd.base.param.vo.CodeValue;
 import cn.iosd.demo.base.param.init.TestParamInit;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class TestService {
             return null;
         }
         // 从基础参数服务中获取基础参数码值对象的列表
-        List<BaseParamCodeValueVo<?>> simulation = baseParamService.selectCodeValueVoParamByKey(TestParamInit.KEY);
+        List<CodeValue<?>> simulation = baseParamService.selectCodeValueVoParamByKey(TestParamInit.KEY);
         // 判断是否开启模拟数据
         if (!ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation, ParamInitUtil.OPEN_SIMULATION_CODE)) {
             // TODO: 实现获取其他来源途径的数据的代码
@@ -39,7 +39,7 @@ public class TestService {
             return null;
         }
         // 获取存储的模拟数据，并将其转换为对应的实体类
-        Optional<BaseParamCodeValueVo<?>> contentData = ParamInitUtil.getBaseParamCodeValueVoByCode(simulation, ParamInitUtil.CONTENT_DATA_CODE);
+        Optional<CodeValue<?>> contentData = ParamInitUtil.getCodeValueByCode(simulation, ParamInitUtil.CONTENT_DATA_CODE);
         if (contentData.isPresent()) {
             return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
         }

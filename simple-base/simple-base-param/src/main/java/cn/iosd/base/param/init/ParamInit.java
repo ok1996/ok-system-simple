@@ -1,6 +1,6 @@
 package cn.iosd.base.param.init;
 
-import cn.iosd.base.param.vo.BaseParamCodeValueVo;
+import cn.iosd.base.param.vo.CodeValue;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface ParamInit {
      *
      * @return 配置值列表
      */
-    List<BaseParamCodeValueVo<?>> getCodeValues();
+    List<CodeValue<?>> getCodeValues();
 
     /**
      * 判断是否每次启动都覆盖生成。

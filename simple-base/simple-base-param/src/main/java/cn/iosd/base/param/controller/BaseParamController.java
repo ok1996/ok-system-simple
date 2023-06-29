@@ -2,7 +2,7 @@ package cn.iosd.base.param.controller;
 
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
-import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import cn.iosd.base.param.vo.BaseParamVo;
 import cn.iosd.starter.datasource.domain.PageRequest;
 import cn.iosd.starter.datasource.utils.DsConvertUtil;
 import cn.iosd.starter.web.domain.Response;
@@ -47,13 +47,13 @@ public class BaseParamController {
 
     @Operation(summary = "新增")
     @PostMapping
-    public Response<Integer> add(@RequestBody BaseParamSaveReqVo baseParamVo) {
+    public Response<Integer> add(@RequestBody BaseParamVo baseParamVo) {
         return Response.ok(baseParamService.insertBaseParam(baseParamVo));
     }
 
     @Operation(summary = "修改")
     @PutMapping
-    public Response<Integer> edit(@RequestBody BaseParamSaveReqVo baseParamVo) {
+    public Response<Integer> edit(@RequestBody BaseParamVo baseParamVo) {
         return Response.ok(baseParamService.updateBaseParam(baseParamVo));
     }
 

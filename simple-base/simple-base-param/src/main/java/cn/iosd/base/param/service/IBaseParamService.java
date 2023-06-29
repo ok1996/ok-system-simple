@@ -1,8 +1,8 @@
 package cn.iosd.base.param.service;
 
 import cn.iosd.base.param.domain.BaseParam;
-import cn.iosd.base.param.vo.BaseParamCodeValueVo;
-import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import cn.iosd.base.param.vo.CodeValue;
+import cn.iosd.base.param.vo.BaseParamVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public interface IBaseParamService extends IService<BaseParam> {
      * @param paramKey
      * @return
      */
-    List<BaseParamCodeValueVo<?>> selectCodeValueVoParamByKey(String paramKey);
+    List<CodeValue<?>> selectCodeValueVoParamByKey(String paramKey);
 
     /**
      * 新增
@@ -41,7 +41,7 @@ public interface IBaseParamService extends IService<BaseParam> {
      * @param baseParamVo
      * @return 影响行数
      */
-    int insertBaseParam(BaseParamSaveReqVo baseParamVo);
+    int insertBaseParam(BaseParamVo baseParamVo);
 
     /**
      * 修改
@@ -49,6 +49,6 @@ public interface IBaseParamService extends IService<BaseParam> {
      * @param baseParamVo
      * @return 影响行数
      */
-    int updateBaseParam(BaseParamSaveReqVo baseParamVo);
+    int updateBaseParam(BaseParamVo baseParamVo);
 
 }

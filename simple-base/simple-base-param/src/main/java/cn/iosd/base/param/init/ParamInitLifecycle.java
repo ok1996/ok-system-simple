@@ -2,7 +2,7 @@ package cn.iosd.base.param.init;
 
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
-import cn.iosd.base.param.vo.BaseParamSaveReqVo;
+import cn.iosd.base.param.vo.BaseParamVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
@@ -63,7 +63,7 @@ public class ParamInitLifecycle implements SmartLifecycle {
         if (baseParam == null) {
             baseParamService.insertBaseParam(initVo(init));
         } else if (init.restartOverride()) {
-            BaseParamSaveReqVo saveReqVo = initVo(init);
+            BaseParamVo saveReqVo = initVo(init);
             saveReqVo.setId(baseParam.getId());
             baseParamService.updateBaseParam(saveReqVo);
         }
@@ -75,8 +75,8 @@ public class ParamInitLifecycle implements SmartLifecycle {
      * @param init 需要转换的参数
      * @return 转换后的BaseParamSaveReqVo对象
      */
-    public BaseParamSaveReqVo initVo(ParamInit init) {
-        BaseParamSaveReqVo vo = new BaseParamSaveReqVo();
+    public BaseParamVo initVo(ParamInit init) {
+        BaseParamVo vo = new BaseParamVo();
         vo.setCodeValues(init.getCodeValues());
         vo.setModuleNames(init.getModuleNames());
         vo.setParamKey(init.getKey());
