@@ -58,7 +58,7 @@
 | 模块名称                      | 使用场景     | 说明                                                           |
 |---------------------------|----------|--------------------------------------------------------------|
 | simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类 |
-| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等                                         |
+| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等; <br/> Cacheable注解常用配置及自定义CacheName过期时间 |
 | simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                              |
 | simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                  |
 | simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                        |
