@@ -2,3 +2,5 @@ cn.iosd.starter.redisson.config.RedissonAutoConfiguration
 cn.iosd.starter.redisson.annotation.DistributedLockHandler
 cn.iosd.starter.redisson.annotation.DistributedIdempotentHandler
 cn.iosd.starter.redisson.properties.RedissonProperties
+cn.iosd.starter.redisson.properties.RedissonCacheableProperties
+cn.iosd.starter.redisson.service.RedissonCacheableManager
