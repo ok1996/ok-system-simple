@@ -11,7 +11,18 @@ simple:
     address: 127.0.0.1:6379
     password: password
     database: 0
-
+    #Cacheable注解自定义配置
+    cacheable:
+      #缺省项为false,优先级小于simple.redisson.enabled
+      enabled: true
+      config:
+        #自定义cacheName及过期时间
+        cacheExpiresAfterFiveMinutes:
+          ttl: 300000
+          maxIdleTime: 300000
+        cacheExpiresAfterTenSecond:
+          ttl: 10000
+          maxIdleTime: 10000
   ## 哨兵配置
   ##  address:  ** 格式为: sentinel.conf配置里的sentinel别名,sentinel1节点的服务IP和端口，sentinel2节点的服务IP和端口，sentinel3节点的服务IP和端口
   ##  如sentinel.conf里配置为sentinel monitor my-sentinel-name 127.0.0.1 6379 2,那么这里就配置my-sentinel-name
