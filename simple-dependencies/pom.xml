@@ -101,6 +101,12 @@
 
             <dependency>
                 <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-gateway</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-param</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>

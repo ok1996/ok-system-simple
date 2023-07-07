@@ -1,0 +1,33 @@
+server:
+  port: 11000
+spring:
+  application:
+    name: simple-demo-gateway
+  cloud:
+    nacos:
+      server-addr: http://127.0.0.1:8848
+      username:
+      password:
+      discovery:
+        registerEnabled: true
+        namespace:
+      config:
+        namespace:
+        file-extension: yml
+    # 路由网关配置
+    gateway:
+      # 启用了自动根据服务名建立路由
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+  config:
+    import:
+      - nacos:application.yml
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      enabled: true
+      version: openapi3
