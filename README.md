@@ -2,29 +2,11 @@
 
 基于SpringBoot提供常用的自动装配模块，能快速提供各模块所需的服务
 
-## 该如何开始？
-
-找到对应所需的starter模块，引入依赖
-
-例，需要快速集成一个拥有Web应用和集成接口文档的服务
-
-引入依赖
-~~~
-    <dependencies>
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-~~~
-
-## Links
-
-- [文档详情](https://ok96.cn/pages/8e9dc3/)
-- [版本说明](https://ok96.cn/pages/ae03ef/)
-- [中央仓库](https://mvnrepository.com/search?q=cn.iosd)
-
 <p>
+  <a href="https://mvnrepository.com/search?q=cn.iosd">
+    <img alt="maven" src="https://img.shields.io/badge/maven-repository-blue?style=flat-square&logo=apachemaven">
+  </a>
+
   <a href="https://central.sonatype.com/search?q=g%3Acn.iosd+a%3Asimple-starter">
     <img alt="maven" src="https://img.shields.io/maven-central/v/cn.iosd/simple-starter.svg?style=flat-square&logo=apachemaven">
   </a>
@@ -40,8 +22,23 @@
   <a href="https://app.codacy.com/gh/ok1996/ok-system-simple/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
     <img src="https://app.codacy.com/project/badge/Grade/32f59a4b8afd4035a0da527009690541"/>
   </a>
-
 </p>
+
+## 该如何开始？
+
+找到对应所需的starter模块，引入依赖
+
+例，需要快速集成一个拥有Web应用和集成接口文档的服务
+
+引入依赖
+~~~
+    <dependencies>
+        <dependency>
+            <groupId>cn.iosd</groupId>
+            <artifactId>simple-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+~~~
 
 ## 核心依赖
 
@@ -65,6 +62,7 @@
 | simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、<br/>通用CURD控制层、自定义JsonNode处理器        |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
+| simple-starter-gateway    | 微服务网关    | 微服务接口网关：集成微服务文档网关                                            |
 | simple-starter-encrypt    | 加密       | 注解：加密脱敏（加密规则有通用模板、或自定义）<br/>注解：接口请求参数或返回参数Rsa加密解密            |
 | simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）    |
 | simple-starter-email      | 邮件       | Smtp邮件推送                                                     |
