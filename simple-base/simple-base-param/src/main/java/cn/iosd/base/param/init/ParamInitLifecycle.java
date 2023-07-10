@@ -3,9 +3,10 @@ package cn.iosd.base.param.init;
 import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamVo;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.SmartLifecycle;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,32 +15,14 @@ import java.util.List;
  * @author ok1996
  */
 @Component
-public class ParamInitLifecycle implements SmartLifecycle {
+@DependsOn("paramFlyway")
+public class ParamInitLifecycle {
     @Autowired(required = false)
     private List<ParamInit> inits;
     @Autowired
     private IBaseParamService baseParamService;
 
-    private static boolean RUNNING = false;
-
-    @Override
-    public void start() {
-        if (!this.isRunning()) {
-            RUNNING = true;
-            this.init();
-        }
-    }
-
-    @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public boolean isRunning() {
-        return RUNNING;
-    }
-
+    @PostConstruct
     public void init() {
         if (this.inits != null) {
             this.inits.forEach(init -> {
