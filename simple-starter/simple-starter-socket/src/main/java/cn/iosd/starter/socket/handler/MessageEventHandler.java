@@ -77,13 +77,12 @@ public class MessageEventHandler {
     private void joinRoom(SocketIOClient client, String room, String prefix) {
         if (StringUtils.isNotBlank(room)) {
             String[] rooms = room.split(",");
-            for (int i = 0; i < rooms.length; i++) {
-                if (!client.getAllRooms().contains(rooms[i])) {
-                    if (StringUtils.isEmpty(prefix)) {
-                        prefix = "";
-                    }
-                    log.info("client join room:{}{}", prefix, rooms[i]);
-                    client.joinRoom(prefix + rooms[i]);
+            for (String roomName : rooms) {
+                if (!client.getAllRooms().contains(roomName)) {
+                    String prefixReal = StringUtils.defaultString(prefix);
+                    String roomWithPrefix = prefixReal + roomName;
+                    log.info("client join room: {}", roomWithPrefix);
+                    client.joinRoom(roomWithPrefix);
                 }
             }
         }
