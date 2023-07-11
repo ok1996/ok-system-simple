@@ -10,4 +10,4 @@ services:
       - "./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf"
       - "./redis/data:/data"
     command:
-      redis-server /usr/local/etc/redis/redis.conf --notify-keyspace-events Ex --requirepass redisp123456 --appendonly yes
+      redis-server /usr/local/etc/redis/redis.conf --appendonly yes
