@@ -26,8 +26,8 @@
 
         <java.version>8</java.version>
         <spring-boot.version>2.7.13</spring-boot.version>
-        <spring-cloud.version>2021.0.7</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.8</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
 
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>4.1.0</knife4j.version>
