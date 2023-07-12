@@ -27,18 +27,19 @@ public class MessageEventHandler {
      */
     @OnConnect
     public void onConnect(SocketIOClient client) {
-        if (client != null) {
-            String sessionId = client.getSessionId().toString();
-            String room = client.getHandshakeData().getSingleUrlParam("room");
-            joinRoom(client, room, null);
-            //可选指定连接微服务名称
-            String serviceName = client.getHandshakeData().getSingleUrlParam(SocketConstants.CONNECT_APPLICATION_NAME);
-            joinRoom(client, serviceName, SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX);
-            log.info("socket连接成功, sessionId={}", sessionId);
-        } else {
+        if (client == null) {
             log.error("客户端建立连接失败: SocketIOClient为空");
+            return;
         }
+        String sessionId = client.getSessionId().toString();
+        String room = client.getHandshakeData().getSingleUrlParam("room");
+        joinRoom(client, room, null);
+        // 可选指定连接微服务名称
+        String serviceName = client.getHandshakeData().getSingleUrlParam(SocketConstants.CONNECT_APPLICATION_NAME);
+        joinRoom(client, serviceName, SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX);
+        log.info("socket连接成功, sessionId={}", sessionId);
     }
+
 
     /**
      * 添加@OnDisconnect事件，客户端断开连接时调用，刷新客户端信息
@@ -80,7 +81,7 @@ public class MessageEventHandler {
             for (String roomName : rooms) {
                 if (!client.getAllRooms().contains(roomName)) {
                     String prefixReal = StringUtils.defaultString(prefix);
-                    String roomWithPrefix = prefixReal + roomName;
+                    String roomWithPrefix = prefixReal + roomName.trim();
                     log.info("client join room: {}", roomWithPrefix);
                     client.joinRoom(roomWithPrefix);
                 }
