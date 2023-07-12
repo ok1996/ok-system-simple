@@ -36,7 +36,6 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>2.0.2</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.469</aws-java-sdk-s3.version>
-        <springdoc-openapi.version>1.7.0</springdoc-openapi.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
     </properties>
@@ -89,14 +88,8 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>${springdoc-openapi.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
 
