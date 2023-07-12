@@ -1,0 +1,65 @@
+version: '3'
+services:
+  seaweedfsRedis:
+    image: redis:7.0.11
+    restart: always
+    container_name: seaweedfsRedis
+    ports:
+      - "10201:6379"
+    volumes:
+      - "./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf"
+      - "./redis/data:/data"
+    command:
+      redis-server /usr/local/etc/redis/redis.conf --appendonly yes
+
+  seaweedfsMaster1:
+    image: chrislusf/seaweedfs:3.53
+    container_name: seaweedfsMaster1
+    ports:
+      - "9331:9331"
+      - "19331:19331"
+      - "9324:9324"
+    command: 'master -ip=192.168.213.213 -ip.bind="0.0.0.0" -peers="192.168.213.213:9331" -port=9331 -metricsPort=9324'
+
+  seaweedfsVolume1:
+    image: chrislusf/seaweedfs:3.53
+    container_name: seaweedfsVolume1
+    ports:
+      - "8331:8331"
+      - "18331:18331"
+    command: 'volume -mserver="192.168.213.213:9331" -ip.bind="0.0.0.0" -ip="192.168.213.213"  -port=8331'
+    depends_on:
+      - seaweedfsMaster1
+    volumes:
+      - ./seaweedfs/volume1data:/data
+
+  seaweedfsFiler1:
+    image: chrislusf/seaweedfs:3.53
+    container_name: seaweedfsFiler1
+    ports:
+      - "9431:9431"
+      - "19431:19431"
+    command: 'filer -master="192.168.213.213:9331" -ip.bind="0.0.0.0" -ip="192.168.213.213"  -port=9431'
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./filer/filer.toml:/etc/seaweedfs/filer.toml
+    depends_on:
+      - seaweedfsMaster1
+      - seaweedfsVolume1
+      - seaweedfsRedis
+
+  seaweedfsS31:
+    image: chrislusf/seaweedfs:3.53
+    container_name: seaweedfsS31
+    ports:
+      - "9531:9531"
+      - "9327:9327"
+    command: 's3 -config=/s3/config.json -ip.bind="0.0.0.0" -filer="192.168.213.213:9431"  -port=9531'
+    volumes:
+      - ./s3/config.json:/s3/config.json
+    depends_on:
+      - seaweedfsMaster1
+      - seaweedfsVolume1
+      - seaweedfsRedis
+      - seaweedfsFiler1
