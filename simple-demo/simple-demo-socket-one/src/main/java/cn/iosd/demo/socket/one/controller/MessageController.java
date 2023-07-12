@@ -1,6 +1,8 @@
 package cn.iosd.demo.socket.one.controller;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +26,15 @@ public class MessageController {
     private SocketMessageServer socketMessageServer;
 
     @Operation(summary = "广播所有连接客户端")
-    @PostMapping("broadcast")
-    public Response<?> broadcast(@RequestBody Object chatMessage) {
-        socketMessageServer.sendBroadcast("broadcastTest", chatMessage);
+    @GetMapping("broadcast")
+    public Response<?> broadcast(String message) {
+        socketMessageServer.sendBroadcast("broadcastTest", message);
         return Response.ok();
     }
 
     @Operation(summary = "仅发送带群聊Room连接的客户端")
-    @PostMapping("room")
-    public Response<?> room(@RequestBody ChatMessage chatMessage) {
+    @GetMapping("room")
+    public Response<?> room(@ParameterObject ChatMessage chatMessage) {
         socketMessageServer.sendRoom(chatMessage.getEventName()
                 , chatMessage.getRoom()
                 , chatMessage.getMessage()
@@ -41,9 +43,9 @@ public class MessageController {
     }
 
     @Operation(summary = "发送带指定微服务连接的客户端")
-    @PostMapping("service")
-    public Response<?> service(@RequestBody Object chatMessage) {
-        socketMessageServer.sendService("serviceTest", chatMessage);
+    @GetMapping("service")
+    public Response<?> service(String message) {
+        socketMessageServer.sendService("serviceTest", message);
         return Response.ok();
     }
 }
