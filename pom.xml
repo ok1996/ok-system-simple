@@ -38,7 +38,6 @@
         <netty-socketio.version>2.0.2</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.469</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
-        <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
         <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     </properties>
 
@@ -129,13 +128,6 @@
                 <groupId>p6spy</groupId>
                 <artifactId>p6spy</artifactId>
                 <version>${p6spy.version}</version>
-            </dependency>
-
-            <!-- Mybatis 依赖配置 -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${spring-boot-mybatis.version}</version>
             </dependency>
 
             <!-- 代码生成 -->
