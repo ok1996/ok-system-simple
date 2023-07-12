@@ -38,7 +38,6 @@
         <netty-socketio.version>2.0.2</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.469</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
-        <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     </properties>
 
     <!-- 依赖声明 -->
