@@ -30,12 +30,12 @@
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
 
         <p6spy.version>3.9.1</p6spy.version>
+        <knife4j.version>4.1.0</knife4j.version>
         <io-grpc.version>1.56.0</io-grpc.version>
         <redisson.version>3.22.1</redisson.version>
         <jakarta-mail.version>2.0.1</jakarta-mail.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>2.0.2</netty-socketio.version>
-        <knife4j-openapi3.version>4.1.0</knife4j-openapi3.version>
         <aws-java-sdk-s3.version>1.12.469</aws-java-sdk-s3.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <spring-boot-mybatis.version>3.0.1</spring-boot-mybatis.version>
@@ -92,13 +92,13 @@
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-                <version>${knife4j-openapi3.version}</version>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
-                <version>${knife4j-openapi3.version}</version>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <dependency>
