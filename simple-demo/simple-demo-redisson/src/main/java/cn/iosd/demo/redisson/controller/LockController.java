@@ -44,7 +44,7 @@ public class LockController {
             TOTAL--;
         }
         Thread.sleep(50);
-        log.info("===lock===减完库存后,当前库存===" + TOTAL);
+        log.info("===/lock/decrement===减完库存后,当前库存===" + TOTAL);
         //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
         if (redissonLockService.isHeldByCurrentThread(LOCK_NAME)) {
             redissonLockService.unlock(LOCK_NAME);
@@ -65,7 +65,7 @@ public class LockController {
             }
             Thread.sleep(50);
             redissonLockService.unlock(TRY_LOCK_NAME);
-            log.info("====tryLock===减完库存后,当前库存===" + TOTAL);
+            log.info("====/lock/decrementTryLock===减完库存后,当前库存===" + TOTAL);
         } else {
             log.info("[ExecutorRedisson]获取锁失败");
         }
@@ -79,7 +79,7 @@ public class LockController {
             TOTAL_NOT_LOCK--;
         }
         Thread.sleep(50);
-        log.info("===notLock===减完库存后,当前库存===" + TOTAL_NOT_LOCK);
+        log.info("===/lock/decrementNotLock===减完库存后,当前库存===" + TOTAL_NOT_LOCK);
         return Response.ok();
     }
 }

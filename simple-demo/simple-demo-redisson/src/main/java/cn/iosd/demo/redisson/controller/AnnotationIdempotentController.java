@@ -30,7 +30,7 @@ public class AnnotationIdempotentController {
         if (TOTAL > 0) {
             TOTAL--;
         }
-        log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
+        log.info("===/annotationIdempotent/decrement注解模式=== 减完库存后,当前库存===" + TOTAL);
         return Response.ok();
     }
 
@@ -41,7 +41,7 @@ public class AnnotationIdempotentController {
         if (TOTAL > 0) {
             TOTAL--;
         }
-        log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
+        log.info("===/annotationIdempotent/decrementReqPara注解模式=== 减完库存后,当前库存===" + TOTAL);
         return Response.ok();
     }
 
@@ -52,7 +52,7 @@ public class AnnotationIdempotentController {
         if (TOTAL > 0) {
             TOTAL--;
         }
-        log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
+        log.info("===/annotationIdempotent/decrementException注解模式=== 减完库存后,当前库存===" + TOTAL);
         throw new Exception("异常测试");
     }
 }
