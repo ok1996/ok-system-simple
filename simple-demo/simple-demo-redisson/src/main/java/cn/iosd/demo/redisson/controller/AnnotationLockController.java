@@ -31,7 +31,7 @@ public class AnnotationLockController {
         if (TOTAL > 0) {
             TOTAL--;
         }
-        log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
+        log.info("===/annotationLock/decrement注解模式=== 减完库存后,当前库存===" + TOTAL);
         return Response.ok();
     }
 
@@ -42,7 +42,7 @@ public class AnnotationLockController {
         if (TOTAL > 0) {
             TOTAL--;
         }
-        log.info("===注解模式=== 减完库存后,当前库存===" + TOTAL);
+        log.info("===/annotationLock/decrementException注解模式=== 减完库存后,当前库存===" + TOTAL);
         throw new Exception("异常测试");
     }
 }
