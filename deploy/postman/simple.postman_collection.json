@@ -309,7 +309,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程1发送消息，页面1应接收到数据&eventName=123&room=1001",
+							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程1发送消息，room=1001应接收到数据&eventName=123&room=1001",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
@@ -320,7 +320,7 @@
 							"query": [
 								{
 									"key": "message",
-									"value": "接口调用工程1发送消息，页面1应接收到数据"
+									"value": "接口调用工程1发送消息，room=1001应接收到数据"
 								},
 								{
 									"key": "eventName",
@@ -356,7 +356,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程2发送消息，页面2应接收到数据&eventName=123&room=1002",
+							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程2发送消息，room=1002应接收到数据&eventName=123&room=1002",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
@@ -367,7 +367,7 @@
 							"query": [
 								{
 									"key": "message",
-									"value": "接口调用工程2发送消息，页面2应接收到数据"
+									"value": "接口调用工程2发送消息，room=1002应接收到数据"
 								},
 								{
 									"key": "eventName",
@@ -442,7 +442,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/service?message=本消息为simple-demo-socket-one发送，页面4应接收到数据",
+							"raw": "{{Host}}{{DemoSocketOne}}/message/service?message=本消息为simple-demo-socket-one发送，连接one应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
@@ -453,7 +453,7 @@
 							"query": [
 								{
 									"key": "message",
-									"value": "本消息为simple-demo-socket-one发送，页面4应接收到数据"
+									"value": "本消息为simple-demo-socket-one发送，连接one应接收到数据"
 								}
 							]
 						},
@@ -481,7 +481,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketTwo}}/message/service?message=本消息为simple-demo-socket-two发送，页面3应接收到数据",
+							"raw": "{{Host}}{{DemoSocketTwo}}/message/service?message=本消息为simple-demo-socket-two发送，连接two应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketTwo}}"
 							],
@@ -492,7 +492,7 @@
 							"query": [
 								{
 									"key": "message",
-									"value": "本消息为simple-demo-socket-two发送，页面3应接收到数据"
+									"value": "本消息为simple-demo-socket-two发送，连接two应接收到数据"
 								}
 							]
 						},
@@ -2120,7 +2120,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/d:/Pictures/76f7141530885540b8ec4a0d45f27b1d.jpeg"
+									"src": "/d:/Pictures/00042d4e1ff744ccafc6a569ce8d1c35.jpg"
 								}
 							]
 						},
@@ -2366,6 +2366,143 @@
 									"key": "bucketName",
 									"value": "imtest001"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "simple-demo-encrypt",
+			"item": [
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体-嵌套",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.personVo.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/test/superPerson",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"test",
+								"superPerson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表-嵌套",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].personVo.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/test/superPersonList",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"test",
+								"superPersonList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/test/person",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"test",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/test/personList",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"test",
+								"personList"
 							]
 						}
 					},
