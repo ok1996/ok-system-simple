@@ -1041,7 +1041,7 @@
 							"response": []
 						},
 						{
-							"name": "[simple-demo-redisson]分布式锁-注解模式-测试请求（观察后台日志输出，若输出/annotationLock/decrement库存乱序减少则正常）",
+							"name": "[simple-demo-redisson]分布式锁-注解模式-测试请求（观察后台日志输出，若输出/annotationLock/decrement库存按序减少则正常）",
 							"event": [
 								{
 									"listen": "test",
@@ -1085,7 +1085,7 @@
 							"response": []
 						},
 						{
-							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求（观察后台日志输出，若输出/annotationIdempotent/decrement库存乱序减少则正常）",
+							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求（观察后台日志输出，若输出/annotationIdempotent/decrement库存按序减少则正常）",
 							"event": [
 								{
 									"listen": "test",
@@ -1129,7 +1129,7 @@
 							"response": []
 						},
 						{
-							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求-请求参数变量（观察后台日志输出，若输出/annotationIdempotent/decrementReqPara库存乱序减少则正常）",
+							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求-请求参数变量（观察后台日志输出，若输出/annotationIdempotent/decrementReqPara库存按序减少则正常）",
 							"event": [
 								{
 									"listen": "test",
