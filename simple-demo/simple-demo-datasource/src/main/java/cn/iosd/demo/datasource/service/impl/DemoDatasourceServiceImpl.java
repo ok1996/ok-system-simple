@@ -15,5 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoDatasourceServiceImpl extends ServiceImpl<DemoDatasourceMapper, DemoDatasource> implements IDemoDatasourceService {
 
-
+    @Override
+    public DemoDatasource selectCustomById(Long id) {
+        return baseMapper.selectCustomById(id);
+    }
 }

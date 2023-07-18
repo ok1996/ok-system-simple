@@ -1,14 +1,16 @@
 package cn.iosd.demo.datasource.config;
 
+import cn.iosd.starter.datasource.mybatis.MapperLocations;
 import org.flywaydb.core.Flyway;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
- * 配置MapperScan、Flyway
+ * 配置MapperScan、MapperLocations、Flyway
  *
  * @author ok1996
  */
@@ -32,5 +34,10 @@ public class DemoDatasourceAutoConfiguration {
                 .load();
         flyway.migrate();
         return flyway;
+    }
+
+    @Bean
+    public MapperLocations datasourceLocations() {
+        return new MapperLocations(List.of("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml"));
     }
 }

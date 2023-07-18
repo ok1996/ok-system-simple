@@ -37,7 +37,6 @@ public class MybatisGenerator {
     private static final String TEMPLATES_DIR_SERVICE = TEMPLATES_DIR_TEMPLATES + "service.java";
     private static final String TEMPLATES_DIR_SERVICE_IMPL = TEMPLATES_DIR_TEMPLATES + "serviceImpl.java";
     private static final String TEMPLATES_DIR_CONFIG = TEMPLATES_DIR_TEMPLATES + "config.java.ftl";
-    private static final String TEMPLATES_DIR_MAPPER_LOCATIONS_PROVIDER = TEMPLATES_DIR_TEMPLATES + "mapperLocationsProvider.java.ftl";
 
     private static final String TEMPLATES_DIR_YML = TEMPLATES_DIR_TEMPLATES + "application.yml.ftl";
     private static final String TEMPLATES_DIR_CONFIG_YML = TEMPLATES_DIR_TEMPLATES + "configApplication.yml.ftl";
@@ -88,7 +87,6 @@ public class MybatisGenerator {
 
         Map<String, String> customFile = new HashMap<>();
         customFile.put(customFilePrefix + "config/" + capitalizedModuleName + "AutoConfig.java", TEMPLATES_DIR_CONFIG);
-        customFile.put(customFilePrefix + "config/" + capitalizedModuleName + "MapperLocationsProvider.java", TEMPLATES_DIR_MAPPER_LOCATIONS_PROVIDER);
         customFile.put(customFilePrefix + "resources/application.yml", TEMPLATES_DIR_YML);
         customFile.put(customFilePrefix + "resources/config/application.yml", TEMPLATES_DIR_CONFIG_YML);
         customFile.put(customFilePrefix + "resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports", TEMPLATES_DIR_IMPORTS);

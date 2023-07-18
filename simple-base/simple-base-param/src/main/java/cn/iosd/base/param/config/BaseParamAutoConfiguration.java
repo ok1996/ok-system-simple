@@ -1,5 +1,6 @@
 package cn.iosd.base.param.config;
 
+import cn.iosd.starter.datasource.mybatis.MapperLocations;
 import org.flywaydb.core.Flyway;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -8,9 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
- * 配置MapperScan、Flyway、ComponentScan以及是否启用
+ * 配置MapperScan、MapperLocations、Flyway、ComponentScan以及是否启用
  *
  * @author ok1996
  */
@@ -30,5 +32,10 @@ public class BaseParamAutoConfiguration {
                 .load();
         flyway.migrate();
         return flyway;
+    }
+
+    @Bean
+    public MapperLocations paramMapperLocations() {
+        return new MapperLocations(List.of("classpath*:/cn/iosd/base/param/mapper/**/*Mapper.xml"));
     }
 }
