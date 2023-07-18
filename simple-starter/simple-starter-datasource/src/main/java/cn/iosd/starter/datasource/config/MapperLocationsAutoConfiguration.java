@@ -1,6 +1,6 @@
 package cn.iosd.starter.datasource.config;
 
-import cn.iosd.starter.datasource.mybatis.provider.MapperLocationsProvider;
+import cn.iosd.starter.datasource.mybatis.MapperLocations;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.List;
 @ConditionalOnProperty(name = "simple.datasource.locations.enabled", havingValue = "true", matchIfMissing = true)
 public class MapperLocationsAutoConfiguration {
     @Autowired(required = false)
-    private List<MapperLocationsProvider> providers;
+    private List<MapperLocations> mapperProvider;
 
     /**
      * 配置 MybatisPlusPropertiesCustomizer 的 Bean
@@ -34,10 +34,10 @@ public class MapperLocationsAutoConfiguration {
     @Bean
     public MybatisPlusPropertiesCustomizer mybatisPlusPropertiesCustomizer() {
         return (properties) -> {
-            if (providers != null) {
+            if (mapperProvider != null) {
                 List<String> mapperLocations = new ArrayList<>();
-                for (MapperLocationsProvider provider : providers) {
-                    List<String> locations = provider.getMapperLocations();
+                for (MapperLocations provider : mapperProvider) {
+                    List<String> locations = provider.getLocations();
                     if (locations != null && !locations.isEmpty()) {
                         mapperLocations.addAll(locations);
                     }

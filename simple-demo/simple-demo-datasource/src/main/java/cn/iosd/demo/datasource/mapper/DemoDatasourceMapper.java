@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface DemoDatasourceMapper extends BaseMapper<DemoDatasource> {
 
+    DemoDatasource selectCustomById(Long id);
 }
