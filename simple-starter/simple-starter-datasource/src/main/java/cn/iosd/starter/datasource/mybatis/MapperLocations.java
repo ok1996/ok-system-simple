@@ -1,5 +1,6 @@
 package cn.iosd.starter.datasource.mybatis;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class MapperLocations {
     }
 
     public MapperLocations(String location) {
-        this.locations = List.of(location);
+        this.locations = Arrays.asList(location);
     }
 
     public List<String> getLocations() {
