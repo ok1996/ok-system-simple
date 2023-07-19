@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.util.List;
 
 /**
  * 配置MapperScan、MapperLocations、Flyway、ComponentScan以及是否启用
@@ -36,6 +35,6 @@ public class BaseParamAutoConfiguration {
 
     @Bean
     public MapperLocations paramMapperLocations() {
-        return new MapperLocations(List.of("classpath*:/cn/iosd/base/param/mapper/**/*Mapper.xml"));
+        return new MapperLocations("classpath*:/cn/iosd/base/param/mapper/**/*Mapper.xml");
     }
 }

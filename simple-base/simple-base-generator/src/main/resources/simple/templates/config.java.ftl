@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.util.List;
 
 /**
  * <p>
@@ -38,6 +37,6 @@ public class ${ModuleName}AutoConfig {
 
     @Bean
     public MapperLocations ${ModuleName?lower_case}Locations() {
-        return new MapperLocations(List.of("classpath*:${mapperLocations}**/*Mapper.xml"));
+        return new MapperLocations("classpath*:${mapperLocations}**/*Mapper.xml");
     }
 }

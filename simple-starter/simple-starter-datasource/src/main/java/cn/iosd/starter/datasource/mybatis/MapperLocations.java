@@ -17,6 +17,10 @@ public class MapperLocations {
         this.locations = locations;
     }
 
+    public MapperLocations(String location) {
+        this.locations = List.of(location);
+    }
+
     public List<String> getLocations() {
         return locations;
     }
