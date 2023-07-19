@@ -1,6 +1,6 @@
 package cn.iosd.demo.socket.two.controller;
 
-import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
