@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 自动配置 MybatisPlus 的 mapper-locations 属性，通过实现 MapperLocationsProvider 接口获取配置值
@@ -35,16 +37,15 @@ public class MapperLocationsAutoConfiguration {
     public MybatisPlusPropertiesCustomizer mybatisPlusPropertiesCustomizer() {
         return (properties) -> {
             if (mapperProvider != null) {
-                List<String> mapperLocations = new ArrayList<>();
-                for (MapperLocations provider : mapperProvider) {
-                    List<String> locations = provider.getLocations();
-                    if (locations != null && !locations.isEmpty()) {
-                        mapperLocations.addAll(locations);
-                    }
-                }
+                List<String> mapperLocations = mapperProvider.stream()
+                        .map(MapperLocations::getLocations)
+                        .filter(Objects::nonNull)
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList());
                 mapperLocations.addAll(List.of(properties.getMapperLocations()));
                 properties.setMapperLocations(mapperLocations.toArray(new String[0]));
             }
+
         };
     }
 
