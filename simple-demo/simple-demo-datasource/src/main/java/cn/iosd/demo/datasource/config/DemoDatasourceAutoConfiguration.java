@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.util.List;
 
 /**
  * 配置MapperScan、MapperLocations、Flyway
@@ -38,6 +37,6 @@ public class DemoDatasourceAutoConfiguration {
 
     @Bean
     public MapperLocations datasourceLocations() {
-        return new MapperLocations(List.of("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml"));
+        return new MapperLocations("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml");
     }
 }
