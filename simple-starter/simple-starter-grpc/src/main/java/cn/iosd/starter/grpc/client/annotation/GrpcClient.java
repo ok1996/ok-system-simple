@@ -1,5 +1,7 @@
 package cn.iosd.starter.grpc.client.annotation;
 
+import org.springframework.context.annotation.Bean;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -18,6 +20,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+@Bean
 public @interface GrpcClient {
 
     /**
