@@ -1129,7 +1129,7 @@
 							"response": []
 						},
 						{
-							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求-请求参数变量（观察后台日志输出，若输出/annotationIdempotent/decrementReqPara库存按序减少则正常）",
+							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求-请求参数变量--在业务执行结束后解锁（观察后台日志输出，若输出/annotationIdempotent/decrementReqPara库存按序减少则正常）",
 							"event": [
 								{
 									"listen": "test",
@@ -1172,6 +1172,62 @@
 										{
 											"key": "keyName",
 											"value": "cda6666"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "循环调用测试",
+					"item": [
+						{
+							"name": "[simple-demo-redisson]分布式幂等-注解模式-测试请求-请求参数变量-等待expireTime过期后自动解锁（查看后台日志===/annotationIdempotent/decrementReqPara/executionFinishedUnlock，每5秒则正常一次）",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"测试返回结果code是否为200\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.code).to.eql(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"2\",\r\n  \"remark\": \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{DemoRedisson}}/annotationIdempotent/decrementReqPara/executionFinishedUnlock?keyName=cda7777",
+									"host": [
+										"{{Host}}{{DemoRedisson}}"
+									],
+									"path": [
+										"annotationIdempotent",
+										"decrementReqPara",
+										"executionFinishedUnlock"
+									],
+									"query": [
+										{
+											"key": "keyName",
+											"value": "cda7777"
 										}
 									]
 								}
