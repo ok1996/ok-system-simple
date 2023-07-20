@@ -51,7 +51,9 @@ public class DistributedIdempotentHandler {
                 log.debug("[完成]执行DistributedIdempotent环绕通知");
                 return proceed;
             } finally {
-                lock.unlock();
+                if (idempotent.executionFinishedUnlock()) {
+                    lock.unlock();
+                }
             }
         }
         throw new Exception(idempotent.message());

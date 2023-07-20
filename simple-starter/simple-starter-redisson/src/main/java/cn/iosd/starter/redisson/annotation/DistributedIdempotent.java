@@ -53,4 +53,13 @@ public @interface DistributedIdempotent {
      * @return {@link TimeUnit}
      */
     TimeUnit unit() default TimeUnit.SECONDS;
+
+    /**
+     * 是否在业务执行结束后解锁,默认true
+     *
+     * @return false：则等待expireTime自动过期后自动解锁
+     * <br/>
+     * true：业务执行结束point.proceed()后解锁
+     */
+    boolean executionFinishedUnlock() default true;
 }
