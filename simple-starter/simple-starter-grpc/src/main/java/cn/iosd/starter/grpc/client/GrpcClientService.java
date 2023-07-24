@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 涉及的Bean对象注入GrpcChannel
@@ -135,14 +136,15 @@ public class GrpcClientService implements InitializingBean {
      * @return 请求头对象，如果无法获取则返回 null
      */
     private ClientCallStartHeaders getHeaders(GrpcClient annotation) {
-        if (!CollectionUtils.isEmpty(clientCallStartHeadersList)) {
-            if (clientCallStartHeadersList.size() == 1 && StringUtils.isBlank(annotation.headerBeanName())) {
-                return clientCallStartHeadersList.get(0);
-            } else {
-                String beanName = annotation.headerBeanName();
-                return StringUtils.isNotBlank(beanName) ? clientCallStartHeadersMap.get(beanName) : null;
-            }
+        if (CollectionUtils.isEmpty(clientCallStartHeadersList)) {
+            return null;
         }
-        return null;
+
+        if (clientCallStartHeadersList.size() == 1 && StringUtils.isBlank(annotation.headerBeanName())) {
+            return clientCallStartHeadersList.get(0);
+        } else {
+            String beanName = annotation.headerBeanName();
+            return Optional.ofNullable(beanName).map(clientCallStartHeadersMap::get).orElse(null);
+        }
     }
 }
