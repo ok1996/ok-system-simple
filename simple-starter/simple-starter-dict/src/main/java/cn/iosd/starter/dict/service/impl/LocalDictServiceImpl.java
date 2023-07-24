@@ -34,13 +34,13 @@ public class LocalDictServiceImpl implements DictService {
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-        Map<String, List<DictItem>> dictItemList = null;
         try (InputStream inputStream = this.getClass().getResourceAsStream(resourceDictFileDir)) {
             ObjectMapper mapper = new ObjectMapper();
-            dictItemList = mapper.readValue(inputStream, TYPE_DICT_ITEM);
+            Map<String, List<DictItem>> dictItemList = mapper.readValue(inputStream, TYPE_DICT_ITEM);
+            return dictItemList.get(dictionaryParams);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return dictItemList.get(dictionaryParams);
     }
 }
