@@ -85,12 +85,12 @@ public class DictAspect {
             if (dictFieldAnnotation != null) {
                 DictService dictService = getDictServiceByName(dictFieldAnnotation.dictImplBeanName());
                 if (dictService == null) {
-                    break;
+                    continue;
                 }
                 // 获取字典项列表
                 List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), tempCacheEnabled, cache);
                 if (dictItemList == null || dictItemList.size() == 0) {
-                    break;
+                    continue;
                 }
                 ReflectionUtils.makeAccessible(field);
                 // 获取目标字段值
