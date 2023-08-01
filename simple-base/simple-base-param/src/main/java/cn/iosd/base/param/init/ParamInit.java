@@ -42,10 +42,11 @@ public class ParamInit {
 
     /**
      * 初始化对象
-     * @param key 初始化参数的键
-     * @param remark 备注信息
+     *
+     * @param key             初始化参数的键
+     * @param remark          备注信息
      * @param restartOverride 是否每次启动都覆盖生成
-     * @param moduleNames 模块名称列表
+     * @param moduleNames     模块名称列表
      */
     public ParamInit(String key, String remark, boolean restartOverride, List<String> moduleNames) {
         this.key = key;
@@ -92,5 +93,16 @@ public class ParamInit {
 
     public void setModuleNames(List<String> moduleNames) {
         this.moduleNames = moduleNames;
+    }
+
+    @Override
+    public String toString() {
+        return "ParamInit{" +
+                "key='" + key + '\'' +
+                ", codeValues=" + codeValues +
+                ", restartOverride=" + restartOverride +
+                ", remark='" + remark + '\'' +
+                ", moduleNames=" + moduleNames +
+                '}';
     }
 }

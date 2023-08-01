@@ -4,12 +4,15 @@ import cn.iosd.base.param.domain.BaseParam;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.vo.BaseParamVo;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author ok1996
@@ -17,21 +20,26 @@ import java.util.List;
 @Component
 @DependsOn("paramFlyway")
 public class ParamInitLifecycle {
+    private static final Logger log = LoggerFactory.getLogger(ParamInitLifecycle.class);
+
     @Autowired(required = false)
     private List<ParamInit> inits;
+
     @Autowired
     private IBaseParamService baseParamService;
 
     @PostConstruct
     public void init() {
         if (this.inits != null) {
-            this.inits.forEach(init -> {
-                String key = init.getKey();
-                if (StringUtils.isEmpty(key)) {
-                    throw new IllegalArgumentException("初始化key值为空");
-                }
-                initParam(init);
-            });
+            this.inits.stream()
+                    .filter(Objects::nonNull)
+                    .forEach(v -> {
+                        if (StringUtils.isEmpty(v.getKey())) {
+                            log.error("初始化key值为空,请检查ParamInit对象:{}",v);
+                            return;
+                        }
+                        initParam(v);
+                    });
         }
     }
 
