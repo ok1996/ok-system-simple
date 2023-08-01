@@ -5,47 +5,92 @@ import cn.iosd.base.param.vo.CodeValue;
 import java.util.List;
 
 /**
- * 实现此方法则工程启动进行初始化数据
+ * 实现此对象则工程启动进行初始化数据
  *
  * @author ok1996
  */
-public interface ParamInit {
+public class ParamInit {
     /**
-     * 获取初始化参数的键。
-     *
-     * @return 参数键
+     * 初始化参数的键。
      */
-    String getKey();
+    private String key;
 
     /**
      * 获取初始化参数的配置值列表。
-     *
-     * @return 配置值列表
      */
-    List<CodeValue<?>> getCodeValues();
+    private List<CodeValue<?>> codeValues;
 
     /**
-     * 判断是否每次启动都覆盖生成。
-     *
-     * @return true表示每次启动覆盖生成；false表示不覆盖
+     * 是否每次启动都覆盖生成。
+     * <br/>
+     * true表示每次启动覆盖生成；false表示不覆盖
      */
-    boolean restartOverride();
+    private boolean restartOverride = false;
 
     /**
-     * 获取备注信息。
-     *
-     * @return 备注信息
+     * 备注信息。
      */
-    default String getRemark() {
-        return "";
+    private String remark = "";
+
+    /**
+     * 模块名称列表。
+     */
+    private List<String> moduleNames;
+
+    public ParamInit() {
     }
 
     /**
-     * 获取模块名称列表。
-     *
-     * @return 模块名称列表
+     * 初始化对象
+     * @param key 初始化参数的键
+     * @param remark 备注信息
+     * @param restartOverride 是否每次启动都覆盖生成
+     * @param moduleNames 模块名称列表
      */
-    default List<String> getModuleNames() {
-        return null;
+    public ParamInit(String key, String remark, boolean restartOverride, List<String> moduleNames) {
+        this.key = key;
+        this.moduleNames = moduleNames;
+        this.remark = remark;
+        this.restartOverride = restartOverride;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public List<CodeValue<?>> getCodeValues() {
+        return codeValues;
+    }
+
+    public void setCodeValues(List<CodeValue<?>> codeValues) {
+        this.codeValues = codeValues;
+    }
+
+    public boolean isRestartOverride() {
+        return restartOverride;
+    }
+
+    public void setRestartOverride(boolean restartOverride) {
+        this.restartOverride = restartOverride;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<String> getModuleNames() {
+        return moduleNames;
+    }
+
+    public void setModuleNames(List<String> moduleNames) {
+        this.moduleNames = moduleNames;
     }
 }
