@@ -45,7 +45,7 @@ public class ParamInitLifecycle {
         BaseParam baseParam = baseParamService.selectBaseParamByKey(key);
         if (baseParam == null) {
             baseParamService.insertBaseParam(initVo(init));
-        } else if (init.restartOverride()) {
+        } else if (init.isRestartOverride()) {
             BaseParamVo saveReqVo = initVo(init);
             saveReqVo.setId(baseParam.getId());
             baseParamService.updateBaseParam(saveReqVo);

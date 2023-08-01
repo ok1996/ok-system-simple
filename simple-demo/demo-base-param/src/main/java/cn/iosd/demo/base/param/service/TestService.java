@@ -3,7 +3,7 @@ package cn.iosd.demo.base.param.service;
 import cn.iosd.base.param.service.IBaseParamService;
 import cn.iosd.base.param.utils.ParamInitUtil;
 import cn.iosd.base.param.vo.CodeValue;
-import cn.iosd.demo.base.param.init.TestParamInit;
+import cn.iosd.demo.base.param.init.DemoTestParamInit;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,9 @@ public class TestService {
             return null;
         }
         // 从基础参数服务中获取基础参数码值对象的列表
-        List<CodeValue<?>> simulation = baseParamService.selectCodeValueVoParamByKey(TestParamInit.KEY);
+        List<CodeValue<?>> simulation = baseParamService.selectCodeValueVoParamByKey(DemoTestParamInit.STUDENT_KEY_ONE);
         // 判断是否开启模拟数据
         if (!ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation, ParamInitUtil.OPEN_SIMULATION_CODE)) {
-            // TODO: 实现获取其他来源途径的数据的代码
             log.info("获取其他来源途径的数据");
             return null;
         }
@@ -43,7 +42,7 @@ public class TestService {
         if (contentData.isPresent()) {
             return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
         }
-        log.error("模拟数据不存在,key:{}", TestParamInit.KEY);
+        log.error("模拟数据不存在,key:{}", DemoTestParamInit.STUDENT_KEY_ONE);
         return null;
     }
 
