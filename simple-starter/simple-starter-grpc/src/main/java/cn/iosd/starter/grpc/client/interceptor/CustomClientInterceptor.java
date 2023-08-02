@@ -40,8 +40,9 @@ public class CustomClientInterceptor implements ClientInterceptor {
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 // 在请求开始前设置头部信息
                 Map<String, String> map = clientCallStartHeaders.headers();
-                for (String key : map.keySet()) {
-                    String value = map.get(key);
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    String key = entry.getKey();
+                    String value = entry.getValue();
                     headers.put(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER), value);
                 }
                 super.start(responseListener, headers);
