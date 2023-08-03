@@ -21,13 +21,6 @@ spring:
         locator:
           lowerCaseServiceId: true
           enabled: true
-      routes:
-        - id: simple-demo-cloud
-          uri: lb://simple-demo-cloud
-          predicates:
-            - Path=/**
-          filters:
-            - RewritePath=/simple-demo-cloud/(?<segment>.*),/$\{segment}
   config:
     import:
       - nacos:application.yml
