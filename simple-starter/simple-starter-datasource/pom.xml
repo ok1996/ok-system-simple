@@ -59,12 +59,6 @@
             <artifactId>simple-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-utils-jackson</artifactId>
-        </dependency>
-
     </dependencies>
 
     <profiles>
