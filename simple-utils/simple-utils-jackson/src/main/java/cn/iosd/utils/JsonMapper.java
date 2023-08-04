@@ -3,6 +3,7 @@ package cn.iosd.utils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -62,6 +63,32 @@ public class JsonMapper {
      */
     public static <T> T convertObject(Object obj, TypeReference<T> valueTypeRef) {
         return OBJECT_MAPPER.convertValue(obj, valueTypeRef);
+    }
+
+    /**
+     * 将JSON字符串反序列化为指定类的Java对象。
+     *
+     * @param obj   要反序列化的JSON字符串。
+     * @param clazz 表示要创建的Java对象类型的类。
+     * @param <T>   要创建的Java对象的类型。
+     * @return 表示反序列化JSON数据的Java对象。
+     * @throws JsonProcessingException 如果在反序列化过程中出现错误。
+     */
+    public static <T> T readValue(String obj, Class<T> clazz) throws JsonProcessingException {
+        return OBJECT_MAPPER.readValue(obj, clazz);
+    }
+
+    /**
+     * 将JSON字符串反序列化为指定TypeReference表示的Java对象。
+     *
+     * @param obj         要反序列化的JSON字符串。
+     * @param valueTypeRef 表示要创建的Java对象类型的TypeReference。
+     * @param <T>         要创建的Java对象的类型。
+     * @return 表示反序列化JSON数据的Java对象。
+     * @throws JsonProcessingException 在反序列化过程中出现错误。
+     */
+    public static <T> T readValue(String obj, TypeReference<T> valueTypeRef) throws JsonProcessingException {
+        return OBJECT_MAPPER.readValue(obj, valueTypeRef);
     }
 
 }
