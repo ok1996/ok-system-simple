@@ -1,8 +1,8 @@
 package cn.iosd.demo.base.param.init;
 
-import cn.iosd.base.param.init.ParamInit;
-import cn.iosd.base.param.utils.ParamInitUtil;
-import cn.iosd.base.param.vo.CodeValue;
+import cn.iosd.base.param.api.init.ParamInit;
+import cn.iosd.base.param.api.utils.ParamInitUtil;
+import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
