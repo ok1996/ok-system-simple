@@ -1,6 +1,7 @@
 package cn.iosd.starter.web.conf;
 
 
+import cn.iosd.starter.web.convert.LocalDateTimeFromTimestampDeserializer;
 import cn.iosd.starter.web.convert.LocalDateTimeToLongConvert;
 import cn.iosd.starter.web.convert.LocalDateToLongConvert;
 import cn.iosd.starter.web.convert.LocalTimeToLongConvert;
@@ -70,6 +71,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     private void registerDeserializers(SimpleModule simpleModule) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
         simpleModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
+        simpleModule.addDeserializer(LocalDateTime.class, new LocalDateTimeFromTimestampDeserializer());
         simpleModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(dateTimeFormatter));
         simpleModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(dateTimeFormatter));
     }
