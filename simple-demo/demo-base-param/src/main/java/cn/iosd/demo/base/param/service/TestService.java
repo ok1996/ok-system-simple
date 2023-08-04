@@ -1,8 +1,8 @@
 package cn.iosd.demo.base.param.service;
 
-import cn.iosd.base.param.service.IBaseParamService;
-import cn.iosd.base.param.utils.ParamInitUtil;
-import cn.iosd.base.param.vo.CodeValue;
+import cn.iosd.base.param.api.service.IBaseParamService;
+import cn.iosd.base.param.api.utils.ParamInitUtil;
+import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.demo.base.param.init.DemoTestParamInit;
 import cn.iosd.demo.base.param.vo.ClassmateVo;
 import lombok.extern.slf4j.Slf4j;

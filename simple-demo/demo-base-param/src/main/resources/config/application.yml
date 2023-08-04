@@ -4,8 +4,10 @@ server:
 spring:
   application:
     name: demo-base-param
+
 simple:
-  base:
-    param:
-      ##开启参数配置服务 缺省项为true
-      enabled: true
+  feign:
+    base:
+      param:
+        # 未开启注册中心需要指定调用地址
+        url: http://localhost:9010

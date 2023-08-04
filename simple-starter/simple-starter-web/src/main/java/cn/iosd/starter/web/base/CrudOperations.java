@@ -1,7 +1,7 @@
 package cn.iosd.starter.web.base;
 
 import cn.iosd.starter.web.domain.Response;
-import org.springdoc.core.annotations.ParameterObject;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

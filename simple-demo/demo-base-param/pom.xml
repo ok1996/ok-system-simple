@@ -18,11 +18,7 @@
         </dependency>
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-datasource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-param</artifactId>
+            <artifactId>simple-base-param-api</artifactId>
         </dependency>
     </dependencies>
 

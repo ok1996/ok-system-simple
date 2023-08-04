@@ -1705,7 +1705,7 @@
 			]
 		},
 		{
-			"name": "demo-base-param",
+			"name": "simple-base-param-service",
 			"item": [
 				{
 					"name": "[demo-base-param]新增",
@@ -1736,11 +1736,63 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
+								"simple-base-param-service",
+								"param"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[demo-base-param]修改",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{baseParamTestId}},\r\n  \"moduleNames\": [\r\n    \"demo\",\r\n    \"test\"\r\n  ],\r\n  \"paramKey\": \"qwww\",\r\n  \"codeValues\": [\r\n    {\r\n      \"code\": \"age\",\r\n      \"value\": 100\r\n    },\r\n    {\r\n      \"code\": \"sex\",\r\n      \"value\": \"女性\"\r\n    }\r\n  ],\r\n  \"remark\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param",
+							"host": [
+								"{{Host}}{{BaseParamService}}"
+							],
+							"path": [
+								"simple-base-param-service",
 								"param"
 							]
 						}
@@ -1767,11 +1819,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param/api/list",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/list",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
+								"simple-base-param-service",
 								"param",
 								"api",
 								"list"
@@ -1819,64 +1872,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param/api/page",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/page",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
+								"simple-base-param-service",
 								"param",
 								"api",
 								"page"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[demo-base-param]修改",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": {{baseParamTestId}},\r\n  \"moduleNames\": [\r\n    \"demo\",\r\n    \"test\"\r\n  ],\r\n  \"paramKey\": \"qwww\",\r\n  \"codeValues\": [\r\n    {\r\n      \"code\": \"age\",\r\n      \"value\": 100\r\n    },\r\n    {\r\n      \"code\": \"sex\",\r\n      \"value\": \"女性\"\r\n    }\r\n  ],\r\n  \"remark\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param",
-							"host": [
-								"{{Host}}{{BaseParam}}"
-							],
-							"path": [
-								"param"
 							]
 						}
 					},
@@ -1912,11 +1916,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/{{baseParamTestId}}",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
+								"simple-base-param-service",
 								"param",
 								"api",
 								"{{baseParamTestId}}"
@@ -1958,11 +1963,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/param/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/{{baseParamTestId}}",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
+								"simple-base-param-service",
 								"param",
 								"api",
 								"{{baseParamTestId}}"
@@ -1970,7 +1976,12 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "demo-base-param",
+			"item": [
 				{
 					"name": "[demo-base-param]获取同班同学列表",
 					"event": [
