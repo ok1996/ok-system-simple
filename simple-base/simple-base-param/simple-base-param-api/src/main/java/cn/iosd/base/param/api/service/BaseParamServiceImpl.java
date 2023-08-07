@@ -4,7 +4,6 @@ import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.feign.BaseParamServiceFeign;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

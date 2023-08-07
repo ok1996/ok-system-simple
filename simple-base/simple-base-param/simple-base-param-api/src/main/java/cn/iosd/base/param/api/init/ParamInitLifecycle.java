@@ -3,7 +3,6 @@ package cn.iosd.base.param.api.init;
 import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.vo.BaseParamVo;
-import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
