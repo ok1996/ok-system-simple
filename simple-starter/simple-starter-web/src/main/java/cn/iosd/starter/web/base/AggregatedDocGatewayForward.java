@@ -2,6 +2,7 @@ package cn.iosd.starter.web.base;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 聚合网关文档所需转发视图
@@ -22,12 +23,13 @@ public class AggregatedDocGatewayForward {
      * <br/>
      * 则所需聚合文档增加转发包含应用名称的接口地址
      */
-    @GetMapping("/${spring.application.name}/v3/api-docs/default")
-    public String forwardV3ApiDocsDefault() {
-        return "forward:/v3/api-docs/default";
+    @GetMapping("/${spring.application.name}/v3/api-docs/{param}")
+    public String forwardV3ApiDocsParam(@PathVariable String param) {
+        return "forward:/v3/api-docs/" + param;
     }
 
-    @GetMapping("/${spring.application.name}/v3/api-docs")
+    @GetMapping(value = {"/${spring.application.name}/v3/api-docs"
+            , "/${spring.application.name}/v3/api-docs/default"})
     public String forwardV3ApiDocs() {
         return "forward:/v3/api-docs";
     }
