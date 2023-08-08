@@ -21,6 +21,11 @@ spring:
         locator:
           lowerCaseServiceId: true
           enabled: true
+          # 配置过滤器为->将请求的路径前缀去除
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 0
   config:
     import:
       - nacos:application.yml

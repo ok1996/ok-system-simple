@@ -769,7 +769,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"测试返回字符串是否正常\", function () {\r",
-									"    pm.response.to.have.body(\"hello world\");\r",
+									"    pm.response.to.have.body(\"simple-demo-cloud: hello world\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -780,11 +780,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoCloud}}/hello/world",
+							"raw": "{{Host}}{{DemoCloud}}/simple-demo-cloud/hello/world",
 							"host": [
 								"{{Host}}{{DemoCloud}}"
 							],
 							"path": [
+								"simple-demo-cloud",
 								"hello",
 								"world"
 							]
@@ -805,7 +806,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"测试返回字符串是否正常\", function () {\r",
-									"    pm.response.to.have.body(\"hello world\");\r",
+									"    pm.response.to.have.body(\"simple-demo-cloud: hello world\");\r",
 									"});"
 								],
 								"type": "text/javascript"
