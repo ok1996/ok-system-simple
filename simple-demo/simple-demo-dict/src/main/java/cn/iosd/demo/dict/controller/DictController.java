@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Tag(name = "提供字典数据接口")
 @RestController
-@RequestMapping("dict")
+@RequestMapping("/simple-demo-dict/dict")
 public class DictController {
     @Autowired
     private DictService service;

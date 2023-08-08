@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @Tag(name = "消息管理")
 @RestController
-@RequestMapping("message")
+@RequestMapping("/simple-demo-socket-two/message")
 public class MessageController {
     @Autowired(required = false)
     private SocketMessageServer socketMessageServer;

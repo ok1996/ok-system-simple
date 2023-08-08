@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Tag(name = "存储服务")
 @RestController
-@RequestMapping("/storage")
+@RequestMapping("/simple-base-s3/storage")
 public class StorageController {
 
     @Autowired(required = false)

@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @RestController
 @Tag(name = "缓存的常用操作")
-@RequestMapping("/cache")
+@RequestMapping("/simple-demo-redisson/cache")
 public class RedissonCacheController {
     @Autowired(required = false)
     private RedissonCacheService redissonCacheService;

@@ -16,7 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @Tag(name = "测试模块")
 @RestController
-@RequestMapping("test")
+@RequestMapping("/demo-base-param/test")
 public class TestController {
 
     @Autowired

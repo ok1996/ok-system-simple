@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @Tag(name = "分布式锁-注解模式-测试请求")
-@RequestMapping("/annotationLock")
+@RequestMapping("/simple-demo-redisson/annotationLock")
 public class AnnotationLockController {
 
     /**

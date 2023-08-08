@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Tag(name = "缓存测试")
-@RequestMapping("/cacheable")
+@RequestMapping("/simple-demo-redisson/cacheable")
 public class CacheableController {
 
     @Autowired

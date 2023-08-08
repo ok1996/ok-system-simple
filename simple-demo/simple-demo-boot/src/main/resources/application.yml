@@ -2,7 +2,7 @@ server:
   port: 11010
 spring:
   application:
-    name: simple-demo-boot3
+    name: simple-demo-boot
 simple:
   openApi:
     title: 接口文档示例1

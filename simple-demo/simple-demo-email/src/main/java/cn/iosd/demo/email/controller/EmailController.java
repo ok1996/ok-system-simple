@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @Tag(name = "邮件发送测试")
 @RestController
-@RequestMapping("email")
+@RequestMapping("/simple-demo-email/email")
 public class EmailController {
 
     @Autowired

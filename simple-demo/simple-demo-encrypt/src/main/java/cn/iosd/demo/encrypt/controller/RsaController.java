@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "Rsa测试模块")
 @RestController
-@RequestMapping("rsa")
+@RequestMapping("/simple-demo-encrypt/rsa")
 public class RsaController {
     @Autowired
     private RsaProperties rsaProperties;
