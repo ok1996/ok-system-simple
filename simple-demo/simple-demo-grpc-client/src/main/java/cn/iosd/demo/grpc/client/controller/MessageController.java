@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @Tag(name = "客户端调用服务端")
 @RestController
-@RequestMapping("message")
+@RequestMapping("/simple-demo-grpc-client/message")
 public class MessageController {
 
     @Autowired

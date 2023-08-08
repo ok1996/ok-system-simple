@@ -17,7 +17,7 @@ import java.util.Map;
 public class IndexController {
 
     @Operation(summary = "首页")
-    @GetMapping("/index")
+    @GetMapping("/simple-demo-freemarker/index")
     public String index(Map<String, Object> map) {
         map.put("name", "ok1996");
         return "index";

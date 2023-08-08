@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @Tag(name = "分布式锁-测试请求")
-@RequestMapping("/lock")
+@RequestMapping("/simple-demo-redisson/lock")
 public class LockController {
     @Autowired(required = false)
     private RedissonLockService redissonLockService;

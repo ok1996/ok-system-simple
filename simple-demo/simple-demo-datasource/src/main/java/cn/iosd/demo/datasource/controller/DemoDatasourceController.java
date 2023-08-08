@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "datasource示例模块数据库Controller")
 @RestController
-@RequestMapping("/datasource")
+@RequestMapping("/simple-demo-datasource/datasource")
 public class DemoDatasourceController extends BaseController<DemoDatasource> {
 
     @Autowired

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Tag(name = "字典测试模块-默认实现类的json文件调用字典")
 @RestController
-@RequestMapping("dictJson")
+@RequestMapping("/simple-demo-dict/dictJson")
 public class DictJsonController {
     @Autowired
     private DictService service;

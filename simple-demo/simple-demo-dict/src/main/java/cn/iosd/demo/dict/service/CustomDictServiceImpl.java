@@ -23,7 +23,7 @@ public class CustomDictServiceImpl implements DictService {
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-        String path = "http://127.0.0.1:11120/dict/custom/" + dictionaryParams;
+        String path = "http://127.0.0.1:11120/simple-demo-dict/dict/custom/" + dictionaryParams;
         ResponseEntity<Response<List<DictItem>>> responseEntity = restTemplate.exchange(path, HttpMethod.GET, null, new ParameterizedTypeReference<Response<List<DictItem>>>() {
         });
         return responseEntity.getBody().getData();

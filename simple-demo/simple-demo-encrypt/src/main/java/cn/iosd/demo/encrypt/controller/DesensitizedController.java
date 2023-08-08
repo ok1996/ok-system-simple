@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  */
 @Tag(name = "脱敏测试模块")
 @RestController
-@RequestMapping("test")
+@RequestMapping("/simple-demo-encrypt/test")
 public class DesensitizedController {
     @Autowired
     private DesensitizedService service;

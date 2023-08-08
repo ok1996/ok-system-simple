@@ -38,11 +38,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api"
 							]
@@ -70,11 +71,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api/list",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api/list",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api",
 								"list"
@@ -122,11 +124,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api/page",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api/page",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api",
 								"page"
@@ -174,11 +177,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api/{{datasourceTestId}}",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api/{{datasourceTestId}}",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api",
 								"{{datasourceTestId}}"
@@ -217,11 +221,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api/{{datasourceTestId}}",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api/{{datasourceTestId}}",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api",
 								"{{datasourceTestId}}"
@@ -263,11 +268,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDatasourcePortHost}}/datasource/api/{{datasourceTestId}}",
+							"raw": "{{Host}}{{DemoDatasourcePortHost}}/simple-demo-datasource/datasource/api/{{datasourceTestId}}",
 							"host": [
 								"{{Host}}{{DemoDatasourcePortHost}}"
 							],
 							"path": [
+								"simple-demo-datasource",
 								"datasource",
 								"api",
 								"{{datasourceTestId}}"
@@ -309,11 +315,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程1发送消息，room=1001应接收到数据&eventName=123&room=1001",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/room?message=接口调用工程1发送消息，room=1001应接收到数据&eventName=123&room=1001",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
+								"simple-demo-socket-one",
 								"message",
 								"room"
 							],
@@ -356,11 +363,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/room?message=接口调用工程2发送消息，room=1002应接收到数据&eventName=123&room=1002",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/room?message=接口调用工程2发送消息，room=1002应接收到数据&eventName=123&room=1002",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
+								"simple-demo-socket-one",
 								"message",
 								"room"
 							],
@@ -403,11 +411,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/broadcast?message=接口调用工程1发送广播，则所有页面接收到数据",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/broadcast?message=接口调用工程1发送广播，则所有页面接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
+								"simple-demo-socket-one",
 								"message",
 								"broadcast"
 							],
@@ -442,11 +451,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/message/service?message=本消息为simple-demo-socket-one发送，连接one应接收到数据",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/service?message=本消息为simple-demo-socket-one发送，连接one应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
+								"simple-demo-socket-one",
 								"message",
 								"service"
 							],
@@ -481,11 +491,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketTwo}}/message/service?message=本消息为simple-demo-socket-two发送，连接two应接收到数据",
+							"raw": "{{Host}}{{DemoSocketTwo}}/simple-demo-socket-two/message/service?message=本消息为simple-demo-socket-two发送，连接two应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketTwo}}"
 							],
 							"path": [
+								"simple-demo-socket-two",
 								"message",
 								"service"
 							],
@@ -526,11 +537,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoGrpcClient}}/message/sendPerson?message=test",
+							"raw": "{{Host}}{{DemoGrpcClient}}/simple-demo-grpc-client/message/sendPerson?message=test",
 							"host": [
 								"{{Host}}{{DemoGrpcClient}}"
 							],
 							"path": [
+								"simple-demo-grpc-client",
 								"message",
 								"sendPerson"
 							],
@@ -565,11 +577,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoGrpcClient}}/message/sendHello?message=test",
+							"raw": "{{Host}}{{DemoGrpcClient}}/simple-demo-grpc-client/message/sendHello?message=test",
 							"host": [
 								"{{Host}}{{DemoGrpcClient}}"
 							],
 							"path": [
+								"simple-demo-grpc-client",
 								"message",
 								"sendHello"
 							],
@@ -610,11 +623,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDict}}/dictJson/superPerson",
+							"raw": "{{Host}}{{DemoDict}}/simple-demo-dict/dictJson/superPerson",
 							"host": [
 								"{{Host}}{{DemoDict}}"
 							],
 							"path": [
+								"simple-demo-dict",
 								"dictJson",
 								"superPerson"
 							]
@@ -644,11 +658,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDict}}/dictJson/superPersonList",
+							"raw": "{{Host}}{{DemoDict}}/simple-demo-dict/dictJson/superPersonList",
 							"host": [
 								"{{Host}}{{DemoDict}}"
 							],
 							"path": [
+								"simple-demo-dict",
 								"dictJson",
 								"superPersonList"
 							]
@@ -677,11 +692,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDict}}/dictJson/person",
+							"raw": "{{Host}}{{DemoDict}}/simple-demo-dict/dictJson/person",
 							"host": [
 								"{{Host}}{{DemoDict}}"
 							],
 							"path": [
+								"simple-demo-dict",
 								"dictJson",
 								"person"
 							]
@@ -710,11 +726,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDict}}/dictJson/personList",
+							"raw": "{{Host}}{{DemoDict}}/simple-demo-dict/dictJson/personList",
 							"host": [
 								"{{Host}}{{DemoDict}}"
 							],
 							"path": [
+								"simple-demo-dict",
 								"dictJson",
 								"personList"
 							]
@@ -744,11 +761,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoDict}}/dictCustom/personRemoteVo",
+							"raw": "{{Host}}{{DemoDict}}/simple-demo-dict/dictCustom/personRemoteVo",
 							"host": [
 								"{{Host}}{{DemoDict}}"
 							],
 							"path": [
+								"simple-demo-dict",
 								"dictCustom",
 								"personRemoteVo"
 							]
@@ -843,7 +861,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"测试返回字符串是否正常\", function () {\r",
-									"    pm.response.to.have.body(\"hello world\");\r",
+									"    pm.response.to.have.body(\"simple-demo-boot: hello world\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -854,11 +872,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoBoot}}/hello/world",
+							"raw": "{{Host}}{{DemoBoot}}/simple-demo-boot/hello/world",
 							"host": [
 								"{{Host}}{{DemoBoot}}"
 							],
 							"path": [
+								"simple-demo-boot",
 								"hello",
 								"world"
 							]
@@ -890,11 +909,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoFreemarker}}/index",
+							"raw": "{{Host}}{{DemoFreemarker}}/simple-demo-freemarker/index",
 							"host": [
 								"{{Host}}{{DemoFreemarker}}"
 							],
 							"path": [
+								"simple-demo-freemarker",
 								"index"
 							]
 						}
@@ -941,11 +961,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/lock/decrement",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/lock/decrement",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"lock",
 										"decrement"
 									]
@@ -985,11 +1006,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/lock/decrementTryLock",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/lock/decrementTryLock",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"lock",
 										"decrementTryLock"
 									]
@@ -1029,11 +1051,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/lock/decrementNotLock",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/lock/decrementNotLock",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"lock",
 										"decrementNotLock"
 									]
@@ -1073,11 +1096,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/annotationLock/decrement",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationLock/decrement",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"annotationLock",
 										"decrement"
 									]
@@ -1117,11 +1141,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/annotationIdempotent/decrement",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationIdempotent/decrement",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"annotationIdempotent",
 										"decrement"
 									]
@@ -1161,11 +1186,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/annotationIdempotent/decrementReqPara?keyName=cda6666",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationIdempotent/decrementReqPara?keyName=cda6666",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"annotationIdempotent",
 										"decrementReqPara"
 									],
@@ -1216,11 +1242,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/annotationIdempotent/decrementReqPara/executionFinishedUnlock?keyName=cda7777",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationIdempotent/decrementReqPara/executionFinishedUnlock?keyName=cda7777",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
 									"path": [
+										"simple-demo-redisson",
 										"annotationIdempotent",
 										"decrementReqPara",
 										"executionFinishedUnlock"
@@ -1266,11 +1293,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/object/Object001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/object/Object001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"object",
 								"Object001"
@@ -1312,11 +1340,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/object/Object001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/object/Object001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"object",
 								"Object001"
@@ -1354,11 +1383,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/map/Map001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/map/Map001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"map",
 								"Map001"
@@ -1400,11 +1430,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/map/Map001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/map/Map001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"map",
 								"Map001"
@@ -1442,11 +1473,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/list/List001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/list/List001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"list",
 								"List001"
@@ -1488,11 +1520,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/list/List001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/list/List001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"list",
 								"List001"
@@ -1530,11 +1563,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/Object001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/Object001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"Object001"
 							]
@@ -1571,11 +1605,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/Map001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/Map001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"Map001"
 							]
@@ -1612,11 +1647,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cache/List001",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cache/List001",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cache",
 								"List001"
 							]
@@ -1630,11 +1666,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoRedisson}}/cacheable/annotateTestCacheName?keyName=testAnnotateTestCacheName&cycles=10",
+							"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/cacheable/annotateTestCacheName?keyName=testAnnotateTestCacheName&cycles=10",
 							"host": [
 								"{{Host}}{{DemoRedisson}}"
 							],
 							"path": [
+								"simple-demo-redisson",
 								"cacheable",
 								"annotateTestCacheName"
 							],
@@ -1664,11 +1701,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoEmail}}/email/sendEmail?toEmails=1105735250@qq.com&ccEmails=wzh29@vip.qq.com,ok96@foxmail.com&subject=zhuti&content=enirong&isHtml=false",
+							"raw": "{{Host}}{{DemoEmail}}/simple-demo-email/email/sendEmail?toEmails=1105735250@qq.com&ccEmails=wzh29@vip.qq.com,ok96@foxmail.com&subject=zhuti&content=enirong&isHtml=false",
 							"host": [
 								"{{Host}}{{DemoEmail}}"
 							],
 							"path": [
+								"simple-demo-email",
 								"email",
 								"sendEmail"
 							],
@@ -2013,11 +2051,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/test/classmateList",
+							"raw": "{{Host}}{{BaseParam}}/demo-base-param/test/classmateList",
 							"host": [
 								"{{Host}}{{BaseParam}}"
 							],
 							"path": [
+								"demo-base-param",
 								"test",
 								"classmateList"
 							]
@@ -2050,11 +2089,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/bucket?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket?bucketName=imtest001",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"bucket"
 							],
@@ -2089,11 +2129,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/bucket/list?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket/list?bucketName=imtest001",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"bucket",
 								"list"
@@ -2139,11 +2180,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object",
 								"upload"
@@ -2193,11 +2235,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object",
 								"upload"
@@ -2243,11 +2286,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object/url?bucketName=imtest001&key={{S3FileId}}",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/url?bucketName=imtest001&key={{S3FileId}}",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object",
 								"url"
@@ -2296,11 +2340,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object"
 							]
@@ -2338,11 +2383,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object/Next",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/Next",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object",
 								"Next"
@@ -2375,11 +2421,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/object?bucketName=imtest001&key={{S3FileId}}",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object?bucketName=imtest001&key={{S3FileId}}",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"object"
 							],
@@ -2421,11 +2468,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/storage/bucket?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket?bucketName=imtest001",
 							"host": [
 								"{{Host}}{{BaseS3}}"
 							],
 							"path": [
+								"simple-base-s3",
 								"storage",
 								"bucket"
 							],
@@ -2465,11 +2513,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/test/superPerson",
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPerson",
 							"host": [
 								"{{Host}}{{DemoEncrypt}}"
 							],
 							"path": [
+								"simple-demo-encrypt",
 								"test",
 								"superPerson"
 							]
@@ -2498,11 +2547,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/test/superPersonList",
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPersonList",
 							"host": [
 								"{{Host}}{{DemoEncrypt}}"
 							],
 							"path": [
+								"simple-demo-encrypt",
 								"test",
 								"superPersonList"
 							]
@@ -2531,11 +2581,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/test/person",
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/person",
 							"host": [
 								"{{Host}}{{DemoEncrypt}}"
 							],
 							"path": [
+								"simple-demo-encrypt",
 								"test",
 								"person"
 							]
@@ -2564,11 +2615,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/test/personList",
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/personList",
 							"host": [
 								"{{Host}}{{DemoEncrypt}}"
 							],
 							"path": [
+								"simple-demo-encrypt",
 								"test",
 								"personList"
 							]

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Tag(name = "分布式幂等-注解模式-测试请求")
-@RequestMapping("/annotationIdempotent")
+@RequestMapping("/simple-demo-redisson/annotationIdempotent")
 public class AnnotationIdempotentController {
     /**
      * 商品库存
