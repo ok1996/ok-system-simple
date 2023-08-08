@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ok1996
  */
 @RestController
-@RequestMapping("hello")
+@RequestMapping("/simple-demo-cloud/hello")
 @Tag(name = "你好")
 public class HelloController {
 
     @Operation(summary = "世界")
     @GetMapping(value = "/world")
     public String world() {
-        return "hello world";
+        return "simple-demo-cloud: hello world";
     }
 
 }
