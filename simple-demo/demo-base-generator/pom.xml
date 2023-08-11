@@ -23,7 +23,7 @@
 
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-generator</artifactId>
+            <artifactId>simple-base-generator-api</artifactId>
         </dependency>
     </dependencies>
 
