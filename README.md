@@ -48,7 +48,7 @@
 | Spring Boot          | 3.1.2               |
 | Spring Cloud         | 2022.0.3            |
 | Spring Cloud Alibaba | 2022.0.0.0          |
-| Ok System Simple     | 2023.4.2.0-SNAPSHOT |
+| Ok System Simple     | 2023.5.0.0-SNAPSHOT |
 
 ## Starter自动装配模块
 
