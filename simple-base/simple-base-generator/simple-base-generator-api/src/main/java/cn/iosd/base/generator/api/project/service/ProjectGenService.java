@@ -187,14 +187,12 @@ public class ProjectGenService {
         String moduleName = req.getModuleName();
         String simpleVersion = req.getSimpleVersion();
 
-        content = content.replace("{projectName}", projectName)
+        return content.replace("{projectName}", projectName)
                 .replace("{packageName}", packageName)
                 .replace("{moduleName}", moduleName)
                 .replace("{simpleVersion}", simpleVersion)
                 .replace("{moduleNameCapitalized}", req.getModuleNameCapitalizedCustom())
                 .replace("{packageDir}", req.getPackageDirCustom());
-
-        return content;
     }
 
     /**
