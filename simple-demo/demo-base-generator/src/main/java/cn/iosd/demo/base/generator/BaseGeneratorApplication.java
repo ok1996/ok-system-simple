@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class BaseGeneratorApplication {
         vo.setPackageName("cn.iosd.demo");
         vo.setProjectName("simple-service-generator");
         vo.setModuleName("generator");
-        vo.setTableName("demo_article");
+        vo.setTableNames(Collections.singletonList("demo_article"));
         List<String> tablePrefix = new ArrayList<>();
         tablePrefix.add("demo");
         vo.setTablePrefix(tablePrefix);
