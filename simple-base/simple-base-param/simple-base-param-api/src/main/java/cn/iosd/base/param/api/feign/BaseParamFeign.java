@@ -19,7 +19,7 @@ import java.util.List;
  */
 @FeignClient(name = "simple-base-param-service", contextId = "baseParamServiceFeign", path = "/simple-base-param-service/param"
         , url = "${simple.feign.base.param.url:}", primary = false)
-public interface BaseParamServiceFeign extends CrudOperations<BaseParam> {
+public interface BaseParamFeign extends CrudOperations<BaseParam> {
 
     /**
      * 新增
