@@ -31,7 +31,7 @@ public class DatabaseGenVo {
     private String authorName;
 
     @Schema(description = "表名",example = "demo_article")
-    private String tableName;
+    private List<String> tableNames;
 
     @Schema(description = "过滤表名前缀",example = "demo")
     private List<String> tablePrefix;
@@ -93,12 +93,12 @@ public class DatabaseGenVo {
         this.authorName = authorName;
     }
 
-    public String getTableName() {
-        return tableName;
+    public List<String> getTableNames() {
+        return tableNames;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+    public void setTableNames(List<String> tableNames) {
+        this.tableNames = tableNames;
     }
 
     public List<String> getTablePrefix() {

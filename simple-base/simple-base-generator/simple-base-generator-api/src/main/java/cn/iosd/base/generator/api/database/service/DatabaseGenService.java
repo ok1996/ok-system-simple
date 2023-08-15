@@ -136,7 +136,7 @@ public class DatabaseGenService {
                         .pathInfo(pathInfo)
                 )
                 .strategyConfig(builder -> {
-                    builder.addInclude(vo.getTableName());
+                    builder.addInclude(vo.getTableNames());
                     if (vo.getTablePrefix() != null) {
                         builder.addTablePrefix(vo.getTablePrefix());
                     }
