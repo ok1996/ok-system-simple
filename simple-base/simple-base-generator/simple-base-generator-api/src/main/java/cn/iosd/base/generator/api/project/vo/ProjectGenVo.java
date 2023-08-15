@@ -16,7 +16,7 @@ public class ProjectGenVo {
     private String moduleName;
 
     @Schema(description = "依赖模块版本号", hidden = true)
-    private String simpleVersion = "2023.4.2.0-SNAPSHOT";
+    private String simpleVersion = "2022.5.0.0-SNAPSHOT";
 
     @Schema(description = "模块名称-首字母大写", example = "Generator", hidden = true)
     private String moduleNameCapitalized;
