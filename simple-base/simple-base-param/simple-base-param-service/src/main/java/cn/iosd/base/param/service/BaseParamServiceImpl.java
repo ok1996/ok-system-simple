@@ -5,6 +5,7 @@ import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.utils.ParamInitUtil;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
+import cn.iosd.base.param.entity.BaseParamEntity;
 import cn.iosd.base.param.mapper.BaseParamMapper;
 import cn.iosd.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -21,11 +22,11 @@ import java.util.List;
  */
 @Service
 @Primary
-public class BaseParamService extends ServiceImpl<BaseParamMapper, BaseParam> implements IBaseParamService {
+public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParamEntity> implements IBaseParamService {
 
     @Override
     public BaseParam selectBaseParamByKey(String paramKey) {
-        BaseParam queryDb = new BaseParam();
+        BaseParamEntity queryDb = new BaseParamEntity();
         queryDb.setParamKey(paramKey);
         return baseMapper.selectOne(Wrappers.lambdaQuery(queryDb));
     }
@@ -42,7 +43,7 @@ public class BaseParamService extends ServiceImpl<BaseParamMapper, BaseParam> im
 
     @Override
     public int insertBaseParam(BaseParamVo baseParamVo) {
-        BaseParam baseParam = convertBaseParam(baseParamVo);
+        BaseParamEntity baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setCreateTime(now);
         baseParam.setModifyTime(now);
@@ -51,7 +52,7 @@ public class BaseParamService extends ServiceImpl<BaseParamMapper, BaseParam> im
 
     @Override
     public int updateBaseParam(BaseParamVo baseParamVo) {
-        BaseParam baseParam = convertBaseParam(baseParamVo);
+        BaseParamEntity baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setModifyTime(now);
         return baseMapper.updateById(baseParam);
@@ -63,13 +64,13 @@ public class BaseParamService extends ServiceImpl<BaseParamMapper, BaseParam> im
      * @param baseParamVo
      * @return
      */
-    public BaseParam convertBaseParam(BaseParamVo baseParamVo) {
-        BaseParam baseParam = new BaseParam();
+    public BaseParamEntity convertBaseParam(BaseParamVo baseParamVo) {
+        BaseParamEntity baseParam = new BaseParamEntity();
         baseParam.setId(baseParamVo.getId());
         try {
             baseParam.setModuleNames(JsonMapper.getObjectMapper().writeValueAsString(baseParamVo.getModuleNames()));
             baseParam.setCodeValues((JsonMapper.getObjectMapper().writeValueAsString(baseParamVo.getCodeValues())));
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         baseParam.setRemark(baseParamVo.getRemark());

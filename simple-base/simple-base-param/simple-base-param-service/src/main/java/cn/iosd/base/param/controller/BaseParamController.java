@@ -4,6 +4,7 @@ import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
+import cn.iosd.base.param.entity.BaseParamEntity;
 import cn.iosd.starter.datasource.base.BaseController;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +26,7 @@ import java.util.List;
 @Tag(name = "基础参数配置")
 @RestController
 @RequestMapping("/simple-base-param-service/param")
-public class BaseParamController extends BaseController<BaseParam> {
+public class BaseParamController extends BaseController<BaseParamEntity> {
     @Autowired
     private IBaseParamService baseParamService;
 
