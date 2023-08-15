@@ -15,6 +15,9 @@ public class ProjectGenVo {
     @Schema(description = "模块名称", example = "generator")
     private String moduleName;
 
+    @Schema(description = "SpringBoot版本号", hidden = true)
+    private String springBootVersion = "3.1.2";
+
     @Schema(description = "依赖模块版本号", hidden = true)
     private String simpleVersion = "2022.5.0.0-SNAPSHOT";
 
@@ -72,6 +75,14 @@ public class ProjectGenVo {
 
     public void setPackageDir(String packageDir) {
         this.packageDir = packageDir;
+    }
+
+    public String getSpringBootVersion() {
+        return springBootVersion;
+    }
+
+    public void setSpringBootVersion(String springBootVersion) {
+        this.springBootVersion = springBootVersion;
     }
 
     /**

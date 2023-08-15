@@ -192,7 +192,8 @@ public class ProjectGenService {
                 .replace("{moduleName}", moduleName)
                 .replace("{simpleVersion}", simpleVersion)
                 .replace("{moduleNameCapitalized}", req.getModuleNameCapitalizedCustom())
-                .replace("{packageDir}", req.getPackageDirCustom());
+                .replace("{packageDir}", req.getPackageDirCustom())
+                .replace("{springBootVersion}",req.getSpringBootVersion());
     }
 
     /**
