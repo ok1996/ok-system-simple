@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "cn.iosd.base.param.mapper")
 @ComponentScan(value = {"cn.iosd.base.param"})
-@ConditionalOnProperty(value = "simple.base.param.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "simple.scan.service.enabled", havingValue = "true", matchIfMissing = true)
 public class BaseParamAutoConfiguration {
 
     @Bean
