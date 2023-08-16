@@ -7,7 +7,15 @@ spring:
 
 simple:
   feign:
+    # 开启日志记录，缺省默认开启
+    logger:
+      enabled: true
     base:
       param:
         # 未开启注册中心需要指定调用地址
         url: http://localhost:9010
+logging:
+  level:
+    # 声明包位置的Feign日志级别为debug，打印日志详情
+    cn:
+      iosd: debug
