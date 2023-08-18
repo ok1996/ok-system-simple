@@ -6,10 +6,6 @@ spring:
     name: demo-base-param
 
 simple:
-  scan:
-    ## 关闭service依赖中service服务端，仅使用service依赖中的api客户端
-    service:
-      enabled: false
   feign:
     # 开启日志记录，缺省默认开启
     logger:

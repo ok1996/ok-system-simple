@@ -1,12 +1,12 @@
-package cn.iosd.base.param.service;
+package cn.iosd.base.param.service.service;
 
 import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.utils.ParamInitUtil;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
-import cn.iosd.base.param.entity.BaseParamEntity;
-import cn.iosd.base.param.mapper.BaseParamMapper;
+import cn.iosd.base.param.service.entity.BaseParamEntity;
+import cn.iosd.base.param.service.mapper.BaseParamMapper;
 import cn.iosd.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

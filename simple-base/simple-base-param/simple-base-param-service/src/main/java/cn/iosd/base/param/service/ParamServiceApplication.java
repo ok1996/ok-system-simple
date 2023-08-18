@@ -1,4 +1,4 @@
-package cn.iosd.base.param;
+package cn.iosd.base.param.service;
 
 
 import org.springframework.boot.SpringApplication;
