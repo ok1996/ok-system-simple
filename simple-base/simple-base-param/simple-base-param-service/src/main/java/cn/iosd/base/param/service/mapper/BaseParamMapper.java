@@ -1,7 +1,6 @@
-package cn.iosd.base.param.mapper;
+package cn.iosd.base.param.service.mapper;
 
-import cn.iosd.base.param.api.domain.BaseParam;
-import cn.iosd.base.param.entity.BaseParamEntity;
+import cn.iosd.base.param.service.entity.BaseParamEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

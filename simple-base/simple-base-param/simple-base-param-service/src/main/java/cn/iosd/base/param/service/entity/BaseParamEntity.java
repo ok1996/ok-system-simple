@@ -1,4 +1,4 @@
-package cn.iosd.base.param.entity;
+package cn.iosd.base.param.service.entity;
 
 import cn.iosd.base.param.api.domain.BaseParam;
 import com.baomidou.mybatisplus.annotation.TableName;

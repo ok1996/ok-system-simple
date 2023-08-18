@@ -1,10 +1,10 @@
-package cn.iosd.base.param.controller;
+package cn.iosd.base.param.service.controller;
 
 import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
-import cn.iosd.base.param.entity.BaseParamEntity;
+import cn.iosd.base.param.service.entity.BaseParamEntity;
 import cn.iosd.starter.datasource.base.BaseController;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;

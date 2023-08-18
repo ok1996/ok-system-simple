@@ -11,10 +11,10 @@
 
     <artifactId>simple-base-generator</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>simple-base-generator-api</module>
         <module>simple-base-generator-service</module>
     </modules>
-
 
 </project>

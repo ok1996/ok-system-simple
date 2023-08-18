@@ -11,6 +11,7 @@
 
     <artifactId>simple-base-param</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>simple-base-param-api</module>
         <module>simple-base-param-service</module>
