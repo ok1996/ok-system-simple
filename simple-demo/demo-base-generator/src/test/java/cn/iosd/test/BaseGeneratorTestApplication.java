@@ -1,3 +1,5 @@
+package cn.iosd.test;
+
 import cn.iosd.base.generator.service.DatabaseGenService;
 import cn.iosd.base.generator.vo.DatabaseGenVo;
 import lombok.extern.slf4j.Slf4j;
