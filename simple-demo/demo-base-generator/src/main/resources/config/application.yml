@@ -1,0 +1,16 @@
+server:
+  port: 13020
+
+spring:
+  application:
+    name: demo-base-generator
+
+simple:
+  base:
+    #simple-base-generator
+    generator:
+      project:
+        # 初始化压缩包地址
+        initProjectZipUrl: /temp/initProject.zip
+        # 解压覆盖生成项目压缩包操作的临时目录
+        newProjectAndZipTempPath: /temp/simple/new

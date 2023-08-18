@@ -20,10 +20,9 @@
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-datasource</artifactId>
         </dependency>
-
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-generator-api</artifactId>
+            <artifactId>simple-base-generator</artifactId>
         </dependency>
     </dependencies>
 

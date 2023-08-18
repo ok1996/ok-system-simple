@@ -1,0 +1,3 @@
+cn.iosd.base.generator.service.DatabaseGenService
+cn.iosd.base.generator.service.ProjectGenService
+cn.iosd.base.generator.controller.GenController
