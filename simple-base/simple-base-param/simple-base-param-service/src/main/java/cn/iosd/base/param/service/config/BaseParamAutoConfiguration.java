@@ -16,6 +16,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @MapperScan(basePackages = "cn.iosd.base.param.service.mapper")
+@ComponentScan(value = {"cn.iosd.base.param.service"})
 public class BaseParamAutoConfiguration {
 
     @Bean

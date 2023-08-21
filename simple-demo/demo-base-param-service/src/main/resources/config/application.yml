@@ -1,0 +1,6 @@
+server:
+  port: 13011
+
+spring:
+  application:
+    name: demo-base-param-service

@@ -13,7 +13,7 @@ simple:
     base:
       param:
         # 未开启注册中心需要指定调用地址
-        url: http://localhost:9010
+        url: http://localhost:13011
 logging:
   level:
     # 声明包位置的Feign日志级别为debug，打印日志详情
