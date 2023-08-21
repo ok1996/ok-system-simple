@@ -14,10 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.iosd</groupId>
             <artifactId>simple-base-param-service</artifactId>
         </dependency>
     </dependencies>
