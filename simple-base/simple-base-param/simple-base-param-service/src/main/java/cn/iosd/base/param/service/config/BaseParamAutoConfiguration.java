@@ -3,6 +3,7 @@ package cn.iosd.base.param.service.config;
 import cn.iosd.starter.datasource.mybatis.MapperLocations;
 import org.flywaydb.core.Flyway;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "cn.iosd.base.param.service.mapper")
 @ComponentScan(value = {"cn.iosd.base.param.service"})
+@ConditionalOnProperty(value = "simple.scan.service.enabled", havingValue = "true", matchIfMissing = true)
 public class BaseParamAutoConfiguration {
 
     @Bean
