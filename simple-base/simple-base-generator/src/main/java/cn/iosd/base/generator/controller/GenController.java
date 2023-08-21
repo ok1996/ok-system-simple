@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @Tag(name = "代码生成")
 @RestController
 @RequestMapping("/simple-base-generator/generator")
+@ConditionalOnProperty(value = "simple.base.generator.project.enabled", havingValue = "true")
 public class GenController {
     @Autowired
     private ProjectGenService projectGenService;
