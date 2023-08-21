@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-param-api</artifactId>
+            <artifactId>simple-base-param-service</artifactId>
         </dependency>
     </dependencies>
 
