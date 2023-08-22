@@ -186,14 +186,16 @@ public class ProjectGenService {
         String packageName = req.getPackageName();
         String moduleName = req.getModuleName();
         String simpleVersion = req.getSimpleVersion();
-
+        String springBootVersion = req.getSpringBootVersion();
+        String javaVersion = req.getJavaVersion();
         return content.replace("{projectName}", projectName)
                 .replace("{packageName}", packageName)
                 .replace("{moduleName}", moduleName)
                 .replace("{simpleVersion}", simpleVersion)
                 .replace("{moduleNameCapitalized}", req.getModuleNameCapitalizedCustom())
                 .replace("{packageDir}", req.getPackageDirCustom())
-                .replace("{springBootVersion}",req.getSpringBootVersion());
+                .replace("{springBootVersion}",springBootVersion)
+                .replace("{javaVersion}",javaVersion);
     }
 
     /**

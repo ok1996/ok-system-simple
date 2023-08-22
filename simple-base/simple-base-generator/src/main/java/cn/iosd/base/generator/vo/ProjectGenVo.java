@@ -21,6 +21,9 @@ public class ProjectGenVo {
     @Schema(description = "依赖模块版本号", hidden = true)
     private String simpleVersion = "2023.5.0.0-SNAPSHOT";
 
+    @Schema(description = "JAVA版本号", hidden = true)
+    private String javaVersion = "17";
+
     @Schema(description = "模块名称-首字母大写", example = "Generator", hidden = true)
     private String moduleNameCapitalized;
 
@@ -83,6 +86,14 @@ public class ProjectGenVo {
 
     public void setSpringBootVersion(String springBootVersion) {
         this.springBootVersion = springBootVersion;
+    }
+
+    public String getJavaVersion() {
+        return javaVersion;
+    }
+
+    public void setJavaVersion(String javaVersion) {
+        this.javaVersion = javaVersion;
     }
 
     /**
