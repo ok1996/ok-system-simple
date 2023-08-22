@@ -1,4 +1,4 @@
-package cn.iosd.base.param;
+package cn.iosd.base.param.service;
 
 
 import org.springframework.boot.SpringApplication;
@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author ok1996
  */
 @SpringBootApplication
-public class BaseParamSpringbootApplication {
+public class BaseParamServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BaseParamSpringbootApplication.class, args);
+        SpringApplication.run(BaseParamServiceApplication.class, args);
     }
 }
 
