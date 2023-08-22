@@ -15,7 +15,6 @@
     <modules>
         <module>simple-base-param-api</module>
         <module>simple-base-param-service</module>
-        <module>simple-base-param-springboot</module>
     </modules>
 
 </project>
