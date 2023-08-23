@@ -16,13 +16,13 @@ public class ProjectGenVo {
     private String moduleName;
 
     @Schema(description = "SpringBoot版本号", hidden = true)
-    private String springBootVersion = "3.1.2";
+    private String springBootVersion = "2.7.14";
 
     @Schema(description = "依赖模块版本号", hidden = true)
     private String simpleVersion = "2022.5.0.0-SNAPSHOT";
 
     @Schema(description = "JAVA版本号", hidden = true)
-    private String javaVersion = "17";
+    private String javaVersion = "8";
 
     @Schema(description = "模块名称-首字母大写", example = "Generator", hidden = true)
     private String moduleNameCapitalized;
