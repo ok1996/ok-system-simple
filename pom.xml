@@ -32,7 +32,7 @@
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>4.3.0</knife4j.version>
         <io-grpc.version>1.57.2</io-grpc.version>
-        <redisson.version>3.23.1</redisson.version>
+        <redisson.version>3.23.3</redisson.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <netty-socketio.version>2.0.3</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.506</aws-java-sdk-s3.version>
