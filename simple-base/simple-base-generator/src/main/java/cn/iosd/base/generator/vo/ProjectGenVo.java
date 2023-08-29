@@ -19,7 +19,7 @@ public class ProjectGenVo {
     private String springBootVersion = "3.1.2";
 
     @Schema(description = "依赖模块版本号", hidden = true)
-    private String simpleVersion = "2023.5.0.0";
+    private String simpleVersion = "2023.5.1.0-SNAPSHOT";
 
     @Schema(description = "JAVA版本号", hidden = true)
     private String javaVersion = "17";

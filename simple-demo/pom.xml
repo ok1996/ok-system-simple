@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ok-system-simple</artifactId>
         <groupId>cn.iosd</groupId>
-        <version>2023.5.0.0</version>
+        <version>2023.5.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
