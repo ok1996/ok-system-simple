@@ -1,5 +1,6 @@
 package cn.iosd.starter.web.domain;
 
+import cn.iosd.starter.web.exception.ResponseException;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
@@ -100,15 +101,15 @@ public class Response<T> {
     public static <T> Boolean isSuccess(Response<T> ret) {
         return Response.SUCCESS == ret.getCode();
     }
-	
+
     /**
-     * 如果code不等于200时，抛出一个 RuntimeException 异常
+     * 如果code不等于200时，抛出一个 ResponseException 异常
      *
-     * @throws RuntimeException 响应异常
+     * @throws ResponseException 响应异常
      */
     public void throwExceptionIfNotSuccess() {
         if (SUCCESS != code) {
-            throw new RuntimeException("Communication Exception - Code:[" + code + "], Message:[" + msg + "]");
+            throw new ResponseException("Response Exception - Code:[" + code + "], Message:[" + msg + "]");
         }
     }
 
@@ -118,7 +119,7 @@ public class Response<T> {
      * 该方法首先检查 状态码code是否等于200 ，然后返回数据。
      *
      * @return 如果通信成功，则返回数据
-     * @throws RuntimeException 响应异常
+     * @throws ResponseException 响应异常
      */
     public T dataOrThrowExceptionIfNotSuccess() {
         throwExceptionIfNotSuccess();
