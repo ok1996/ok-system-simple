@@ -100,4 +100,28 @@ public class Response<T> {
     public static <T> Boolean isSuccess(Response<T> ret) {
         return Response.SUCCESS == ret.getCode();
     }
+	
+    /**
+     * 如果code不等于200时，抛出一个 RuntimeException 异常
+     *
+     * @throws RuntimeException 响应异常
+     */
+    public void throwExceptionIfNotSuccess() {
+        if (SUCCESS != code) {
+            throw new RuntimeException("Communication Exception - Code:[" + code + "], Message:[" + msg + "]");
+        }
+    }
+
+    /**
+     * 如果code等于200，则返回数据；如果code不等于200，抛出异常。
+     * <br/>
+     * 该方法首先检查 状态码code是否等于200 ，然后返回数据。
+     *
+     * @return 如果通信成功，则返回数据
+     * @throws RuntimeException 响应异常
+     */
+    public T dataOrThrowExceptionIfNotSuccess() {
+        throwExceptionIfNotSuccess();
+        return data;
+    }
 }

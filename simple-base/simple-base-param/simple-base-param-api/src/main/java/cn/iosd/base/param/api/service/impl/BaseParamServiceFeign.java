@@ -21,26 +21,26 @@ public class BaseParamServiceFeign implements IBaseParamService {
 
     @Override
     public BaseParam selectBaseParamByKey(String paramKey) {
-        return baseParamFeign.selectBaseParamByKey(paramKey).getData();
+        return baseParamFeign.selectBaseParamByKey(paramKey).dataOrThrowExceptionIfNotSuccess();
     }
 
     @Override
     public List<CodeValue<?>> selectCodeValueVoParamByKey(String paramKey) {
-        return baseParamFeign.selectCodeValueVoParamByKey(paramKey).getData();
+        return baseParamFeign.selectCodeValueVoParamByKey(paramKey).dataOrThrowExceptionIfNotSuccess();
     }
 
     @Override
     public int insertBaseParam(BaseParamVo baseParamVo) {
-        return baseParamFeign.insertBaseParam(baseParamVo).getData();
+        return baseParamFeign.insertBaseParam(baseParamVo).dataOrThrowExceptionIfNotSuccess();
     }
 
     @Override
     public int updateBaseParam(BaseParamVo baseParamVo) {
-        return baseParamFeign.updateBaseParam(baseParamVo).getData();
+        return baseParamFeign.updateBaseParam(baseParamVo).dataOrThrowExceptionIfNotSuccess();
     }
 
     @Override
     public List<CodeValueListHistory> selectCodeValueHistoryParamByKey(String paramKey) {
-        return baseParamFeign.selectCodeValueHistoryParamByKey(paramKey).getData();
+        return baseParamFeign.selectCodeValueHistoryParamByKey(paramKey).dataOrThrowExceptionIfNotSuccess();
     }
 }
