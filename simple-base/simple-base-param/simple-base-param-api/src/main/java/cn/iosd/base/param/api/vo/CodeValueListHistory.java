@@ -11,7 +11,7 @@ public class CodeValueListHistory {
     @Schema(description = "时间戳")
     private Long time;
 
-    @Schema(description = "时间")
+    @Schema(description = "历史配置参数")
     private List<CodeValue<?>> codeValueList;
 
     public Long getTime() {

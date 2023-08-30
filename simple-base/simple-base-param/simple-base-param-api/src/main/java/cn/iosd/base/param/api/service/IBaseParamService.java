@@ -3,13 +3,14 @@ package cn.iosd.base.param.api.service;
 import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
+import cn.iosd.base.param.api.vo.CodeValueListHistory;
 
 import java.util.List;
 
 /**
  * @author ok1996
  */
-public interface IBaseParamService{
+public interface IBaseParamService {
 
     /**
      * 查询基础参数配置
@@ -43,4 +44,11 @@ public interface IBaseParamService{
      */
     int updateBaseParam(BaseParamVo baseParamVo);
 
+    /**
+     * 查询参数配置历史
+     *
+     * @param paramKey 参数主键
+     * @return 参数配置历史
+     */
+    List<CodeValueListHistory> selectCodeValueHistoryParamByKey(String paramKey);
 }

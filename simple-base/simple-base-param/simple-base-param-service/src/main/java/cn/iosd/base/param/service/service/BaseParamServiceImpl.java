@@ -63,6 +63,17 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
         return baseMapper.updateById(baseParam);
     }
 
+    @Override
+    public List<CodeValueListHistory> selectCodeValueHistoryParamByKey(String paramKey) {
+        BaseParam baseParam = selectBaseParamByKey(paramKey);
+        try {
+            return JsonMapper.readValue(baseParam.getHistoryCodeValues(), new TypeReference<List<CodeValueListHistory>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
+        }
+    }
+
     /**
      * 请求实体转换Domain
      *

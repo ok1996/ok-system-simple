@@ -4,6 +4,7 @@ import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.service.IBaseParamService;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
+import cn.iosd.base.param.api.vo.CodeValueListHistory;
 import cn.iosd.base.param.service.entity.BaseParamEntity;
 import cn.iosd.starter.datasource.base.BaseController;
 import cn.iosd.starter.web.domain.Response;
@@ -54,4 +55,9 @@ public class BaseParamController extends BaseController<BaseParamEntity> {
         return Response.ok(baseParamService.selectCodeValueVoParamByKey(paramKey));
     }
 
+    @Operation(summary = "查询参数配置历史")
+    @GetMapping("/CodeValuesHistory/key/{paramKey}")
+    public Response<List<CodeValueListHistory>> selectCodeValueHistoryParamByKey(@PathVariable String paramKey) {
+        return Response.ok(baseParamService.selectCodeValueHistoryParamByKey(paramKey));
+    }
 }

@@ -3,6 +3,7 @@ package cn.iosd.base.param.api.feign;
 import cn.iosd.base.param.api.domain.BaseParam;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
+import cn.iosd.base.param.api.vo.CodeValueListHistory;
 import cn.iosd.starter.web.base.CrudOperations;
 import cn.iosd.starter.web.domain.Response;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -57,4 +58,12 @@ public interface BaseParamFeign extends CrudOperations<BaseParam> {
     @GetMapping("/CodeValues/key/{paramKey}")
     Response<List<CodeValue<?>>> selectCodeValueVoParamByKey(@PathVariable String paramKey);
 
+    /**
+     * 查询参数配置历史
+     *
+     * @param paramKey key
+     * @return 参数配置历史
+     */
+    @GetMapping("/CodeValuesHistory/key/{paramKey}")
+    Response<List<CodeValueListHistory>> selectCodeValueHistoryParamByKey(@PathVariable String paramKey);
 }
