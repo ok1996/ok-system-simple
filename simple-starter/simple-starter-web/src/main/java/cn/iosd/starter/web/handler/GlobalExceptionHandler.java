@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-
     /**
      * 处理系统异常
      *
@@ -34,24 +33,6 @@ public class GlobalExceptionHandler {
         String requestUri = request.getRequestURI();
         log.error("请求地址'{}',发生系统异常.", requestUri, e);
         return Response.fail(e.getMessage());
-    }
-
-    /**
-     * 拦截未知的运行时异常
-     *
-     * @param e       异常对象
-     * @param request HTTP请求对象
-     * @return 返回响应结果
-     */
-    @ExceptionHandler(RuntimeException.class)
-    public Response<String> handleRuntimeException(RuntimeException e, HttpServletRequest request) {
-        String requestUri = request.getRequestURI();
-        String msg = e.getMessage();
-        if (StringUtils.isBlank(msg) && e.getCause() != null) {
-            msg = e.getCause().getMessage();
-        }
-        log.error("请求地址'{}',发生未知异常.", requestUri, e);
-        return Response.fail(msg);
     }
 
     /**
