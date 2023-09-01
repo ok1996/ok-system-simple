@@ -117,7 +117,7 @@ public class DatabaseGenService {
         List<CustomFile> customFiles = new ArrayList<>();
         customFiles.add(new CustomFile.Builder().fileName("Feign.java")
                 .templatePath(TEMPLATES_DIR_TEMPLATES_API_FEIGN).filePath(outputDirModuleApiFeign).enableFileOverride().build());
-        customFiles.add(new CustomFile.Builder().fileName("ServiceFeign.java")
+        customFiles.add(new CustomFile.Builder().fileName("ServiceFeignImpl.java")
                 .templatePath(TEMPLATES_DIR_TEMPLATES_API_SERVICE_IMPL).filePath(outputDirModuleApiServiceImpl).enableFileOverride().build());
         customFiles.add(new CustomFile.Builder().fileName("Entity.java")
                 .templatePath(TEMPLATES_DIR_TEMPLATES_SERVICE_ENTITY).filePath(outputDirModuleServiceEntity).enableFileOverride().build());

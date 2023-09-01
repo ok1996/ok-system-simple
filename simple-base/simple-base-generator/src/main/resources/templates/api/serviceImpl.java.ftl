@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author ${author}
  */
-public class ${entity}ServiceFeign implements ${table.serviceName}{
+public class ${entity}ServiceFeignImpl implements ${table.serviceName}{
 
     @Autowired
     private ${entity}Feign ${entity?lower_case}Feign;

@@ -15,7 +15,7 @@ import java.util.List;
  * @author ok1996
  */
 @Service
-public class BaseParamServiceFeign implements IBaseParamService {
+public class BaseParamServiceFeignImpl implements IBaseParamService {
     @Autowired
     private BaseParamFeign baseParamFeign;
 
