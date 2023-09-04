@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-s3</artifactId>
+            <artifactId>simple-base-s3-service</artifactId>
         </dependency>
     </dependencies>
 

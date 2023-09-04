@@ -2067,10 +2067,10 @@
 			]
 		},
 		{
-			"name": "demo-base-s3",
+			"name": "simple-base-s3-service",
 			"item": [
 				{
-					"name": "[demo-base-s3]创建存储桶",
+					"name": "[simple-base-s3-service]创建存储桶",
 					"event": [
 						{
 							"listen": "test",
@@ -2089,12 +2089,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/bucket?bucketName=imtest001",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"bucket"
 							],
@@ -2109,7 +2109,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]获取存储桶列表",
+					"name": "[simple-base-s3-service]获取存储桶列表",
 					"event": [
 						{
 							"listen": "test",
@@ -2129,12 +2129,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket/list?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/bucket/list?bucketName=imtest001",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"bucket",
 								"list"
@@ -2150,7 +2150,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]上传文件-返回文件key",
+					"name": "[simple-base-s3-service]上传文件-返回文件key",
 					"event": [
 						{
 							"listen": "test",
@@ -2180,12 +2180,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"object",
 								"upload"
@@ -2205,62 +2205,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]上传文件-返回文件key-用于分页",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,并设置S3FileId\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.collectionVariables.set(\"S3FileId\", jsonData.data);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/d:/Pictures/00042d4e1ff744ccafc6a569ce8d1c35.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
-							"host": [
-								"{{Host}}{{BaseS3}}"
-							],
-							"path": [
-								"simple-base-s3",
-								"storage",
-								"object",
-								"upload"
-							],
-							"query": [
-								{
-									"key": "bucketName",
-									"value": "imtest001"
-								},
-								{
-									"key": "fileExtension",
-									"value": "jpg"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[demo-base-s3]生成带有预签名的URL，用于私有S3对象的访问",
+					"name": "[simple-base-s3-service]生成带有预签名的URL，用于私有S3对象的访问",
 					"event": [
 						{
 							"listen": "test",
@@ -2286,12 +2231,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/url?bucketName=imtest001&key={{S3FileId}}",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object/url?bucketName=imtest001&key={{S3FileId}}",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"object",
 								"url"
@@ -2311,7 +2256,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]获取文件列表-首页",
+					"name": "[simple-base-s3-service]获取文件列表-首页",
 					"event": [
 						{
 							"listen": "test",
@@ -2340,12 +2285,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"object"
 							]
@@ -2354,7 +2299,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]获取文件列表-下一页",
+					"name": "[simple-base-s3-service]获取文件列表-下一页",
 					"event": [
 						{
 							"listen": "test",
@@ -2383,12 +2328,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object/Next",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object/Next",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"object",
 								"Next"
@@ -2398,7 +2343,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]删除文件",
+					"name": "[simple-base-s3-service]删除文件",
 					"event": [
 						{
 							"listen": "test",
@@ -2421,12 +2366,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/object?bucketName=imtest001&key={{S3FileId}}",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object?bucketName=imtest001&key={{S3FileId}}",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"object"
 							],
@@ -2445,7 +2390,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-s3]删除存储桶",
+					"name": "[simple-base-s3-service]删除存储桶",
 					"event": [
 						{
 							"listen": "test",
@@ -2468,12 +2413,12 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3}}/simple-base-s3/storage/bucket?bucketName=imtest001",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/bucket?bucketName=imtest001",
 							"host": [
-								"{{Host}}{{BaseS3}}"
+								"{{Host}}{{BaseS3Service}}"
 							],
 							"path": [
-								"simple-base-s3",
+								"simple-base-s3-service",
 								"storage",
 								"bucket"
 							],
@@ -2482,6 +2427,46 @@
 									"key": "bucketName",
 									"value": "imtest001"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "demo-base-s3",
+			"item": [
+				{
+					"name": "[demo-base-s3]获取存储桶列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,判断返回数据是否正确\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].name).to.eql(\"imtest001\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseS3}}/demo-base-s3/test/bucket/list",
+							"host": [
+								"{{Host}}{{BaseS3}}"
+							],
+							"path": [
+								"demo-base-s3",
+								"test",
+								"bucket",
+								"list"
 							]
 						}
 					},

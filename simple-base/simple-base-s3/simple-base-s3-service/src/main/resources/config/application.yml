@@ -1,0 +1,18 @@
+server:
+  port: 9020
+
+spring:
+  application:
+    name: simple-base-s3-service
+
+simple:
+  scan:
+    service:
+      ## 关闭service依赖中service服务端，仅使用service依赖中的api客户端（本服务层除外）
+      enabled: false
+  s3:
+    #缺省项为false
+    enabled: true
+    accessKey: RKcxrJ80qTgziqaH
+    secretKey: pVlB5bm0vIA6aidjWLG8ZfKUIuB7dNUC
+    endpoint: 127.0.0.1:9000
