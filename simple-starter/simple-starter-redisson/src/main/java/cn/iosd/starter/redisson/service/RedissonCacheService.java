@@ -32,7 +32,8 @@ public class RedissonCacheService {
      */
     public void setObject(String key, Object value, long ttl) {
         RBucket<Object> bucket = redisson.getBucket(key);
-        bucket.set(value, ttl, TimeUnit.SECONDS);
+        bucket.set(value);
+        bucket.expire(Instant.now().plusSeconds(ttl));
     }
 
     /**

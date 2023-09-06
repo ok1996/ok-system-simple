@@ -10,6 +10,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @date 2022-12-14
  */
 public interface DemoDatasourceMapper extends BaseMapper<DemoDatasource> {
-
+    /**
+     * 自定义Sql查询数据
+     *
+     * @param id 主键id
+     * @return 数据实体
+     */
     DemoDatasource selectCustomById(Long id);
 }
