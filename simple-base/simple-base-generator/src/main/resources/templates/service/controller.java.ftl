@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "${table.comment!}")
 @RestController
-@RequestMapping("/${projectName}/${entity}")
+@RequestMapping("/${projectName}-service/${entity}")
 public class ${table.controllerName} extends BaseController<${table.entityName}Entity>{
 
 }
