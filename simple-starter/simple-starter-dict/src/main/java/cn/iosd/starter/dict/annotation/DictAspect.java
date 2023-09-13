@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +26,7 @@ import java.util.Map;
 @Aspect
 @Component
 public class DictAspect {
+    private static final Logger log = LoggerFactory.getLogger(DictAspect.class);
 
     @Autowired
     private List<DictService> dictServiceList;
@@ -83,11 +86,12 @@ public class DictAspect {
             if (dictFieldAnnotation != null) {
                 DictService dictService = getDictServiceByName(dictFieldAnnotation.dictImplBeanName());
                 if (dictService == null) {
+                    log.error("字典服务不存在，请检查实现类：{}", dictFieldAnnotation.dictImplBeanName());
                     continue;
                 }
-                // 获取字典项列表
                 List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), cache);
                 if (dictItemList == null || dictItemList.size() == 0) {
+                    log.error("获取字典项列表为空，请检查字典参数：{}", dictFieldAnnotation.dictionaryParams());
                     continue;
                 }
                 ReflectionUtils.makeAccessible(field);
@@ -127,7 +131,6 @@ public class DictAspect {
         List<DictItem> dictItemList = cache.get(dictParams);
         if (dictItemList == null) {
             dictItemList = dictService.getDictItemList(dictParams);
-            // 将字典项列表放入缓存
             cache.put(dictParams, dictItemList);
         }
         return dictItemList;
