@@ -1,5 +1,7 @@
 ## 可共享配置
 spring:
+  flyway:
+    enabled: false
   datasource:
     dynamic:
       p6spy: true
