@@ -21,22 +21,22 @@ public @interface DictField {
     /**
      * 关联字段，用于翻译字典项
      *
-     * @return
+     * @return 关联字段名称
      */
     String relatedField() default "";
 
 
     /**
-     * 接口实现类所需的参数
+     * 接口实现类所需的参数类型
      *
-     * @return
+     * @return 参数类型值
      */
     String dictionaryParams();
 
     /**
      * 字典获取方式实现类
      *
-     * @return
+     * @return 实现类名称
      */
     String dictImplBeanName() default "";
 }
