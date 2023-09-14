@@ -34,7 +34,7 @@ public class DictAspect {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Value("${simple.dict.dictImplBeanName:localDictServiceImpl}")
+    @Value("${simple.dict.dictImplBeanName:}")
     private String dictImplBeanName;
 
     private Map<String, DictService> dictServiceMap = new HashMap<>();
@@ -50,11 +50,23 @@ public class DictAspect {
         }
     }
 
+    /**
+     * 根据字典服务名称获取对应的字典服务
+     * <br/>
+     * 优先级1：注解配置值 @DictField 字段dictImplBeanName
+     * <br/>
+     * 优先级2：配置文件项 simple.dict.dictImplBeanName
+     * <br/>
+     * 优先级3：代码中服务类@Order优先顺序第一的服务类
+     *
+     * @param name 字典服务实现类名称
+     * @return 字典服务
+     */
     public DictService getDictServiceByName(String name) {
         if (StringUtils.isBlank(name)) {
-            return dictServiceMap.get(dictImplBeanName);
+            name = dictImplBeanName;
         }
-        return dictServiceMap.get(name);
+        return dictServiceMap.getOrDefault(name, dictServiceList.get(0));
     }
 
 
@@ -85,13 +97,11 @@ public class DictAspect {
             DictField dictFieldAnnotation = field.getAnnotation(DictField.class);
             if (dictFieldAnnotation != null) {
                 DictService dictService = getDictServiceByName(dictFieldAnnotation.dictImplBeanName());
-                if (dictService == null) {
-                    log.error("字典服务不存在，请检查实现类：{}", dictFieldAnnotation.dictImplBeanName());
-                    continue;
-                }
                 List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), cache);
                 if (dictItemList == null || dictItemList.size() == 0) {
-                    log.error("获取字典项列表为空，请检查字典参数：{}", dictFieldAnnotation.dictionaryParams());
+                    log.error("获取字典项列表为空，请检查服务类：{} 字典参数：{} 服务类包地址：{}"
+                            , dictService.getClass().getSimpleName(), dictFieldAnnotation.dictionaryParams()
+                            , dictService.getClass().getPackageName());
                     continue;
                 }
                 ReflectionUtils.makeAccessible(field);

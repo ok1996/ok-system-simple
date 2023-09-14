@@ -5,6 +5,7 @@ import cn.iosd.starter.dict.vo.DictItem;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.Map;
  *
  * @author ok1996
  */
+@Order(10)
 @Service
 public class LocalDictServiceImpl implements DictService {
 

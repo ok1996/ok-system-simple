@@ -4,6 +4,7 @@ import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
  *
  * @author ok1996
  */
+@Order(20)
 @Service
 public class RemoteDictServiceImpl implements DictService {
 
