@@ -13,6 +13,14 @@ public class DictItem {
      */
     private String label;
 
+    public DictItem() {
+    }
+
+    public DictItem(String value, String label) {
+        this.value = value;
+        this.label = label;
+    }
+
     public String getValue() {
         return value;
     }
