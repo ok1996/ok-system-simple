@@ -53,7 +53,7 @@ public class DictAspect {
     /**
      * 根据字典服务名称获取对应的字典服务
      * <br/>
-     * 优先级1：注解配置值 @DictField 字段dictImplBeanName
+     * 优先级1：注解 @DictField 配置值 dictImplBeanName
      * <br/>
      * 优先级2：配置文件项 simple.dict.dictImplBeanName
      * <br/>
@@ -63,10 +63,8 @@ public class DictAspect {
      * @return 字典服务
      */
     public DictService getDictServiceByName(String name) {
-        if (StringUtils.isBlank(name)) {
-            name = dictImplBeanName;
-        }
-        return dictServiceMap.getOrDefault(name, dictServiceList.get(0));
+        String serviceName = StringUtils.isNotBlank(name) ? name : dictImplBeanName;
+        return dictServiceMap.getOrDefault(serviceName, dictServiceList.get(0));
     }
 
 
