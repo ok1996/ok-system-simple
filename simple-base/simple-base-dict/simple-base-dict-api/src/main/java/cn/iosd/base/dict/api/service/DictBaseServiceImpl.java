@@ -3,7 +3,6 @@ package cn.iosd.base.dict.api.service;
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 

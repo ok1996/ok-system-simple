@@ -5,7 +5,6 @@ import cn.iosd.base.dict.api.service.IDictInfoService;
 import cn.iosd.base.dict.api.vo.DictGroupVo;
 import cn.iosd.starter.dict.vo.DictItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
