@@ -1,13 +1,13 @@
 package cn.iosd.base.param.service.service;
 
-import cn.iosd.base.param.api.domain.BaseParam;
-import cn.iosd.base.param.api.service.IBaseParamService;
+import cn.iosd.base.param.api.domain.ParamInfo;
+import cn.iosd.base.param.api.service.IParamInfoService;
 import cn.iosd.base.param.api.utils.ParamInitUtil;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.base.param.api.vo.CodeValueListHistory;
-import cn.iosd.base.param.service.entity.BaseParamEntity;
-import cn.iosd.base.param.service.mapper.BaseParamMapper;
+import cn.iosd.base.param.service.entity.ParamInfoEntity;
+import cn.iosd.base.param.service.mapper.ParamInfoMapper;
 import cn.iosd.utils.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -27,20 +27,20 @@ import java.util.Optional;
  */
 @Service
 @Primary
-public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParamEntity> implements IBaseParamService {
+public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, ParamInfoEntity> implements IParamInfoService {
 
     @Override
-    public BaseParam selectBaseParamByKey(String paramKey) {
-        BaseParamEntity queryDb = new BaseParamEntity();
+    public ParamInfo selectBaseParamByKey(String paramKey) {
+        ParamInfoEntity queryDb = new ParamInfoEntity();
         queryDb.setParamKey(paramKey);
         return baseMapper.selectOne(Wrappers.lambdaQuery(queryDb));
     }
 
     @Override
     public List<CodeValue<?>> selectCodeValueVoParamByKey(String paramKey) {
-        BaseParam baseParam = selectBaseParamByKey(paramKey);
+        ParamInfo paramInfo = selectBaseParamByKey(paramKey);
         try {
-            return JsonMapper.readValue(baseParam.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
+            return JsonMapper.readValue(paramInfo.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
         }
@@ -48,7 +48,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
 
     @Override
     public int insertBaseParam(BaseParamVo baseParamVo) {
-        BaseParamEntity baseParam = convertBaseParam(baseParamVo);
+        ParamInfoEntity baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setCreateTime(now);
         baseParam.setModifyTime(now);
@@ -57,7 +57,7 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
 
     @Override
     public int updateBaseParam(BaseParamVo baseParamVo) {
-        BaseParamEntity baseParam = convertBaseParam(baseParamVo);
+        ParamInfoEntity baseParam = convertBaseParam(baseParamVo);
         LocalDateTime now = LocalDateTime.now();
         baseParam.setModifyTime(now);
         return baseMapper.updateById(baseParam);
@@ -65,9 +65,9 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
 
     @Override
     public List<CodeValueListHistory> selectCodeValueHistoryParamByKey(String paramKey) {
-        BaseParam baseParam = selectBaseParamByKey(paramKey);
+        ParamInfo paramInfo = selectBaseParamByKey(paramKey);
         try {
-            return JsonMapper.readValue(baseParam.getHistoryCodeValues(), new TypeReference<List<CodeValueListHistory>>() {
+            return JsonMapper.readValue(paramInfo.getHistoryCodeValues(), new TypeReference<List<CodeValueListHistory>>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
@@ -80,13 +80,13 @@ public class BaseParamServiceImpl extends ServiceImpl<BaseParamMapper, BaseParam
      * @param baseParamVo 请求实体
      * @return 转换后的Entity实体
      */
-    public BaseParamEntity convertBaseParam(BaseParamVo baseParamVo) {
-        BaseParamEntity baseParam = new BaseParamEntity();
+    public ParamInfoEntity convertBaseParam(BaseParamVo baseParamVo) {
+        ParamInfoEntity baseParam = new ParamInfoEntity();
         baseParam.setId(baseParamVo.getId());
 
         String codeValueListHistory = Optional.ofNullable(baseParamVo.getId())
                 .map(baseMapper::selectById)
-                .map(BaseParamEntity::getHistoryCodeValues)
+                .map(ParamInfoEntity::getHistoryCodeValues)
                 .orElse(null);
         try {
             baseParam.setModuleNames(JsonMapper.getObjectMapper().writeValueAsString(baseParamVo.getModuleNames()));

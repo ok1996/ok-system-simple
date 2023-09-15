@@ -1,6 +1,6 @@
 package cn.iosd.base.param.api.feign;
 
-import cn.iosd.base.param.api.domain.BaseParam;
+import cn.iosd.base.param.api.domain.ParamInfo;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.base.param.api.vo.CodeValueListHistory;
@@ -18,9 +18,9 @@ import java.util.List;
 /**
  * @author ok1996
  */
-@FeignClient(name = "simple-base-param-service", contextId = "baseParamServiceFeign", path = "/simple-base-param-service/param"
+@FeignClient(name = "simple-base-param-service", contextId = "baseParamServiceFeign", path = "/simple-base-param-service/paramInfo"
         , url = "${simple.feign.base.param.url:}", primary = false)
-public interface BaseParamFeign extends CrudOperations<BaseParam> {
+public interface ParamInfoFeign extends CrudOperations<ParamInfo> {
 
     /**
      * 新增
@@ -46,8 +46,8 @@ public interface BaseParamFeign extends CrudOperations<BaseParam> {
      * @param paramKey key
      * @return 数据实体
      */
-    @GetMapping("/BaseParam/key/{paramKey}")
-    Response<BaseParam> selectBaseParamByKey(@PathVariable String paramKey);
+    @GetMapping("/key/{paramKey}")
+    Response<ParamInfo> selectBaseParamByKey(@PathVariable String paramKey);
 
     /**
      * 查询参数配置

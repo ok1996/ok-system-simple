@@ -1,7 +1,7 @@
 package cn.iosd.base.param.api.init;
 
-import cn.iosd.base.param.api.domain.BaseParam;
-import cn.iosd.base.param.api.service.IBaseParamService;
+import cn.iosd.base.param.api.domain.ParamInfo;
+import cn.iosd.base.param.api.service.IParamInfoService;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ public class ParamInitLifecycle implements SmartLifecycle {
     private List<ParamInit> inits;
 
     @Autowired
-    private IBaseParamService baseParamService;
+    private IParamInfoService paramInfoService;
 
     private static boolean RUNNING = false;
 
@@ -67,13 +67,13 @@ public class ParamInitLifecycle implements SmartLifecycle {
      */
     private void initParam(ParamInit init) {
         String key = init.getKey();
-        BaseParam baseParam = baseParamService.selectBaseParamByKey(key);
-        if (baseParam == null) {
-            baseParamService.insertBaseParam(initVo(init));
+        ParamInfo paramInfo = paramInfoService.selectBaseParamByKey(key);
+        if (paramInfo == null) {
+            paramInfoService.insertBaseParam(initVo(init));
         } else if (init.isRestartOverride()) {
             BaseParamVo saveReqVo = initVo(init);
-            saveReqVo.setId(baseParam.getId());
-            baseParamService.updateBaseParam(saveReqVo);
+            saveReqVo.setId(paramInfo.getId());
+            paramInfoService.updateBaseParam(saveReqVo);
         }
     }
 

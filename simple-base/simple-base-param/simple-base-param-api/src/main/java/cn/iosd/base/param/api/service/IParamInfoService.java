@@ -1,6 +1,6 @@
 package cn.iosd.base.param.api.service;
 
-import cn.iosd.base.param.api.domain.BaseParam;
+import cn.iosd.base.param.api.domain.ParamInfo;
 import cn.iosd.base.param.api.vo.BaseParamVo;
 import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.base.param.api.vo.CodeValueListHistory;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author ok1996
  */
-public interface IBaseParamService {
+public interface IParamInfoService {
 
     /**
      * 查询基础参数配置
@@ -18,7 +18,7 @@ public interface IBaseParamService {
      * @param paramKey 参数主键
      * @return 基础参数配置
      */
-    BaseParam selectBaseParamByKey(String paramKey);
+    ParamInfo selectBaseParamByKey(String paramKey);
 
     /**
      * 查询参数配置

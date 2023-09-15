@@ -1,4 +1,4 @@
-CREATE TABLE base_param
+CREATE TABLE base_param_info
 (
     id                  bigint       NOT NULL COMMENT '主键',
     module_names        mediumtext            DEFAULT NULL COMMENT '模块名列表',

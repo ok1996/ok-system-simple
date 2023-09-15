@@ -1,6 +1,6 @@
 package cn.iosd.demo.base.param.service;
 
-import cn.iosd.base.param.api.service.IBaseParamService;
+import cn.iosd.base.param.api.service.IParamInfoService;
 import cn.iosd.base.param.api.utils.ParamInitUtil;
 import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.demo.base.param.init.DemoTestParamInit;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Service
 public class TestService {
     @Autowired(required = false)
-    private IBaseParamService baseParamService;
+    private IParamInfoService paramInfoService;
 
     /**
      * 获取同学列表信息
@@ -27,11 +27,11 @@ public class TestService {
      * @return 返回同学列表信息的ClassmateVo对象
      */
     public ClassmateVo classmateList() {
-        if (baseParamService == null) {
+        if (paramInfoService == null) {
             return null;
         }
         // 从基础参数服务中获取基础参数码值对象的列表
-        List<CodeValue<?>> simulation = baseParamService.selectCodeValueVoParamByKey(DemoTestParamInit.STUDENT_KEY_ONE);
+        List<CodeValue<?>> simulation = paramInfoService.selectCodeValueVoParamByKey(DemoTestParamInit.STUDENT_KEY_ONE);
         // 判断是否开启模拟数据
         if (!ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation, ParamInitUtil.OPEN_SIMULATION_CODE)) {
             log.info("获取其他来源途径的数据");

@@ -21,9 +21,9 @@ public class BaseParamAutoConfiguration {
     public Flyway paramFlyway(DataSource dataSource) {
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
-                .locations("classpath:db/mysql/param")
+                .locations("classpath:db/mysql/base/param")
                 .baselineOnMigrate(true)
-                .table("param_flyway_schema_history")
+                .table("base_param_flyway_schema_history")
                 .load();
         flyway.migrate();
         return flyway;

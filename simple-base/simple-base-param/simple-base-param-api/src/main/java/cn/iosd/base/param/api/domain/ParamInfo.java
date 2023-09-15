@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 /**
  * @author ok1996
  */
-public class BaseParam {
+public class ParamInfo {
     @Schema(description = "主键id")
     private Long id;
     @Schema(description = "模块名列表")

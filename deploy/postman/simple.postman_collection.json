@@ -1775,13 +1775,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param"
+								"paramInfo"
 							]
 						}
 					},
@@ -1826,13 +1826,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param"
+								"paramInfo"
 							]
 						}
 					},
@@ -1858,13 +1858,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/list",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/list",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param",
+								"paramInfo",
 								"api",
 								"list"
 							]
@@ -1911,13 +1911,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/page",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/page",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param",
+								"paramInfo",
 								"api",
 								"page"
 							]
@@ -1955,13 +1955,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/{{baseParamTestId}}",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param",
+								"paramInfo",
 								"api",
 								"{{baseParamTestId}}"
 							]
@@ -2002,13 +2002,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/param/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/{{baseParamTestId}}",
 							"host": [
 								"{{Host}}{{BaseParamService}}"
 							],
 							"path": [
 								"simple-base-param-service",
-								"param",
+								"paramInfo",
 								"api",
 								"{{baseParamTestId}}"
 							]
