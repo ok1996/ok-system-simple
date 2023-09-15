@@ -2614,6 +2614,119 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "simple-base-dict-service",
+			"item": [
+				{
+					"name": "[simple-base-dict-service]提取字典分组",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].dictGroupParam).to.eql(\"leader\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/uniqueDictGroups",
+							"host": [
+								"{{Host}}{{BaseDictService}}"
+							],
+							"path": [
+								"simple-base-dict-service",
+								"DictInfo",
+								"uniqueDictGroups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-base-dict-service]字典翻译-远程调用接口实现类字典",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].value).to.eql(\"1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/custom/leader",
+							"host": [
+								"{{Host}}{{BaseDictService}}"
+							],
+							"path": [
+								"simple-base-dict-service",
+								"DictInfo",
+								"custom",
+								"leader"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "demo-base-dict",
+			"item": [
+				{
+					"name": "[demo-base-dict]测试单体",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.sexText).to.eql(\"女\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDict}}/demo-base-dict/customTest/personRemoteVo",
+							"host": [
+								"{{Host}}{{BaseDict}}"
+							],
+							"path": [
+								"demo-base-dict",
+								"customTest",
+								"personRemoteVo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [

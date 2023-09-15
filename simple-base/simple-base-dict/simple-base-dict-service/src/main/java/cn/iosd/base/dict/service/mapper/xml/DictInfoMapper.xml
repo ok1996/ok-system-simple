@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.iosd.base.dict.service.mapper.DictInfoMapper">
+
+    <select id="getUniqueDictGroups" resultType="cn.iosd.base.dict.api.vo.DictGroupVo">
+        SELECT dict_group_param, dict_group_desc
+        FROM base_dict_info
+        GROUP BY dict_group_param, dict_group_desc
+    </select>
+
+</mapper>

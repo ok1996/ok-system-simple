@@ -1,0 +1,6 @@
+server:
+  port: 9030
+
+spring:
+  application:
+    name: simple-base-dict-service
