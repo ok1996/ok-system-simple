@@ -2,7 +2,7 @@ package cn.iosd.starter.encrypt.rsa.annotation;
 
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
-import cn.iosd.utils.JsonMapperThreadLocal;
+import cn.iosd.utils.jackson.JsonMapperThreadLocal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

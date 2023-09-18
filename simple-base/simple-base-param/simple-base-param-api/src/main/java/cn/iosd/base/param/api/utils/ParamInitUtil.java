@@ -1,7 +1,7 @@
 package cn.iosd.base.param.api.utils;
 
 import cn.iosd.base.param.api.vo.CodeValue;
-import cn.iosd.utils.JsonMapper;
+import cn.iosd.utils.jackson.JsonMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;

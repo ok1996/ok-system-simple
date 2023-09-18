@@ -1,4 +1,4 @@
-package cn.iosd.utils;
+package cn.iosd.utils.jackson;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;

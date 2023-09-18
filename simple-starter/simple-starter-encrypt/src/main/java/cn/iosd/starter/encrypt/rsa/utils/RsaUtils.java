@@ -1,7 +1,7 @@
 package cn.iosd.starter.encrypt.rsa.utils;
 
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
-import cn.iosd.utils.JsonMapperThreadLocal;
+import cn.iosd.utils.jackson.JsonMapperThreadLocal;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.codec.binary.Base64;

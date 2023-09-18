@@ -2,7 +2,7 @@ package cn.iosd.starter.encrypt.rsa.annotation;
 
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
-import cn.iosd.utils.JsonMapperThreadLocal;
+import cn.iosd.utils.jackson.JsonMapperThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;

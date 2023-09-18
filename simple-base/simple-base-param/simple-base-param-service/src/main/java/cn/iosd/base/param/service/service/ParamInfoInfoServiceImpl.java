@@ -8,7 +8,7 @@ import cn.iosd.base.param.api.vo.CodeValue;
 import cn.iosd.base.param.api.vo.CodeValueListHistory;
 import cn.iosd.base.param.service.entity.ParamInfoEntity;
 import cn.iosd.base.param.service.mapper.ParamInfoMapper;
-import cn.iosd.utils.JsonMapper;
+import cn.iosd.utils.jackson.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
