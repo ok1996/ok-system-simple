@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(value = {"cn.iosd.starter.s3"})
-@ConditionalOnProperty(prefix = "simple.s3", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "simple.s3", name = "enabled", havingValue = "true" , matchIfMissing = true)
 public class ServiceScanner {
 }
