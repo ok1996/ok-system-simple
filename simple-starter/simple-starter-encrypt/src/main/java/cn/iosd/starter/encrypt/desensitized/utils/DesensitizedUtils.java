@@ -85,13 +85,24 @@ public class DesensitizedUtils {
     }
 
     /**
-     * 【中文姓名】只显示最后一个汉字，其他隐藏为星号，比如：**梦
+     * 【中文姓名】两位遮罩第一位，三位遮罩第二位，超过三位只显示前两位及最后一位
+     * <p>
+     * 如：*红、吴*库、欧阳*库、上官**华
+     * </p>
      *
-     * @param fullName 姓名
+     * @param fullName 完整的中文姓名字符串
      * @return 结果
      */
     public static String chineseName(String fullName) {
-        return desValue(fullName, 0, 1);
+        if (fullName == null || fullName.isEmpty()) {
+            return fullName;
+        }
+        int len = fullName.length();
+        //判断前缀几位明文
+        int prefixLen = len <= 2 ? 0 : (len == 3 ? 1 : 2);
+        //保持最后一位明文
+        int suffixLen = 1;
+        return desValue(fullName, prefixLen, suffixLen);
     }
 
     /**
@@ -172,28 +183,4 @@ public class DesensitizedUtils {
         return "******";
     }
 
-    /**
-     * 【密钥】密钥除了最后三位，全部都用*代替，比如：***xdS 脱敏后长度为6，如果明文长度不足三位，则按实际长度显示，剩余位置补*
-     *
-     * @param key 密钥
-     * @return 结果
-     */
-    public static String key(String key) {
-        if (StringUtils.isBlank(key)) {
-            return key;
-        }
-        int viewLength = 6;
-        StringBuilder tmpKey = new StringBuilder(desValue(key, 0, 3));
-        if (tmpKey.length() > viewLength) {
-            return tmpKey.substring(tmpKey.length() - viewLength);
-        } else if (tmpKey.length() < viewLength) {
-            int buffLength = viewLength - tmpKey.length();
-            for (int i = 0; i < buffLength; i++) {
-                tmpKey.insert(0, MASK_STR);
-            }
-            return tmpKey.toString();
-        } else {
-            return tmpKey.toString();
-        }
-    }
 }
