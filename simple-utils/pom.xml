@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>simple-utils-jackson</module>
+        <module>simple-utils-common</module>
     </modules>
 
     <profiles>
