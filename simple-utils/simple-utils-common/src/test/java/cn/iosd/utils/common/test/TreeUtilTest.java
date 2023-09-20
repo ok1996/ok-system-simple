@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * @author ok1996
  */
@@ -18,11 +20,12 @@ public class TreeUtilTest {
     @Test
     public void testConvert() {
         //乱序数据-正确用法
-        performConversionTest(generateOutOfOrderDemoList(), "Convert");
+        int result = performConversionTest(generateOutOfOrderDemoList(), "Convert");
         //异常用法-导致特殊一级节点200为空
         performConversionTest(generateOutOfOrderDemoList(), "ConvertBySequentialGrade");
         //异常用法-导致200的二级节点均成为一级节点
         performConversionTest(generateOutOfOrderDemoList(), "ConvertBySequentialGradeRootCandidateData");
+        assertEquals(7, result);
     }
 
     @Test
@@ -32,7 +35,8 @@ public class TreeUtilTest {
         //正确排序数据正确用法-没有父级关联的数据移除
         performConversionTest(generateDemoList(), "ConvertBySequentialGrade");
         //正确排序数据正确用法-将没有父级关联的数据添加为一级节点-应与调用Convert方法数据结果一致
-        performConversionTest(generateDemoList(), "ConvertBySequentialGradeRootCandidateData");
+        int result = performConversionTest(generateDemoList(), "ConvertBySequentialGradeRootCandidateData");
+        assertEquals(7, result);
     }
 
     /**
@@ -95,7 +99,7 @@ public class TreeUtilTest {
      * @param list     原始数据
      * @param testName 测试方法
      */
-    private void performConversionTest(List<Demo> list, String testName) {
+    private Integer performConversionTest(List<Demo> list, String testName) {
         long startTime = System.currentTimeMillis();
         Predicate<String> isRootPredicate = parentId -> parentId.isEmpty() || "-1".equals(parentId);
         List<Demo> convertData;
@@ -116,6 +120,7 @@ public class TreeUtilTest {
         long elapsedTime = endTime - startTime;
         log.info("{} method execution time: {} milliseconds; Top-level tree structure length: {}",
                 testName, elapsedTime, convertData.size());
+        return convertData.size();
     }
 
 
