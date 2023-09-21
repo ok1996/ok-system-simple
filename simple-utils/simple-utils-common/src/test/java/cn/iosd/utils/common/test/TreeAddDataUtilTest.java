@@ -69,7 +69,7 @@ public class TreeAddDataUtilTest {
         long startTime = System.currentTimeMillis();
         Predicate<String> isRootPredicate = parentId -> parentId.isEmpty() || "-1".equals(parentId);
 
-        List<Demo> convertData = TreeListUtils.convertAndAddData(list, idData, "id", "pid", "children", "data", isRootPredicate);
+        List<Demo> convertData = TreeListUtils.convertAndAddData(list, idData, "id", "pid", "children", "data", "id", isRootPredicate);
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
