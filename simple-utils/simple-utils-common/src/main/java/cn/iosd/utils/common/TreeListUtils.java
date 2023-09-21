@@ -1,5 +1,6 @@
 package cn.iosd.utils.common;
 
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -22,7 +23,7 @@ public class TreeListUtils {
     /**
      * 将原始列表转换为树形结构，没有父级关联的数据视为一级节点
      *
-     * @param origList          原始列表
+     * @param origList          原始列表,包含（id字段、parentId字段、children字段）
      * @param idFieldName       id字段名
      * @param parentIdFieldName parentId字段名
      * @param childrenFieldName children字段名
@@ -32,6 +33,29 @@ public class TreeListUtils {
      */
     public static <T> List<T> convert(List<T> origList, String idFieldName, String parentIdFieldName
             , String childrenFieldName, Predicate<String> isRootPredicate) {
+        return convertAndAddData(origList, null, idFieldName
+                , parentIdFieldName, childrenFieldName, null, isRootPredicate);
+    }
+
+    /**
+     * 将原始列表转换为树形结构，没有父级关联的数据视为一级节点
+     * <p>
+     * 并将关联对象添加进去树形结构
+     * <p/>
+     *
+     * @param origList          原始列表,包含（id字段、parentId字段、children字段、data字段）
+     * @param idData            关联对象键值对集合，key为id字段名对应值
+     * @param idFieldName       id字段名
+     * @param parentIdFieldName parentId字段名
+     * @param childrenFieldName children字段名
+     * @param dataFieldName     data字段名
+     * @param isRootPredicate   判断是否为根节点的条件
+     * @param <T>               实体类型
+     * @return 树形结构的结果列表
+     */
+    public static <T, V> List<T> convertAndAddData(List<T> origList, Map<String, V> idData, String idFieldName, String parentIdFieldName
+            , String childrenFieldName, String dataFieldName, Predicate<String> isRootPredicate) {
+        boolean dataBool = ObjectUtils.isEmpty(dataFieldName) || ObjectUtils.isEmpty(idData);
         Map<String, T> idMaps = new HashMap<>(origList.size());
         // 获取字段值的方法
         Function<T, String> getId = entity -> Objects.toString(getFieldValue(entity, idFieldName), "");
@@ -47,6 +71,10 @@ public class TreeListUtils {
         List<T> result = new ArrayList<>();
         Function<T, String> getParentId = entity -> Objects.toString(getFieldValue(entity, parentIdFieldName), "");
         for (T entity : origList) {
+            if (!dataBool) {
+                String id = getId.apply(entity);
+                setFieldValue(entity, dataFieldName, idData.get(id));
+            }
             String parentId = getParentId.apply(entity);
             if (isRootPredicate.test(parentId)) {
                 result.add(entity);
@@ -80,6 +108,34 @@ public class TreeListUtils {
      */
     public static <T> List<T> convertBySequentialGrade(List<T> origList, String idFieldName, String parentIdFieldName
             , String childrenFieldName, Predicate<String> isRootPredicate, Boolean rootCandidateData) {
+        return convertBySequentialGradeAndAddData(origList, null, idFieldName
+                , parentIdFieldName, childrenFieldName, null
+                , isRootPredicate, rootCandidateData);
+    }
+
+    /**
+     * 将原始列表转换为树形结构,并将关联对象添加进去树形结构
+     * <p>
+     * 原始列表数据要求：一级数据在二级数据前、以此类推。<br/>
+     * 若原始列表不符合要求：则视为二级在一级前的数据是没有父级关联
+     * </p>
+     *
+     * @param origList          原始列表
+     * @param idData            关联对象键值对集合，key为id字段名对应值
+     * @param idFieldName       id字段名
+     * @param parentIdFieldName parentId字段名
+     * @param childrenFieldName children字段名
+     * @param dataFieldName     data字段名
+     * @param isRootPredicate   判断是否为根节点的条件
+     * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
+     * @param <T>               实体类型
+     * @return 树形结构的结果列表
+     */
+    public static <T, V> List<T> convertBySequentialGradeAndAddData(List<T> origList, Map<String, V> idData, String idFieldName
+            , String parentIdFieldName, String childrenFieldName, String dataFieldName
+            , Predicate<String> isRootPredicate, Boolean rootCandidateData) {
+        boolean dataBool = ObjectUtils.isEmpty(dataFieldName) || ObjectUtils.isEmpty(idData);
+
         Map<String, T> idMaps = new HashMap<>(origList.size());
         List<T> result = new ArrayList<>();
 
@@ -89,6 +145,9 @@ public class TreeListUtils {
 
         for (T entity : origList) {
             String id = getId.apply(entity);
+            if (!dataBool) {
+                setFieldValue(entity, dataFieldName, idData.get(id));
+            }
             String parentId = getParentId.apply(entity);
             if (id.isEmpty()) {
                 throw new IllegalArgumentException("存在id为空的数据");
