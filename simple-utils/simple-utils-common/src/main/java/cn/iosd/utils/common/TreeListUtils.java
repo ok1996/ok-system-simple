@@ -34,8 +34,36 @@ public class TreeListUtils {
      */
     public static <T> List<T> convert(List<T> origList, String idFieldName, String parentIdFieldName
             , String childrenFieldName, Predicate<String> isRootPredicate) {
-        return convertAndAddData(origList, null, idFieldName
-                , parentIdFieldName, childrenFieldName, null, null, isRootPredicate);
+        return convertAndAddData(
+                origList, null, idFieldName, parentIdFieldName
+                , childrenFieldName, null, null, isRootPredicate
+        );
+    }
+
+
+    /**
+     * 将原始列表转换为树形结构
+     * <p>
+     * 原始列表数据要求：一级数据在二级数据前、以此类推。<br/>
+     * 若原始列表不符合要求：则视为二级在一级前的数据是没有父级关联
+     * </p>
+     *
+     * @param origList          原始列表,包含（id字段、parentId字段、children字段）
+     *                          其中，children字段 为空 用于建立树形结构和补充数据
+     * @param idFieldName       id字段名
+     * @param parentIdFieldName parentId字段名
+     * @param childrenFieldName children字段名
+     * @param isRootPredicate   判断是否为根节点的条件
+     * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
+     * @param <T>               实体类型
+     * @return 树形结构的结果列表
+     */
+    public static <T> List<T> convertBySequentialGrade(List<T> origList, String idFieldName, String parentIdFieldName
+            , String childrenFieldName, Predicate<String> isRootPredicate, Boolean rootCandidateData) {
+        return convertBySequentialGradeAndAddData(
+                origList, null, idFieldName, parentIdFieldName, childrenFieldName
+                , null, null, isRootPredicate, rootCandidateData
+        );
     }
 
     /**
@@ -46,14 +74,15 @@ public class TreeListUtils {
      *
      * @param origList          原始列表,包含（id字段、parentId字段、children字段、data字段、data主键字段）
      *                          其中，children字段、data字段 为空 用于建立树形结构和补充数据
-     * @param idData            关联对象键值对集合，key为id字段名对应值
+     * @param idData            包含关联数据对象的映射，key为data主键字段名
      * @param idFieldName       id字段名
      * @param parentIdFieldName parentId字段名
      * @param childrenFieldName children字段名
-     * @param dataFieldName     data字段名
-     * @param dataIdFieldName   data主键字段名
+     * @param dataFieldName     data字段名（表示要关联的数据字段名）
+     * @param dataIdFieldName   data主键字段名（表示要关联的数据字段的主键字段名）
      * @param isRootPredicate   判断是否为根节点的条件
-     * @param <T>               实体类型
+     * @param <T>               泛型类型，表示原始数据的类型
+     * @param <V>               泛型类型，表示关联数据的类型
      * @return 树形结构的结果列表
      */
     public static <T, V> List<T> convertAndAddData(List<T> origList, Map<String, V> idData, String idFieldName
@@ -98,29 +127,6 @@ public class TreeListUtils {
         return result;
     }
 
-    /**
-     * 将原始列表转换为树形结构
-     * <p>
-     * 原始列表数据要求：一级数据在二级数据前、以此类推。<br/>
-     * 若原始列表不符合要求：则视为二级在一级前的数据是没有父级关联
-     * </p>
-     *
-     * @param origList          原始列表,包含（id字段、parentId字段、children字段）
-     *                          其中，children字段 为空 用于建立树形结构和补充数据
-     * @param idFieldName       id字段名
-     * @param parentIdFieldName parentId字段名
-     * @param childrenFieldName children字段名
-     * @param isRootPredicate   判断是否为根节点的条件
-     * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
-     * @param <T>               实体类型
-     * @return 树形结构的结果列表
-     */
-    public static <T> List<T> convertBySequentialGrade(List<T> origList, String idFieldName, String parentIdFieldName
-            , String childrenFieldName, Predicate<String> isRootPredicate, Boolean rootCandidateData) {
-        return convertBySequentialGradeAndAddData(origList, null, idFieldName
-                , parentIdFieldName, childrenFieldName, null, null
-                , isRootPredicate, rootCandidateData);
-    }
 
     /**
      * 将原始列表转换为树形结构,并将关联对象添加进去树形结构
@@ -131,15 +137,16 @@ public class TreeListUtils {
      *
      * @param origList          原始列表,包含（id字段、parentId字段、children字段、data字段、data主键字段）
      *                          其中，children字段、data字段 为空 用于建立树形结构和补充数据
-     * @param idData            关联对象键值对集合，key为id字段名对应值
+     * @param idData            关联对象键值对集合，key为data主键字段名
      * @param idFieldName       id字段名
      * @param parentIdFieldName parentId字段名
      * @param childrenFieldName children字段名
-     * @param dataFieldName     data字段名
-     * @param dataIdFieldName   data主键字段名
+     * @param dataFieldName     data字段名（表示要关联的数据字段名）
+     * @param dataIdFieldName   data主键字段名（表示要关联的数据字段的主键字段名）
      * @param isRootPredicate   判断是否为根节点的条件
      * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
-     * @param <T>               实体类型
+     * @param <T>               泛型类型，表示原始数据的类型
+     * @param <V>               泛型类型，表示关联数据的类型
      * @return 树形结构的结果列表
      */
     public static <T, V> List<T> convertBySequentialGradeAndAddData(List<T> origList, Map<String, V> idData, String idFieldName
