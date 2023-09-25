@@ -42,13 +42,13 @@
 
 ## 核心依赖
 
-| 依赖                   | 版本                  |
-|----------------------|---------------------|
-| Java                 | 17                  |
-| Spring Boot          | 3.1.4               |
-| Spring Cloud         | 2022.0.4            |
-| Spring Cloud Alibaba | 2022.0.0.0          |
-| Ok System Simple     | 2023.5.1.0-SNAPSHOT |
+| 依赖                   | 版本         |
+|----------------------|------------|
+| Java                 | 17         |
+| Spring Boot          | 3.1.4      |
+| Spring Cloud         | 2022.0.4   |
+| Spring Cloud Alibaba | 2022.0.0.0 |
+| Ok System Simple     | 2023.5.1.0 |
 
 ## Starter自动装配模块
 
