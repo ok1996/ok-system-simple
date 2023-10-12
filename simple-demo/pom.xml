@@ -35,6 +35,7 @@
         <module>simple-demo-email</module>
         <module>simple-demo-gateway</module>
         <module>demo-base-dict</module>
+        <module>simple-demo-package</module>
     </modules>
 
     <build>

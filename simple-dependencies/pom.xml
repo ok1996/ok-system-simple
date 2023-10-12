@@ -107,6 +107,12 @@
 
             <dependency>
                 <groupId>cn.iosd</groupId>
+                <artifactId>simple-starter-package</artifactId>
+                <version>${ok-system-simple.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-param-api</artifactId>
                 <version>${ok-system-simple.version}</version>
             </dependency>

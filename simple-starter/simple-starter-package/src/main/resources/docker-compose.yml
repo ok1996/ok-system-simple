@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  @project.artifactId@:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: @project.artifactId@:@project.version@
+    container_name: @project.artifactId@
+    network_mode: host
+    #可修改为桥接模式，需指定开放服务端口号
+#    network_mode: bridge
+#    ports:
+#      - "9200:9200"
+    volumes:
+      - ./application.yml:/application.yml
+      - ./config:/config
+    restart: always
+    environment:
+      - JAVA_OPTS=-Duser.timezone=GMT+08

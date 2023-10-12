@@ -1,0 +1,52 @@
+<assembly>
+    <id>deploy</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!-- SpringBoot多模块打包:将可执行jar包复制到压缩包中，打包时需指名classifier名称为exec -->
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>${project.artifactId}</outputDirectory>
+            <includes>
+                <include>*-exec.jar</include>
+            </includes>
+        </fileSet>
+        <!-- 把项目配置文件复制到压缩包中 -->
+        <fileSet>
+            <directory>${project.build.outputDirectory}</directory>
+            <outputDirectory>${project.artifactId}</outputDirectory>
+            <includes>
+                <include>application.yml</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.outputDirectory}/config</directory>
+            <outputDirectory>${project.artifactId}/config</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <!-- 将可执行脚本复制到压缩包中 -->
+        <dependencySet>
+            <outputDirectory>${project.artifactId}</outputDirectory>
+            <includes>
+                <include>cn.iosd:simple-starter-package</include>
+            </includes>
+            <unpack>true</unpack>
+            <fileMode>0755</fileMode>
+            <unpackOptions>
+                <includes>
+                    <include>win_java_start.bat</include>
+                    <include>shell_java_start.sh</include>
+                    <include>shell_java_stop.sh</include>
+                    <include>Dockerfile</include>
+                    <include>docker-compose.yml</include>
+                    <include>Readme.md</include>
+                </includes>
+                <filtered>true</filtered>
+            </unpackOptions>
+        </dependencySet>
+    </dependencySets>
+</assembly>

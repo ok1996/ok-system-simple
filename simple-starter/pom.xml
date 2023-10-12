@@ -29,6 +29,7 @@
         <module>simple-starter-dict</module>
         <module>simple-starter-email</module>
         <module>simple-starter-gateway</module>
+        <module>simple-starter-package</module>
     </modules>
 
     <profiles>

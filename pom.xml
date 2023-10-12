@@ -38,6 +38,7 @@
         <netty-socketio.version>2.0.3</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.533</aws-java-sdk-s3.version>
         <dynamic-datasource.version>4.1.3</dynamic-datasource.version>
+        <apm-toolkit-logback-1.x.version>9.0.0</apm-toolkit-logback-1.x.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -140,6 +141,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-logback-1.x</artifactId>
+                <version>${apm-toolkit-logback-1.x.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

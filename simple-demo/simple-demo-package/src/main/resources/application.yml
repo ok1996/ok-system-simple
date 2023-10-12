@@ -1,0 +1,5 @@
+server:
+  port: 11140
+spring:
+  application:
+    name: simple-demo-package
