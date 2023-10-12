@@ -1,4 +1,4 @@
-﻿package cn.iosd.demo.pack.controller;
+package cn.iosd.demo.pack.controller;
 
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
