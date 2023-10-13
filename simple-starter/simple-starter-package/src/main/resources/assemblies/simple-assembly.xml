@@ -13,7 +13,7 @@
                 <include>*-exec.jar</include>
             </includes>
         </fileSet>
-        <!-- 把项目配置文件复制到压缩包中 -->
+        <!-- 将项目配置文件复制到压缩包中 -->
         <fileSet>
             <directory>${project.build.outputDirectory}</directory>
             <outputDirectory>${project.artifactId}</outputDirectory>
@@ -24,6 +24,14 @@
         <fileSet>
             <directory>${project.build.outputDirectory}/config</directory>
             <outputDirectory>${project.artifactId}/config</outputDirectory>
+        </fileSet>
+        <!-- 将git版本文件复制到压缩包中 -->
+        <fileSet>
+            <directory>${project.build.outputDirectory}</directory>
+            <outputDirectory>${project.artifactId}</outputDirectory>
+            <includes>
+                <include>git.properties</include>
+            </includes>
         </fileSet>
     </fileSets>
 

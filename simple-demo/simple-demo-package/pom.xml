@@ -18,7 +18,6 @@
         <ok-simple.version>2023.5.2.0-SNAPSHOT</ok-simple.version>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
@@ -81,6 +80,12 @@
                         <version>${ok-simple.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <!-- 构建输出增加git版本文件 -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
             </plugin>
         </plugins>
 
