@@ -30,3 +30,4 @@ while [ $attempts -lt 5 ]; do
 done
 
 echo "已尝试 $attempts 次，无法打开日志。请检查服务环境。"
+echo '日志查看命名为： tail -f -n 100 ./logs/"$(ls -t ./logs | head -n 1)"'
