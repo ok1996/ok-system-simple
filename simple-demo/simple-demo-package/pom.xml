@@ -4,11 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>cn.iosd</groupId>
-        <artifactId>simple-demo</artifactId>
-        <version>2023.5.2.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.4</version>
+        <relativePath/>
     </parent>
 
+    <groupId>cn.iosd</groupId>
     <artifactId>simple-demo-package</artifactId>
     <version>2023.5.2.0-SNAPSHOT</version>
 
@@ -62,18 +64,16 @@
                 </dependencies>
             </plugin>
 
-            <!-- 构建输出增加git版本文件（可选） -->
+            <!-- 构建输出增加git版本文件 -->
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
 
-
+        <!-- 插件声明 可放在首层 指定使用simple-assembly -->
         <pluginManagement>
             <plugins>
-                <!-- 插件声明 可放在首层 指定使用simple-assembly -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -92,25 +92,6 @@
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
-                <!-- 插件声明 可放在首层 打包时生成git.properties（可选） -->
-                <plugin>
-                    <groupId>io.github.git-commit-id</groupId>
-                    <artifactId>git-commit-id-maven-plugin</artifactId>
-                    <version>5.0.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>revision</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <verbose>true</verbose>
-                        <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
-                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                        <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

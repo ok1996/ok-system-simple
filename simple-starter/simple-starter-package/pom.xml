@@ -23,23 +23,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/docker-compose.yml</include>
-                    <include>**/Dockerfile</include>
-                    <include>**/Readme.md</include>
-                    <include>**/shell_java_start.sh</include>
-                    <include>**/shell_java_stop.sh</include>
-                    <include>**/win_java_start.bat</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
                 <filtering>false</filtering>
-                <includes>
-                    <include>**/assemblies/simple-assembly.xml</include>
-                    <include>**/logback-spring.xml</include>
-                </includes>
             </resource>
         </resources>
     </build>
