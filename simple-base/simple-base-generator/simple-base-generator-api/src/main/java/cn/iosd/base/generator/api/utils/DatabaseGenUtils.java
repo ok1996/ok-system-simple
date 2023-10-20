@@ -1,11 +1,10 @@
-package cn.iosd.base.generator.service;
+package cn.iosd.base.generator.api.utils;
 
-import cn.iosd.base.generator.vo.DatabaseGenVo;
+import cn.iosd.base.generator.api.vo.DatabaseGenVo;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,8 +18,7 @@ import java.util.Map;
  *
  * @author ok1996
  */
-@Service
-public class DatabaseGenService {
+public class DatabaseGenUtils {
     /**
      * 文件输出地址前缀
      */

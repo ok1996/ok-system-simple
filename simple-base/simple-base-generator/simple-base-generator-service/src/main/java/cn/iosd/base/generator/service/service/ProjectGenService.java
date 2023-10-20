@@ -1,6 +1,6 @@
-package cn.iosd.base.generator.service;
+package cn.iosd.base.generator.service.service;
 
-import cn.iosd.base.generator.vo.ProjectGenVo;
+import cn.iosd.base.generator.api.vo.ProjectGenVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

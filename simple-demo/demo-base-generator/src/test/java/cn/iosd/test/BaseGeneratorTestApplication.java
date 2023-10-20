@@ -1,13 +1,11 @@
 package cn.iosd.test;
 
-import cn.iosd.base.generator.service.DatabaseGenService;
-import cn.iosd.base.generator.vo.DatabaseGenVo;
+import cn.iosd.base.generator.api.utils.DatabaseGenUtils;
+import cn.iosd.base.generator.api.vo.DatabaseGenVo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * @author ok1996
@@ -24,10 +22,8 @@ public class BaseGeneratorTestApplication {
         vo.setProjectName("simple-service-generator");
         vo.setModuleName("generator");
         vo.setTableNames(Collections.singletonList("demo_article"));
-        List<String> tablePrefix = new ArrayList<>();
-        tablePrefix.add("demo");
-        vo.setTablePrefix(tablePrefix);
-        DatabaseGenService.generate(vo);
+        vo.setTablePrefix(Collections.singletonList("demo"));
+        DatabaseGenUtils.generate(vo);
         log.info("文件生成目录：" + new File("target/generator").getAbsolutePath());
     }
 }

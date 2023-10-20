@@ -1,7 +1,7 @@
-package cn.iosd.base.generator.controller;
+package cn.iosd.base.generator.service.controller;
 
-import cn.iosd.base.generator.service.ProjectGenService;
-import cn.iosd.base.generator.vo.ProjectGenVo;
+import cn.iosd.base.generator.api.vo.ProjectGenVo;
+import cn.iosd.base.generator.service.service.ProjectGenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
@@ -23,8 +23,7 @@ import java.util.Optional;
  */
 @Tag(name = "代码生成")
 @RestController
-@RequestMapping("/simple-base-generator/generator")
-@ConditionalOnProperty(value = "simple.base.generator.project.enabled", havingValue = "true")
+@RequestMapping("/simple-base-generator-service/generator")
 public class GenController {
     @Autowired
     private ProjectGenService projectGenService;

@@ -1,4 +1,4 @@
-package cn.iosd.base.generator.vo;
+package cn.iosd.base.generator.api.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

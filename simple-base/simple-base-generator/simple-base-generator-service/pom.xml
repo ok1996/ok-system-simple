@@ -5,37 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.iosd</groupId>
-        <artifactId>simple-base-dict</artifactId>
-         <version>2023.5.2.0-SNAPSHOT</version>
+        <artifactId>simple-base-generator</artifactId>
+        <version>2023.5.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>simple-base-dict-service</artifactId>
+    <artifactId>simple-base-generator-service</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>cn.iosd</groupId>
-            <artifactId>simple-base-dict-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
+            <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>cn.iosd</groupId>
-            <artifactId>simple-starter-datasource</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>cn.iosd</groupId>
             <artifactId>simple-base-generator-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -72,7 +56,7 @@
             </plugin>
         </plugins>
     </build>
-	
+
     <profiles>
         <profile>
             <id>release</id>
