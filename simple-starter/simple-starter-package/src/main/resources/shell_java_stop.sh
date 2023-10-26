@@ -3,7 +3,7 @@
 # 定义服务名
 service_name="@project.artifactId@"
 
-# 查找包含 "service_name-exec.jar" 的进程并提取PID
+# 查找包含 "@project.artifactId@-exec.jar" 的进程并提取PID
 pid=$(ps -aux | grep "$service_name-exec.jar" | grep -v grep | awk '{print $2}')
 
 if [ -z "$pid" ]; then
