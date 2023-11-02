@@ -1,6 +1,5 @@
 package cn.iosd.starter.datasource.config;
 
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,22 +21,20 @@ import java.sql.Statement;
 public class DatabaseInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private static final Logger log = LoggerFactory.getLogger(DatabaseInitializer.class);
 
-    private static volatile boolean RUN = false;
-
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        if (!RUN) {
-            String autoCreate = getPropertyValue(applicationContext, "simple.datasource.autoCreateDatabase");
-            if (StringUtils.isBlank(autoCreate) || Boolean.parseBoolean(autoCreate)) {
-                String url = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.url");
-                String username = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.username");
-                String password = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.password");
-                if (StringUtils.isAnyBlank(url, username, password)) {
-                    return;
-                }
-                initDatabase(url, username, password);
+        String autoCreate = getPropertyValue(applicationContext, "simple.datasource.autoCreateDatabase");
+        if (StringUtils.isBlank(autoCreate) || Boolean.parseBoolean(autoCreate)) {
+            String url = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.url");
+            String username = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.username");
+            String password = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.password");
+
+            if (StringUtils.isAnyBlank(url, username, password)) {
+                return;
             }
-            RUN = true;
+
+            // 初始化数据库
+            initDatabase(url, username, password);
         }
     }
 
