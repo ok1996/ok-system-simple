@@ -10,7 +10,7 @@ if [ -z "$pid" ]; then
   echo "$service_name 未找到相关进程"
 else
   # 杀死进程
-  kill -9 "$pid"
+  kill -15 "$pid"
 
   # 循环检测进程是否还存在，最多3次
   for i in {1..3}; do
