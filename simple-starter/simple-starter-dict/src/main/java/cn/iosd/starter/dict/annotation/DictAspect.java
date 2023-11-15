@@ -38,16 +38,6 @@ public class DictAspect {
     @Value("${simple.dict.dictImplBeanName:}")
     private String dictImplBeanName;
 
-    private Map<String, DictService> dictServiceMap;
-
-    /**
-     * 初始化时将DictService对象与beanName进行关联
-     */
-    @PostConstruct
-    public void init() {
-        dictServiceMap = dictServiceBeanPostProcessor.getDictServiceMap();
-    }
-
     /**
      * 根据字典服务名称获取对应的字典服务
      * <br/>
@@ -62,7 +52,7 @@ public class DictAspect {
      */
     public DictService getDictServiceByName(String name) {
         return Optional.ofNullable(StringUtils.isNotBlank(name) ? name : dictImplBeanName)
-                .map(dictServiceMap::get)
+                .map(dictServiceBeanPostProcessor.getDictServiceMap()::get)
                 .orElseGet(() -> dictServiceList.get(0));
     }
 
