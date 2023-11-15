@@ -1,5 +1,6 @@
 package cn.iosd.starter.dict.annotation;
 
+import cn.iosd.starter.dict.factory.DictServiceBeanPostProcessor;
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
 import jakarta.annotation.PostConstruct;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
@@ -19,6 +19,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author ok1996
@@ -32,22 +33,19 @@ public class DictAspect {
     private List<DictService> dictServiceList;
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private DictServiceBeanPostProcessor dictServiceBeanPostProcessor;
 
     @Value("${simple.dict.dictImplBeanName:}")
     private String dictImplBeanName;
 
-    private Map<String, DictService> dictServiceMap = new HashMap<>();
+    private Map<String, DictService> dictServiceMap;
 
     /**
      * 初始化时将DictService对象与beanName进行关联
      */
     @PostConstruct
     public void init() {
-        for (DictService service : dictServiceList) {
-            String beanName = applicationContext.getBeanNamesForType(service.getClass())[0];
-            dictServiceMap.put(beanName, service);
-        }
+        dictServiceMap = dictServiceBeanPostProcessor.getDictServiceMap();
     }
 
     /**
@@ -63,8 +61,9 @@ public class DictAspect {
      * @return 字典服务
      */
     public DictService getDictServiceByName(String name) {
-        String serviceName = StringUtils.isNotBlank(name) ? name : dictImplBeanName;
-        return dictServiceMap.getOrDefault(serviceName, dictServiceList.get(0));
+        return Optional.ofNullable(StringUtils.isNotBlank(name) ? name : dictImplBeanName)
+                .map(dictServiceMap::get)
+                .orElseGet(() -> dictServiceList.get(0));
     }
 
 
