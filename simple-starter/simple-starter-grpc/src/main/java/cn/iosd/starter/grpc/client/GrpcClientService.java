@@ -1,27 +1,24 @@
 package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
+import cn.iosd.starter.grpc.client.factory.ClientCallStartHeadersBeanPostProcessor;
 import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
 import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import io.grpc.ManagedChannel;
-import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -43,29 +40,13 @@ public class GrpcClientService implements InitializingBean {
     private InitializeGrpcClientBeans beanInjection;
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private ClientCallStartHeadersBeanPostProcessor clientCallStartHeadersBeanPostProcessor;
 
     /**
      * 客户端调用开始时的请求头列表
      */
     @Autowired(required = false)
     private List<ClientCallStartHeaders> clientCallStartHeadersList;
-
-    private Map<String, ClientCallStartHeaders> clientCallStartHeadersMap = new HashMap<>();
-
-    /**
-     * 初始化时将ClientCallStartHeaders对象与beanName进行关联
-     */
-    @PostConstruct
-    public void init() {
-        if (CollectionUtils.isEmpty(clientCallStartHeadersList)) {
-            return;
-        }
-        for (ClientCallStartHeaders service : clientCallStartHeadersList) {
-            String beanName = applicationContext.getBeanNamesForType(service.getClass())[0];
-            clientCallStartHeadersMap.put(beanName, service);
-        }
-    }
 
     @Override
     public void afterPropertiesSet() {
@@ -115,11 +96,9 @@ public class GrpcClientService implements InitializingBean {
      * @return 超时时间（单位：毫秒）
      */
     private long getTimeout(GrpcClient annotation) {
-        if (annotation.timeout() != -1) {
-            return annotation.timeout();
-        } else {
-            return grpcClientProperties.getTimeout();
-        }
+        return annotation.timeout() != -1
+                ? annotation.timeout()
+                : grpcClientProperties.getTimeout();
     }
 
     /**
@@ -142,7 +121,7 @@ public class GrpcClientService implements InitializingBean {
             return clientCallStartHeadersList.get(0);
         } else {
             String beanName = annotation.headerBeanName();
-            return Optional.ofNullable(beanName).map(clientCallStartHeadersMap::get).orElse(null);
+            return Optional.ofNullable(beanName).map(clientCallStartHeadersBeanPostProcessor.getClientCallStartHeadersMap()::get).orElse(null);
         }
     }
 }
