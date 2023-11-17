@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 /**
  * 消息事件处理器
  *
@@ -23,7 +25,7 @@ public class MessageEventHandler {
     /**
      * 添加connect事件，当客户端发起连接时调用
      *
-     * @param client
+     * @param client 客户端
      */
     @OnConnect
     public void onConnect(SocketIOClient client) {
@@ -32,60 +34,48 @@ public class MessageEventHandler {
             return;
         }
         String sessionId = client.getSessionId().toString();
-        String room = client.getHandshakeData().getSingleUrlParam("room");
-        joinRoom(client, room, null);
-        // 可选指定连接微服务名称
-        String serviceName = client.getHandshakeData().getSingleUrlParam(SocketConstants.CONNECT_APPLICATION_NAME);
-        joinRoom(client, serviceName, SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX);
-        log.info("socket连接成功, sessionId={}", sessionId);
+        joinRoom(client, client.getHandshakeData().getSingleUrlParam("room"), null);
+        joinRoom(client, client.getHandshakeData().getSingleUrlParam(SocketConstants.CONNECT_APPLICATION_NAME)
+                , SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX);
+        log.info("Socket连接成功, sessionId={}, room={}", sessionId, client.getAllRooms());
     }
 
-
     /**
-     * 添加@OnDisconnect事件，客户端断开连接时调用，刷新客户端信息
+     * 添加OnDisconnect事件，客户端断开连接时调用
      *
-     * @param client
+     * @param client 客户端
      */
     @OnDisconnect
     public void onDisconnect(SocketIOClient client) {
         client.disconnect();
-        String sessionId = client.getSessionId().toString();
-        log.warn("客户端断开连接, sessionId={}", sessionId);
+        log.warn("客户端断开连接, sessionId={}", client.getSessionId().toString());
     }
 
-    /**
-     * 连接验证
-     *
-     * @param client
-     * @param ackRequest
-     * @param message
-     */
     @OnEvent(value = "Hello")
     public void onHelloEvent(SocketIOClient client, AckRequest ackRequest, String message) {
-        log.info("hello事件, sessionId={}, message={}", client.getSessionId().toString(), message);
+        log.info("Hello事件, sessionId={}, message={}", client.getSessionId().toString(), message);
         if (ackRequest.isAckRequested()) {
-            ackRequest.sendAckData("您好, netty连接已建立.");
+            ackRequest.sendAckData("您好, Netty连接已建立.");
         }
         client.sendEvent("Hello", "您好, Message:" + message);
     }
 
     /**
-     * 将room加入client
+     * 将客户端加入指定的房间。
+     * 如果提供了前缀，将会把它加到房间名前面。
+     * 房间名可以是一个或多个，用逗号分隔。
      *
-     * @param client
-     * @param room   多个使用逗号分割
+     * @param client 客户端实例。
+     * @param room   要加入的房间名，多个房间用逗号分隔。
+     * @param prefix 房间名前缀，如果不需要则为null。
      */
     private void joinRoom(SocketIOClient client, String room, String prefix) {
         if (StringUtils.isNotBlank(room)) {
-            String[] rooms = room.split(",");
-            for (String roomName : rooms) {
-                if (!client.getAllRooms().contains(roomName)) {
-                    String prefixReal = StringUtils.defaultString(prefix);
-                    String roomWithPrefix = prefixReal + roomName.trim();
-                    log.info("client join room: {}", roomWithPrefix);
-                    client.joinRoom(roomWithPrefix);
-                }
-            }
+            Arrays.stream(room.split(","))
+                    .map(String::trim)
+                    .filter(StringUtils::isNotBlank)
+                    .map(roomName -> StringUtils.defaultString(prefix) + roomName)
+                    .forEach(client::joinRoom);
         }
     }
 }

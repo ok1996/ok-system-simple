@@ -15,8 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
 
 /**
  * SocketIOServer启动器
@@ -37,32 +36,30 @@ public class SocketServerRunner implements CommandLineRunner {
     public void run(String... args) {
         socketIoServer.start();
         //订阅redis队列
-        pubSubStore.subscribe(PubSubType.DISPATCH, msg -> {
-            String room = msg.getRoom();
-            Packet packet = msg.getPacket();
-            Object socketMessage = packet.getData();
-            log.info("收到订阅消息：DispatchMessage={}", socketMessage);
-            Collection<SocketIOClient> clients;
-            if (StringUtils.isEmpty(room) || SocketConstants.SEND_ALL.equals(room)) {
-                clients = socketIoServer.getBroadcastOperations().getClients();
-            } else {
-                clients = socketIoServer.getRoomOperations(room).getClients();
-                if (room.contains(SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX)) {
-                    //加入参数为空的客户端一起推送数据
-                    Collection<SocketIOClient> clientsAll = socketIoServer.getBroadcastOperations().getClients();
-                    List<SocketIOClient> clientNotSpecifiedList = clientsAll.stream()
-                            .filter(v -> v.getAllRooms().size() == 1
-                                    && v.getAllRooms().contains("")
-                            ).collect(Collectors.toList());
-                    clients.addAll(clientNotSpecifiedList);
-                }
-            }
-
-            for (final SocketIOClient client : clients) {
-                client.sendEvent(packet.getName(), socketMessage);
-            }
-        }, DispatchMessage.class);
+        subscribeToRedis();
         log.info("SocketIOServer启动");
+    }
+
+    private void subscribeToRedis() {
+        pubSubStore.subscribe(PubSubType.DISPATCH, this::handleDispatchMessage, DispatchMessage.class);
+    }
+
+    private void handleDispatchMessage(DispatchMessage msg) {
+        String room = msg.getRoom();
+        Packet packet = msg.getPacket();
+        Object socketMessage = packet.getData();
+        log.info("收到订阅消息：DispatchMessage={}", socketMessage);
+
+        Collection<SocketIOClient> clients = getClients(room);
+        clients.forEach(client -> client.sendEvent(packet.getName(), socketMessage));
+    }
+
+    private Collection<SocketIOClient> getClients(String room) {
+        // 判断是否发送给所有客户端
+        if (StringUtils.isEmpty(room) || SocketConstants.SEND_ALL.equals(room)) {
+            return socketIoServer.getBroadcastOperations().getClients();
+        }
+        return new HashSet<>(socketIoServer.getRoomOperations(room).getClients());
     }
 
 }

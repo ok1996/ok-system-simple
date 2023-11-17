@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.HashSet;
 
 /**
  * @author ok1996
@@ -41,16 +41,10 @@ public class SocketMessageServer {
      */
     public void sendBroadcast(String event, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getBroadcastOperations().getClients();
-        for (final SocketIOClient client : clients) {
-            client.sendEvent(event, msg);
-            log.info("向客户端推送广播消息, event={}", event);
-        }
-        Packet packet = new Packet(PacketType.MESSAGE);
-        packet.setSubType(PacketType.EVENT);
-        packet.setName(event);
-        packet.setData(msg);
-        packet.setNsp("");
-        pubSubStore.publish(PubSubType.DISPATCH, new DispatchMessage(SocketConstants.SEND_ALL, packet, ""));
+        clients.forEach(client -> client.sendEvent(event, msg));
+        log.info("向所有客户端推送广播消息, event={}", event);
+
+        publishMessage(SocketConstants.SEND_ALL, event, msg);
     }
 
     /**
@@ -62,16 +56,10 @@ public class SocketMessageServer {
      */
     public void sendRoom(String event, String room, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getRoomOperations(room).getClients();
-        for (SocketIOClient client : clients) {
-            client.sendEvent(event, msg);
-            log.info("向客户端推送消息Room:{}, event={}", room, event);
-        }
-        Packet packet = new Packet(PacketType.MESSAGE);
-        packet.setSubType(PacketType.EVENT);
-        packet.setName(event);
-        packet.setData(msg);
-        packet.setNsp("");
-        pubSubStore.publish(PubSubType.DISPATCH, new DispatchMessage(room, packet, ""));
+        clients.forEach(client -> client.sendEvent(event, msg));
+        log.info("向房间{}中的客户端推送消息, event={}", room, event);
+
+        publishMessage(room, event, msg);
     }
 
     /**
@@ -82,26 +70,20 @@ public class SocketMessageServer {
      * @param msg   消息体
      */
     public void sendService(String event, Object msg) {
-        Collection<SocketIOClient> clients = socketIoServer.getRoomOperations(SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX
-                + applicationName).getClients();
-        clients.addAll(getEmptyConnectRoom());
-        for (SocketIOClient client : clients) {
-            client.sendEvent(event, msg);
-            log.info("向客户端推送消息微服务:{}, event={}", applicationName, event);
-        }
+        Collection<SocketIOClient> clients = new HashSet<>(socketIoServer.getRoomOperations(SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX
+                + applicationName).getClients());
+        clients.forEach(client -> client.sendEvent(event, msg));
+        log.info("向连接参数为applicationName={}的客户端发送消息, event={}", applicationName, event);
+
+        publishMessage(SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX + applicationName, event, msg);
+    }
+
+    private void publishMessage(String room, String event, Object msg) {
         Packet packet = new Packet(PacketType.MESSAGE);
         packet.setSubType(PacketType.EVENT);
         packet.setName(event);
         packet.setData(msg);
         packet.setNsp("");
-        pubSubStore.publish(PubSubType.DISPATCH, new DispatchMessage(SocketConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX
-                + applicationName, packet, ""));
-    }
-
-    public Collection<SocketIOClient> getEmptyConnectRoom() {
-        Collection<SocketIOClient> clientsAll = socketIoServer.getBroadcastOperations().getClients();
-        return clientsAll.stream().filter(v -> v.getAllRooms().size() == 1
-                && v.getAllRooms().contains("")
-        ).collect(Collectors.toList());
+        pubSubStore.publish(PubSubType.DISPATCH, new DispatchMessage(room, packet, ""));
     }
 }
