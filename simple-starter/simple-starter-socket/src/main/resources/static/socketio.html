@@ -3,55 +3,92 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>SocketIOClient test page</title>
-    <base>
     <script src="./jquery/3.3.1/jquery.min.js"></script>
     <script src="./socket.io.js"></script>
     <style>
         body {
             padding: 20px;
+            background-color: #f4f4f4;
         }
 
-        #console {
-            height: 100%;
-            max-height: 600px;
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .console {
+            background-color: #f8f9fa;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
             overflow: auto;
         }
 
-        .username-msg {
-            color: orange;
-        }
-
-        .connect-msg {
+        .status {
             color: green;
-        }
-
-        .disconnect-msg {
-            color: red;
         }
     </style>
 </head>
 
 <body>
-<h2>SocketIOClient test page</h2>
-<div style="border: 1px;">
-    <label>socketIoUrl:</label><input type="text" id="url" style="width:300px">
-    <br>
-    <button id="connect">connect</button>
-    <button id="disconnect">disconnect</button>
-    <span>状态：</span><span id="status" style="color: red">未连接</span>
+<div class="container">
+    <h2>SocketIOClient test page</h2>
+    <div class="section">
+        <label for="url">socketIoUrl:</label>
+        <input type="text" id="url" placeholder="Enter SocketIO URL">
+        <button id="connect">connect</button>
+        <button id="disconnect">disconnect</button>
+        <span>状态：</span><span id="status" class="status">未连接</span>
+    </div>
 
+    <div class="section">
+        <label for="socketEvent">socketEvent:</label>
+        <input type="text" id="socketEvent" placeholder="Enter Socket Event">
+        <label for="content">content:</label>
+        <textarea id="content" rows="5"></textarea>
+        <button id="send">send</button>
+        <button id="clear">clearOutput</button>
+    </div>
+
+    <div id="console" class="console"></div>
 </div>
-<br>
-<div style="border: 1px;">
-    <label>socketEvent:</label><input type="text" id="socketEvent" style="width:300px">
-    <br>
-    <label>content:</label><br><textarea id="content" rows="5" style="width: 100%"></textarea>
-    <br>
-    <button id="send">send</button>
-    <button id="clear">clearOutput</button>
-</div>
-<br>
-<div id="console" class="well"></div>
 </body>
 <script type="text/javascript">
     function restoreSocketIoUrl() {
@@ -90,13 +127,13 @@
         socket.on('connect', function () {
             isConnected = true;
             console.log("连接成功");
-            serverOutput('<span class="connect-msg"><span style="color: blue; ">' + getNowTime() + '&nbsp;</span>连接成功</span>');
+            serverOutput('<span class="connect-msg"><span style="color: green; ">' + getNowTime() + '&nbsp;</span>连接成功</span>');
             $("#status").text("已连接");
             errorCount = 0;
         });
         socket.on('reconnect_attempt', function () {
             let time = getNowTime();
-            let html = `<span class="connect-msg"><span style="color: blue; ">${time}&nbsp;</span>开始第${errorCount + 1}次重连，共${maxError}次</span>`
+            let html = `<span class="connect-msg"><span style="color: red; ">${time}&nbsp;</span>开始第${errorCount + 1}次重连，共${maxError}次</span>`
             serverOutput(html);
         });
         socket.on('**', function (event, data) {
@@ -118,24 +155,24 @@
             isConnected = false;
             console.log("连接断开");
             $("#status").text("未连接");
-            serverOutput('<span class="disconnect-msg"><span style="color: blue; ">' + getNowTime() + '&nbsp;</span>' + '已下线! </span>');
+            serverOutput('<span class="disconnect-msg"><span style="color: red; ">' + getNowTime() + '&nbsp;</span>' + '已下线! </span>');
         });
         socket.on('connect_error', function (data) {
-            serverOutput('<span class="disconnect-msg"><span style="color: blue; ">' + getNowTime() + '&nbsp;</span>;' + '连接错误-' + data + ' </span>');
+            serverOutput('<span class="disconnect-msg"><span style="color: red; ">' + getNowTime() + '&nbsp;</span>;' + '连接错误-' + data + ' </span>');
             errorCount++;
             if (errorCount >= maxError) {
                 socket.disconnect();
             }
         });
         socket.on('connect_timeout', function (data) {
-            serverOutput('<span class="disconnect-msg"><span style="color: blue; ">' + getNowTime() + '&nbsp;</span>' + '连接超时-' + data + ' </span>');
+            serverOutput('<span class="disconnect-msg"><span style="color: red; ">' + getNowTime() + '&nbsp;</span>' + '连接超时-' + data + ' </span>');
             errorCount++;
             if (errorCount >= maxError) {
                 socket.disconnect();
             }
         });
         socket.on('error', function (data) {
-            serverOutput('<span class="disconnect-msg"><span style="color: blue; ">' + getNowTime() + '&nbsp;</span>' + '系统错误-' + data + ' </span>');
+            serverOutput('<span class="disconnect-msg"><span style="color: red; ">' + getNowTime() + '&nbsp;</span>' + '系统错误-' + data + ' </span>');
             errorCount++;
             if (errorCount >= maxError) {
                 socket.disconnect();
