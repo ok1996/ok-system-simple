@@ -4,8 +4,12 @@ import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
+import org.redisson.config.SentinelServersConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -17,24 +21,21 @@ public class SentinelConfigImpl implements RedissonConfigService {
     private static final Logger log = LoggerFactory.getLogger(SentinelConfigImpl.class);
 
     @Override
-    public Config createRedissonConfig(RedissonProperties redissonProperties) {
+    public Config createRedissonConfig(RedissonProperties properties) {
         Config config = new Config();
-        String address = redissonProperties.getAddress();
-        String password = redissonProperties.getPassword();
-        Integer database = redissonProperties.getDatabase();
-        String[] addrTokens = address.split(",");
-        String sentinelAliasName = addrTokens[0];
-        //设置redis配置文件sentinel.conf配置的sentinel别名
-        config.useSentinelServers().setMasterName(sentinelAliasName);
-        config.useSentinelServers().setDatabase(database);
+        List<String> sentinelAddresses = properties.getSentinelConfig().getSentinelAddresses();
+        String password=properties.getSentinelConfig().getPassword();
+
+        SentinelServersConfig sentinelConfig = config.useSentinelServers()
+                .setMasterName(properties.getSentinelConfig().getSentinelMasterName())
+                .setDatabase(properties.getSentinelConfig().getDatabase())
+                .addSentinelAddress(sentinelAddresses.toArray(String[]::new));
+
         if (StringUtils.isNotBlank(password)) {
-            config.useSentinelServers().setPassword(password);
+            sentinelConfig.setPassword(password);
         }
-        //设置sentinel节点的服务IP和端口
-        for (int i = 1; i < addrTokens.length; i++) {
-            config.useSentinelServers().addSentinelAddress(RedissonProperties.REDIS_CONNECTION_PREFIX + addrTokens[i]);
-        }
-        log.info("初始化[哨兵部署]方式 连接地址:" + address);
+
+        log.info("初始化[哨兵部署]方式 连接地址: {}", sentinelAddresses);
         return config;
     }
 }

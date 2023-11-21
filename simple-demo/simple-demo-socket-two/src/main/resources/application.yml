@@ -7,10 +7,13 @@ simple:
   ## 无Redis配置情况下，默认开启Socket单机
   redisson:
     enabled: true
-    type:  standalone
-    address:  127.0.0.1:6379
-    password: password
-    database: 0
+    type: standalone
+    config:
+      ## 单体模式
+      standalone:
+        address: redis://127.0.0.1:6379
+        password:
+        database: 0
   socket:
     #缺省项为false
     enabled: true

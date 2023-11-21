@@ -14,12 +14,8 @@ public class RedissonManager {
     private Redisson redisson;
 
     public RedissonManager(RedissonProperties redissonProperties) {
-        try {
-            Config config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
-            redisson = (Redisson) Redisson.create(config);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Redisson init error. Please check the configuration");
-        }
+        Config config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
+        redisson = (Redisson) Redisson.create(config);
     }
 
     public Redisson getRedisson() {
