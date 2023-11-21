@@ -25,28 +25,24 @@ public class DistributedLockHandler {
     @Autowired
     RedissonLockService redissonLockService;
 
-    public final static String LOCK_NAME_APPEND = "RLock:";
+    private static final String LOCK_KEY_PREFIX = "RLock:";
 
     @Around("@annotation(distributedLock)")
     public Object around(ProceedingJoinPoint joinPoint, DistributedLock distributedLock) throws Throwable {
-        String lockName = LOCK_NAME_APPEND + distributedLock.value();
+        String lockName = LOCK_KEY_PREFIX + distributedLock.value();
         int leaseTime = distributedLock.leaseTime();
         RLock lock = redissonLockService.getLock(lockName);
-        boolean isLocked = false;
-        log.debug("[开始]执行RedisLock环绕通知,获取Redis分布式锁[{}]开始", lockName);
+
+        log.debug("[开始]尝试获取Redis分布式锁[{}]", lockName);
         try {
-            isLocked = lock.tryLock(leaseTime, TimeUnit.SECONDS);
-            if (!isLocked) {
+            if (!lock.tryLock(leaseTime, TimeUnit.SECONDS)) {
                 throw new Exception("获取Redis分布式锁[" + lockName + "]失败");
             }
-            log.info("获取Redis分布式锁[{}]成功，加锁完成，开始执行业务逻辑...", lockName);
             return joinPoint.proceed();
         } finally {
-            if (isLocked) {
+            if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
-                log.debug("释放Redis分布式锁[{}]成功，解锁完成，结束业务逻辑...", lockName);
-            } else {
-                log.debug("Redis分布式锁[{}]未被获取，不需要进行解锁", lockName);
+                log.debug("释放Redis分布式锁[{}]成功", lockName);
             }
         }
     }

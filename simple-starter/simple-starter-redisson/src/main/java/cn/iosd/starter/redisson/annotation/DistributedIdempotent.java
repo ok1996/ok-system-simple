@@ -14,10 +14,14 @@ import java.util.concurrent.TimeUnit;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedIdempotent {
+
+    /**
+     * 当注解value为此默认值时，将动态生成唯一的锁标识
+     */
     String METHOD_NAME = "RedissonMethodName";
 
     /**
-     * 锁的名字,支持el表达式
+     * 锁名称,支持el表达式
      *
      * <pre>
      *  1.获取方法名称
