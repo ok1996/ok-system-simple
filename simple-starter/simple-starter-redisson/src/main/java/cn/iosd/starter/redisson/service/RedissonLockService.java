@@ -1,5 +1,6 @@
 package cn.iosd.starter.redisson.service;
 
+import cn.iosd.starter.redisson.manager.RedissonManager;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 

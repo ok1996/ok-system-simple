@@ -1,4 +1,4 @@
-package cn.iosd.starter.redisson.service;
+package cn.iosd.starter.redisson.config.tactic;
 
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;

@@ -1,7 +1,7 @@
-package cn.iosd.starter.redisson.service.impl;
+package cn.iosd.starter.redisson.config.tactic.impl;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
-import cn.iosd.starter.redisson.service.RedissonConfigService;
+import cn.iosd.starter.redisson.config.tactic.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;

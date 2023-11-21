@@ -1,4 +1,4 @@
-package cn.iosd.starter.redisson.service;
+package cn.iosd.starter.redisson.manager;
 
 import cn.iosd.starter.redisson.properties.RedissonCacheableProperties;
 import org.redisson.spring.cache.CacheConfig;

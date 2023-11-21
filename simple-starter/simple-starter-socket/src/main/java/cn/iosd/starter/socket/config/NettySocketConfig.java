@@ -1,6 +1,6 @@
 package cn.iosd.starter.socket.config;
 
-import cn.iosd.starter.redisson.service.RedissonManager;
+import cn.iosd.starter.redisson.manager.RedissonManager;
 import cn.iosd.starter.socket.properties.SocketProperties;
 import com.corundumstudio.socketio.AckMode;
 import com.corundumstudio.socketio.AuthorizationListener;

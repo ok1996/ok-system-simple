@@ -3,7 +3,7 @@ package cn.iosd.starter.redisson.config;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonCacheService;
 import cn.iosd.starter.redisson.service.RedissonLockService;
-import cn.iosd.starter.redisson.service.RedissonManager;
+import cn.iosd.starter.redisson.manager.RedissonManager;
 import org.redisson.Redisson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

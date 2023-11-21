@@ -7,7 +7,7 @@ simple:
   redisson:
 #    #缺省项为false
     enabled: true
-    type: masterSlave
+    type: standalone
     config:
       ## 单体模式
       standalone:

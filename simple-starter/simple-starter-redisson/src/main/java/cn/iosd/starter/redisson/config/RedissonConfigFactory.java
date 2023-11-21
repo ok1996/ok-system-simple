@@ -1,10 +1,11 @@
-package cn.iosd.starter.redisson.service;
+package cn.iosd.starter.redisson.config;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
-import cn.iosd.starter.redisson.service.impl.ClusterConfigImpl;
-import cn.iosd.starter.redisson.service.impl.MasterSlaveConfigImpl;
-import cn.iosd.starter.redisson.service.impl.SentinelConfigImpl;
-import cn.iosd.starter.redisson.service.impl.StandaloneConfigImpl;
+import cn.iosd.starter.redisson.config.tactic.RedissonConfigService;
+import cn.iosd.starter.redisson.config.tactic.impl.ClusterConfigImpl;
+import cn.iosd.starter.redisson.config.tactic.impl.MasterSlaveConfigImpl;
+import cn.iosd.starter.redisson.config.tactic.impl.SentinelConfigImpl;
+import cn.iosd.starter.redisson.config.tactic.impl.StandaloneConfigImpl;
 import org.redisson.config.Config;
 
 /**

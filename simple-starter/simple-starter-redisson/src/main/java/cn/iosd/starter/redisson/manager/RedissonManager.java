@@ -1,6 +1,7 @@
-package cn.iosd.starter.redisson.service;
+package cn.iosd.starter.redisson.manager;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
+import cn.iosd.starter.redisson.config.RedissonConfigFactory;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
 

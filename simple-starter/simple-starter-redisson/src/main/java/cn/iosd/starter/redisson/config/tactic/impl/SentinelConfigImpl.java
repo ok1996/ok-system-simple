@@ -1,14 +1,13 @@
-package cn.iosd.starter.redisson.service.impl;
+package cn.iosd.starter.redisson.config.tactic.impl;
 
 import cn.iosd.starter.redisson.properties.RedissonProperties;
-import cn.iosd.starter.redisson.service.RedissonConfigService;
+import cn.iosd.starter.redisson.config.tactic.RedissonConfigService;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.config.Config;
 import org.redisson.config.SentinelServersConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.List;
 
 
