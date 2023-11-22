@@ -54,7 +54,7 @@ public class DistributedIdempotentHandler {
                 }
             }
         }
-        throw new Exception(idempotent.message());
+        throw new RuntimeException(idempotent.message());
     }
 
     /**

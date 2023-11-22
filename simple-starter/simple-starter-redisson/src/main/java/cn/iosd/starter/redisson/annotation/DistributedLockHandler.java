@@ -36,7 +36,7 @@ public class DistributedLockHandler {
         log.debug("[开始]尝试获取Redis分布式锁[{}]", lockName);
         try {
             if (!lock.tryLock(leaseTime, TimeUnit.SECONDS)) {
-                throw new Exception("获取Redis分布式锁[" + lockName + "]失败");
+                throw new RuntimeException("获取Redis分布式锁[" + lockName + "]失败");
             }
             return joinPoint.proceed();
         } finally {

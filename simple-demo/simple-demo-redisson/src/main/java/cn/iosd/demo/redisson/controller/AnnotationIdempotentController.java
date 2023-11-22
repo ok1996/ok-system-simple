@@ -58,11 +58,11 @@ public class AnnotationIdempotentController {
     @Operation(summary = "库存自减-异常测试")
     @GetMapping("decrementException")
     @DistributedIdempotent(value = "'demo:singIn4:' + #keyName", message = "请求重复！")
-    public void decrementException(String keyName) throws Exception {
+    public void decrementException(String keyName){
         if (TOTAL > 0) {
             TOTAL--;
         }
         log.info("===/annotationIdempotent/decrementException注解模式=== 减完库存后,当前库存===" + TOTAL);
-        throw new Exception("异常测试");
+        throw new RuntimeException("异常测试");
     }
 }

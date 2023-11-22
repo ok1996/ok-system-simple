@@ -38,11 +38,11 @@ public class AnnotationLockController {
     @Operation(summary = "库存自减-测试异常")
     @GetMapping("decrementException")
     @DistributedLock(value = "demo-redisson:decrementException", leaseTime = 105)
-    public void decrementException() throws Exception {
+    public void decrementException(){
         if (TOTAL > 0) {
             TOTAL--;
         }
         log.info("===/annotationLock/decrementException注解模式=== 减完库存后,当前库存===" + TOTAL);
-        throw new Exception("异常测试");
+        throw new RuntimeException("异常测试");
     }
 }
