@@ -26,37 +26,32 @@ public class ParamInitLifecycle implements SmartLifecycle {
     @Autowired
     private IParamInfoService paramInfoService;
 
-    private static boolean RUNNING = false;
+    private boolean running = false;
 
     @Override
     public void start() {
         if (!this.isRunning()) {
-            RUNNING = true;
+            running = true;
             this.init();
         }
     }
 
     @Override
     public void stop() {
-        RUNNING = false;
+        running = false;
     }
 
     @Override
     public boolean isRunning() {
-        return RUNNING;
+        return running;
     }
 
     public void init() {
         if (this.inits != null) {
             this.inits.stream()
                     .filter(Objects::nonNull)
-                    .forEach(v -> {
-                        if (StringUtils.isEmpty(v.getKey())) {
-                            log.error("初始化key值为空,请检查ParamInit对象:{}", v);
-                            return;
-                        }
-                        initParam(v);
-                    });
+                    .filter(v -> !StringUtils.isEmpty(v.getKey()))
+                    .forEach(this::initParam);
         }
     }
 
@@ -69,9 +64,11 @@ public class ParamInitLifecycle implements SmartLifecycle {
         String key = init.getKey();
         ParamInfo paramInfo = paramInfoService.selectBaseParamByKey(key);
         if (paramInfo == null) {
-            paramInfoService.insertBaseParam(initVo(init));
+            log.debug("base-param 初始化参数数据key：{}", key);
+            paramInfoService.insertBaseParam(convertToBaseParamVo(init));
         } else if (init.isRestartOverride()) {
-            BaseParamVo saveReqVo = initVo(init);
+            log.debug("base-param 覆盖参数数据key：{}", key);
+            BaseParamVo saveReqVo = convertToBaseParamVo(init);
             saveReqVo.setId(paramInfo.getId());
             paramInfoService.updateBaseParam(saveReqVo);
         }
@@ -83,7 +80,7 @@ public class ParamInitLifecycle implements SmartLifecycle {
      * @param init 需要转换的参数
      * @return 转换后的BaseParamSaveReqVo对象
      */
-    public BaseParamVo initVo(ParamInit init) {
+    public BaseParamVo convertToBaseParamVo(ParamInit init) {
         BaseParamVo vo = new BaseParamVo();
         vo.setCodeValues(init.getCodeValues());
         vo.setModuleNames(init.getModuleNames());

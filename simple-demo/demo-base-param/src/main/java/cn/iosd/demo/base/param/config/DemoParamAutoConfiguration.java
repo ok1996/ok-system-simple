@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class DemoParamAutoConfiguration {
 
     @Bean
-    public Flyway paramFlyway(DataSource dataSource) {
+    public Flyway paramDemoFlyway(DataSource dataSource) {
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
                 .locations("classpath:db/mysql/demo/param")

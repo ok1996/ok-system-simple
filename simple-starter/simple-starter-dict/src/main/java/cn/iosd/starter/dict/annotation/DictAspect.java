@@ -3,7 +3,6 @@ package cn.iosd.starter.dict.annotation;
 import cn.iosd.starter.dict.factory.DictServiceBeanPostProcessor;
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
-import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
