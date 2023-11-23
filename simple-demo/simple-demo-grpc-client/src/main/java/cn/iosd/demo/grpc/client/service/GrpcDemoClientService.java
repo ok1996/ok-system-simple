@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class GrpcDemoClientService {
 
-    @GrpcClient(value = "grpc-server-hello", timeout = 10000, headerBeanName = "grpcClientCallStartHeaders")
+    @GrpcClient(value = "grpc-server-hello", timeout = 10000, headerClass = GrpcClientCallStartHeaders.class)
     private SimpleGrpc.SimpleBlockingStub simpleStub;
 
-    @GrpcClient(value = "grpc-server-person", headerBeanName = "grpcSecondClientCallStartHeaders")
+    @GrpcClient(value = "grpc-server-person", headerClass = GrpcSecondClientCallStartHeaders.class)
     private PersonHelloGrpc.PersonHelloBlockingStub personHelloBlockingStub;
 
 

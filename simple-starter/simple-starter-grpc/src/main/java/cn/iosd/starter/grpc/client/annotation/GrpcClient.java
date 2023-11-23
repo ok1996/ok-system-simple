@@ -1,5 +1,6 @@
 package cn.iosd.starter.grpc.client.annotation;
 
+import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
 import org.springframework.context.annotation.Bean;
 
 import java.lang.annotation.Documented;
@@ -40,9 +41,9 @@ public @interface GrpcClient {
     long timeout() default -1;
 
     /**
-     * Grpc设置请求头实现类名称，当实现类只有一个时可为空
+     * Grpc设置请求头实现类，当实现类只有一个时可为空
      *
-     * @return 实现类名称
+     * @return 实现类
      */
-    String headerBeanName() default "";
+    Class<? extends ClientCallStartHeaders> headerClass() default ClientCallStartHeaders.class;
 }

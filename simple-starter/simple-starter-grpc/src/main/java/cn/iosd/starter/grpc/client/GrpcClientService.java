@@ -1,14 +1,12 @@
 package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
-import cn.iosd.starter.grpc.client.factory.ClientCallStartHeadersBeanPostProcessor;
 import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
 import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
 import io.grpc.ManagedChannel;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -19,7 +17,6 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 涉及的Bean对象注入GrpcChannel
@@ -38,9 +35,6 @@ public class GrpcClientService implements InitializingBean {
      */
     @Autowired
     private InitializeGrpcClientBeans beanInjection;
-
-    @Autowired
-    private ClientCallStartHeadersBeanPostProcessor clientCallStartHeadersBeanPostProcessor;
 
     /**
      * 客户端调用开始时的请求头列表
@@ -105,23 +99,28 @@ public class GrpcClientService implements InitializingBean {
      * 获取请求头
      * 如果请求头列表不为空，根据以下条件进行判断：
      * <p/>
-     * - 当请求头列表只有一个元素且未指定 headerBeanName 时，直接使用该元素作为请求头；
+     * - 当请求头列表只有一个元素且未指定 headerClass 时，直接使用该元素作为请求头；
      * <p/>
-     * - 否则，根据指定的 headerBeanName 从 clientCallStartHeadersMap 中获取对应的请求头。
+     * - 否则，根据指定的 headerClass 从 clientCallStartHeadersList 中获取对应的请求头。
      *
      * @param annotation 调用方传入的注解对象
-     * @return 请求头对象，如果无法获取则返回 null
+     * @return 请求头对象，如无法获取则返回 null
      */
     private ClientCallStartHeaders getHeaders(GrpcClient annotation) {
         if (CollectionUtils.isEmpty(clientCallStartHeadersList)) {
             return null;
         }
 
-        if (clientCallStartHeadersList.size() == 1 && StringUtils.isBlank(annotation.headerBeanName())) {
+        if (clientCallStartHeadersList.size() == 1 && annotation.headerClass().equals(ClientCallStartHeaders.class)) {
             return clientCallStartHeadersList.get(0);
-        } else {
-            String beanName = annotation.headerBeanName();
-            return Optional.ofNullable(beanName).map(clientCallStartHeadersBeanPostProcessor.getClientCallStartHeadersMap()::get).orElse(null);
         }
+
+        if (!annotation.headerClass().equals(ClientCallStartHeaders.class)) {
+            return clientCallStartHeadersList.stream()
+                    .filter(header -> annotation.headerClass().isInstance(header))
+                    .findFirst()
+                    .orElse(null);
+        }
+        return null;
     }
 }
