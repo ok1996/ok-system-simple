@@ -1,5 +1,7 @@
 package cn.iosd.starter.dict.annotation;
 
+import cn.iosd.starter.dict.service.DictService;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -36,7 +38,7 @@ public @interface DictField {
     /**
      * 字典获取方式实现类
      *
-     * @return 实现类名称
+     * @return 实现类
      */
-    String dictImplBeanName() default "";
+    Class<? extends DictService> dictImplClass() default DictService.class;
 }

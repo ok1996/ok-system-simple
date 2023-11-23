@@ -1,16 +1,13 @@
 package cn.iosd.starter.dict.annotation;
 
-import cn.iosd.starter.dict.factory.DictServiceBeanPostProcessor;
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 
@@ -18,7 +15,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * @author ok1996
@@ -31,28 +27,21 @@ public class DictAspect {
     @Autowired
     private List<DictService> dictServiceList;
 
-    @Autowired
-    private DictServiceBeanPostProcessor dictServiceBeanPostProcessor;
-
-    @Value("${simple.dict.dictImplBeanName:}")
-    private String dictImplBeanName;
-
     /**
-     * 根据字典服务名称获取对应的字典服务
+     * 根据字典服务泛型获取对应的字典服务
      * <br/>
-     * 优先级1：注解 @DictField 配置值 dictImplBeanName
+     * 优先级1：注解 @DictField 配置值 dictImplClass
      * <br/>
-     * 优先级2：配置文件项 simple.dict.dictImplBeanName
-     * <br/>
-     * 优先级3：代码中服务类@Order优先顺序第一的服务类
+     * 优先级2：代码中服务类@Order优先顺序第一的服务类
      *
-     * @param name 字典服务实现类名称
+     * @param dictClass 字典服务实现类
      * @return 字典服务
      */
-    public DictService getDictServiceByName(String name) {
-        return Optional.ofNullable(StringUtils.isNotBlank(name) ? name : dictImplBeanName)
-                .map(dictServiceBeanPostProcessor.getDictServiceMap()::get)
-                .orElseGet(() -> dictServiceList.get(0));
+    public DictService getDictServiceByClass(Class<? extends DictService> dictClass) {
+        return dictServiceList.stream()
+                .filter(dictClass::isInstance)
+                .findFirst()
+                .orElse(dictServiceList.get(0));
     }
 
 
@@ -82,12 +71,12 @@ public class DictAspect {
         for (Field field : fields) {
             DictField dictFieldAnnotation = field.getAnnotation(DictField.class);
             if (dictFieldAnnotation != null) {
-                DictService dictService = getDictServiceByName(dictFieldAnnotation.dictImplBeanName());
+                DictService dictService = getDictServiceByClass(dictFieldAnnotation.dictImplClass());
                 List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), cache);
                 if (dictItemList == null || dictItemList.size() == 0) {
-                    log.error("获取字典项列表为空，请检查服务类：{} 字典参数：{} 服务类包地址：{}"
-                            , dictService.getClass().getSimpleName(), dictFieldAnnotation.dictionaryParams()
-                            , dictService.getClass().getPackageName());
+                    log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}"
+                            , dictFieldAnnotation.relatedField(), dictFieldAnnotation.dictionaryParams()
+                            , dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
                     continue;
                 }
                 ReflectionUtils.makeAccessible(field);

@@ -1,6 +1,7 @@
 package cn.iosd.demo.dict.vo;
 
 import cn.iosd.starter.dict.annotation.DictField;
+import cn.iosd.starter.dict.service.impl.LocalDictServiceImpl;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class PersonVo {
     private String name;
 
     @Schema(description = "性别-默认实现类的json文件调用字典")
-    @DictField(dictionaryParams = "sex", dictImplBeanName = "localDictServiceImpl", relatedField = "sexText")
+    @DictField(dictionaryParams = "sex", dictImplClass = LocalDictServiceImpl.class, relatedField = "sexText")
     private Integer sex;
 
     private String sexText;
