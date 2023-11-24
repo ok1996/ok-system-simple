@@ -72,11 +72,11 @@ public class DictAspect {
             DictField dictFieldAnnotation = field.getAnnotation(DictField.class);
             if (dictFieldAnnotation != null) {
                 DictService dictService = getDictServiceByClass(dictFieldAnnotation.dictImplClass());
-                List<DictItem> dictItemList = getCachedDictItemList(dictService, dictFieldAnnotation.dictionaryParams(), cache);
+                List<DictItem> dictItemList = cache.computeIfAbsent(dictFieldAnnotation.dictionaryParams(), dictService::getDictItemList);
                 if (dictItemList == null || dictItemList.size() == 0) {
-                    log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}"
-                            , dictFieldAnnotation.relatedField(), dictFieldAnnotation.dictionaryParams()
-                            , dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
+                    log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}",
+                            dictFieldAnnotation.relatedField(), dictFieldAnnotation.dictionaryParams(),
+                            dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
                     continue;
                 }
                 ReflectionUtils.makeAccessible(field);
@@ -102,23 +102,6 @@ public class DictAspect {
                 translateDictObjects(fieldValue, cache);
             }
         }
-    }
-
-    /**
-     * 获取缓存的字典项列表，如果缓存不存在，则从字典服务中获取，并将结果放入缓存
-     *
-     * @param dictService 字典服务接口
-     * @param dictParams  字典参数
-     * @param cache       临时缓存对象
-     * @return 字典项列表
-     */
-    private List<DictItem> getCachedDictItemList(DictService dictService, String dictParams, Map<String, List<DictItem>> cache) {
-        List<DictItem> dictItemList = cache.get(dictParams);
-        if (dictItemList == null) {
-            dictItemList = dictService.getDictItemList(dictParams);
-            cache.put(dictParams, dictItemList);
-        }
-        return dictItemList;
     }
 
 }
