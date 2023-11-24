@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author ok1996
@@ -71,31 +72,7 @@ public class DictAspect {
         for (Field field : fields) {
             DictField dictFieldAnnotation = field.getAnnotation(DictField.class);
             if (dictFieldAnnotation != null) {
-                DictService dictService = getDictServiceByClass(dictFieldAnnotation.dictImplClass());
-                List<DictItem> dictItemList = cache.computeIfAbsent(dictFieldAnnotation.dictionaryParams(), dictService::getDictItemList);
-                if (dictItemList == null || dictItemList.size() == 0) {
-                    log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}",
-                            dictFieldAnnotation.relatedField(), dictFieldAnnotation.dictionaryParams(),
-                            dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
-                    continue;
-                }
-                ReflectionUtils.makeAccessible(field);
-                // 获取目标字段值
-                Object fieldValue = field.get(responseObj);
-                // 查找关联字段，翻译字典项
-                if (fieldValue != null) {
-                    String relatedField = dictFieldAnnotation.relatedField();
-                    for (DictItem dictItem : dictItemList) {
-                        if (String.valueOf(fieldValue).equals(dictItem.getValue())) {
-                            Field related = ReflectionUtils.findField(responseObj.getClass(), relatedField);
-                            if (related != null) {
-                                ReflectionUtils.makeAccessible(related);
-                                ReflectionUtils.setField(related, responseObj, dictItem.getLabel());
-                            }
-                            break;
-                        }
-                    }
-                }
+                processDictField(responseObj, field, cache, dictFieldAnnotation);
             } else if (field.isAnnotationPresent(DictEntity.class)) {
                 ReflectionUtils.makeAccessible(field);
                 Object fieldValue = field.get(responseObj);
@@ -104,4 +81,45 @@ public class DictAspect {
         }
     }
 
+    /**
+     * 处理字典字段的翻译。
+     *
+     * @param responseObj     要处理的对象
+     * @param field           被注解的字段
+     * @param cache           字典项缓存
+     * @param fieldAnnotation 字典字段的注解
+     * @throws IllegalAccessException 反射操作时可能抛出的异常
+     */
+    private void processDictField(Object responseObj, Field field, Map<String, List<DictItem>> cache, DictField fieldAnnotation) throws IllegalAccessException {
+        ReflectionUtils.makeAccessible(field);
+        Object fieldValue = field.get(responseObj);
+        if (fieldValue == null) {
+            // 目标字段值为空跳过查询
+            return;
+        }
+        String relatedField = fieldAnnotation.relatedField();
+        Field related = ReflectionUtils.findField(responseObj.getClass(), relatedField);
+        if (related == null) {
+            log.error("需要设置翻译字段值不存在：{}，将跳过查询，对象：{}", relatedField, responseObj.getClass().getName());
+            return;
+        }
+        DictService dictService = getDictServiceByClass(fieldAnnotation.dictImplClass());
+        List<DictItem> dictItemList = cache.computeIfAbsent(fieldAnnotation.dictionaryParams(), dictService::getDictItemList);
+        if (dictItemList == null || dictItemList.isEmpty()) {
+            log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}",
+                    fieldAnnotation.relatedField(), fieldAnnotation.dictionaryParams(),
+                    dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
+            return;
+        }
+        // 查找关联字段，翻译字典项
+        Optional<DictItem> matchingDictItem = dictItemList.stream()
+                .filter(dictItem -> String.valueOf(fieldValue).equals(dictItem.getValue()))
+                .findFirst();
+
+        matchingDictItem.ifPresent(dictItem -> {
+            ReflectionUtils.makeAccessible(related);
+            ReflectionUtils.setField(related, responseObj, dictItem.getLabel());
+        });
+
+    }
 }
