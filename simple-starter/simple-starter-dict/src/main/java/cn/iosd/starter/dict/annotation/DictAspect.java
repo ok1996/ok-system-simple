@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -93,20 +94,20 @@ public class DictAspect {
     private void processDictField(Object responseObj, Field field, Map<String, List<DictItem>> cache, DictField fieldAnnotation) throws IllegalAccessException {
         ReflectionUtils.makeAccessible(field);
         Object fieldValue = field.get(responseObj);
-        if (fieldValue == null) {
-            // 目标字段值为空跳过查询
+        if (ObjectUtils.isEmpty(fieldValue)) {
+            log.debug("目标字段值为空跳过查询，字段：{}，对象：{}",field.getName(), responseObj.toString());
             return;
         }
         String relatedField = fieldAnnotation.relatedField();
         Field related = ReflectionUtils.findField(responseObj.getClass(), relatedField);
         if (related == null) {
-            log.error("需要设置翻译字段值不存在：{}，将跳过查询，对象：{}", relatedField, responseObj.getClass().getName());
+            log.debug("需要设置翻译字段值不存在：{}，将跳过查询，对象：{}", relatedField, responseObj.getClass().getName());
             return;
         }
         DictService dictService = getDictServiceByClass(fieldAnnotation.dictImplClass());
         List<DictItem> dictItemList = cache.computeIfAbsent(fieldAnnotation.dictionaryParams(), dictService::getDictItemList);
         if (dictItemList == null || dictItemList.isEmpty()) {
-            log.error("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}",
+            log.debug("字段：{} 获取字典项列表为空，请检查 字典参数：{} 服务类：{} 服务类包地址：{}",
                     fieldAnnotation.relatedField(), fieldAnnotation.dictionaryParams(),
                     dictService.getClass().getSimpleName(), dictService.getClass().getPackageName());
             return;
