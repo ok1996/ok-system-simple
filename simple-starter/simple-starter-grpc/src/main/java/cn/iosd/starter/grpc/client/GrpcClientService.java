@@ -45,20 +45,14 @@ public class GrpcClientService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        Optional.ofNullable(beanInjection)
-                .map(InitializeGrpcClientBeans::getInjections)
-                .ifPresent(this::initializeGrpcClients);
+        beanInjection.getInjections().forEach(this::configureGrpcClientBean);
     }
 
     /**
-     * 初始化 Grpc 客户端列表
+     * 配置GrpcClientBean对象，将Grpc服务客户端注入到相应的字段中。
      *
-     * @param grpcClientBeanList GrpcClientBean 列表
+     * @param grpcClientBean 包含有关Grpc客户端的信息的GrpcClientBean对象
      */
-    private void initializeGrpcClients(List<GrpcClientBean> grpcClientBeanList) {
-        grpcClientBeanList.forEach(this::configureGrpcClientBean);
-    }
-
     private void configureGrpcClientBean(GrpcClientBean grpcClientBean) {
         GrpcClient annotation = grpcClientBean.client();
         String annotationValue = annotation.value();
