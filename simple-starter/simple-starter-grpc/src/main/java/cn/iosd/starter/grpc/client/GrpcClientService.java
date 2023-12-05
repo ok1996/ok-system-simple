@@ -5,7 +5,7 @@ import cn.iosd.starter.grpc.client.interceptor.ClientCallStartHeaders;
 import cn.iosd.starter.grpc.client.properties.GrpcChannelProperties;
 import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
-import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
+import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import io.grpc.ManagedChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +46,7 @@ public class GrpcClientService implements InitializingBean {
     @Override
     public void afterPropertiesSet() {
         Optional.ofNullable(beanInjection)
-                .map(InitializeGrpcClientBeans::getGrpcClientBeans)
-                .map(GrpcClientBeans::getInjections)
+                .map(InitializeGrpcClientBeans::getInjections)
                 .ifPresent(this::initializeGrpcClients);
     }
 
@@ -56,11 +55,11 @@ public class GrpcClientService implements InitializingBean {
      *
      * @param grpcClientBeanList GrpcClientBean 列表
      */
-    private void initializeGrpcClients(List<GrpcClientBeans.GrpcClientBean> grpcClientBeanList) {
+    private void initializeGrpcClients(List<GrpcClientBean> grpcClientBeanList) {
         grpcClientBeanList.forEach(this::configureGrpcClientBean);
     }
 
-    private void configureGrpcClientBean(GrpcClientBeans.GrpcClientBean grpcClientBean) {
+    private void configureGrpcClientBean(GrpcClientBean grpcClientBean) {
         GrpcClient annotation = grpcClientBean.client();
         String annotationValue = annotation.value();
         Optional<GrpcChannelProperties> channelPropertiesOpt = Optional.ofNullable(grpcClientProperties.getChannel())

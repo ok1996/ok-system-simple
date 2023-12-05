@@ -1,12 +1,14 @@
 package cn.iosd.starter.grpc.client;
 
 import cn.iosd.starter.grpc.client.annotation.GrpcClient;
-import cn.iosd.starter.grpc.client.vo.GrpcClientBeans;
+import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -16,10 +18,10 @@ import java.util.stream.Stream;
  */
 @Component
 public class InitializeGrpcClientBeans implements BeanPostProcessor {
-    final GrpcClientBeans grpcClientBeans = new GrpcClientBeans();
+    private final List<GrpcClientBean> injections = new ArrayList<>();
 
-    public GrpcClientBeans getGrpcClientBeans() {
-        return grpcClientBeans;
+    public List<GrpcClientBean> getInjections() {
+        return injections;
     }
 
     @Override
@@ -36,8 +38,8 @@ public class InitializeGrpcClientBeans implements BeanPostProcessor {
                 .filter(field -> field.isAnnotationPresent(GrpcClient.class))
                 .forEach(field -> {
                     GrpcClient annotation = field.getAnnotation(GrpcClient.class);
-                    GrpcClientBeans.GrpcClientBean registry = new GrpcClientBeans.GrpcClientBean(bean, annotation, field);
-                    grpcClientBeans.add(registry);
+                    GrpcClientBean registry = new GrpcClientBean(bean, annotation, field);
+                    injections.add(registry);
                 });
         return bean;
     }
