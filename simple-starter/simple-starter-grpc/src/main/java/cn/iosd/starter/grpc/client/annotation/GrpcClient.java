@@ -41,9 +41,13 @@ public @interface GrpcClient {
     long timeout() default -1;
 
     /**
-     * Grpc设置请求头实现类，当实现类只有一个时可为空
+     * 用于配置 gRPC 请求头的实现类
+     * <p>
+     * 若只有一个实现类可用，此字段不填默认取其实现类
+     * <p>
+     * 若没有可用的实现类，将其留空则不传
      *
-     * @return 实现类
+     * @return 请求头实现类
      */
     Class<? extends ClientCallStartHeaders> headerClass() default ClientCallStartHeaders.class;
 }
