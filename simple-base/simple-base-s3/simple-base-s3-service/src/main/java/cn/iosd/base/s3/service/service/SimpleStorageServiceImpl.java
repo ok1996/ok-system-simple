@@ -27,7 +27,9 @@ public class SimpleStorageServiceImpl implements SimpleStorageService {
 
     @Override
     public String uploadMultipartFile(MultipartFile file, String bucket, String fileExtension) throws IOException {
-        String fileKey = RandomStringUtils.randomAlphabetic(12) + "." + fileExtension;
+        String fileKey = RandomStringUtils.randomAlphabetic(12)
+                + (fileExtension.startsWith(".") ? "" : ".")
+                + fileExtension;
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(file.getContentType());
         metadata.setContentLength(file.getSize());
