@@ -1,7 +1,6 @@
 package cn.iosd.starter.datasource.base;
 
 import cn.iosd.starter.datasource.domain.PageRequest;
-import cn.iosd.starter.datasource.utils.DsConvertUtil;
 import cn.iosd.starter.web.base.CrudOperations;
 import cn.iosd.starter.web.domain.Response;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -68,7 +67,7 @@ public class BaseController<T> implements CrudOperations<T> {
     @Operation(summary = "Api-查询-分页")
     @PostMapping("/api/page")
     public Response<IPage<T>> apiPage(@RequestBody PageRequest<T> req) {
-        return Response.ok(service.page(DsConvertUtil.page(req), Wrappers.lambdaQuery(req.getData())));
+        return Response.ok(service.page(req.toPage(), req.toWrapper()));
     }
 
     /**

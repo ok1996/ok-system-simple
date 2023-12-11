@@ -1,10 +1,14 @@
 package cn.iosd.starter.datasource.domain;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 分页请求参数
@@ -55,5 +59,28 @@ public class PageRequest<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    /**
+     * 转换MybatisPlus的分页对象
+     *
+     * @return Page
+     */
+    public Page<T> toPage() {
+        Objects.requireNonNull(pageNum, "Page number cannot be null");
+        Objects.requireNonNull(pageSize, "Page size cannot be null");
+
+        Page<T> page = new Page<>(pageNum, pageSize);
+        page.setOrders(orders);
+        return page;
+    }
+
+    /**
+     * 转换MybatisPlus的条件构造对象
+     *
+     * @return LambdaQueryWrapper
+     */
+    public LambdaQueryWrapper<T> toWrapper() {
+        return Wrappers.lambdaQuery(data);
     }
 }
