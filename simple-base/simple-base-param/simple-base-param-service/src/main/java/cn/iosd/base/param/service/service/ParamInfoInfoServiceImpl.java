@@ -29,11 +29,15 @@ import java.util.Optional;
 @Primary
 public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, ParamInfoEntity> implements IParamInfoService {
 
+    /**
+     * 历史记录列表保留数
+     */
+    public static final Integer HISTORY_RETENTION_SIZE = 10;
+
     @Override
     public ParamInfo selectBaseParamByKey(String paramKey) {
-        ParamInfoEntity queryDb = new ParamInfoEntity();
-        queryDb.setParamKey(paramKey);
-        return baseMapper.selectOne(Wrappers.lambdaQuery(queryDb));
+        return baseMapper.selectOne(Wrappers.<ParamInfoEntity>lambdaQuery()
+                .eq(ParamInfoEntity::getParamKey, paramKey));
     }
 
     @Override
@@ -111,7 +115,6 @@ public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, Param
      */
     public String inputHistoryCodeValues(List<CodeValue<?>> codeValueList, String codeValueListHistory) throws JsonProcessingException {
         List<CodeValueListHistory> resHistoryObj = new ArrayList<>();
-        Integer historySize = 10;
         if (!StringUtils.isBlank(codeValueListHistory)) {
             resHistoryObj = JsonMapper.readValue(codeValueListHistory, new TypeReference<List<CodeValueListHistory>>() {
             });
@@ -120,8 +123,8 @@ public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, Param
         cvHistoryToAdd.setTime(System.currentTimeMillis());
         cvHistoryToAdd.setCodeValueList(codeValueList);
         resHistoryObj.add(cvHistoryToAdd);
-        if (resHistoryObj.size() > historySize) {
-            resHistoryObj = resHistoryObj.subList(resHistoryObj.size() - historySize, resHistoryObj.size());
+        if (resHistoryObj.size() > HISTORY_RETENTION_SIZE) {
+            resHistoryObj = resHistoryObj.subList(resHistoryObj.size() - HISTORY_RETENTION_SIZE, resHistoryObj.size());
         }
         return JsonMapper.getObjectMapper().writeValueAsString(resHistoryObj);
     }
