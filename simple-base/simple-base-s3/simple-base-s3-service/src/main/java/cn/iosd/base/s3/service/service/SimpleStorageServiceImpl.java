@@ -59,27 +59,14 @@ public class SimpleStorageServiceImpl implements SimpleStorageService {
 
     @Override
     public StorageObjectResponse getStorageObject(StorageObjectRequest sor) {
-        return convertToSor(amazonS3Service.listObjects(sor.getBucketName()
+        return new StorageObjectResponse(amazonS3Service.listObjects(sor.getBucketName()
                 , sor.getPrefixFileName()
                 , sor.getPageSize()));
     }
 
     @Override
     public StorageObjectResponse getStorageObjectNext(ObjectListing objectListing) {
-        return convertToSor(amazonS3Service.listNextBatchOfObjects(objectListing));
-    }
-
-    /**
-     * 将ObjectListing对象转换成StorageObjectResponse对象
-     *
-     * @param objectListing 待转换的ObjectListing对象
-     * @return 转换后的StorageObjectResponse对象
-     */
-    public StorageObjectResponse convertToSor(ObjectListing objectListing) {
-        StorageObjectResponse response = new StorageObjectResponse();
-        response.setSummaries(objectListing.getObjectSummaries());
-        response.setObjectListing(objectListing);
-        return response;
+        return new StorageObjectResponse(amazonS3Service.listNextBatchOfObjects(objectListing));
     }
 
     @Override

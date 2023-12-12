@@ -19,6 +19,15 @@ public class StorageObjectResponse {
     @Schema(description = "对象列表数据")
     private List<S3ObjectSummary> summaries;
 
+    public StorageObjectResponse() {
+
+    }
+
+    public StorageObjectResponse(ObjectListing objectListing) {
+        this.summaries = objectListing.getObjectSummaries();
+        this.objectListing = objectListing;
+    }
+
     public ObjectListing getObjectListing() {
         return objectListing;
     }
@@ -34,4 +43,5 @@ public class StorageObjectResponse {
     public void setSummaries(List<S3ObjectSummary> summaries) {
         this.summaries = summaries;
     }
+
 }
