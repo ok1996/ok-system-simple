@@ -27,6 +27,7 @@
             </exclusions>
         </dependency>
 
+        <!-- WaitingForDependencyUpdates: The following dependencies resolve the "SpringBoot" version conflict. Removal will be possible after the upgrade of "com.baomidou" -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>

@@ -20,8 +20,6 @@ spring:
           username: root
           password: password
   cloud:
-    compatibility-verifier:
-      enabled: false
     nacos:
       server-addr: http://127.0.0.1:8848
       username:
