@@ -59,7 +59,7 @@
 | simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                              |
 | simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                  |
 | simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                        |
-| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、<br/>通用CURD控制层、自定义JsonNode处理器        |
+| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、通用CURD控制层        |
 | simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
 | simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
 | simple-starter-gateway    | 微服务网关    | 微服务接口网关：集成微服务文档网关                                            |
