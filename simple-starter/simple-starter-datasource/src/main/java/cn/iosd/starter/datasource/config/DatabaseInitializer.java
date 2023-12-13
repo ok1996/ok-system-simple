@@ -21,86 +21,74 @@ import java.sql.Statement;
 public class DatabaseInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private static final Logger log = LoggerFactory.getLogger(DatabaseInitializer.class);
 
+    private static final String AUTO_CREATE_PROPERTY = "simple.datasource.autoCreateDatabase";
+    private static final String URL_PROPERTY = "spring.datasource.dynamic.datasource.master.url";
+    private static final String USERNAME_PROPERTY = "spring.datasource.dynamic.datasource.master.username";
+    private static final String PASSWORD_PROPERTY = "spring.datasource.dynamic.datasource.master.password";
+
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        String autoCreate = getPropertyValue(applicationContext, "simple.datasource.autoCreateDatabase");
-        if (StringUtils.isBlank(autoCreate) || Boolean.parseBoolean(autoCreate)) {
-            String url = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.url");
-            String username = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.username");
-            String password = getPropertyValue(applicationContext, "spring.datasource.dynamic.datasource.master.password");
-
+        if (shouldAutoCreateDatabase(applicationContext)) {
+            String url = getPropertyValue(applicationContext, URL_PROPERTY);
+            String username = getPropertyValue(applicationContext, USERNAME_PROPERTY);
+            String password = getPropertyValue(applicationContext, PASSWORD_PROPERTY);
             if (StringUtils.isAnyBlank(url, username, password)) {
                 return;
             }
-
-            // 初始化数据库
             initDatabase(url, username, password);
         }
     }
 
-    /**
-     * 获取指定配置属性的值
-     *
-     * @param applicationContext 应用程序上下文
-     * @param propertyName       配置属性名
-     * @return 配置属性的值
-     */
-    private String getPropertyValue(ConfigurableApplicationContext applicationContext, String propertyName) {
-        return applicationContext.getEnvironment().getProperty(propertyName);
+    private boolean shouldAutoCreateDatabase(ConfigurableApplicationContext applicationContext) {
+        String autoCreate = getPropertyValue(applicationContext, AUTO_CREATE_PROPERTY);
+        return StringUtils.isBlank(autoCreate) || Boolean.parseBoolean(autoCreate);
     }
 
     private void initDatabase(String url, String username, String password) {
-        String database = parseDatabaseName(url);
-        String urlSimplify = removeDatabaseName(url, database);
-        log.info("AutoCreateDatabase：初始化数据库,数据库名:{},连接地址:{} ", database, urlSimplify);
+        String databaseName = parseDatabaseName(url);
+        String urlSimplify = removeDatabaseName(url, databaseName);
 
         String mysql = ":mysql:";
-        String createDataBaseSql = "";
-        if (urlSimplify.contains(mysql)) {
-            createDataBaseSql = "create database if not exists `" + database + "` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci";
+        if (!urlSimplify.contains(mysql)) {
+            return;
         }
+
+        log.info("Initializing database, Database Name: {}, Connection URL: {}", databaseName, urlSimplify);
+        String createDataBaseSql = "create database if not exists `" + databaseName + "` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci";
+
         try (Connection conn = DriverManager.getConnection(urlSimplify, username, password);
              Statement stat = conn.createStatement()) {
             stat.executeUpdate(createDataBaseSql);
         } catch (SQLException e) {
-            log.error("创建数据库失败: {}", e.getMessage(), e);
+            log.error("Failed to create database: {}", e.getMessage(), e);
         }
     }
 
-    /**
-     * 根据 jdbcUrl 解析出数据库名
-     * 示例: jdbc:mysql://127.0.0.1:3306/pure?useUnicode
-     * 从提取到 pure 作为数据库名
-     *
-     * @param jdbcUrl jdbcUrl
-     * @return 数据库名
-     */
-    String parseDatabaseName(String jdbcUrl) {
+    private String getPropertyValue(ConfigurableApplicationContext applicationContext, String propertyName) {
+        return applicationContext.getEnvironment().getProperty(propertyName);
+    }
+
+    private String parseDatabaseName(String jdbcUrl) {
         if (StringUtils.isBlank(jdbcUrl)) {
             throw new IllegalArgumentException("jdbcUrl is null or empty");
         }
+
         try {
             URI uri = new URI(jdbcUrl.substring(5));
             String path = uri.getPath();
             String databaseName = path.substring(1);
+
             if (StringUtils.isBlank(databaseName)) {
-                throw new IllegalArgumentException("can not parse database name from jdbcUrl: " + jdbcUrl);
+                throw new IllegalArgumentException("Cannot parse database name from jdbcUrl: " + jdbcUrl);
             }
+
             return databaseName;
         } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("can not parse database name from jdbcUrl: " + jdbcUrl + ". Invalid URI syntax", e);
+            throw new IllegalArgumentException("Cannot parse database name from jdbcUrl: " + jdbcUrl + ". Invalid URI syntax", e);
         }
     }
 
-    /**
-     * 删除 jdbcUrl 的数据库名
-     *
-     * @param jdbcUrl      jdbcUrl
-     * @param databaseName 数据库名
-     * @return jdbcUrl
-     */
-    String removeDatabaseName(String jdbcUrl, String databaseName) {
+    private String removeDatabaseName(String jdbcUrl, String databaseName) {
         return jdbcUrl.replace("/" + databaseName, "");
     }
-
 }
