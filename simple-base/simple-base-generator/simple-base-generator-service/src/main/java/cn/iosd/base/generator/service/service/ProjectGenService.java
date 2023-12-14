@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -61,25 +62,25 @@ public class ProjectGenService {
          */
         String createZipPath = newProjectAndZipTempPath + "/project-" + projectName + ".zip";
 
-        log.info("项目名称:{}---压缩包:{},解压至目录:{}", projectName, initProjectZipUrl, initUnzipPath);
+        log.debug("项目名称:{}---压缩包:{},解压至目录:{}", projectName, initProjectZipUrl, initUnzipPath);
         unzip(initProjectZipUrl, initUnzipPath);
 
-        log.info("项目名称:{}---复制初始化目录到新的目录地址,以备覆盖内容,初始化目录地址:{},新目录地址为:{}", projectName, initUnzipPath, copyUnzipPath);
+        log.debug("项目名称:{}---复制初始化目录到新的目录地址,以备覆盖内容,初始化目录地址:{},新目录地址为:{}", projectName, initUnzipPath, copyUnzipPath);
         copyInitProjectFiles(initUnzipPath, copyUnzipPath, req);
 
-        log.info("项目名称:{}---在指定文件夹中递归地替换变量的值,指定文件夹为:{}", projectName, copyUnzipPath);
+        log.debug("项目名称:{}---在指定文件夹中递归地替换变量的值,指定文件夹为:{}", projectName, copyUnzipPath);
         replaceVariableValues(copyUnzipPath, req);
 
-        log.info("项目名称:{}---创建压缩包,完成内容覆盖的目录地址:{},压缩包地址:{}", projectName, successProjectPath, createZipPath);
+        log.debug("项目名称:{}---创建压缩包,完成内容覆盖的目录地址:{},压缩包地址:{}", projectName, successProjectPath, createZipPath);
         createZip(successProjectPath, createZipPath);
 
-        log.info("项目名称:{}---删除压缩包解压目录及目录下文件:{}", projectName, initUnzipPath);
+        log.debug("项目名称:{}---删除压缩包解压目录及目录下文件:{}", projectName, initUnzipPath);
         deleteFolder(new File(initUnzipPath));
 
-        log.info("项目名称:{}---删除复制解压后的内容地址及目录下文件:{}", projectName, copyUnzipPath);
+        log.debug("项目名称:{}---删除复制解压后的内容地址及目录下文件:{}", projectName, copyUnzipPath);
         deleteFolder(new File(copyUnzipPath));
 
-        log.info("项目名称:{}---留存压缩包地址,以供下载,可定期清理:{}", projectName, createZipPath);
+        log.debug("项目名称:{}---留存压缩包地址,以供下载,可定期清理:{}", projectName, createZipPath);
         return new FileSystemResource(createZipPath);
     }
 
@@ -182,20 +183,30 @@ public class ProjectGenService {
      * @return 替换后的内容
      */
     private String replaceVariables(String content, ProjectGenVo req) {
-        String projectName = req.getProjectName();
-        String packageName = req.getPackageName();
-        String moduleName = req.getModuleName();
-        String simpleVersion = req.getSimpleVersion();
-        String springBootVersion = req.getSpringBootVersion();
-        String javaVersion = req.getJavaVersion();
-        return content.replace("{projectName}", projectName)
-                .replace("{packageName}", packageName)
-                .replace("{moduleName}", moduleName)
-                .replace("{simpleVersion}", simpleVersion)
-                .replace("{moduleNameCapitalized}", req.getModuleNameCapitalizedCustom())
-                .replace("{packageDir}", req.getPackageDirCustom())
-                .replace("{springBootVersion}",springBootVersion)
-                .replace("{javaVersion}",javaVersion);
+        Map<String, String> variables = Map.of(
+                "{projectName}", req.getProjectName(),
+                "{packageName}", req.getPackageName(),
+                "{moduleName}", req.getModuleName(),
+                "{simpleVersion}", req.getSimpleVersion(),
+                "{moduleNameCapitalized}", req.getModuleNameCapitalizedCustom(),
+                "{packageDir}", req.getPackageDirCustom(),
+                "{springBootVersion}", req.getSpringBootVersion(),
+                "{javaVersion}", req.getJavaVersion(),
+                "{projectVersion}", req.getProjectVersion(),
+                "{projectPort}", req.getProjectPort()
+        );
+        StringBuilder result = new StringBuilder(content);
+        variables.forEach((variable, value) ->
+                replaceVariable(result, variable, value));
+        return result.toString();
+    }
+
+    private void replaceVariable(StringBuilder content, String variable, String value) {
+        int index = content.indexOf(variable);
+        while (index != -1) {
+            content.replace(index, index + variable.length(), value);
+            index = content.indexOf(variable, index + value.length());
+        }
     }
 
     /**

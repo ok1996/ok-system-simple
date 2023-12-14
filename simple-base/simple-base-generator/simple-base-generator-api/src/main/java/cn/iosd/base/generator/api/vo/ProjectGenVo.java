@@ -15,8 +15,14 @@ public class ProjectGenVo {
     @Schema(description = "模块名称", example = "generator")
     private String moduleName;
 
+    @Schema(description = "项目端口号", example = "8080")
+    private String projectPort;
+
     @Schema(description = "SpringBoot版本号", hidden = true)
     private String springBootVersion = "3.2.0";
+
+    @Schema(description = "项目版本号", hidden = true)
+    private String projectVersion = "2024.1.0.0-SNAPSHOT";
 
     @Schema(description = "依赖模块版本号", hidden = true)
     private String simpleVersion = "2024.1.0.0-SNAPSHOT";
@@ -94,6 +100,22 @@ public class ProjectGenVo {
 
     public void setJavaVersion(String javaVersion) {
         this.javaVersion = javaVersion;
+    }
+
+    public String getProjectVersion() {
+        return projectVersion;
+    }
+
+    public void setProjectVersion(String projectVersion) {
+        this.projectVersion = projectVersion;
+    }
+
+    public String getProjectPort() {
+        return projectPort;
+    }
+
+    public void setProjectPort(String projectPort) {
+        this.projectPort = projectPort;
     }
 
     /**
