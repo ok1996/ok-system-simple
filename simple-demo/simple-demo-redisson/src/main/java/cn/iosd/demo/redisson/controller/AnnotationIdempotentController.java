@@ -35,7 +35,7 @@ public class AnnotationIdempotentController {
 
     @Operation(summary = "库存自减-请求参数变量-在业务执行结束后解锁")
     @GetMapping("decrementReqPara")
-    @DistributedIdempotent(value = "#keyName", message = "请求重复！", expireTime = 5)
+    @DistributedIdempotent(value = "dRP", param = "#keyName", message = "请求重复！", expireTime = 5)
     public Response<?> decrementReqPara(String keyName) {
         if (TOTAL > 0) {
             TOTAL--;
@@ -46,7 +46,7 @@ public class AnnotationIdempotentController {
 
     @Operation(summary = "库存自减-请求参数变量-等待expireTime自动过期后自动解锁")
     @GetMapping("decrementReqPara/executionFinishedUnlock")
-    @DistributedIdempotent(value = "#keyName", message = "请求重复！", expireTime = 5, executionFinishedUnlock = false)
+    @DistributedIdempotent(value = "dRPE", param = "#keyName", message = "请求重复！", expireTime = 5, executionFinishedUnlock = false)
     public Response<?> decrementReqParaExecutionFinishedUnlock(String keyName) {
         if (TOTAL > 0) {
             TOTAL--;
@@ -57,8 +57,8 @@ public class AnnotationIdempotentController {
 
     @Operation(summary = "库存自减-异常测试")
     @GetMapping("decrementException")
-    @DistributedIdempotent(value = "'demo:singIn4:' + #keyName", message = "请求重复！")
-    public void decrementException(String keyName){
+    @DistributedIdempotent(value = "demo", param = "#keyName", message = "请求重复！")
+    public void decrementException(String keyName) {
         if (TOTAL > 0) {
             TOTAL--;
         }

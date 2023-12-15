@@ -17,10 +17,17 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface DistributedLock {
+    String METHOD_NAME = "DlMn";
+
     /**
-     * 锁的名称
+     * 锁KEY值的固定部分
      */
-    String value() default "RedissonLock";
+    String value() default METHOD_NAME;
+
+    /**
+     * 锁KEY值的动态参数部分，支持el表达式
+     */
+    String param() default "";
 
     /**
      * 锁的有效时间-秒

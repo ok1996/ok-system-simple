@@ -26,7 +26,7 @@ public class AnnotationLockController {
 
     @Operation(summary = "库存自减")
     @GetMapping("decrement")
-    @DistributedLock(value = "demo-redisson:decrement", leaseTime = 105)
+    @DistributedLock(value = "de", leaseTime = 105)
     public Response<?> decrement() {
         if (TOTAL > 0) {
             TOTAL--;
@@ -37,7 +37,7 @@ public class AnnotationLockController {
 
     @Operation(summary = "库存自减-测试异常")
     @GetMapping("decrementException")
-    @DistributedLock(value = "demo-redisson:decrementException", leaseTime = 105)
+    @DistributedLock(value = "deEx", leaseTime = 105)
     public void decrementException(){
         if (TOTAL > 0) {
             TOTAL--;

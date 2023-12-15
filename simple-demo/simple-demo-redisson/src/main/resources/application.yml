@@ -49,3 +49,6 @@ simple:
         cacheExpiresAfterTenSecond:
           ttl: 10000
           maxIdleTime: 10000
+logging:
+  level:
+    root: info

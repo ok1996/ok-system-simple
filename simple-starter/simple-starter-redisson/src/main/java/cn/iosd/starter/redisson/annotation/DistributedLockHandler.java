@@ -1,6 +1,7 @@
 package cn.iosd.starter.redisson.annotation;
 
 import cn.iosd.starter.redisson.service.RedissonLockService;
+import cn.iosd.starter.redisson.utils.LockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +30,7 @@ public class DistributedLockHandler {
 
     @Around("@annotation(distributedLock)")
     public Object around(ProceedingJoinPoint joinPoint, DistributedLock distributedLock) throws Throwable {
-        String lockName = LOCK_KEY_PREFIX + distributedLock.value();
+        String lockName = LockUtil.generateLockName(joinPoint, LOCK_KEY_PREFIX, distributedLock.value(), distributedLock.param());
         int leaseTime = distributedLock.leaseTime();
         RLock lock = redissonLockService.getLock(lockName);
 
@@ -46,6 +47,4 @@ public class DistributedLockHandler {
             }
         }
     }
-
-
 }

@@ -15,24 +15,24 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedIdempotent {
 
-    /**
-     * 当注解value为此默认值时，将动态生成唯一的锁标识
-     */
-    String METHOD_NAME = "RedissonMethodName";
+    String METHOD_NAME = "DiMn";
 
     /**
-     * 锁名称,支持el表达式
+     * 锁KEY值的固定部分
+     */
+    String value() default METHOD_NAME;
+
+    /**
+     * 锁KEY值的动态参数部分，支持el表达式
      *
      * <pre>
      *  1.获取方法名称
      *      #methodName
      *  2.获取方法参数中的某个值
      *      void test(String id)  => #id
-     *  3.不支持引用一个字符串常量然后和spel表达式拼接
-     *  4.如果要拼接字符串:  "'test' + #id"
      * </pre>
      */
-    String value() default METHOD_NAME;
+    String param() default "";
 
     /**
      * 获取锁失败后的提示信息
