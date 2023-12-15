@@ -38,7 +38,7 @@ public class DistributedIdempotentHandler {
         RLock lock = redissonLockService.getLock(lockName);
 
         log.debug("[开始]执行DistributedIdempotent环绕通知，锁[{}]", lockName);
-        if (lock.tryLock(idempotent.acquireTimeout(), idempotent.expireTime(), idempotent.unit())) {
+        if (!lock.isLocked() && lock.tryLock(idempotent.acquireTimeout(), idempotent.expireTime(), idempotent.unit())) {
             try {
                 return point.proceed();
             } finally {

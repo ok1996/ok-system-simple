@@ -40,6 +40,8 @@ public class DistributedLockHandler {
                 throw new RuntimeException("获取Redis分布式锁[" + lockName + "]失败");
             }
             return joinPoint.proceed();
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Redis分布式加锁[" + lockName + "]失败", e);
         } finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
