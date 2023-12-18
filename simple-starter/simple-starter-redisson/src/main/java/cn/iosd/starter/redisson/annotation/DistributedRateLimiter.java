@@ -29,7 +29,7 @@ public @interface DistributedRateLimiter {
     String value() default METHOD_NAME;
 
     /**
-     * 锁KEY值的动态参数部分，支持el表达式
+     * KEY值的动态参数部分，支持el表达式
      *
      * <pre>
      *  1.获取方法名称
@@ -41,17 +41,17 @@ public @interface DistributedRateLimiter {
     String param() default "";
 
     /**
-     * 速率 默认100
+     * 速率
      */
     long rate() default 100L;
 
     /**
-     * 锁的有效时间
+     * 有效时间
      */
     long rateTime() default 1L;
 
     /**
-     * 时间单位 默认秒
+     * 时间单位
      */
     RateIntervalUnit timeUnit() default RateIntervalUnit.SECONDS;
 
