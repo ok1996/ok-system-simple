@@ -1,6 +1,7 @@
 cn.iosd.starter.redisson.config.RedissonAutoConfiguration
-cn.iosd.starter.redisson.annotation.DistributedLockHandler
-cn.iosd.starter.redisson.annotation.DistributedIdempotentHandler
+cn.iosd.starter.redisson.handler.DistributedLockHandler
+cn.iosd.starter.redisson.handler.DistributedIdempotentHandler
+cn.iosd.starter.redisson.handler.DistributedRateLimiterHandler
 cn.iosd.starter.redisson.properties.RedissonProperties
 cn.iosd.starter.redisson.properties.RedissonCacheableProperties
 cn.iosd.starter.redisson.manager.RedissonCacheableManager

@@ -1,9 +1,10 @@
 package cn.iosd.starter.redisson.config;
 
+import cn.iosd.starter.redisson.manager.RedissonManager;
 import cn.iosd.starter.redisson.properties.RedissonProperties;
 import cn.iosd.starter.redisson.service.RedissonCacheService;
 import cn.iosd.starter.redisson.service.RedissonLockService;
-import cn.iosd.starter.redisson.manager.RedissonManager;
+import cn.iosd.starter.redisson.service.RedissonRateLimiterService;
 import org.redisson.Redisson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,13 @@ public class RedissonAutoConfiguration {
     @Order(value = 2)
     public RedissonCacheService redissonCache(RedissonManager redissonManager) {
         return new RedissonCacheService(redissonManager);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @Order(value = 2)
+    public RedissonRateLimiterService redissonRateLimiterService(RedissonManager redissonManager) {
+        return new RedissonRateLimiterService(redissonManager);
     }
 
     @Bean

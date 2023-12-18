@@ -1,5 +1,6 @@
-package cn.iosd.starter.redisson.annotation;
+package cn.iosd.starter.redisson.handler;
 
+import cn.iosd.starter.redisson.annotation.DistributedLock;
 import cn.iosd.starter.redisson.service.RedissonLockService;
 import cn.iosd.starter.redisson.utils.LockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;

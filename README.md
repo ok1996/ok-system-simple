@@ -52,21 +52,21 @@
 
 ## Starter自动装配模块
 
-| 模块名称                      | 使用场景     | 说明                                                           |
-|---------------------------|----------|--------------------------------------------------------------|
-| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类 |
-| simple-starter-redisson   | 锁        | 自定义注解简化使用：分布式锁、分布式幂等; <br/> Cacheable注解常用配置及自定义CacheName过期时间 |
-| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                              |
-| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                  |
-| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                        |
-| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、通用CURD控制层        |
-| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                     |
-| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                       |
-| simple-starter-gateway    | 微服务网关    | 微服务接口网关：集成微服务文档网关                                            |
-| simple-starter-encrypt    | 加密       | 注解：加密脱敏（加密规则有通用模板、或自定义）<br/>注解：接口请求参数或返回参数Rsa加密解密            |
-| simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）    |
-| simple-starter-email      | 邮件       | Smtp邮件推送                                                     |
-| simple-starter-package    | 构建打包     | 自定义Maven构建打包逻辑，将常用脚本及可执行文件统一打包                               |
+| 模块名称                      | 使用场景     | 说明                                                             |
+|---------------------------|----------|----------------------------------------------------------------|
+| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类   |
+| simple-starter-redisson   | 锁及缓存     | 注解使用：分布式锁、分布式幂等、分布式限流器; <br/> Cacheable注解常用配置及自定义CacheName过期时间 |
+| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                                |
+| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                    |
+| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                          |
+| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、通用CURD控制层                              |
+| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                       |
+| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                         |
+| simple-starter-gateway    | 微服务网关    | 微服务接口网关：集成微服务文档网关                                              |
+| simple-starter-encrypt    | 加密       | 注解：加密脱敏（加密规则有通用模板、或自定义）<br/>注解：接口请求参数或返回参数Rsa加密解密              |
+| simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）      |
+| simple-starter-email      | 邮件       | Smtp邮件推送                                                       |
+| simple-starter-package    | 构建打包     | 自定义Maven构建打包逻辑，将常用脚本及可执行文件统一打包                                 |
 
 ## Base服务类模块
 
