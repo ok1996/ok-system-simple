@@ -25,14 +25,18 @@ import java.util.concurrent.TimeUnit;
 public class DistributedLockHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedLockHandler.class);
 
+    /**
+     * Simple Redisson Lock
+     */
+    private static final String LOCK_KEY_PREFIX = "SimpleRL:";
+
     @Autowired
     RedissonLockService redissonLockService;
 
-    private static final String LOCK_KEY_PREFIX = "RLock:";
 
     @Around("@annotation(distributedLock)")
     public Object around(ProceedingJoinPoint joinPoint, DistributedLock distributedLock) throws Throwable {
-        String lockName = LockUtil.generateLockName(joinPoint, LOCK_KEY_PREFIX, distributedLock.value(), distributedLock.param());
+        String lockName = LockUtil.generateKey(joinPoint, LOCK_KEY_PREFIX, distributedLock.value(), distributedLock.param(), distributedLock.includePointMd5());
         int leaseTime = distributedLock.leaseTime();
         RLock lock = redissonLockService.getLock(lockName);
 

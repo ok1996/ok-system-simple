@@ -24,7 +24,10 @@ import org.springframework.stereotype.Component;
 public class DistributedIdempotentHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedIdempotentHandler.class);
 
-    private static final String LOCK_KEY_PREFIX = "RIdem:";
+    /**
+     * Simple Redisson Idempotent
+     */
+    private static final String LOCK_KEY_PREFIX = "SimpleRI:";
 
     @Autowired
     RedissonLockService redissonLockService;
@@ -36,7 +39,7 @@ public class DistributedIdempotentHandler {
             "@within(cn.iosd.starter.redisson.annotation.DistributedIdempotent)")
     public Object idempotent(final ProceedingJoinPoint point) throws Throwable {
         DistributedIdempotent idempotent = ((MethodSignature) point.getSignature()).getMethod().getAnnotation(DistributedIdempotent.class);
-        String lockName = LockUtil.generateLockName(point, LOCK_KEY_PREFIX, idempotent.value(), idempotent.param());
+        String lockName = LockUtil.generateKey(point, LOCK_KEY_PREFIX, idempotent.value(), idempotent.param(), idempotent.includePointMd5());
         RLock lock = redissonLockService.getLock(lockName);
 
         log.debug("[开始]执行DistributedIdempotent环绕通知，锁[{}]", lockName);

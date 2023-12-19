@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
 /**
@@ -23,9 +22,6 @@ import java.util.stream.IntStream;
  * @author ok1996
  */
 public class SpElUtil {
-
-    private static final Map<String, CachedExpression> CACHE = new ConcurrentHashMap<>();
-
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 
     /**
@@ -43,22 +39,21 @@ public class SpElUtil {
         if (!spEl.contains(StringPool.HASH)) {
             return defaultValue;
         }
-        return Optional.of(CACHE.computeIfAbsent(spEl, key -> {
-            Expression expression = PARSER.parseExpression(key);
-            StandardEvaluationContext context = new StandardEvaluationContext();
-            return new CachedExpression(expression, context);
-        })).map(cachedExpression -> {
-            StandardEvaluationContext context = cachedExpression.context();
-            argMap.forEach(context::setVariable);
-            return cachedExpression.expression().getValue(context, clazz);
-        }).orElse(defaultValue);
+        Expression expression = PARSER.parseExpression(spEl);
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        argMap.forEach(context::setVariable);
+
+        return Optional.of(new CachedExpression(expression, context))
+                .map(cachedExpression -> cachedExpression.expression().getValue(cachedExpression.context(), clazz))
+                .orElse(defaultValue);
     }
+
 
     /**
      * 从方法调用的切点中获取参数映射并封装对象
      *
      * @param point 方法调用的切点
-     * @return 包含方法参数和方法名称的 MethodContext 对象
+     * @return 包含方法参数和实例字符串的 MethodContext 对象
      */
     public static MethodContext getArgMap(final ProceedingJoinPoint point) {
         final Object[] args = point.getArgs();
@@ -69,7 +64,7 @@ public class SpElUtil {
         }
         Map<String, Object> map = new LinkedHashMap<>();
         IntStream.range(0, args.length).forEach(i -> map.put(params[i], args[i]));
-        return new MethodContext(map, method.getName());
+        return new MethodContext(map, method.toGenericString());
     }
 
     /**

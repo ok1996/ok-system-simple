@@ -15,24 +15,41 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedIdempotent {
 
-    String METHOD_NAME = "DiMn";
-
     /**
-     * 锁KEY值的固定部分
+     * Idempotent Constant
      */
-    String value() default METHOD_NAME;
+    String CONSTANT = "IC";
 
     /**
-     * 锁KEY值的动态参数部分，支持el表达式
+     * key固定值
+     */
+    String value() default CONSTANT;
+
+    /**
+     * key动态参数值，支持el表达式
      *
      * <pre>
-     *  1.获取方法名称
-     *      #methodName
-     *  2.获取方法参数中的某个值
+     *  1.获取方法参数中的某个值
      *      void test(String id)  => #id
+     *  2.获取对象参数中的某个值
+     *      void test(Vo vo)  => #vo.id
+     *  3.参数值获取不到，默认为：DV
+     *      void test(String id)  => #im
+     *  4.默认空，不拼接到key中
      * </pre>
      */
     String param() default "";
+
+    /**
+     * key后缀
+     * <pre>
+     * 是否拼接MD5
+     *   值：从切点获取方法参数和实例字符串生成对象，转为md5
+     * </pre>
+     *
+     * @return 默认生成Md5后缀
+     */
+    boolean includePointMd5() default true;
 
     /**
      * 获取锁失败后的提示信息
