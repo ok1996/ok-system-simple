@@ -1,6 +1,7 @@
 package cn.iosd.starter.redisson.handler;
 
 import cn.iosd.starter.redisson.annotation.DistributedIdempotent;
+import cn.iosd.starter.redisson.exception.RedissonException;
 import cn.iosd.starter.redisson.service.RedissonLockService;
 import cn.iosd.starter.redisson.utils.LockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -49,6 +50,6 @@ public class DistributedIdempotentHandler {
                 }
             }
         }
-        throw new RuntimeException(idempotent.message());
+        throw new RedissonException(idempotent.message());
     }
 }

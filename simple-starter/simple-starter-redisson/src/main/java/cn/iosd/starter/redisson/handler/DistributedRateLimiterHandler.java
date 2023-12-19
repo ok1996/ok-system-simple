@@ -1,6 +1,7 @@
 package cn.iosd.starter.redisson.handler;
 
 import cn.iosd.starter.redisson.annotation.DistributedRateLimiter;
+import cn.iosd.starter.redisson.exception.RedissonException;
 import cn.iosd.starter.redisson.service.RedissonRateLimiterService;
 import cn.iosd.starter.redisson.utils.LockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -40,7 +41,7 @@ public class DistributedRateLimiterHandler {
                 lockName, rateLimiter.rate(), rateLimiter.rateTime(), rateLimiter.timeUnit())) {
             return point.proceed();
         }
-        throw new RuntimeException(rateLimiter.message());
+        throw new RedissonException(rateLimiter.message());
     }
 
 

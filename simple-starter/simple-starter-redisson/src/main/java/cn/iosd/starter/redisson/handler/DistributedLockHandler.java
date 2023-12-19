@@ -1,6 +1,7 @@
 package cn.iosd.starter.redisson.handler;
 
 import cn.iosd.starter.redisson.annotation.DistributedLock;
+import cn.iosd.starter.redisson.exception.RedissonException;
 import cn.iosd.starter.redisson.service.RedissonLockService;
 import cn.iosd.starter.redisson.utils.LockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -38,11 +39,11 @@ public class DistributedLockHandler {
         log.debug("[开始]尝试获取Redis分布式锁[{}]", lockName);
         try {
             if (!lock.tryLock(leaseTime, TimeUnit.SECONDS)) {
-                throw new RuntimeException("获取Redis分布式锁[" + lockName + "]失败");
+                throw new RedissonException("获取Redis分布式锁[" + lockName + "]失败");
             }
             return joinPoint.proceed();
         } catch (InterruptedException e) {
-            throw new RuntimeException("Redis分布式加锁[" + lockName + "]失败", e);
+            throw new RedissonException("Redis分布式加锁[" + lockName + "]失败", e);
         } finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
