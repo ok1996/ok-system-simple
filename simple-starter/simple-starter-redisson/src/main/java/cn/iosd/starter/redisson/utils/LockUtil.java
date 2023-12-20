@@ -38,14 +38,14 @@ public class LockUtil {
             Supplier<String> md5 = () -> DigestUtils.md5DigestAsHex(context.toString().getBytes());
             String dynamicPart = StringUtils.isEmpty(param)
                     ? md5.get()
-                    : SpElUtil.analytical(param, context.argMap(), String.class, PARAM_ABSENT_DEFAULT_VALUE) + ":" + md5.get();
+                    : SpElUtil.analytical(param, context.argMap(), PARAM_ABSENT_DEFAULT_VALUE) + ":" + md5.get();
 
             return prefix + value + ":" + dynamicPart;
         }
         if (StringUtils.isEmpty(param)) {
             return prefix + value;
         }
-        String dynamicPart = SpElUtil.analytical(param, context.argMap(), String.class, PARAM_ABSENT_DEFAULT_VALUE);
+        String dynamicPart = SpElUtil.analytical(param, context.argMap(), PARAM_ABSENT_DEFAULT_VALUE);
         return prefix + value + ":" + dynamicPart;
     }
 

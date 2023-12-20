@@ -1226,15 +1226,12 @@
 									}
 								}
 							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"2\",\r\n  \"remark\": \"2\"\r\n}",
+									"raw": "{\r\n  \"name\": \"23\",\r\n  \"remark\": \"213\",\r\n  \"id\": 1\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1242,7 +1239,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationIdempotent/decrementReqPara/executionFinishedUnlock?keyName=cda7777",
+									"raw": "{{Host}}{{DemoRedisson}}/simple-demo-redisson/annotationIdempotent/decrementReqPara/executionFinishedUnlock",
 									"host": [
 										"{{Host}}{{DemoRedisson}}"
 									],
@@ -1251,12 +1248,6 @@
 										"annotationIdempotent",
 										"decrementReqPara",
 										"executionFinishedUnlock"
-									],
-									"query": [
-										{
-											"key": "keyName",
-											"value": "cda7777"
-										}
 									]
 								}
 							},
@@ -2067,6 +2058,260 @@
 			]
 		},
 		{
+			"name": "simple-demo-encrypt",
+			"item": [
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体-嵌套",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.personVo.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPerson",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"simple-demo-encrypt",
+								"test",
+								"superPerson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表-嵌套",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].personVo.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPersonList",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"simple-demo-encrypt",
+								"test",
+								"superPersonList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/person",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"simple-demo-encrypt",
+								"test",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].name).to.eql(\"*三\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/personList",
+							"host": [
+								"{{Host}}{{DemoEncrypt}}"
+							],
+							"path": [
+								"simple-demo-encrypt",
+								"test",
+								"personList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "simple-base-dict-service",
+			"item": [
+				{
+					"name": "[simple-base-dict-service]提取字典分组",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].dictGroupParam).to.eql(\"leader\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/uniqueDictGroups",
+							"host": [
+								"{{Host}}{{BaseDictService}}"
+							],
+							"path": [
+								"simple-base-dict-service",
+								"DictInfo",
+								"uniqueDictGroups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[simple-base-dict-service]字典翻译-远程调用接口实现类字典",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data[0].value).to.eql(\"1\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/custom/leader",
+							"host": [
+								"{{Host}}{{BaseDictService}}"
+							],
+							"path": [
+								"simple-base-dict-service",
+								"DictInfo",
+								"custom",
+								"leader"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "demo-base-dict",
+			"item": [
+				{
+					"name": "[demo-base-dict]测试单体",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"    pm.expect(jsonData.data.sexText).to.eql(\"女\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}{{BaseDict}}/demo-base-dict/customTest/personRemoteVo",
+							"host": [
+								"{{Host}}{{BaseDict}}"
+							],
+							"path": [
+								"demo-base-dict",
+								"customTest",
+								"personRemoteVo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "simple-base-s3-service",
 			"item": [
 				{
@@ -2467,260 +2712,6 @@
 								"test",
 								"bucket",
 								"list"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "simple-demo-encrypt",
-			"item": [
-				{
-					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体-嵌套",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data.personVo.name).to.eql(\"*三\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPerson",
-							"host": [
-								"{{Host}}{{DemoEncrypt}}"
-							],
-							"path": [
-								"simple-demo-encrypt",
-								"test",
-								"superPerson"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表-嵌套",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data[0].personVo.name).to.eql(\"*三\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/superPersonList",
-							"host": [
-								"{{Host}}{{DemoEncrypt}}"
-							],
-							"path": [
-								"simple-demo-encrypt",
-								"test",
-								"superPersonList"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[simple-demo-encrypt]脱敏测试模块-测试单体",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data.name).to.eql(\"*三\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/person",
-							"host": [
-								"{{Host}}{{DemoEncrypt}}"
-							],
-							"path": [
-								"simple-demo-encrypt",
-								"test",
-								"person"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[simple-demo-encrypt]脱敏测试模块-测试列表",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data[0].name).to.eql(\"*三\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{DemoEncrypt}}/simple-demo-encrypt/test/personList",
-							"host": [
-								"{{Host}}{{DemoEncrypt}}"
-							],
-							"path": [
-								"simple-demo-encrypt",
-								"test",
-								"personList"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "simple-base-dict-service",
-			"item": [
-				{
-					"name": "[simple-base-dict-service]提取字典分组",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data[0].dictGroupParam).to.eql(\"leader\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/uniqueDictGroups",
-							"host": [
-								"{{Host}}{{BaseDictService}}"
-							],
-							"path": [
-								"simple-base-dict-service",
-								"DictInfo",
-								"uniqueDictGroups"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[simple-base-dict-service]字典翻译-远程调用接口实现类字典",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data[0].value).to.eql(\"1\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{BaseDictService}}/simple-base-dict-service/DictInfo/custom/leader",
-							"host": [
-								"{{Host}}{{BaseDictService}}"
-							],
-							"path": [
-								"simple-base-dict-service",
-								"DictInfo",
-								"custom",
-								"leader"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "demo-base-dict",
-			"item": [
-				{
-					"name": "[demo-base-dict]测试单体",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"测试返回结果code是否为200,数据是否正常\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data.sexText).to.eql(\"女\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{Host}}{{BaseDict}}/demo-base-dict/customTest/personRemoteVo",
-							"host": [
-								"{{Host}}{{BaseDict}}"
-							],
-							"path": [
-								"demo-base-dict",
-								"customTest",
-								"personRemoteVo"
 							]
 						}
 					},

@@ -2,6 +2,7 @@ package cn.iosd.starter.redisson.utils;
 
 import cn.iosd.starter.redisson.domain.MethodContext;
 import jodd.util.StringPool;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.StandardReflectionParameterNameDiscoverer;
@@ -25,26 +26,26 @@ public class SpElUtil {
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 
     /**
-     * 解析并执行 SpEL 表达式。
-     * 若表达式中包含哈希符号 (#)，则解析并执行该表达式；
-     * 否则，直接返回默认值。
+     * 解析并执行 SpEL 表达式
+     * 若表达式中包含哈希符号 (#)，则解析并执行该表达式
+     * 否则，直接返回默认值
      *
-     * @param spEl         SpEL表达式字符串。
-     * @param argMap       方法参数的映射，用于在表达式中引用参数。
-     * @param clazz        表达式期望返回的结果类型。
-     * @param defaultValue 如果表达式未执行或执行结果为空时的默认返回值。
-     * @return 解析执行后的结果，或默认值。
+     * @param spEl         SpEL表达式字符串
+     * @param argMap       方法参数的映射，用于在表达式中引用参数
+     * @param defaultValue 如果表达式未执行或执行结果为空时的默认返回值
+     * @return 解析执行后的结果，或默认值
      */
-    public static <T> T analytical(final String spEl, final Map<String, Object> argMap, final Class<T> clazz, final T defaultValue) {
-        if (!spEl.contains(StringPool.HASH)) {
+    public static String analytical(final String spEl, final Map<String, Object> argMap, final String defaultValue) {
+        if (spEl == null || !spEl.contains(StringPool.HASH)) {
             return defaultValue;
         }
+
         Expression expression = PARSER.parseExpression(spEl);
         StandardEvaluationContext context = new StandardEvaluationContext();
         argMap.forEach(context::setVariable);
 
-        return Optional.of(new CachedExpression(expression, context))
-                .map(cachedExpression -> cachedExpression.expression().getValue(cachedExpression.context(), clazz))
+        return Optional.ofNullable(expression.getValue(context, String.class))
+                .filter(StringUtils::isNotEmpty)
                 .orElse(defaultValue);
     }
 
@@ -67,9 +68,5 @@ public class SpElUtil {
         return new MethodContext(map, method.toGenericString());
     }
 
-    /**
-     * 缓存辅助类，用于存储解析后的SpEL表达式
-     */
-    private record CachedExpression(Expression expression, StandardEvaluationContext context) {
-    }
+
 }

@@ -20,4 +20,6 @@ public class PersonVo {
     @Schema(description = "备注")
     private String remark;
 
+    @Schema(description = "唯一标识")
+    private Integer id;
 }
