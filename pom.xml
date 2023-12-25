@@ -34,7 +34,7 @@
         <io-grpc.version>1.59.1</io-grpc.version>
         <redisson.version>3.24.3</redisson.version>
         <jakarta-mail.version>2.0.1</jakarta-mail.version>
-        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <netty-socketio.version>2.0.6</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.599</aws-java-sdk-s3.version>
         <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
@@ -139,7 +139,7 @@
 
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 

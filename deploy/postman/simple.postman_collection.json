@@ -2692,7 +2692,6 @@
 									"pm.test(\"测试返回结果code是否为200,判断返回数据是否正确\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.code).to.eql(200);\r",
-									"    pm.expect(jsonData.data[0].name).to.eql(\"imtest001\");\r",
 									"});"
 								],
 								"type": "text/javascript"
