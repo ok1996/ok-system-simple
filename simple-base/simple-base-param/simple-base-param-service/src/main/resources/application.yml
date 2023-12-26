@@ -36,8 +36,7 @@ spring:
         file-extension: yml
         import-check:
           enabled: false
-#  可写出配置中心使用到的文件
-#  config:
-#    import:
-#      - nacos:application.yml
-#      - nacos:simple-base-param-service.yml?group=DEFAULT_GROUP&refreshEnabled=false
+  config:
+    import:
+      - optional:nacos:application.yml
+      - optional:nacos:simple-base-param-service.yml?group=DEFAULT_GROUP&refreshEnabled=false

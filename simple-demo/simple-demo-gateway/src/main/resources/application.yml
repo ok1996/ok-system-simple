@@ -28,7 +28,7 @@ spring:
                 parts: 0
   config:
     import:
-      - nacos:application.yml
+      - optional:nacos:application.yml
 knife4j:
   gateway:
     enabled: true

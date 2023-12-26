@@ -7,12 +7,16 @@ spring:
       username:
       password:
       discovery:
+        enabled: true
         registerEnabled: true
         namespace:
       config:
+        enabled: true
         namespace:
         file-extension: yml
+        import-check:
+          enabled: false
   config:
     import:
-      - nacos:application.yml
-      - nacos:simple-demo-cloud.yml?group=DEFAULT_GROUP&refreshEnabled=false
+      - optional:nacos:application.yml
+      - optional:nacos:simple-demo-cloud.yml?group=DEFAULT_GROUP&refreshEnabled=false

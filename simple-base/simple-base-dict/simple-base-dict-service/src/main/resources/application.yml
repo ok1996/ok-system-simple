@@ -34,8 +34,9 @@ spring:
         enabled: false
         namespace:
         file-extension: yml
-#  可写出配置中心使用到的文件
-#  config:
-#    import:
-#      - nacos:application.yml
-#      - nacos:simple-base-dict-service.yml?group=DEFAULT_GROUP&refreshEnabled=false
+        import-check:
+          enabled: false
+  config:
+    import:
+      - optional:nacos:application.yml
+      - optional:nacos:simple-base-dict-service.yml?group=DEFAULT_GROUP&refreshEnabled=false

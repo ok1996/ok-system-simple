@@ -36,7 +36,6 @@ spring:
         file-extension: yml
         import-check:
           enabled: false
-#  可写出配置中心使用到的文件
-#  config:
-#    import:
-#      - nacos:application.yml
+  config:
+    import:
+      - optional:nacos:application.yml
