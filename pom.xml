@@ -32,13 +32,13 @@
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>4.4.0</knife4j.version>
         <io-grpc.version>1.60.1</io-grpc.version>
-        <redisson.version>3.24.3</redisson.version>
+        <redisson.version>3.25.2</redisson.version>
         <jakarta-mail.version>2.0.1</jakarta-mail.version>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <netty-socketio.version>2.0.6</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.599</aws-java-sdk-s3.version>
         <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
-        <apm-toolkit-logback-1.x.version>9.0.0</apm-toolkit-logback-1.x.version>
+        <apm-toolkit-logback-1.x.version>9.1.0</apm-toolkit-logback-1.x.version>
     </properties>
 
     <!-- 依赖声明 -->
