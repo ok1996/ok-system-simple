@@ -12,10 +12,10 @@
 
     <groupId>cn.iosd</groupId>
     <artifactId>simple-demo-package</artifactId>
-    <version>2024.1.0.0</version>
+    <version>2024.1.1.0-SNAPSHOT</version>
 
     <properties>
-        <ok-simple.version>2024.1.0.0</ok-simple.version>
+        <ok-simple.version>2024.1.1.0-SNAPSHOT</ok-simple.version>
     </properties>
 
     <dependencies>
@@ -78,7 +78,7 @@
                     <dependency>
                         <groupId>cn.iosd</groupId>
                         <artifactId>simple-starter-package</artifactId>
-                        <version>2024.1.0.0</version>
+                        <version>2024.1.1.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
             </plugin>
