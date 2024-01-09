@@ -84,6 +84,11 @@
 | simple-utils-jackson | Json工具 | 提供 Json 序列化和反序列化功能的工具类 |
 | simple-utils-common  | 通用工具   | 提供常用及通用的工具类            |
 
+## 基础配置模块
+| 模块名称                | 使用场景   | 说明                                                                 |
+|---------------------|--------|--------------------------------------------------------------------|
+| simple-dependencies | 项目依赖管理 | 可用于集中管理项目中所有模块的依赖版本。定义了各个模块所需的依赖版本，并通过dependencyManagement标签进行统一管理 |
+
 ## 鸣谢
 
 感谢 JetBrains [OpenSourceSupport](https://jb.gg/OpenSourceSupport) 所提供的支持
