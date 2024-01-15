@@ -40,32 +40,6 @@ public class TreeListUtils {
         );
     }
 
-
-    /**
-     * 将原始列表转换为树形结构
-     * <p>
-     * 原始列表数据要求：一级数据在二级数据前、以此类推。<br/>
-     * 若原始列表不符合要求：则视为二级在一级前的数据是没有父级关联
-     * </p>
-     *
-     * @param origList          原始列表,包含（id字段、parentId字段、children字段）
-     *                          其中，children字段 为空 用于建立树形结构和补充数据
-     * @param idFieldName       id字段名
-     * @param parentIdFieldName parentId字段名
-     * @param childrenFieldName children字段名
-     * @param isRootPredicate   判断是否为根节点的条件
-     * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
-     * @param <T>               实体类型
-     * @return 树形结构的结果列表
-     */
-    public static <T> List<T> convertBySequentialGrade(List<T> origList, String idFieldName, String parentIdFieldName
-            , String childrenFieldName, Predicate<String> isRootPredicate, Boolean rootCandidateData) {
-        return convertBySequentialGradeAndAddData(
-                origList, null, idFieldName, parentIdFieldName, childrenFieldName
-                , null, null, isRootPredicate, rootCandidateData
-        );
-    }
-
     /**
      * 将原始列表转换为树形结构，没有父级关联的数据视为一级节点
      * <p>
@@ -129,66 +103,6 @@ public class TreeListUtils {
 
 
     /**
-     * 将原始列表转换为树形结构,并将关联对象添加进去树形结构
-     * <p>
-     * 原始列表数据要求：一级数据在二级数据前、以此类推。<br/>
-     * 若原始列表不符合要求：则视为二级在一级前的数据是没有父级关联
-     * </p>
-     *
-     * @param origList          原始列表,包含（id字段、parentId字段、children字段、data字段、data主键字段）
-     *                          其中，children字段、data字段 为空 用于建立树形结构和补充数据
-     * @param idData            关联对象键值对集合，key为data主键字段名
-     * @param idFieldName       id字段名
-     * @param parentIdFieldName parentId字段名
-     * @param childrenFieldName children字段名
-     * @param dataFieldName     data字段名（表示要关联的数据字段名）
-     * @param dataIdFieldName   data主键字段名（表示要关联的数据字段的主键字段名）
-     * @param isRootPredicate   判断是否为根节点的条件
-     * @param rootCandidateData 是否将没有父级关联的数据添加为一级节点
-     * @param <T>               泛型类型，表示原始数据的类型
-     * @param <V>               泛型类型，表示关联数据的类型
-     * @return 树形结构的结果列表
-     */
-    public static <T, V> List<T> convertBySequentialGradeAndAddData(List<T> origList, Map<String, V> idData, String idFieldName
-            , String parentIdFieldName, String childrenFieldName, String dataFieldName
-            , String dataIdFieldName, Predicate<String> isRootPredicate, Boolean rootCandidateData) {
-        // 是否需要添加关联数据
-        boolean addDataBool = !(ObjectUtils.isEmpty(dataFieldName) || ObjectUtils.isEmpty(dataIdFieldName) || ObjectUtils.isEmpty(idData));
-
-        Map<String, T> idMaps = new HashMap<>(origList.size());
-        List<T> result = new ArrayList<>();
-
-        // 获取字段值的方法
-        Function<T, String> getId = entity -> Objects.toString(getFieldValue(entity, idFieldName), "");
-        Function<T, String> getDataId = entity -> Objects.toString(getFieldValue(entity, dataIdFieldName), "");
-        Function<T, String> getParentId = entity -> Objects.toString(getFieldValue(entity, parentIdFieldName), "");
-
-        for (T entity : origList) {
-            String id = getId.apply(entity);
-            if (addDataBool) {
-                String dataId = getDataId.apply(entity);
-                setFieldValue(entity, dataFieldName, idData.get(dataId));
-            }
-            String parentId = getParentId.apply(entity);
-            if (id.isEmpty()) {
-                throw new IllegalArgumentException("存在id为空的数据");
-            }
-            idMaps.put(id, entity);
-            if (isRootPredicate.test(parentId)) {
-                result.add(entity);
-            } else {
-                T parentEntity = idMaps.get(parentId);
-                if (parentEntity != null) {
-                    setChildrenValue(childrenFieldName, entity, parentEntity);
-                } else if (rootCandidateData) {
-                    result.add(entity);
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
      * 设置实体的子节点
      *
      * @param childrenFieldName 子节点字段名
@@ -201,7 +115,6 @@ public class TreeListUtils {
         List<T> children = Optional.ofNullable(getFieldValue(parentEntity, childrenFieldName))
                 .map(value -> (List<T>) value)
                 .orElse(new ArrayList<>());
-
         // 将当前实体添加到父实体的子节点列表中
         children.add(entity);
         setFieldValue(parentEntity, childrenFieldName, children);
@@ -243,5 +156,3 @@ public class TreeListUtils {
         }
     }
 }
-
-
