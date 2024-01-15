@@ -157,6 +157,7 @@
         <module>simple-base</module>
         <module>simple-utils</module>
         <module>simple-dependencies</module>
+        <module>simple-parent</module>
     </modules>
     <packaging>pom</packaging>
 

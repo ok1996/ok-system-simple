@@ -17,7 +17,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <ok-system-simple.version>2024.1.1.0-SNAPSHOT</ok-system-simple.version>
+        <ok-simple.version>2024.1.1.0-SNAPSHOT</ok-simple.version>
 
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -36,137 +36,136 @@
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-web</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-redisson</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-s3</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-socket</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-grpc</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-datasource</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-freemarker</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-cloud</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-encrypt</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-dict</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-email</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-gateway</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-starter-package</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-param-api</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-param-service</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-generator-api</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-generator-service</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-s3-api</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-s3-service</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-dict-api</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-base-dict-service</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
                 <artifactId>simple-utils-jackson</artifactId>
-                <version>${ok-system-simple.version}</version>
+                <version>${ok-simple.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 
     <profiles>
         <profile>
