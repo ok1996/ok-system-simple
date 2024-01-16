@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,8 +62,13 @@ public class TreeUtilTest {
      */
     private String performConversionTest(List<Demo> list) {
         long startTime = System.currentTimeMillis();
-        Predicate<String> isRootPredicate = parentId -> parentId.isEmpty() || "-1".equals(parentId);
-        List<Demo> convertData = TreeListUtils.convert(list, "id", "pid", "children", isRootPredicate);
+
+        String childrenFieldName = "children";
+        Predicate<Integer> isRootPredicate = parentId -> parentId == null || -1 == parentId;
+        Function<Demo, Integer> getId = Demo::getId;
+        Function<Demo, Integer> getParentId = Demo::getPid;
+        List<Demo> convertData = TreeListUtils.convert(list, childrenFieldName, isRootPredicate, getId, getParentId);
+
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         log.info("convert method execution time: {} milliseconds; Top-level tree structure length: {}",

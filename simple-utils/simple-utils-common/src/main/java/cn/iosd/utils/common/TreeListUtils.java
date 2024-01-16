@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -21,72 +20,65 @@ import java.util.function.Predicate;
 public class TreeListUtils {
 
     /**
-     * 将原始列表转换为树形结构，没有父级关联的数据视为一级节点
+     * 将原始列表转换为树形结构的工具方法
      *
-     * @param origList          原始列表,包含（id字段、parentId字段、children字段）
-     *                          其中，children字段 为空 用于建立树形结构和补充数据
-     * @param idFieldName       id字段名
-     * @param parentIdFieldName parentId字段名
-     * @param childrenFieldName children字段名
-     * @param isRootPredicate   判断是否为根节点的条件
-     * @param <T>               实体类型
-     * @return 树形结构的结果列表
+     * @param <T>               列表元素类型
+     * @param <D>               ID元素类型
+     * @param origList          原始列表
+     * @param childrenFieldName 子节点列表在实体中的字段名称
+     * @param isRootPredicate   判断是否为根节点的断言条件
+     * @param getId             获取实体的ID的函数
+     * @param getParentId       获取实体的父ID的函数
+     * @return 转换后的树形结构列表
      */
-    public static <T> List<T> convert(List<T> origList, String idFieldName, String parentIdFieldName
-            , String childrenFieldName, Predicate<String> isRootPredicate) {
-        return convertAndAddData(
-                origList, null, idFieldName, parentIdFieldName
-                , childrenFieldName, null, null, isRootPredicate
-        );
+    public static <T, D> List<T> convert(List<T> origList, String childrenFieldName, Predicate<D> isRootPredicate
+            , Function<T, D> getId, Function<T, D> getParentId) {
+        return convert(origList, childrenFieldName, isRootPredicate, getId, getParentId
+                , null, null, null);
     }
 
     /**
-     * 将原始列表转换为树形结构，没有父级关联的数据视为一级节点
+     * 将原始列表转换为树形结构的工具方法
      * <p>
      * 并将关联对象添加进去树形结构
      * <p/>
      *
-     * @param origList          原始列表,包含（id字段、parentId字段、children字段、data字段、data主键字段）
-     *                          其中，children字段、data字段 为空 用于建立树形结构和补充数据
-     * @param idData            包含关联数据对象的映射，key为data主键字段名
-     * @param idFieldName       id字段名
-     * @param parentIdFieldName parentId字段名
-     * @param childrenFieldName children字段名
-     * @param dataFieldName     data字段名（表示要关联的数据字段名）
-     * @param dataIdFieldName   data主键字段名（表示要关联的数据字段的主键字段名）
-     * @param isRootPredicate   判断是否为根节点的条件
-     * @param <T>               泛型类型，表示原始数据的类型
-     * @param <V>               泛型类型，表示关联数据的类型
-     * @return 树形结构的结果列表
+     * @param <T>               列表元素类型
+     * @param <V>               关联数据元素类型
+     * @param <D>               ID元素类型
+     * @param origList          原始列表
+     * @param childrenFieldName 子节点列表在实体中的字段名称
+     * @param isRootPredicate   判断是否为根节点的断言条件
+     * @param getId             获取实体的ID的函数
+     * @param getParentId       获取实体的父ID的函数
+     * @param idData            ID与关联数据的映射
+     * @param dataFieldName     关联数据字段在实体中的名称
+     * @param getDataRelationId 获取关联数据与实体关系的ID的函数
+     * @return 转换后的树形结构列表
      */
-    public static <T, V> List<T> convertAndAddData(List<T> origList, Map<String, V> idData, String idFieldName
-            , String parentIdFieldName, String childrenFieldName, String dataFieldName
-            , String dataIdFieldName, Predicate<String> isRootPredicate) {
+    public static <T, V, D> List<T> convert(List<T> origList, String childrenFieldName, Predicate<D> isRootPredicate
+            , Function<T, D> getId, Function<T, D> getParentId
+            , Map<D, V> idData, String dataFieldName, Function<T, D> getDataRelationId) {
         // 是否需要添加关联数据
-        boolean addDataBool = !(ObjectUtils.isEmpty(dataFieldName) || ObjectUtils.isEmpty(dataIdFieldName) || ObjectUtils.isEmpty(idData));
+        boolean addDataBool = !(ObjectUtils.isEmpty(dataFieldName) || ObjectUtils.isEmpty(idData));
 
-        Map<String, T> idMaps = new HashMap<>(origList.size());
-        // 获取字段值的方法
-        Function<T, String> getId = entity -> Objects.toString(getFieldValue(entity, idFieldName), "");
-        Function<T, String> getDataId = entity -> Objects.toString(getFieldValue(entity, dataIdFieldName), "");
-
+        Map<D, T> idMaps = new HashMap<>(origList.size());
         // 预先遍历一次原始列表，将id赋值给idMaps
         for (T entity : origList) {
-            String id = getId.apply(entity);
-            if (id.isEmpty()) {
+            D id = getId.apply(entity);
+            if (ObjectUtils.isEmpty(id)) {
                 throw new IllegalArgumentException("存在id为空的数据");
             }
             idMaps.put(id, entity);
         }
 
         List<T> result = new ArrayList<>();
-        Function<T, String> getParentId = entity -> Objects.toString(getFieldValue(entity, parentIdFieldName), "");
         for (T entity : origList) {
             if (addDataBool) {
-                String dataId = getDataId.apply(entity);
+                D dataId = getDataRelationId.apply(entity);
                 setFieldValue(entity, dataFieldName, idData.get(dataId));
             }
-            String parentId = getParentId.apply(entity);
+            D parentId = getParentId.apply(entity);
             if (isRootPredicate.test(parentId)) {
                 result.add(entity);
             } else {
