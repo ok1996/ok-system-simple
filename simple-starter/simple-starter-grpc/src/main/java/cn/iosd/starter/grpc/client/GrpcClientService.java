@@ -70,8 +70,7 @@ public class GrpcClientService implements InitializingBean {
         long timeout = getTimeout(annotation);
         ClientCallStartHeaders headers = getHeaders(annotation);
 
-        GrpcChannelProperties properties = grpcClientProperties.getChannel().get(annotationValue);
-        ManagedChannel client = GrpcChannel.getChannel(properties.getAddress(), timeout, headers);
+        ManagedChannel client = GrpcChannel.getChannel(channelPropertiesOpt.get().getAddress(), timeout, headers);
         Object object = GrpcChannel.getBlockingStub(client, type);
 
         boolean accessible = field.canAccess(bean);
