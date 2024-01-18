@@ -59,7 +59,7 @@ public class GrpcClientService implements InitializingBean {
         Optional<GrpcChannelProperties> channelPropertiesOpt = Optional.ofNullable(grpcClientProperties.getChannel())
                 .map(channel -> channel.get(annotationValue));
 
-        if (channelPropertiesOpt.isEmpty()) {
+        if (channelPropertiesOpt.isEmpty() || StringUtils.isEmpty(channelPropertiesOpt.get().getAddress())) {
             log.error("GrpcChannel：{} 未装配，配置文件缺失项请核查：simple.grpc.client.channel.{}.address", annotationValue, annotationValue);
             return;
         }
