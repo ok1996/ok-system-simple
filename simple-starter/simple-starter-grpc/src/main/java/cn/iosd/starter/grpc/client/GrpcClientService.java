@@ -7,6 +7,7 @@ import cn.iosd.starter.grpc.client.properties.GrpcClientProperties;
 import cn.iosd.starter.grpc.client.vo.GrpcChannel;
 import cn.iosd.starter.grpc.client.vo.GrpcClientBean;
 import io.grpc.ManagedChannel;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
