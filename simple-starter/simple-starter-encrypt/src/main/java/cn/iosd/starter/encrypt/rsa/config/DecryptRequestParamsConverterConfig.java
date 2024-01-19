@@ -1,6 +1,6 @@
 package cn.iosd.starter.encrypt.rsa.config;
 
-import cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParamsResolve;
+import cn.iosd.starter.encrypt.rsa.hander.DecryptRequestParamsResolve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;

@@ -1,10 +1,13 @@
-package cn.iosd.starter.encrypt.rsa.annotation;
+package cn.iosd.starter.encrypt.rsa.hander;
 
+import cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParams;
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
+import cn.iosd.starter.encrypt.rsa.utils.CheckAnnotationUtils;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
@@ -38,9 +41,15 @@ public class DecryptRequestParamsAdvice implements RequestBodyAdvice {
     @Autowired
     private RsaProperties rsaProperties;
 
+    /**
+     * 是否启用将所有使用Mapping注解的接口加解密
+     */
+    @Value("${simple.encrypt.rsa.secureParams.all-controller.mapping.enabled:false}")
+    private boolean allControllerMappingEnabled;
+
     @Override
     public boolean supports(MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return parameter.getMethodAnnotation(DecryptRequestParams.class) != null;
+        return CheckAnnotationUtils.check(allControllerMappingEnabled, parameter, DecryptRequestParams.class);
     }
 
     @Override

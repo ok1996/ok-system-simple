@@ -1,5 +1,7 @@
-package cn.iosd.starter.encrypt.desensitized.annotation;
+package cn.iosd.starter.encrypt.desensitized.hander;
 
+import cn.iosd.starter.encrypt.desensitized.annotation.SensitiveEntity;
+import cn.iosd.starter.encrypt.desensitized.annotation.SensitiveField;
 import cn.iosd.starter.encrypt.desensitized.utils.DesensitizedUtils;
 import cn.iosd.starter.encrypt.desensitized.vo.SensitiveRule;
 import org.aspectj.lang.ProceedingJoinPoint;

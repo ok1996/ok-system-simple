@@ -1,6 +1,8 @@
-package cn.iosd.starter.encrypt.rsa.annotation;
+package cn.iosd.starter.encrypt.rsa.hander;
 
+import cn.iosd.starter.encrypt.rsa.annotation.EncryptResponseParams;
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
+import cn.iosd.starter.encrypt.rsa.utils.CheckAnnotationUtils;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
 import cn.iosd.utils.jackson.JsonMapperThreadLocal;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -8,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -33,15 +36,15 @@ public class EncryptResponseParamsAdvice implements ResponseBodyAdvice<Object> {
     private RsaProperties rsaProperties;
 
     /**
-     * 方法上包含注解EncryptResponseParams则进行拦截
-     *
-     * @param returnType    返回类型
-     * @param converterType 转换器类型
-     * @return true or false
+     * 是否启用将所有使用Mapping注解的接口加解密
      */
+    @Value("${simple.encrypt.rsa.secureParams.all-controller.mapping.enabled:false}")
+    private boolean allControllerMappingEnabled;
+
+
     @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return returnType.hasMethodAnnotation(EncryptResponseParams.class);
+    public boolean supports(MethodParameter parameter, Class<? extends HttpMessageConverter<?>> converterType) {
+        return CheckAnnotationUtils.check(allControllerMappingEnabled, parameter, EncryptResponseParams.class);
     }
 
     /**

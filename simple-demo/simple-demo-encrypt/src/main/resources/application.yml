@@ -12,8 +12,12 @@ simple:
       secureParams:
         enabled: true
         urlField: encryptedData
+        #是否启用将所有使用Mapping注解的接口加解密 缺省项为false
+        all-controller:
+          mapping:
+            enabled: false
       timestampValidation:
-        enabled: true
+        enabled: false
         expiryMillis: 60000
       publicKey: |
         MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6ewfgrp97KoD7beFHnzl

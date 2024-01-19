@@ -4,6 +4,7 @@ import cn.iosd.demo.encrypt.vo.PersonVo;
 import cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParams;
 import cn.iosd.starter.encrypt.rsa.annotation.EncryptResponseParams;
 import cn.iosd.starter.encrypt.rsa.annotation.SecureParams;
+import cn.iosd.starter.encrypt.rsa.annotation.UnEncrypted;
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
 import cn.iosd.starter.web.domain.Response;
@@ -56,14 +57,21 @@ public class RsaController {
 
     @Operation(summary = "工具类-加密测试")
     @GetMapping(value = "/encrypt")
+    @UnEncrypted
     public String encrypt(String reqString) throws Exception {
         return RsaUtils.encrypt(reqString, rsaProperties.getPublicKey());
     }
 
     @Operation(summary = "工具类-解密测试")
     @GetMapping(value = "/decrypt")
+    @UnEncrypted
     public String decrypt(String data) throws Exception {
         return RsaUtils.decrypt(data, rsaProperties.getPrivateKey());
     }
 
+    @Operation(summary = "注解测试-测试全局是否开启-请求参数解密及返回参数加密")
+    @PostMapping(value = "/decryptAndEncryptAll")
+    public Response<PersonVo> decryptAndEncryptAll(@RequestBody PersonVo vo) {
+        return Response.ok(vo);
+    }
 }

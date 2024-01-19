@@ -1,6 +1,8 @@
-package cn.iosd.starter.encrypt.rsa.annotation;
+package cn.iosd.starter.encrypt.rsa.hander;
 
+import cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParams;
 import cn.iosd.starter.encrypt.rsa.properties.RsaProperties;
+import cn.iosd.starter.encrypt.rsa.utils.CheckAnnotationUtils;
 import cn.iosd.starter.encrypt.rsa.utils.RsaUtils;
 import cn.iosd.utils.jackson.JsonMapperThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,15 @@ public class DecryptRequestParamsResolve implements HandlerMethodArgumentResolve
     @Value("${simple.encrypt.rsa.secureParams.urlField:encryptedData}")
     private String urlField;
 
+    /**
+     * 是否启用将所有使用Mapping注解的接口加解密
+     */
+    @Value("${simple.encrypt.rsa.secureParams.all-controller.mapping.enabled:false}")
+    private boolean allControllerMappingEnabled;
+
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getMethodAnnotation(DecryptRequestParams.class) != null;
+        return CheckAnnotationUtils.check(allControllerMappingEnabled, parameter, DecryptRequestParams.class);
     }
 
     @Override

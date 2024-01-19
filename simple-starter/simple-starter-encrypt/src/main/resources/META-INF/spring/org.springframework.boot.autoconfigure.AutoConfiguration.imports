@@ -1,6 +1,6 @@
-cn.iosd.starter.encrypt.desensitized.annotation.DesensitizedHandler
-cn.iosd.starter.encrypt.rsa.annotation.EncryptResponseParamsAdvice
-cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParamsAdvice
+cn.iosd.starter.encrypt.desensitized.hander.DesensitizedHandler
+cn.iosd.starter.encrypt.rsa.hander.EncryptResponseParamsAdvice
+cn.iosd.starter.encrypt.rsa.hander.DecryptRequestParamsAdvice
 cn.iosd.starter.encrypt.rsa.properties.RsaProperties
-cn.iosd.starter.encrypt.rsa.annotation.DecryptRequestParamsResolve
+cn.iosd.starter.encrypt.rsa.hander.DecryptRequestParamsResolve
 cn.iosd.starter.encrypt.rsa.config.DecryptRequestParamsConverterConfig
