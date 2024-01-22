@@ -37,7 +37,7 @@
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <netty-socketio.version>2.0.6</netty-socketio.version>
         <aws-java-sdk-s3.version>1.12.599</aws-java-sdk-s3.version>
-        <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
+        <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
         <apm-toolkit-logback-1.x.version>9.1.0</apm-toolkit-logback-1.x.version>
     </properties>
 
