@@ -6,6 +6,7 @@ import cn.iosd.starter.redisson.config.tactic.impl.ClusterConfigImpl;
 import cn.iosd.starter.redisson.config.tactic.impl.MasterSlaveConfigImpl;
 import cn.iosd.starter.redisson.config.tactic.impl.SentinelConfigImpl;
 import cn.iosd.starter.redisson.config.tactic.impl.StandaloneConfigImpl;
+import cn.iosd.starter.redisson.exception.RedissonException;
 import org.redisson.config.Config;
 
 /**
@@ -30,7 +31,7 @@ public class RedissonConfigFactory {
             case "sentinel" -> new SentinelConfigImpl();
             case "cluster" -> new ClusterConfigImpl();
             case "masterSlave" -> new MasterSlaveConfigImpl();
-            default -> throw new IllegalArgumentException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
+            default -> throw new RedissonException("创建Redisson连接Config失败！当前连接方式:" + connectionType);
         };
         return redissonConfigService.createRedissonConfig(redissonProperties);
     }
