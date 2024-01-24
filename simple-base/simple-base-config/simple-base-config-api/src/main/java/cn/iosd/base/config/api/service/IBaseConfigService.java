@@ -26,7 +26,7 @@ public interface IBaseConfigService {
      * @param key 参数主键
      * @return 参数配置值
      */
-    List<CodeValue<?>> selectListByKey(String key);
+    List<CodeValue<?>> selectValueListByKey(String key);
 
     /**
      * 新增
@@ -50,5 +50,5 @@ public interface IBaseConfigService {
      * @param key 参数主键
      * @return 参数配置历史
      */
-    List<CodeValueListHistory> selectListHistoryByKey(String key);
+    List<CodeValueListHistory> selectValueListHistoryByKey(String key);
 }

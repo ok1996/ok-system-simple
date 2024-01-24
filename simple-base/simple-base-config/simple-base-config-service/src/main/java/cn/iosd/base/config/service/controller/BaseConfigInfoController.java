@@ -51,13 +51,13 @@ public class BaseConfigInfoController extends BaseController<BaseConfigInfoEntit
 
     @Operation(summary = "查询参数配置")
     @GetMapping("/CodeValues/key/{key}")
-    public Response<List<CodeValue<?>>> selectListByKey(@PathVariable String key) {
-        return Response.ok(service.selectListByKey(key));
+    public Response<List<CodeValue<?>>> selectValueListByKey(@PathVariable String key) {
+        return Response.ok(service.selectValueListByKey(key));
     }
 
     @Operation(summary = "查询参数配置历史")
     @GetMapping("/CodeValuesHistory/key/{key}")
-    public Response<List<CodeValueListHistory>> selectListHistoryByKey(@PathVariable String key) {
-        return Response.ok(service.selectListHistoryByKey(key));
+    public Response<List<CodeValueListHistory>> selectValueListHistoryByKey(@PathVariable String key) {
+        return Response.ok(service.selectValueListHistoryByKey(key));
     }
 }

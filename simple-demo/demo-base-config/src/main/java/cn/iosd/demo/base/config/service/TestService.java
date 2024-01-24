@@ -30,7 +30,7 @@ public class TestService {
             return null;
         }
         // 从基础参数服务中获取基础参数码值对象的列表
-        List<CodeValue<?>> simulation = configService.selectListByKey(DemoTestConfigInit.STUDENT_KEY_ONE);
+        List<CodeValue<?>> simulation = configService.selectValueListByKey(DemoTestConfigInit.STUDENT_KEY_ONE);
         // 判断是否开启模拟数据
         if (!ConfigUtils.findFirstByCode(simulation, ConfigUtils.OPEN_SIMULATION_CODE, false)) {
             log.info("获取其他来源途径的数据");

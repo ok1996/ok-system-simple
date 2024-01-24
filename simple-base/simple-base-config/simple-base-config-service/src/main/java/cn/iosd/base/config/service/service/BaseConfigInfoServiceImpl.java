@@ -41,12 +41,12 @@ public class BaseConfigInfoServiceImpl extends ServiceImpl<BaseConfigInfoMapper,
     }
 
     @Override
-    public List<CodeValue<?>> selectListByKey(String paramKey) {
-        BaseConfigInfo baseConfigInfo = selectByKey(paramKey);
+    public List<CodeValue<?>> selectValueListByKey(String key) {
+        BaseConfigInfo baseConfigInfo = selectByKey(key);
         try {
             return ConfigUtils.readValueList(baseConfigInfo.getCodeValues());
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
+            throw new RuntimeException("key:" + key + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
         }
     }
 
@@ -68,12 +68,12 @@ public class BaseConfigInfoServiceImpl extends ServiceImpl<BaseConfigInfoMapper,
     }
 
     @Override
-    public List<CodeValueListHistory> selectListHistoryByKey(String paramKey) {
-        BaseConfigInfo baseConfigInfo = selectByKey(paramKey);
+    public List<CodeValueListHistory> selectValueListHistoryByKey(String key) {
+        BaseConfigInfo baseConfigInfo = selectByKey(key);
         try {
             return ConfigUtils.readValueListHistory(baseConfigInfo.getHistoryCodeValues());
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
+            throw new RuntimeException("key:" + key + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
         }
     }
 

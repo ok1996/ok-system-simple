@@ -56,7 +56,7 @@ public interface BaseConfigInfoFeign extends CrudOperations<BaseConfigInfo> {
      * @return 参数配置
      */
     @GetMapping("/CodeValues/key/{key}")
-    Response<List<CodeValue<?>>> selectListByKey(@PathVariable String key);
+    Response<List<CodeValue<?>>> selectValueListByKey(@PathVariable String key);
 
     /**
      * 查询参数配置历史
@@ -65,5 +65,5 @@ public interface BaseConfigInfoFeign extends CrudOperations<BaseConfigInfo> {
      * @return 参数配置历史
      */
     @GetMapping("/CodeValuesHistory/key/{paramKey}")
-    Response<List<CodeValueListHistory>> selectListHistoryByKey(@PathVariable String key);
+    Response<List<CodeValueListHistory>> selectValueListHistoryByKey(@PathVariable String key);
 }

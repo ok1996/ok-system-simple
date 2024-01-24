@@ -25,8 +25,8 @@ public class BaseConfigInfoServiceFeignImpl implements IBaseConfigService {
     }
 
     @Override
-    public List<CodeValue<?>> selectListByKey(String key) {
-        return baseConfigInfoFeign.selectListByKey(key).dataOrThrowExceptionIfNotSuccess();
+    public List<CodeValue<?>> selectValueListByKey(String key) {
+        return baseConfigInfoFeign.selectValueListByKey(key).dataOrThrowExceptionIfNotSuccess();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class BaseConfigInfoServiceFeignImpl implements IBaseConfigService {
     }
 
     @Override
-    public List<CodeValueListHistory> selectListHistoryByKey(String key) {
-        return baseConfigInfoFeign.selectListHistoryByKey(key).dataOrThrowExceptionIfNotSuccess();
+    public List<CodeValueListHistory> selectValueListHistoryByKey(String key) {
+        return baseConfigInfoFeign.selectValueListHistoryByKey(key).dataOrThrowExceptionIfNotSuccess();
     }
 }
