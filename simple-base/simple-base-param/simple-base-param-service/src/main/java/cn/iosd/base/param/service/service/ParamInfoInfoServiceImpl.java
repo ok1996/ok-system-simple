@@ -44,7 +44,7 @@ public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, Param
     public List<CodeValue<?>> selectCodeValueVoParamByKey(String paramKey) {
         ParamInfo paramInfo = selectBaseParamByKey(paramKey);
         try {
-            return JsonMapper.readValue(paramInfo.getCodeValues(), ParamInitUtil.CODE_VALUES_TYPE_REFERENCE);
+            return ParamInitUtil.readValueList(paramInfo.getCodeValues());
         } catch (JsonProcessingException e) {
             throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
         }
@@ -71,8 +71,7 @@ public class ParamInfoInfoServiceImpl extends ServiceImpl<ParamInfoMapper, Param
     public List<CodeValueListHistory> selectCodeValueHistoryParamByKey(String paramKey) {
         ParamInfo paramInfo = selectBaseParamByKey(paramKey);
         try {
-            return JsonMapper.readValue(paramInfo.getHistoryCodeValues(), new TypeReference<List<CodeValueListHistory>>() {
-            });
+            return ParamInitUtil.readValueListHistory(paramInfo.getHistoryCodeValues());
         } catch (JsonProcessingException e) {
             throw new RuntimeException("paramKey:" + paramKey + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
         }

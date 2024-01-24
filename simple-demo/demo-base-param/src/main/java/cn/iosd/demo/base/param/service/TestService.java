@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author ok1996
@@ -33,17 +32,12 @@ public class TestService {
         // 从基础参数服务中获取基础参数码值对象的列表
         List<CodeValue<?>> simulation = paramInfoService.selectCodeValueVoParamByKey(DemoTestParamInit.STUDENT_KEY_ONE);
         // 判断是否开启模拟数据
-        if (!ParamInitUtil.getBooleanValueByCodeDefaultFalse(simulation, ParamInitUtil.OPEN_SIMULATION_CODE)) {
+        if (!ParamInitUtil.findFirstByCode(simulation, ParamInitUtil.OPEN_SIMULATION_CODE, false)) {
             log.info("获取其他来源途径的数据");
             return null;
         }
         // 获取存储的模拟数据，并将其转换为对应的实体类
-        Optional<CodeValue<?>> contentData = ParamInitUtil.getCodeValueByCode(simulation, ParamInitUtil.CONTENT_DATA_CODE);
-        if (contentData.isPresent()) {
-            return ParamInitUtil.readValue(contentData.get(), ClassmateVo.class);
-        }
-        log.error("模拟数据不存在,key:{}", DemoTestParamInit.STUDENT_KEY_ONE);
-        return null;
+        return ParamInitUtil.findFirstByCode(simulation, ParamInitUtil.CONTENT_DATA_CODE, ClassmateVo.class,null);
     }
 
 }
