@@ -1735,10 +1735,10 @@
 			]
 		},
 		{
-			"name": "simple-base-param-service",
+			"name": "simple-base-config-service",
 			"item": [
 				{
-					"name": "[demo-base-param]新增",
+					"name": "[demo-base-config]新增",
 					"event": [
 						{
 							"listen": "test",
@@ -1766,20 +1766,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo"
+								"simple-base-config-service",
+								"configInfo"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "[demo-base-param]修改",
+					"name": "[demo-base-config]修改",
 					"event": [
 						{
 							"listen": "test",
@@ -1817,20 +1817,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo"
+								"simple-base-config-service",
+								"configInfo"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "[demo-base-param]Api-查询-列表",
+					"name": "[demo-base-config]Api-查询-列表",
 					"event": [
 						{
 							"listen": "test",
@@ -1849,13 +1849,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/list",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo/api/list",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo",
+								"simple-base-config-service",
+								"configInfo",
 								"api",
 								"list"
 							]
@@ -1864,7 +1864,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-param]Api-查询-分页",
+					"name": "[demo-base-config]Api-查询-分页",
 					"event": [
 						{
 							"listen": "test",
@@ -1902,13 +1902,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/page",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo/api/page",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo",
+								"simple-base-config-service",
+								"configInfo",
 								"api",
 								"page"
 							]
@@ -1917,7 +1917,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-param]Api-查询-单个",
+					"name": "[demo-base-config]Api-查询-单个",
 					"event": [
 						{
 							"listen": "test",
@@ -1946,13 +1946,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo/api/{{baseParamTestId}}",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo",
+								"simple-base-config-service",
+								"configInfo",
 								"api",
 								"{{baseParamTestId}}"
 							]
@@ -1961,7 +1961,7 @@
 					"response": []
 				},
 				{
-					"name": "[demo-base-param]Api-删除",
+					"name": "[demo-base-config]Api-删除",
 					"event": [
 						{
 							"listen": "test",
@@ -1993,13 +1993,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParamService}}/simple-base-param-service/paramInfo/api/{{baseParamTestId}}",
+							"raw": "{{Host}}{{BaseConfigService}}/simple-base-config-service/configInfo/api/{{baseParamTestId}}",
 							"host": [
-								"{{Host}}{{BaseParamService}}"
+								"{{Host}}{{BaseConfigService}}"
 							],
 							"path": [
-								"simple-base-param-service",
-								"paramInfo",
+								"simple-base-config-service",
+								"configInfo",
 								"api",
 								"{{baseParamTestId}}"
 							]
@@ -2010,10 +2010,10 @@
 			]
 		},
 		{
-			"name": "demo-base-param",
+			"name": "demo-base-config",
 			"item": [
 				{
-					"name": "[demo-base-param]获取同班同学列表",
+					"name": "[demo-base-config]获取同班同学列表",
 					"event": [
 						{
 							"listen": "test",
@@ -2042,12 +2042,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{BaseParam}}/demo-base-param/test/classmateList",
+							"raw": "{{Host}}{{BaseConfig}}/demo-base-config/test/classmateList",
 							"host": [
-								"{{Host}}{{BaseParam}}"
+								"{{Host}}{{BaseConfig}}"
 							],
 							"path": [
-								"demo-base-param",
+								"demo-base-config",
 								"test",
 								"classmateList"
 							]

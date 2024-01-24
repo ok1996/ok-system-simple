@@ -16,7 +16,7 @@
         Simple Base
     </description>
     <modules>
-        <module>simple-base-param</module>
+        <module>simple-base-config</module>
         <module>simple-base-generator</module>
         <module>simple-base-s3</module>
 		<module>simple-base-dict</module>

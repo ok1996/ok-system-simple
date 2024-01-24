@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Test 客户端</title>
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h4 {
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #websocketAddress {
+            width: 300px;
+        }
+
+        #responseText {
+            height: 390px;
+            resize: none;
+            overflow: auto;
+        }
+
+        #message {
+            height: 100px;
+            resize: none;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>WebSocket Test 客户端</h2>
+        
+        <div class="section">
+            <h4>WebSocket 地址：</h4>
+            <input type="text" id="websocketAddress" placeholder="输入 WebSocket 地址">
+            <button onclick="connectWebSocket()">连接 WebSocket</button>
+            <button onclick="disconnectWebSocket()">断开 WebSocket</button>
+        </div>
+
+        <div class="section">
+            <h4>客户端输入：</h4>
+            <textarea id="message" name="message"></textarea>
+        </div>
+
+        <div class="section">
+            <button onclick="sendClientInput()">发送客户端输入内容</button>
+            <button onclick="clearData()">清空数据</button>
+        </div>
+
+        <div class="section">
+            <h4>服务器返回消息：</h4>
+            <textarea id="responseText" name="message"></textarea>
+        </div>
+    </div>
+	
+    <script type="text/javascript">
+        var webSocket;
+
+        function connectWebSocket() {
+            var websocketAddress = document.getElementById("websocketAddress").value;
+            
+            if (window.WebSocket) {
+                webSocket = new WebSocket(websocketAddress);
+
+                webSocket.onmessage = function (ev) {
+                    var contents = document.getElementById("responseText");
+                    contents.value += "\n" + ev.data;
+                }
+
+                webSocket.onopen = function (ev) {
+                    var contents = document.getElementById("responseText");
+                    contents.value = "与服务器端的 WebSocket 连接建立";
+
+                    var data = '{"method":"init","identifier":"11VKF7M0020199"}';
+
+                    webSocket.send(data);
+                }
+
+                webSocket.onclose = function (ev) {
+                    var contents = document.getElementById("responseText");
+                    contents.value += "\n" + "与服务器端的 WebSocket 连接断开";
+                }
+            } else {
+                alert("该环境不支持 WebSocket");
+            }
+        }
+
+        function disconnectWebSocket() {
+            if (webSocket) {
+                webSocket.close();
+                var contents = document.getElementById("responseText");
+                contents.value += "\n" + "WebSocket 连接已断开";
+            }
+        }
+
+        function sendClientInput() {
+            if (window.webSocket) {
+                if (webSocket.readyState == WebSocket.OPEN) {
+                    webSocket.send(document.getElementById("message").value);
+                } else {
+                    alert("与服务器连接尚未建立");
+                }
+            }
+        }
+
+        function clearData() {
+            document.getElementById('responseText').value = '';
+        }
+    </script>
+</body>
+</html>

@@ -113,13 +113,13 @@
 
             <dependency>
                 <groupId>cn.iosd</groupId>
-                <artifactId>simple-base-param-api</artifactId>
+                <artifactId>simple-base-config-api</artifactId>
                 <version>${ok-simple.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.iosd</groupId>
-                <artifactId>simple-base-param-service</artifactId>
+                <artifactId>simple-base-config-service</artifactId>
                 <version>${ok-simple.version}</version>
             </dependency>
 
