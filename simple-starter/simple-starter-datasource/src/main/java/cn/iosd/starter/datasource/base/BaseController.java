@@ -33,18 +33,21 @@ public class BaseController<T> implements CrudOperations<T> {
 
     @Override
     @Operation(summary = "Api-新增")
-    public Response<Boolean> apiSave(@RequestBody T entity) {
+    public Response<T> apiSave(@RequestBody T entity) {
         setValue(entity, "setCreateTime", LocalDateTime.now(), LocalDateTime.class);
-        return Response.ok(service.save(entity));
+        service.save(entity);
+        return Response.ok(entity);
     }
 
     @Override
     @Operation(summary = "Api-更新-Id")
-    public Response<Boolean> apiUpdateById(@PathVariable Long id, @RequestBody T entity) {
+    public Response<T> apiUpdateById(@PathVariable Long id, @RequestBody T entity) {
         setValue(entity, "setId", id, Long.class);
         setValue(entity, "setModifyTime", LocalDateTime.now(), LocalDateTime.class);
-        return Response.ok(service.updateById(entity));
+        service.updateById(entity);
+        return Response.ok(entity);
     }
+
 
     @Override
     @Operation(summary = "Api-删除")

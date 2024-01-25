@@ -21,7 +21,7 @@ public interface CrudOperations<T> {
      * @return 返回结果
      */
     @PostMapping("/api")
-    Response<Boolean> apiSave(@RequestBody T entity);
+    Response<T> apiSave(@RequestBody T entity);
 
     /**
      * Api-更新-Id
@@ -31,7 +31,7 @@ public interface CrudOperations<T> {
      * @return 返回结果
      */
     @PutMapping("/api/{id}")
-    Response<Boolean> apiUpdateById(@PathVariable Long id, @RequestBody T entity);
+    Response<T> apiUpdateById(@PathVariable Long id, @RequestBody T entity);
 
     /**
      * Api-删除
