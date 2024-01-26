@@ -24,11 +24,11 @@ public class DictInfoServiceFeignImpl implements IDictInfoService{
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
-        return dictinfoFeign.getDictItemList(dictionaryParams).dataOrThrowExceptionIfNotSuccess();
+        return dictinfoFeign.getDictItemList(dictionaryParams).checkThrow().getData();
     }
 
     @Override
     public List<DictGroupVo> getUniqueDictGroups() {
-        return dictinfoFeign.uniqueDictGroups().dataOrThrowExceptionIfNotSuccess();
+        return dictinfoFeign.uniqueDictGroups().checkThrow().getData();
     }
 }

@@ -103,26 +103,16 @@ public class Response<T> {
     }
 
     /**
-     * 如果code不等于200时，抛出一个 ResponseException 异常
+     * 检查响应状态码，不为成功时抛出异常
      *
-     * @throws ResponseException 响应异常
+     * @return 当前 Response 对象，以便支持链式调用
+     * @throws ResponseException 如果响应状态码不为成功状态
      */
-    public void throwExceptionIfNotSuccess() {
+    public Response<T> checkThrow() {
         if (SUCCESS != code) {
             throw new ResponseException("Response Exception - Code:[" + code + "], Message:[" + msg + "]");
         }
+        return this;
     }
 
-    /**
-     * 如果code等于200，则返回数据；如果code不等于200，抛出异常。
-     * <br/>
-     * 该方法首先检查 状态码code是否等于200 ，然后返回数据。
-     *
-     * @return 如果通信成功，则返回数据
-     * @throws ResponseException 响应异常
-     */
-    public T dataOrThrowExceptionIfNotSuccess() {
-        throwExceptionIfNotSuccess();
-        return data;
-    }
 }

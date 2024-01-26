@@ -24,41 +24,41 @@ public class SimpleStorageServiceFeignImpl implements SimpleStorageService {
 
     @Override
     public String uploadMultipartFile(MultipartFile file, String bucket, String fileExtension) throws IOException {
-        return simpleStorageFeign.uploadMultipartFile(file,bucket,fileExtension).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.uploadMultipartFile(file,bucket,fileExtension).checkThrow().getData();
     }
 
     @Override
     public String generatePresignedUrl(String bucket, String key) {
-        return simpleStorageFeign.generatePresignedUrl(bucket, key).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.generatePresignedUrl(bucket, key).checkThrow().getData();
     }
 
     @Override
     public List<Bucket> getListBuckets(String bucketName) {
-        return simpleStorageFeign.getListBuckets(bucketName).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.getListBuckets(bucketName).checkThrow().getData();
     }
 
     @Override
     public Bucket creatBucket(String bucketName) {
-        return simpleStorageFeign.creatBucket(bucketName).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.creatBucket(bucketName).checkThrow().getData();
     }
 
     @Override
     public void deleteBucket(String bucketName) {
-        simpleStorageFeign.deleteBucket(bucketName).throwExceptionIfNotSuccess();
+        simpleStorageFeign.deleteBucket(bucketName).checkThrow();
     }
 
     @Override
     public StorageObjectResponse getStorageObject(StorageObjectRequest storageObjectRequest) {
-        return simpleStorageFeign.getStorageObject(storageObjectRequest).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.getStorageObject(storageObjectRequest).checkThrow().getData();
     }
 
     @Override
     public StorageObjectResponse getStorageObjectNext(ObjectListing objectListing) {
-        return simpleStorageFeign.getStorageObjectNext(objectListing).dataOrThrowExceptionIfNotSuccess();
+        return simpleStorageFeign.getStorageObjectNext(objectListing).checkThrow().getData();
     }
 
     @Override
     public void deleteStorageObject(String bucketName, String key) {
-        simpleStorageFeign.deleteStorageObject(bucketName, key).throwExceptionIfNotSuccess();
+        simpleStorageFeign.deleteStorageObject(bucketName, key).checkThrow();
     }
 }

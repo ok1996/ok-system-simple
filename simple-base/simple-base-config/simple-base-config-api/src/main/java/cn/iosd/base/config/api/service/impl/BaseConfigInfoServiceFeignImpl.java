@@ -21,26 +21,26 @@ public class BaseConfigInfoServiceFeignImpl implements IBaseConfigService {
 
     @Override
     public BaseConfigInfo selectByKey(String key) {
-        return baseConfigInfoFeign.selectByKey(key).dataOrThrowExceptionIfNotSuccess();
+        return baseConfigInfoFeign.selectByKey(key).checkThrow().getData();
     }
 
     @Override
     public List<CodeValue<?>> selectValueListByKey(String key) {
-        return baseConfigInfoFeign.selectValueListByKey(key).dataOrThrowExceptionIfNotSuccess();
+        return baseConfigInfoFeign.selectValueListByKey(key).checkThrow().getData();
     }
 
     @Override
     public int insert(BaseConfigVo baseConfigVo) {
-        return baseConfigInfoFeign.insert(baseConfigVo).dataOrThrowExceptionIfNotSuccess();
+        return baseConfigInfoFeign.insert(baseConfigVo).checkThrow().getData();
     }
 
     @Override
     public int update(BaseConfigVo baseConfigVo) {
-        return baseConfigInfoFeign.update(baseConfigVo).dataOrThrowExceptionIfNotSuccess();
+        return baseConfigInfoFeign.update(baseConfigVo).checkThrow().getData();
     }
 
     @Override
     public List<CodeValueListHistory> selectValueListHistoryByKey(String key) {
-        return baseConfigInfoFeign.selectValueListHistoryByKey(key).dataOrThrowExceptionIfNotSuccess();
+        return baseConfigInfoFeign.selectValueListHistoryByKey(key).checkThrow().getData();
     }
 }
