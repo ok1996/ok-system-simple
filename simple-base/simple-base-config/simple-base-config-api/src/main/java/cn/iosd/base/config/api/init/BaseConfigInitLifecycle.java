@@ -64,10 +64,10 @@ public class BaseConfigInitLifecycle implements SmartLifecycle {
         String key = init.getKey();
         BaseConfigInfo baseConfigInfo = service.selectByKey(key);
         if (baseConfigInfo == null) {
-            log.debug("base-param 初始化参数数据key：{}", key);
+            log.info("Initialize configuration data with key：{}", key);
             service.insert(convertToBaseParamVo(init));
         } else if (init.isRestartOverride()) {
-            log.debug("base-param 覆盖参数数据key：{}", key);
+            log.info("Override configuration data with key：{}", key);
             BaseConfigVo saveReqVo = convertToBaseParamVo(init);
             saveReqVo.setId(baseConfigInfo.getId());
             service.update(saveReqVo);
