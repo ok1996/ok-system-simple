@@ -95,7 +95,7 @@ public class DictAspect {
         ReflectionUtils.makeAccessible(field);
         Object fieldValue = field.get(responseObj);
         if (ObjectUtils.isEmpty(fieldValue)) {
-            log.debug("目标字段值为空跳过查询，字段：{}，对象：{}",field.getName(), responseObj.toString());
+            log.debug("目标字段值为空跳过查询，字段：{}，对象：{}", field.getName(), responseObj.toString());
             return;
         }
         String relatedField = fieldAnnotation.relatedField();
@@ -117,10 +117,10 @@ public class DictAspect {
                 .filter(dictItem -> String.valueOf(fieldValue).equals(dictItem.getValue()))
                 .findFirst();
 
-        matchingDictItem.ifPresent(dictItem -> {
-            ReflectionUtils.makeAccessible(related);
-            ReflectionUtils.setField(related, responseObj, dictItem.getLabel());
-        });
-
+        matchingDictItem.map(DictItem::getLabel)
+                .ifPresent(label -> {
+                    ReflectionUtils.makeAccessible(related);
+                    ReflectionUtils.setField(related, responseObj, label);
+                });
     }
 }
