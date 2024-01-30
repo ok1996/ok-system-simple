@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,9 +66,8 @@ public class StorageController {
     @Operation(summary = "上传文件-返回文件key")
     @PostMapping(value = "/object/upload")
     public Response<String> uploadMultipartFile(@ModelAttribute MultipartFile file
-            , @Parameter(description = "存储桶") String bucketName
-            , @Parameter(description = "文件名后缀", example = "png") String fileExtension) throws IOException {
-        return Response.ok(simpleStorageService.uploadMultipartFile(file, bucketName, fileExtension));
+            , @Parameter(description = "存储桶") String bucketName){
+        return Response.ok(simpleStorageService.uploadMultipartFile(file, bucketName));
     }
 
     @Operation(summary = "生成带有预签名的URL，用于私有S3对象的访问")

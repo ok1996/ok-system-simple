@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,8 +22,8 @@ public class SimpleStorageServiceFeignImpl implements SimpleStorageService {
     private SimpleStorageFeign simpleStorageFeign;
 
     @Override
-    public String uploadMultipartFile(MultipartFile file, String bucket, String fileExtension) throws IOException {
-        return simpleStorageFeign.uploadMultipartFile(file,bucket,fileExtension).checkThrow().getData();
+    public String uploadMultipartFile(MultipartFile file, String bucket) {
+        return simpleStorageFeign.uploadMultipartFile(file, bucket).checkThrow().getData();
     }
 
     @Override

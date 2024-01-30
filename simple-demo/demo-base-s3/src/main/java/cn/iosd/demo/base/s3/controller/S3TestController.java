@@ -31,9 +31,8 @@ public class S3TestController {
     @Operation(summary = "上传文件")
     @PostMapping(value = "/upload")
     public Response<String> uploadMultipartFile(@ModelAttribute MultipartFile file
-            , @Parameter(description = "存储桶") String bucketName
-            , @Parameter(description = "文件名后缀", example = "png") String fileExtension) throws IOException {
-        return Response.ok(simpleStorageService.uploadMultipartFile(file, bucketName, fileExtension));
+            , @Parameter(description = "存储桶") String bucketName){
+        return Response.ok(simpleStorageService.uploadMultipartFile(file, bucketName));
     }
 
     @Operation(summary = "获取存储桶列表")

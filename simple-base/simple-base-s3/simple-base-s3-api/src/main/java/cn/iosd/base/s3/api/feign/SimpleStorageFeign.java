@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
@@ -74,16 +73,12 @@ public interface SimpleStorageFeign {
     /**
      * 上传文件-返回文件key
      *
-     * @param file          文件流
-     * @param bucketName    存储桶
-     * @param fileExtension 文件名后缀 ,例：png
+     * @param file       文件流
+     * @param bucketName 存储桶
      * @return 文件key
-     * @throws IOException 上传异常抛出
      */
     @PostMapping(value = "/object/upload", consumes = MULTIPART_FORM_DATA_VALUE)
-    Response<String> uploadMultipartFile(@RequestPart MultipartFile file
-            , @RequestParam("bucketName") String bucketName
-            , @RequestParam("fileExtension") String fileExtension) throws IOException;
+    Response<String> uploadMultipartFile(@RequestPart MultipartFile file, @RequestParam("bucketName") String bucketName);
 
     /**
      * 生成带有预签名的URL，用于私有S3对象的访问

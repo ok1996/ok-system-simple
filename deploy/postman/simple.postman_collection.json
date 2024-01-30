@@ -2425,7 +2425,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object/upload?bucketName=imtest001&fileExtension=jpg",
+							"raw": "{{Host}}{{BaseS3Service}}/simple-base-s3-service/storage/object/upload?bucketName=imtest001",
 							"host": [
 								"{{Host}}{{BaseS3Service}}"
 							],
@@ -2439,10 +2439,6 @@
 								{
 									"key": "bucketName",
 									"value": "imtest001"
-								},
-								{
-									"key": "fileExtension",
-									"value": "jpg"
 								}
 							]
 						}
