@@ -55,7 +55,7 @@ public class SimpleStorageServiceImpl implements SimpleStorageService {
 
     @Override
     public String generatePresignedUrl(String bucket, String key) {
-        return amazonS3Service.generatePresignedUrl(bucket, key).toString();
+        return amazonS3Service.generatePresignedUrl(bucket, key, 15L).toString();
     }
 
     @Override

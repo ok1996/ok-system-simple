@@ -4,7 +4,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -16,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +25,9 @@ import java.util.stream.Collectors;
  * @author ok1996
  */
 @Service
-public class AmazonS3Service{
+public class AmazonS3Service {
     @Autowired
-	@Qualifier(value="amazonS3Simple")
+    @Qualifier(value = "amazonS3Simple")
     private AmazonS3 client;
 
     /**
@@ -56,13 +58,13 @@ public class AmazonS3Service{
     /**
      * 生成带有预签名的URL，用于私有S3对象的访问
      *
-     * @param bucket 存储桶的名称
-     * @param key    存储对象的键
+     * @param bucket            存储桶的名称
+     * @param key               存储对象的键
+     * @param expirationMinutes 访问地址过期分钟数
      * @return 带有预签名的URL
      */
-    public URL generatePresignedUrl(String bucket, String key) {
-        GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(bucket, key);
-        return client.generatePresignedUrl(urlRequest);
+    public URL generatePresignedUrl(String bucket, String key, Long expirationMinutes) {
+        return client.generatePresignedUrl(bucket, key, addMinutesToCurrentTime(expirationMinutes));
     }
 
     /**
@@ -124,5 +126,10 @@ public class AmazonS3Service{
     public void deleteObject(String bucketName, String key) {
         DeleteObjectRequest dor = new DeleteObjectRequest(bucketName, key);
         client.deleteObject(dor);
+    }
+
+    private static Date addMinutesToCurrentTime(Long minutes) {
+        LocalDateTime resultTime = LocalDateTime.now().plusMinutes(minutes);
+        return Date.from(resultTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
