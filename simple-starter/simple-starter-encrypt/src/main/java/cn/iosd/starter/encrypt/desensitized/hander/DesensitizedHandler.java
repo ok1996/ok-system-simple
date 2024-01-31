@@ -65,9 +65,9 @@ public class DesensitizedHandler {
      *
      * @param value         原始值
      * @param sensitiveRule 脱敏规则
-     * @param prefixLen     自定义规则-左侧需要保留几位明文字段
-     * @param suffixLen     自定义规则-右侧需要保留几位明文字段
-     * @return
+     * @param prefixLen     自定义规则-左侧几位字段进行操作
+     * @param suffixLen     自定义规则-右侧几位字段进行操作
+     * @return 脱敏结果值
      */
     private String desensitize(String value, SensitiveRule sensitiveRule, int prefixLen, int suffixLen) {
         String deStr;
