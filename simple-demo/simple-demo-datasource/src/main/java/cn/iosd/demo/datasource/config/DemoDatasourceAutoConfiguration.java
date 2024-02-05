@@ -37,6 +37,6 @@ public class DemoDatasourceAutoConfiguration {
 
     @Bean
     public MapperLocations datasourceLocations() {
-        return new MapperLocations("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml");
+        return MapperLocations.of("classpath*:/cn/iosd/demo/datasource/mapper/**/*Mapper.xml");
     }
 }

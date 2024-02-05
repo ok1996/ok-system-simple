@@ -28,4 +28,24 @@ public class MapperLocations {
     public void setLocations(List<String> locations) {
         this.locations = locations;
     }
+
+    /**
+     * 简洁方式 创建 MapperLocations 对象
+     *
+     * @param location 资源路径
+     * @return MapperLocations 对象
+     */
+    public static MapperLocations of(String location) {
+        return new MapperLocations(location);
+    }
+
+    /**
+     * 简洁方式 创建 MapperLocations 对象
+     *
+     * @param locations 资源路径
+     * @return MapperLocations 对象
+     */
+    public static MapperLocations of(List<String> locations) {
+        return new MapperLocations(locations);
+    }
 }

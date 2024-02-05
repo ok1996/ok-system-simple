@@ -31,6 +31,6 @@ public class DictAutoConfiguration {
 
     @Bean
     public MapperLocations dictMapperLocations() {
-        return new MapperLocations("classpath*:/cn/iosd/base/dict/service/mapper/**/*Mapper.xml");
+        return MapperLocations.of("classpath*:/cn/iosd/base/dict/service/mapper/**/*Mapper.xml");
     }
 }

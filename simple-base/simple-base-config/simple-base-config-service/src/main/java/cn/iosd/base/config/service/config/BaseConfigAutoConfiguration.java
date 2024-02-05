@@ -31,6 +31,6 @@ public class BaseConfigAutoConfiguration {
 
     @Bean
     public MapperLocations baseConfigMapperLocations() {
-        return new MapperLocations("classpath*:/cn/iosd/base/config/service/mapper/**/*Mapper.xml");
+        return MapperLocations.of("classpath*:/cn/iosd/base/config/service/mapper/**/*Mapper.xml");
     }
 }
