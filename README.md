@@ -1,6 +1,6 @@
-## 这个项目是做什么的？
+## What is this project about?
 
-基于SpringBoot提供常用的自动装配模块，能快速提供各模块所需的服务
+This project offers foundational Starter Modules for Spring Boot, enabling the quick setup of services needed by various modules
 
 <p>
   <a href="https://mvnrepository.com/search?q=cn.iosd">
@@ -24,13 +24,12 @@
   </a>
 </p>
 
-## 该如何开始？
+## How to get started?
 
-找到对应所需的starter模块，引入依赖
+Find the corresponding starter module for your needs and import the dependencies.
 
-例，需要快速集成一个拥有Web应用和集成接口文档的服务
+For example, to quickly integrate a service with a web application and integrated API documentation, import the following dependencies:
 
-引入依赖
 ~~~
     <dependencies>
         <dependency>
@@ -40,9 +39,9 @@
     </dependencies>
 ~~~
 
-## 核心依赖
+## Core Dependencies
 
-| 依赖                   | 版本                  |
+| Dependency           | Version             |
 |----------------------|---------------------|
 | Java                 | 17                  |
 | Spring Boot          | 3.2.2               |
@@ -50,49 +49,50 @@
 | Spring Cloud Alibaba | 2022.0.0.0          |
 | Ok System Simple     | 2024.1.2.0-SNAPSHOT |
 
-## Starter自动装配模块
+## Starter Modules
 
-| 模块名称                      | 使用场景     | 说明                                                             |
-|---------------------------|----------|----------------------------------------------------------------|
-| simple-starter-web        | Web应用    | SpringBoot Web、集成接口文档、序列化格式转换、<br/>响应信息主体、全局异常处理器、Jackson工具类   |
-| simple-starter-redisson   | 锁及缓存     | 注解使用：分布式锁、分布式幂等、分布式限流器; <br/> Cacheable注解常用配置及自定义CacheName过期时间 |
-| simple-starter-s3         | 文件管理客户端  | 初始化客户端、提供基础服务方法                                                |
-| simple-starter-socket     | 长链接通讯及集群 | 集群使用redis订阅及广播机制，无redis自动单机                                    |
-| simple-starter-grpc       | 远程调用协议接口 | 自定义注解Grpc简化使用：客户端、服务端                                          |
-| simple-starter-datasource | 数据库连接应用  | HikariCP、P6spy、自动创建数据库表、通用CURD控制层                              |
-| simple-starter-freemarker | 模板引擎应用   | 简化导入配置参数                                                       |
-| simple-starter-cloud      | 微服务应用    | 微服务常用依赖集成：服务发现、远程配置中心等                                         |
-| simple-starter-gateway    | 微服务网关    | 微服务接口网关：集成微服务文档网关                                              |
-| simple-starter-encrypt    | 加密       | 注解：加密脱敏（加密规则有通用模板、或自定义）<br/>注解：接口请求参数或返回参数Rsa加密解密              |
-| simple-starter-dict       | 字典       | 注解字典翻译（字典支持文件json、调用接口或自定义实现）<br/>（服务类返回参数支持单体字段、列表、实体嵌套）      |
-| simple-starter-email      | 邮件       | Smtp邮件推送                                                       |
-| simple-starter-package    | 构建打包     | 自定义Maven构建打包逻辑，将常用脚本及可执行文件统一打包                                 |
+| Module Name               | Use Cases                              | Description                                                                                                                                                                    |
+|---------------------------|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| simple-starter-web        | Web Application                        | SpringBoot Web, integrated API documentation, serialization format conversion, response body, global exception handler, Jackson utility class                                  |
+| simple-starter-redisson   | Locks and Caching                      | Annotation usage: distributed locks, distributed idempotency, distributed rate limiter; Cacheable annotation common configurations and custom CacheName expiration time        |
+| simple-starter-s3         | File Management Client                 | Initialize client, provide basic service methods                                                                                                                               |
+| simple-starter-socket     | Long Polling Communication and Cluster | Cluster uses redis subscribe and broadcast mechanism, automatic standalone if no redis                                                                                         |
+| simple-starter-grpc       | Remote Invocation Protocol Interface   | Custom Grpc annotation simplifies usage: client, server                                                                                                                        |
+| simple-starter-datasource | Database Connection Application        | HikariCP, P6spy, auto-create database tables, generic CURD controller                                                                                                          |
+| simple-starter-freemarker | Template Engine Application            | Simplify importing configuration parameters                                                                                                                                    |
+| simple-starter-cloud      | Microservices Application              | Integration of common dependencies for microservices: service discovery, remote configuration center, etc.                                                                     |
+| simple-starter-gateway    | Microservices Gateway                  | Microservices API gateway: integrates microservices documentation gateway                                                                                                      |
+| simple-starter-encrypt    | Encryption                             | Annotations: encryption and desensitization (common templates or custom rules); Annotations: RSA encryption and decryption for request or response parameters                  |
+| simple-starter-dict       | Dictionary                             | Annotation dictionary translation (supports JSON files, API calls, or custom implementations); (Service class return parameters support single fields, lists, nested entities) |
+| simple-starter-email      | Email                                  | SMTP email delivery                                                                                                                                                            |
+| simple-starter-package    | Build and Package                      | Custom Maven build and package logic, consolidates common scripts and executable files                                                                                         |
 
-## Base服务类模块
+## Base Modules
 
-| 模块名称                  | 使用场景     | 说明                    |
-|-----------------------|----------|-----------------------|
-| simple-base-config    | 基础配置     | 启动自动初始化配置、可选覆盖生成、开放接口 |
-| simple-base-generator | 代码生成     | 根据数据库表生成基础项目代码        |
-| simple-base-s3        | 文件存储管理服务 | 提供文件管理服务及接口           |
-| simple-base-dict      | 字典管理服务   | 字典管理服务及接口             |
+| Module Name           | Use Cases                       | Description                                                                                         |
+|-----------------------|---------------------------------|-----------------------------------------------------------------------------------------------------|
+| simple-base-config    | Basic Configuration             | Automatically initialize configuration on startup, optionally generate overrides, expose interfaces |
+| simple-base-generator | Code Generation                 | Generate basic project code based on database tables                                                |
+| simple-base-s3        | File Storage Management Service | Provide file management service and interface                                                       |
+| simple-base-dict      | Dictionary Management Service   | Dictionary management service and interface                                                         |
 
-## Utils工具类模块
 
-| 模块名称                 | 使用场景   | 说明                     |
-|----------------------|--------|------------------------|
-| simple-utils-jackson | Json工具 | 提供 Json 序列化和反序列化功能的工具类 |
-| simple-utils-common  | 通用工具   | 提供常用及通用的工具类            |
+## Utils Modules
 
-## 基础配置模块
-| 模块名称                | 使用场景   | 说明                                                                 |
-|---------------------|--------|--------------------------------------------------------------------|
-| simple-parent       | 项目父级管理 | 可用于管理项目的通用配置和依赖版本。统一管理项目的构建配置、依赖版本和插件版本                            |
-| simple-dependencies | 项目依赖管理 | 可用于集中管理项目中所有模块的依赖版本。定义了各个模块所需的依赖版本，并通过dependencyManagement标签进行统一管理 |
+| Module Name          | Use Cases        | Description                                                         |
+|----------------------|------------------|---------------------------------------------------------------------|
+| simple-utils-jackson | Json Utilities   | Provides utility classes for Json serialization and deserialization |
+| simple-utils-common  | Common Utilities | Provides commonly used and general utility classes                  |
 
-## 鸣谢
+## Basic Modules
+| Module Name         | Use Cases                     | Description                                                                                                                                                                                           |
+|---------------------|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| simple-parent       | Project Parent Management     | Used to manage common configurations and dependency versions for the project. Unified management of project build configuration, dependency versions, and plugin versions                             |
+| simple-dependencies | Project Dependency Management | Used to centrally manage dependency versions for all modules in the project. Defines the required dependency versions for each module and manages them uniformly through the dependencyManagement tag |
 
-感谢 JetBrains [OpenSourceSupport](https://jb.gg/OpenSourceSupport) 所提供的支持
+## Acknowledgments
+
+Thanks to JetBrains for providing support through [OpenSourceSupport](https://jb.gg/OpenSourceSupport) .
 
 <div>
 <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="200" height="200"/>
