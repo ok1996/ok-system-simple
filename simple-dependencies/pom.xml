@@ -164,6 +164,12 @@
                 <artifactId>simple-utils-jackson</artifactId>
                 <version>${ok-simple.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.iosd</groupId>
+                <artifactId>simple-utils-common</artifactId>
+                <version>${ok-simple.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
