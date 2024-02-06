@@ -6,6 +6,14 @@ import java.security.SecureRandom;
 import java.time.Instant;
 
 /**
+ * 生成24位长度的唯一标识符，其中包含时间戳、机器ID、进程ID和计数器
+ *
+ * <pre>
+ *      时间戳占比：16位 (支持136年的时间范围)
+ *      进程 ID 占比：4位 (使用运行时MXBean获取进程名称的哈希码)
+ *      机器 ID 占比：6位  (根据本机硬件地址生成机器ID)
+ *      序列号占比：6位
+ * </pre>
  *
  * @author ok1996
  */
@@ -43,7 +51,12 @@ public class ObjectId {
         }
     }
 
-    private static int generateMachineId() {
+    /**
+     * 根据本机硬件地址生成机器ID，如果无法获取本机信息，则随机生成一个
+     *
+     * @return 机器ID
+     */
+    public static int generateMachineId() {
         try {
             InetAddress localhost = InetAddress.getLocalHost();
             NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localhost);
@@ -54,7 +67,12 @@ public class ObjectId {
         }
     }
 
-    private static int generateProcessId() {
+    /**
+     * 生成进程ID，使用运行时MXBean获取进程名称的哈希码
+     *
+     * @return 进程ID
+     */
+    public static int generateProcessId() {
         return java.lang.management.ManagementFactory.getRuntimeMXBean().getName().hashCode() & 0xFFFF;
     }
 
