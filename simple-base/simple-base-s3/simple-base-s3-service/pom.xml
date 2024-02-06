@@ -21,6 +21,11 @@
             <groupId>cn.iosd</groupId>
             <artifactId>simple-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.iosd</groupId>
+            <artifactId>simple-utils-common</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
