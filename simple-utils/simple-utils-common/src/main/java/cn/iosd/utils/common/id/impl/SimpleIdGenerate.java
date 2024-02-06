@@ -9,6 +9,11 @@ import cn.iosd.utils.common.id.utils.SnowflakeId;
  */
 public class SimpleIdGenerate implements IdGenerate {
 
+    public SimpleIdGenerate(){
+        SnowflakeId.setDatacenterId(1L);
+        SnowflakeId.setMachineId(1L);
+    }
+
     @Override
     public Long generate() {
         return SnowflakeId.generate();
