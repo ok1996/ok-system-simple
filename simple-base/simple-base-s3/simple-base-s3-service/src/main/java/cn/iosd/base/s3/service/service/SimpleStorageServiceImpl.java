@@ -32,7 +32,7 @@ public class SimpleStorageServiceImpl implements SimpleStorageService {
             throw new IllegalArgumentException("MultipartFile is null or empty");
         }
 
-        String fileKey = IdFactory.getInstance().generateStr();
+        String fileKey = IdFactory.generateStr();
         String originalFilename = file.getOriginalFilename();
         String comma = ".";
         if (originalFilename != null && originalFilename.contains(comma)) {
