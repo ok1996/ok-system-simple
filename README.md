@@ -41,13 +41,13 @@ For example, to quickly integrate a service with a web application and integrate
 
 ## Core Dependencies
 
-| Dependency           | Version             |
-|----------------------|---------------------|
-| Java                 | 17                  |
-| Spring Boot          | 3.2.2               |
-| Spring Cloud         | 2023.0.0            |
-| Spring Cloud Alibaba | 2022.0.0.0          |
-| Ok System Simple     | 2024.1.2.0-SNAPSHOT |
+| Dependency           | Version    |
+|----------------------|------------|
+| Java                 | 17         |
+| Spring Boot          | 3.2.2      |
+| Spring Cloud         | 2023.0.0   |
+| Spring Cloud Alibaba | 2022.0.0.0 |
+| Ok System Simple     | 2024.1.1.1 |
 
 ## Starter Modules
 
