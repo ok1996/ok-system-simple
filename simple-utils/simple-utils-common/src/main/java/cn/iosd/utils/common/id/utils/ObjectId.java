@@ -40,7 +40,6 @@ public class ObjectId {
 
     private static void appendTimestamp(StringBuilder objectId) {
         long timestamp = Instant.now().getEpochSecond();
-        appendIntToHexString(objectId, (int) (timestamp >> 32), 8);
         appendIntToHexString(objectId, (int) timestamp, 8);
     }
 

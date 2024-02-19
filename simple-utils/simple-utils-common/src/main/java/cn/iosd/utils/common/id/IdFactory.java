@@ -22,18 +22,18 @@ public final class IdFactory {
         if (idGenerateInstance == null) {
             synchronized (IdFactory.class) {
                 if (idGenerateInstance == null) {
-                    idGenerateInstance = initialize(DEFAULT_GENERATOR);
+                    initialize(DEFAULT_GENERATOR);
                 }
             }
         }
         return idGenerateInstance;
     }
 
-    public static IdGenerate initialize(Supplier<IdGenerate> idGenerateSupplier) {
+    public static void initialize(Supplier<IdGenerate> idGenerateSupplier) {
         if (idGenerateInstance != null) {
             throw new IllegalStateException("GenerateId object is not null. To reinitialize, clear the object first.");
         }
-        return idGenerateSupplier.get();
+        idGenerateInstance = idGenerateSupplier.get();
     }
 
     public static void clear() {
