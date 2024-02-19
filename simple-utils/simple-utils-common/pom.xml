@@ -6,10 +6,14 @@
     <parent>
         <groupId>cn.iosd</groupId>
         <artifactId>simple-utils</artifactId>
-        <version>2024.1.1.1</version>
+        <version>2024.1.2.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>simple-utils-common</artifactId>
+
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -23,18 +27,6 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <profiles>
         <profile>

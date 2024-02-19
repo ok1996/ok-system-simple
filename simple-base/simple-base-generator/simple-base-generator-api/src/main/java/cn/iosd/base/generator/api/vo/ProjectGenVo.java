@@ -25,7 +25,7 @@ public class ProjectGenVo {
     private String projectVersion = "2024.1.0.0-SNAPSHOT";
 
     @Schema(description = "依赖模块版本号", hidden = true)
-    private String simpleVersion = "2024.1.1.1";
+    private String simpleVersion = "2024.1.2.0-SNAPSHOT";
 
     @Schema(description = "JAVA版本号", hidden = true)
     private String javaVersion = "17";
