@@ -90,7 +90,7 @@ For example, to quickly integrate a service with a web application and integrate
 | simple-parent       | Project Parent Management     | Used to manage common configurations and dependency versions for the project. Unified management of project build configuration, dependency versions, and plugin versions                             |
 | simple-dependencies | Project Dependency Management | Used to centrally manage dependency versions for all modules in the project. Defines the required dependency versions for each module and manages them uniformly through the dependencyManagement tag |
 
-## Acknowledgments
+## Thanks
 
 Thanks to JetBrains for providing support through [OpenSourceSupport](https://jb.gg/OpenSourceSupport) .
 
