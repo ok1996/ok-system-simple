@@ -22,9 +22,9 @@ import java.lang.annotation.Target;
 public @interface DistributedRateLimiter {
 
     /**
-     * Rate Limiter Constant
+     * Simple Redisson Rate : Rate Limiter Constant
      */
-    String CONSTANT = "RLC";
+    String CONSTANT = "SimpleRRC:RLC";
 
     /**
      * key固定值
@@ -39,9 +39,8 @@ public @interface DistributedRateLimiter {
      *      void test(String id)  => #id
      *  2.获取对象参数中的某个值
      *      void test(Vo vo)  => #vo.id
-     *  3.参数值获取不到，默认为：DV
+     *  3.参数值获取不到 或未配置 ，默认为 PARAM_DEFAULT_VALUE：PDV
      *      void test(String id)  => #im
-     *  4.默认空，不拼接到key中
      * </pre>
      */
     String param() default "";

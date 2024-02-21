@@ -3,7 +3,7 @@ package cn.iosd.starter.redisson.handler;
 import cn.iosd.starter.redisson.annotation.DistributedLock;
 import cn.iosd.starter.redisson.exception.RedissonException;
 import cn.iosd.starter.redisson.service.RedissonLockService;
-import cn.iosd.starter.redisson.utils.LockUtil;
+import cn.iosd.starter.redisson.utils.KeyUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,33 +25,26 @@ import java.util.concurrent.TimeUnit;
 public class DistributedLockHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedLockHandler.class);
 
-    /**
-     * Simple Redisson Lock
-     */
-    private static final String LOCK_KEY_PREFIX = "SimpleRL:";
-
     @Autowired
     RedissonLockService redissonLockService;
 
-
     @Around("@annotation(distributedLock)")
     public Object around(ProceedingJoinPoint joinPoint, DistributedLock distributedLock) throws Throwable {
-        String lockName = LockUtil.generateKey(joinPoint, LOCK_KEY_PREFIX, distributedLock.value(), distributedLock.param(), distributedLock.includePointMd5());
+        String key = KeyUtil.generate(joinPoint, distributedLock.value(), distributedLock.param(), distributedLock.includePointMd5());
         int leaseTime = distributedLock.leaseTime();
-        RLock lock = redissonLockService.getLock(lockName);
+        RLock lock = redissonLockService.getLock(key);
 
-        log.debug("[开始]尝试获取Redis分布式锁[{}]", lockName);
+        log.debug("DistributedLock，key[{}]", key);
         try {
             if (!lock.tryLock(leaseTime, TimeUnit.SECONDS)) {
-                throw new RedissonException("获取Redis分布式锁[" + lockName + "]失败");
+                throw new RedissonException("获取Redis分布式锁[" + key + "]失败");
             }
             return joinPoint.proceed();
         } catch (InterruptedException e) {
-            throw new RedissonException("Redis分布式加锁[" + lockName + "]失败", e);
+            throw new RedissonException("Redis分布式加锁[" + key + "]失败", e);
         } finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
-                log.debug("释放Redis分布式锁[{}]成功", lockName);
             }
         }
     }

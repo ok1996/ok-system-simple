@@ -3,7 +3,7 @@ package cn.iosd.starter.redisson.handler;
 import cn.iosd.starter.redisson.annotation.DistributedIdempotent;
 import cn.iosd.starter.redisson.exception.RedissonException;
 import cn.iosd.starter.redisson.service.RedissonLockService;
-import cn.iosd.starter.redisson.utils.LockUtil;
+import cn.iosd.starter.redisson.utils.KeyUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,32 +24,23 @@ import org.springframework.stereotype.Component;
 public class DistributedIdempotentHandler {
     private static final Logger log = LoggerFactory.getLogger(DistributedIdempotentHandler.class);
 
-    /**
-     * Simple Redisson Idempotent
-     */
-    private static final String LOCK_KEY_PREFIX = "SimpleRI:";
-
     @Autowired
     RedissonLockService redissonLockService;
 
-    /**
-     * 接口幂等切面
-     */
     @Around("@annotation(cn.iosd.starter.redisson.annotation.DistributedIdempotent)||" +
             "@within(cn.iosd.starter.redisson.annotation.DistributedIdempotent)")
     public Object idempotent(final ProceedingJoinPoint point) throws Throwable {
         DistributedIdempotent idempotent = ((MethodSignature) point.getSignature()).getMethod().getAnnotation(DistributedIdempotent.class);
-        String lockName = LockUtil.generateKey(point, LOCK_KEY_PREFIX, idempotent.value(), idempotent.param(), idempotent.includePointMd5());
-        RLock lock = redissonLockService.getLock(lockName);
+        String key = KeyUtil.generate(point, idempotent.value(), idempotent.param(), idempotent.includePointMd5());
+        RLock lock = redissonLockService.getLock(key);
 
-        log.debug("[开始]执行DistributedIdempotent环绕通知，锁[{}]", lockName);
+        log.debug("DistributedIdempotent，key[{}]", key);
         if (!lock.isLocked() && lock.tryLock(idempotent.acquireTimeout(), idempotent.expireTime(), idempotent.unit())) {
             try {
                 return point.proceed();
             } finally {
                 if (idempotent.executionFinishedUnlock()) {
                     lock.unlock();
-                    log.debug("[完成]执行DistributedIdempotent环绕通知，锁[{}]", lockName);
                 }
             }
         }
