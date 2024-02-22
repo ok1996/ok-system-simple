@@ -1,5 +1,6 @@
 package cn.iosd.demo.redisson.service;
 
+import cn.iosd.starter.redisson.domain.CacheName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheableService {
 
-    @Cacheable(key = "#keyName + 'FiveMinutes'", cacheNames = "cacheExpiresAfterFiveMinutes", condition = "#keyName.length()>2")
-    public String annotateTestCacheNameFiveMinutes(String keyName) {
-        log.info("cacheExpiresAfterFiveMinutes:{}", keyName);
+    @Cacheable(key = "#keyName + 'TenMinutes'", cacheNames = CacheName.EXPIRES_AFTER_TEN_MINUTES, condition = "#keyName.length()>2")
+    public String annotateTestCacheNameTenMinutes(String keyName) {
+        log.info("cacheExpiresAfterTenMinutes:{}", keyName);
         return keyName;
     }
 

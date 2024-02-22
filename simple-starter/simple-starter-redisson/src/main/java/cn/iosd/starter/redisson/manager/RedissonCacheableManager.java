@@ -1,5 +1,6 @@
 package cn.iosd.starter.redisson.manager;
 
+import cn.iosd.starter.redisson.domain.CacheName;
 import cn.iosd.starter.redisson.properties.RedissonCacheableProperties;
 import org.redisson.spring.cache.CacheConfig;
 import org.redisson.spring.cache.RedissonSpringCacheManager;
@@ -34,10 +35,10 @@ public class RedissonCacheableManager {
     @Bean
     public CacheManager cacheManager() {
         Map<String, CacheConfig> config = new HashMap<String, CacheConfig>(3);
-        config.put("cacheExpiresAfterTenMinutes", new CacheConfig(10 * 60 * 1000, 10 * 60 * 1000));
-        config.put("cacheExpiresAfterOneHour", new CacheConfig(60 * 60 * 1000, 60 * 60 * 1000));
-        config.put("cacheNeverExpires", new CacheConfig());
-        log.info("Cacheable默认CacheName配置类已装配：[cacheNeverExpires,cacheExpiresAfterTenMinutes,cacheExpiresAfterOneHour]");
+        config.put(CacheName.EXPIRES_AFTER_TEN_MINUTES, new CacheConfig(10 * 60 * 1000, 10 * 60 * 1000));
+        config.put(CacheName.EXPIRES_AFTER_ONE_HOUR, new CacheConfig(60 * 60 * 1000, 60 * 60 * 1000));
+        config.put(CacheName.NEVER_EXPIRES, new CacheConfig());
+        log.info("Cacheable默认CacheName配置类已装配,[{}],[{}],[{}]",CacheName.NEVER_EXPIRES,CacheName.EXPIRES_AFTER_ONE_HOUR,CacheName.EXPIRES_AFTER_TEN_MINUTES);
         if (properties.getConfig() != null) {
             properties.getConfig().forEach((cacheName, cacheExpireVo) -> {
                 Long ttl = cacheExpireVo.getTtl();

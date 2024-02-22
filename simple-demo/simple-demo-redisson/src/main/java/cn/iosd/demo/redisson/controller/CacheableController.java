@@ -26,7 +26,7 @@ public class CacheableController {
     @GetMapping("annotateTestCacheName")
     public Response<String> annotateTestCacheName(String keyName, Integer cycles) {
         for (int i = 1; i <= cycles; i++) {
-            service.annotateTestCacheNameFiveMinutes(keyName);
+            service.annotateTestCacheNameTenMinutes(keyName);
             service.annotateTestCacheNameTenSecond(keyName);
         }
         return Response.ok(keyName);
