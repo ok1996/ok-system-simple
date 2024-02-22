@@ -51,7 +51,7 @@ public class KeyUtil {
         } else {
             if (STATIC_ABSENT_DEFAULT_VALUE.equals(staticPart) && PARAM_ABSENT_DEFAULT_VALUE.equals(dynamicPart)) {
                 log.error("Please verify that both the static part and the dynamic part yield empty values." +
-                        "The current default return value is set to :{}", key);
+                        "The current default return value is set to [{}]", key);
             }
             return key;
         }
