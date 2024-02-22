@@ -51,4 +51,5 @@ simple:
           maxIdleTime: 10000
 logging:
   level:
-    root: info
+    cn:
+      iosd: debug

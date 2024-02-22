@@ -32,9 +32,9 @@ public @interface GrpcClient {
     String value();
 
     /**
-     * 设置Grpc调用超时时间-单位毫秒，默认5000毫秒
+     * 设置 gRPC 调用超时时间-单位毫秒，若为-1则从配置项获取
      * <p>
-     * 优先级高于配置项 simple.grpc.client.timeout
+     * 优先级高于配置项 simple.grpc.client.timeout 默认5000毫秒
      *
      * @return 超时时间
      */
