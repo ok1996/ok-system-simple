@@ -285,18 +285,18 @@
 			]
 		},
 		{
-			"name": "simple-demo-socket",
+			"name": "simple-demo-socketio",
 			"item": [
 				{
 					"name": "页面1连接工程1的socket ：http://localhost:12010?room=1001&token=1001 页面2连接工程2的socket ：http://localhost:12020?room=1002",
 					"item": []
 				},
 				{
-					"name": "页面3连接工程1的socket ：http://localhost:12010?room=1003&token=1003&applicationName=simple-demo-socket-two   页面4连接工程2的socket ：http://localhost:12020?applicationName=simple-demo-socket-one",
+					"name": "页面3连接工程1的socket ：http://localhost:12010?room=1003&token=1003&applicationName=simple-demo-socketio-two   页面4连接工程2的socket ：http://localhost:12020?applicationName=simple-demo-socketio-one",
 					"item": []
 				},
 				{
-					"name": "[simple-demo-socket-one]仅发送带群聊Room连接的客户端",
+					"name": "[simple-demo-socketio-one]仅发送带群聊Room连接的客户端",
 					"event": [
 						{
 							"listen": "test",
@@ -315,12 +315,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/room?message=接口调用工程1发送消息，room=1001应接收到数据&eventName=123&room=1001",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socketio-one/message/room?message=接口调用工程1发送消息，room=1001应接收到数据&eventName=123&room=1001",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
-								"simple-demo-socket-one",
+								"simple-demo-socketio-one",
 								"message",
 								"room"
 							],
@@ -344,7 +344,7 @@
 					"response": []
 				},
 				{
-					"name": "[simple-demo-socket-one]仅发送带群聊Room连接的客户端",
+					"name": "[simple-demo-socketio-one]仅发送带群聊Room连接的客户端",
 					"event": [
 						{
 							"listen": "test",
@@ -363,12 +363,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/room?message=接口调用工程2发送消息，room=1002应接收到数据&eventName=123&room=1002",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socketio-one/message/room?message=接口调用工程2发送消息，room=1002应接收到数据&eventName=123&room=1002",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
-								"simple-demo-socket-one",
+								"simple-demo-socketio-one",
 								"message",
 								"room"
 							],
@@ -392,7 +392,7 @@
 					"response": []
 				},
 				{
-					"name": "[simple-demo-socket-one]广播所有连接客户端",
+					"name": "[simple-demo-socketio-one]广播所有连接客户端",
 					"event": [
 						{
 							"listen": "test",
@@ -411,12 +411,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/broadcast?message=接口调用工程1发送广播，则所有页面接收到数据",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socketio-one/message/broadcast?message=接口调用工程1发送广播，则所有页面接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
-								"simple-demo-socket-one",
+								"simple-demo-socketio-one",
 								"message",
 								"broadcast"
 							],
@@ -432,7 +432,7 @@
 					"response": []
 				},
 				{
-					"name": "[simple-demo-socket-one]发送带指定微服务连接的客户端",
+					"name": "[simple-demo-socketio-one]发送带指定微服务连接的客户端",
 					"event": [
 						{
 							"listen": "test",
@@ -451,19 +451,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socket-one/message/service?message=本消息为simple-demo-socket-one发送，连接one应接收到数据",
+							"raw": "{{Host}}{{DemoSocketOne}}/simple-demo-socketio-one/message/service?message=本消息为simple-demo-socketio-one发送，连接one应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketOne}}"
 							],
 							"path": [
-								"simple-demo-socket-one",
+								"simple-demo-socketio-one",
 								"message",
 								"service"
 							],
 							"query": [
 								{
 									"key": "message",
-									"value": "本消息为simple-demo-socket-one发送，连接one应接收到数据"
+									"value": "本消息为simple-demo-socketio-one发送，连接one应接收到数据"
 								}
 							]
 						},
@@ -472,7 +472,7 @@
 					"response": []
 				},
 				{
-					"name": "[simple-demo-socket-two]发送带指定微服务连接的客户端",
+					"name": "[simple-demo-socketio-two]发送带指定微服务连接的客户端",
 					"event": [
 						{
 							"listen": "test",
@@ -491,19 +491,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{Host}}{{DemoSocketTwo}}/simple-demo-socket-two/message/service?message=本消息为simple-demo-socket-two发送，连接two应接收到数据",
+							"raw": "{{Host}}{{DemoSocketTwo}}/simple-demo-socketio-two/message/service?message=本消息为simple-demo-socketio-two发送，连接two应接收到数据",
 							"host": [
 								"{{Host}}{{DemoSocketTwo}}"
 							],
 							"path": [
-								"simple-demo-socket-two",
+								"simple-demo-socketio-two",
 								"message",
 								"service"
 							],
 							"query": [
 								{
 									"key": "message",
-									"value": "本消息为simple-demo-socket-two发送，连接two应接收到数据"
+									"value": "本消息为simple-demo-socketio-two发送，连接two应接收到数据"
 								}
 							]
 						},

@@ -20,7 +20,7 @@
         <module>simple-starter-web</module>
         <module>simple-starter-redisson</module>
         <module>simple-starter-s3</module>
-        <module>simple-starter-socket</module>
+        <module>simple-starter-socketio</module>
         <module>simple-starter-grpc</module>
         <module>simple-starter-datasource</module>
         <module>simple-starter-freemarker</module>

@@ -53,7 +53,7 @@
 
             <dependency>
                 <groupId>cn.iosd</groupId>
-                <artifactId>simple-starter-socket</artifactId>
+                <artifactId>simple-starter-socketio</artifactId>
                 <version>${ok-simple.version}</version>
             </dependency>
 
