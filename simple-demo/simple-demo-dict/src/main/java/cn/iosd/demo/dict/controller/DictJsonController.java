@@ -1,6 +1,6 @@
 package cn.iosd.demo.dict.controller;
 
-import cn.iosd.demo.dict.service.DictService;
+import cn.iosd.demo.dict.service.DictTestService;
 import cn.iosd.demo.dict.vo.PersonVo;
 import cn.iosd.demo.dict.vo.SuperPersonVo;
 import cn.iosd.starter.web.domain.Response;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/simple-demo-dict/dictJson")
 public class DictJsonController {
     @Autowired
-    private DictService service;
+    private DictTestService service;
 
     @Operation(summary = "测试单体")
     @GetMapping(value = "/person")

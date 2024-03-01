@@ -1,4 +1,4 @@
-package cn.iosd.starter.dict.service.impl;
+package cn.iosd.demo.dict.service.dict;
 
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;

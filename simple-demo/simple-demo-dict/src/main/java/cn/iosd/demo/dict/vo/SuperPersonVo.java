@@ -2,7 +2,7 @@ package cn.iosd.demo.dict.vo;
 
 import cn.iosd.starter.dict.annotation.DictEntity;
 import cn.iosd.starter.dict.annotation.DictField;
-import cn.iosd.starter.dict.service.impl.LocalDictServiceImpl;
+import cn.iosd.demo.dict.service.dict.LocalDictServiceImpl;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

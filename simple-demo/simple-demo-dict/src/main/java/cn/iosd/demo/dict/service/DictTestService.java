@@ -15,7 +15,7 @@ import java.util.List;
  * @author ok1996
  */
 @Service
-public class DictService {
+public class DictTestService {
 
     @Dict
     public PersonVo getPerson() {

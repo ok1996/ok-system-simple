@@ -1,6 +1,6 @@
 package cn.iosd.demo.dict.controller;
 
-import cn.iosd.demo.dict.service.DictService;
+import cn.iosd.demo.dict.service.DictTestService;
 import cn.iosd.starter.dict.vo.DictItem;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/simple-demo-dict/dict")
 public class DictController {
     @Autowired
-    private DictService service;
+    private DictTestService service;
 
     @Operation(summary = "字典翻译-自定义远程调用接口实现类字典")
     @GetMapping("/custom/{param}")

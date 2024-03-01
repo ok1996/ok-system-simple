@@ -1,5 +1,7 @@
-package cn.iosd.starter.dict.annotation;
+package cn.iosd.starter.dict.handler;
 
+import cn.iosd.starter.dict.annotation.DictEntity;
+import cn.iosd.starter.dict.annotation.DictField;
 import cn.iosd.starter.dict.service.DictService;
 import cn.iosd.starter.dict.vo.DictItem;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
@@ -23,8 +26,9 @@ import java.util.Optional;
  */
 @Aspect
 @Component
-public class DictAspect {
-    private static final Logger log = LoggerFactory.getLogger(DictAspect.class);
+@ConditionalOnProperty(name = "simple.dict.enabled", havingValue = "true", matchIfMissing = true)
+public class DictHandler {
+    private static final Logger log = LoggerFactory.getLogger(DictHandler.class);
 
     @Autowired
     private List<DictService> dictServiceList;

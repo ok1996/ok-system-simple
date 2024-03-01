@@ -1,6 +1,6 @@
 package cn.iosd.demo.dict.controller;
 
-import cn.iosd.demo.dict.service.DictService;
+import cn.iosd.demo.dict.service.DictTestService;
 import cn.iosd.demo.dict.vo.PersonRemoteVo;
 import cn.iosd.starter.web.domain.Response;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/simple-demo-dict/dictCustom")
 public class DictCustomController {
     @Autowired
-    private DictService service;
+    private DictTestService service;
 
     @Operation(summary = "测试单体")
     @GetMapping(value = "/personRemoteVo")
