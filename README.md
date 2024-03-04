@@ -53,7 +53,7 @@ For example, to quickly integrate a service with a web application and integrate
 
 | Module Name               | Use Cases                              | Description                                                                                                                                                             |
 |---------------------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| simple-starter-web        | Web Application                        | SpringBoot Web, integrated API documentation, serialization format conversion, response body, global exception handler, Jackson utility class                           |
+| simple-starter-web        | Web Application                        | SpringBoot Web, integrated API documentation, serialization format conversion, response body, global exception handler                                                  |
 | simple-starter-redisson   | Locks and Caching                      | Annotation usage: distributed locks, distributed idempotency, distributed rate limiter; Cacheable annotation common configurations and custom CacheName expiration time |
 | simple-starter-s3         | File Management Client                 | Initialize client, provide basic service methods                                                                                                                        |
 | simple-starter-socketio   | Long Polling Communication and Cluster | Cluster uses redis subscribe and broadcast mechanism, automatic standalone if no redis                                                                                  |
