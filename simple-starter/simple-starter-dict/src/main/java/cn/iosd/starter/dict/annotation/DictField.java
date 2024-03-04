@@ -29,14 +29,14 @@ public @interface DictField {
 
 
     /**
-     * 接口实现类所需的参数类型
+     * 字典实现类，获取对应字典列表所需的参数
      *
      * @return 参数类型值
      */
     String dictionaryParams();
 
     /**
-     * 字典获取方式实现类
+     * 字典实现类，唯一可不填
      *
      * @return 实现类
      */
