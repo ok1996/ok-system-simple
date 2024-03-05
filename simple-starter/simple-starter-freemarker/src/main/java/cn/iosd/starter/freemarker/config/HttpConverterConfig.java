@@ -24,7 +24,9 @@ public class HttpConverterConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         List<ResourceVo> resourceVoList = freemarkerProperties.getResourceVoList();
         if (resourceVoList!=null){
-            resourceVoList.stream().forEach(v -> registry.addResourceHandler(v.getResourceHandler()).addResourceLocations(v.getResourceLocations()));
+            resourceVoList.forEach(v -> registry
+                    .addResourceHandler(v.getResourceHandler())
+                    .addResourceLocations(v.getResourceLocations()));
         }
     }
 

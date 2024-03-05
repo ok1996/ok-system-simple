@@ -14,9 +14,6 @@ public class CustomFreemarker {
 
     @Bean
     public CommandLineRunner customFreemarker(FreeMarkerViewResolver resolver) {
-        return strings -> {
-            // 增加视图
-            resolver.setViewClass(MyFreemarkerView.class);
-        };
+        return strings -> resolver.setViewClass(MyFreemarkerView.class);
     }
 }

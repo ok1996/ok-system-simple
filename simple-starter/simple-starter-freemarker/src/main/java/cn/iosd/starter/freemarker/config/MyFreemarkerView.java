@@ -14,14 +14,15 @@ public class MyFreemarkerView extends FreeMarkerView {
 
     @Override
     protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request) throws Exception {
-        String base = getBasePath(request);
-        model.put("base", base);
+        model.put("base", getBasePath(request));
         super.exposeHelpers(model, request);
     }
 
     public static String getBasePath(HttpServletRequest request) {
         String path = request.getContextPath();
-        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-        return basePath;
+        return request.getScheme()
+                + "://" + request.getServerName()
+                + ":" + request.getServerPort()
+                + path;
     }
 }
