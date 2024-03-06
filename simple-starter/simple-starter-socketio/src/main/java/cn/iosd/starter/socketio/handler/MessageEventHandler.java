@@ -34,10 +34,10 @@ public class MessageEventHandler {
             return;
         }
         String sessionId = client.getSessionId().toString();
-        joinRoom(client, client.getHandshakeData().getSingleUrlParam("room"), null);
+        joinRoom(client, client.getHandshakeData().getSingleUrlParam(SocketIOConstants.CONNECT_ROOM_NAME), null);
         joinRoom(client, client.getHandshakeData().getSingleUrlParam(SocketIOConstants.CONNECT_APPLICATION_NAME)
                 , SocketIOConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX);
-        log.info("Socket连接成功, sessionId={}, room={}", sessionId, client.getAllRooms());
+        log.debug("Socket连接成功, sessionId={}, room={}", sessionId, client.getAllRooms());
     }
 
     /**
@@ -48,16 +48,7 @@ public class MessageEventHandler {
     @OnDisconnect
     public void onDisconnect(SocketIOClient client) {
         client.disconnect();
-        log.warn("客户端断开连接, sessionId={}", client.getSessionId().toString());
-    }
-
-    @OnEvent(value = "Hello")
-    public void onHelloEvent(SocketIOClient client, AckRequest ackRequest, String message) {
-        log.info("Hello事件, sessionId={}, message={}", client.getSessionId().toString(), message);
-        if (ackRequest.isAckRequested()) {
-            ackRequest.sendAckData("您好, Netty连接已建立.");
-        }
-        client.sendEvent("Hello", "您好, Message:" + message);
+        log.debug("客户端断开连接, sessionId={}", client.getSessionId().toString());
     }
 
     /**

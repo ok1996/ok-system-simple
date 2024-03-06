@@ -35,7 +35,6 @@ public class SocketIOServerRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         socketIoServer.start();
-        //订阅redis队列
         subscribeToRedis();
         log.info("SocketIOServer启动");
     }
@@ -48,7 +47,7 @@ public class SocketIOServerRunner implements CommandLineRunner {
         String room = msg.getRoom();
         Packet packet = msg.getPacket();
         Object socketMessage = packet.getData();
-        log.info("收到订阅消息：DispatchMessage={}", socketMessage);
+        log.debug("收到订阅消息：DispatchMessage={}", socketMessage);
 
         Collection<SocketIOClient> clients = getClients(room);
         clients.forEach(client -> client.sendEvent(packet.getName(), socketMessage));

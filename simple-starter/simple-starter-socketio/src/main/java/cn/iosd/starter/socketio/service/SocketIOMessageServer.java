@@ -42,8 +42,7 @@ public class SocketIOMessageServer {
     public void sendBroadcast(String event, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getBroadcastOperations().getClients();
         clients.forEach(client -> client.sendEvent(event, msg));
-        log.info("向所有客户端推送广播消息, event={}", event);
-
+        log.debug("向所有客户端推送广播消息, event={}", event);
         publishMessage(SocketIOConstants.SEND_ALL, event, msg);
     }
 
@@ -57,8 +56,7 @@ public class SocketIOMessageServer {
     public void sendRoom(String event, String room, Object msg) {
         Collection<SocketIOClient> clients = socketIoServer.getRoomOperations(room).getClients();
         clients.forEach(client -> client.sendEvent(event, msg));
-        log.info("向房间{}中的客户端推送消息, event={}", room, event);
-
+        log.debug("向房间{}中的客户端推送消息, event={}", room, event);
         publishMessage(room, event, msg);
     }
 
@@ -73,8 +71,7 @@ public class SocketIOMessageServer {
         Collection<SocketIOClient> clients = new HashSet<>(socketIoServer.getRoomOperations(SocketIOConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX
                 + applicationName).getClients());
         clients.forEach(client -> client.sendEvent(event, msg));
-        log.info("向连接参数为applicationName={}的客户端发送消息, event={}", applicationName, event);
-
+        log.debug("向连接参数为applicationName={}的客户端发送消息, event={}", applicationName, event);
         publishMessage(SocketIOConstants.CONNECT_APPLICATION_NAME_ROOM_PREFIX + applicationName, event, msg);
     }
 
