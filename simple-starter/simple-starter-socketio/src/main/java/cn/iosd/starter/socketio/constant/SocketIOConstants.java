@@ -8,12 +8,12 @@ package cn.iosd.starter.socketio.constant;
 public class SocketIOConstants {
 
     /**
-     * socket微服务连接参数-房间号
+     * socket连接参数-房间号
      */
     public final static String CONNECT_ROOM_NAME = "room";
 
     /**
-     * socket微服务连接参数-应用名称
+     * socket连接参数-应用名称
      */
     public final static String CONNECT_APPLICATION_NAME = "applicationName";
 

@@ -99,7 +99,7 @@ public class GeometryTypeHandler extends BaseTypeHandler<String> {
         }
         byte[] geometryAsBytes = ba.toByteArray();
         if (geometryAsBytes.length < 5) {
-            throw new RuntimeException("Failed to get geometry: Invalid geometry");
+            throw new IllegalArgumentException("Failed to get geometry: Invalid geometry");
         }
 
         byte[] srIdBytes = new byte[4];
