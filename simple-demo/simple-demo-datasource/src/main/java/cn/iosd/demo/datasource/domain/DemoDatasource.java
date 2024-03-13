@@ -1,5 +1,8 @@
 package cn.iosd.demo.datasource.domain;
 
+import cn.iosd.starter.datasource.type.GeometryTypeHandler;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,6 +14,7 @@ import java.io.Serializable;
  * @author ok1996
  * @date 2022-12-14
  */
+@TableName(autoResultMap = true)
 public class DemoDatasource implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +27,12 @@ public class DemoDatasource implements Serializable {
      * 内容
      */
     private String content;
+
+    /**
+     * 几何数据
+     */
+    @TableField(typeHandler = GeometryTypeHandler.class)
+    private String geom;
 
     public void setId(Long id) {
         this.id = id;
@@ -40,11 +50,20 @@ public class DemoDatasource implements Serializable {
         return content;
     }
 
+    public String getGeom() {
+        return geom;
+    }
+
+    public void setGeom(String geom) {
+        this.geom = geom;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("content", getContent())
+                .append("geom", getGeom())
                 .toString();
     }
 }
