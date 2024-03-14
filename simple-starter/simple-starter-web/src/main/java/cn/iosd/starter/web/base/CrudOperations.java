@@ -60,4 +60,12 @@ public interface CrudOperations<T> {
     @GetMapping("/api/list")
     Response<List<T>> apiList(@ParameterObject T req);
 
+    /**
+     * Api-查询-统计
+     *
+     * @param req 查询参数
+     * @return 返回结果数量
+     */
+    @GetMapping("/api/count")
+    Response<Long> apiCount(@ParameterObject T req);
 }

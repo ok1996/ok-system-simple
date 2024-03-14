@@ -67,6 +67,12 @@ public class BaseController<T> implements CrudOperations<T> {
         return Response.ok(service.list(Wrappers.lambdaQuery(req)));
     }
 
+    @Override
+    @Operation(summary = "Api-查询-统计")
+    public Response<Long> apiCount(@ParameterObject T req) {
+        return Response.ok(service.count(Wrappers.lambdaQuery(req)));
+    }
+
     @Operation(summary = "Api-查询-分页")
     @PostMapping("/api/page")
     public Response<IPage<T>> apiPage(@RequestBody PageRequest<T> req) {
