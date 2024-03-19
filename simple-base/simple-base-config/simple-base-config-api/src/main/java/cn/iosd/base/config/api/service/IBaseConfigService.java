@@ -4,13 +4,14 @@ import cn.iosd.base.config.api.domain.BaseConfigInfo;
 import cn.iosd.base.config.api.vo.BaseConfigVo;
 import cn.iosd.base.config.api.vo.CodeValue;
 import cn.iosd.base.config.api.vo.CodeValueListHistory;
+import cn.iosd.starter.web.base.ICrudService;
 
 import java.util.List;
 
 /**
  * @author ok1996
  */
-public interface IBaseConfigService {
+public interface IBaseConfigService extends ICrudService<BaseConfigInfo> {
 
     /**
      * 查询基础参数配置

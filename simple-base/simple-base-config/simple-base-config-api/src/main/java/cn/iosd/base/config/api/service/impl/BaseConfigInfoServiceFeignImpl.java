@@ -6,6 +6,7 @@ import cn.iosd.base.config.api.service.IBaseConfigService;
 import cn.iosd.base.config.api.vo.BaseConfigVo;
 import cn.iosd.base.config.api.vo.CodeValue;
 import cn.iosd.base.config.api.vo.CodeValueListHistory;
+import cn.iosd.starter.web.base.ICrudServiceFeignImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * @author ok1996
  */
 @Service
-public class BaseConfigInfoServiceFeignImpl implements IBaseConfigService {
+public class BaseConfigInfoServiceFeignImpl extends ICrudServiceFeignImpl<BaseConfigInfo,BaseConfigInfoFeign> implements IBaseConfigService {
     @Autowired
     private BaseConfigInfoFeign baseConfigInfoFeign;
 
