@@ -1,13 +1,14 @@
 package cn.iosd.starter.web.base;
 
 import cn.iosd.starter.web.domain.Response;
-import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public interface CrudOperations<T> {
      * @return 返回结果列表
      */
     @GetMapping("/api/list")
-    Response<List<T>> apiList(@ParameterObject T req);
+    Response<List<T>> apiList(@SpringQueryMap T req);
 
     /**
      * Api-查询-统计
@@ -67,5 +68,5 @@ public interface CrudOperations<T> {
      * @return 返回结果数量
      */
     @GetMapping("/api/count")
-    Response<Long> apiCount(@ParameterObject T req);
+    Response<Long> apiCount(@SpringQueryMap T req);
 }
