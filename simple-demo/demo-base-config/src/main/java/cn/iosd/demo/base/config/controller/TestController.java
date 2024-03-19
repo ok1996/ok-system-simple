@@ -27,4 +27,11 @@ public class TestController {
     public Response<ClassmateVo> classmateList() {
         return Response.ok(service.classmateList());
     }
+
+    @Operation(summary = "基础服务接口")
+    @GetMapping(value = "/baseApi")
+    public Response<?> baseApi() {
+        service.baseApi();
+        return Response.ok();
+    }
 }

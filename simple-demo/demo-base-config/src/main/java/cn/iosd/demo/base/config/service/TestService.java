@@ -1,5 +1,6 @@
 package cn.iosd.demo.base.config.service;
 
+import cn.iosd.base.config.api.domain.BaseConfigInfo;
 import cn.iosd.base.config.api.service.IBaseConfigService;
 import cn.iosd.base.config.api.utils.ConfigUtils;
 import cn.iosd.base.config.api.vo.CodeValue;
@@ -37,7 +38,15 @@ public class TestService {
             return null;
         }
         // 获取存储的模拟数据，并将其转换为对应的实体类
-        return ConfigUtils.findFirstByCode(simulation, ConfigUtils.CONTENT_DATA_CODE, ClassmateVo.class,null);
+        return ConfigUtils.findFirstByCode(simulation, ConfigUtils.CONTENT_DATA_CODE, ClassmateVo.class, null);
     }
 
+    public void baseApi() {
+        BaseConfigInfo configInfo = new BaseConfigInfo();
+        configInfo.setId(1760850325286887426L);
+        Long count = configService.apiCount(configInfo);
+        List<BaseConfigInfo> list = configService.apiList(new BaseConfigInfo());
+        BaseConfigInfo one = configService.apiGetById(1760850325286887426L);
+        log.debug("countById:{},Id:{},allListSize:{}", count, one.getId(), list.size());
+    }
 }
