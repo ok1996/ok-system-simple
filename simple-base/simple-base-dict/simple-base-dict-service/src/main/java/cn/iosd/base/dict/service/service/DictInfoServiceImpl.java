@@ -1,12 +1,13 @@
 package cn.iosd.base.dict.service.service;
 
+import cn.iosd.base.dict.api.domain.DictInfo;
 import cn.iosd.base.dict.api.service.IDictInfoService;
 import cn.iosd.base.dict.api.vo.DictGroupVo;
 import cn.iosd.base.dict.service.entity.DictInfoEntity;
 import cn.iosd.base.dict.service.mapper.DictInfoMapper;
+import cn.iosd.starter.datasource.base.BaseServiceImpl;
 import cn.iosd.starter.dict.vo.DictItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Primary
-public class DictInfoServiceImpl extends ServiceImpl<DictInfoMapper, DictInfoEntity> implements IDictInfoService {
+public class DictInfoServiceImpl extends BaseServiceImpl<DictInfoMapper, DictInfoEntity, DictInfo> implements IDictInfoService {
 
     @Override
     public List<DictItem> getDictItemList(String dictionaryParams) {
@@ -31,7 +32,7 @@ public class DictInfoServiceImpl extends ServiceImpl<DictInfoMapper, DictInfoEnt
         queryDb.setDictStatus(0);
         List<DictInfoEntity> dictInfoList = baseMapper.selectList(Wrappers.lambdaQuery(queryDb));
         return dictInfoList.stream()
-                .map(v-> new DictItem(v.getDictValue(),v.getDictDesc()))
+                .map(v -> new DictItem(v.getDictValue(), v.getDictDesc()))
                 .collect(Collectors.toList());
     }
 

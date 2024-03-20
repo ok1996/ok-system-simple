@@ -1,6 +1,7 @@
 package cn.iosd.starter.datasource.base;
 
 import cn.iosd.starter.datasource.domain.PageRequest;
+import cn.iosd.starter.datasource.utils.BaseUtils;
 import cn.iosd.starter.web.base.CrudOperations;
 import cn.iosd.starter.web.domain.Response;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class BaseController<T> implements CrudOperations<T> {
     @Override
     @Operation(summary = "Api-新增")
     public Response<T> apiSave(@RequestBody T entity) {
-        setValue(entity, "setCreateTime", LocalDateTime.now(), LocalDateTime.class);
+        BaseUtils.setValue(entity, "setCreateTime", LocalDateTime.now(), LocalDateTime.class);
         service.save(entity);
         return Response.ok(entity);
     }
@@ -42,8 +41,8 @@ public class BaseController<T> implements CrudOperations<T> {
     @Override
     @Operation(summary = "Api-更新-Id")
     public Response<T> apiUpdateById(@PathVariable Long id, @RequestBody T entity) {
-        setValue(entity, "setId", id, Long.class);
-        setValue(entity, "setModifyTime", LocalDateTime.now(), LocalDateTime.class);
+        BaseUtils.setValue(entity, "setId", id, Long.class);
+        BaseUtils.setValue(entity, "setModifyTime", LocalDateTime.now(), LocalDateTime.class);
         service.updateById(entity);
         return Response.ok(entity);
     }
@@ -77,24 +76,6 @@ public class BaseController<T> implements CrudOperations<T> {
     @PostMapping("/api/page")
     public Response<IPage<T>> apiPage(@RequestBody PageRequest<T> req) {
         return Response.ok(service.page(req.toPage(), req.toWrapper()));
-    }
-
-    /**
-     * 通过反射调用实体类对象中的指定方法，设置指定的值。
-     *
-     * @param entity     需要设置值的实体类对象
-     * @param methodName 需要调用的方法名
-     * @param value      需要设置的值
-     * @param valueType  value参数的类型
-     * @param <V>        value参数的类型
-     */
-    private <V> void setValue(T entity, String methodName, V value, Class<V> valueType) {
-        try {
-            Method method = entity.getClass().getMethod(methodName, valueType);
-            method.invoke(entity, value);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            // T实体不存在方法，不做处理
-        }
     }
 
 }

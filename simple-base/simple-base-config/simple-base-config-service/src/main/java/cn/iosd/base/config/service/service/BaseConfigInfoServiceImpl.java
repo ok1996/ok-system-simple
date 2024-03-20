@@ -8,9 +8,9 @@ import cn.iosd.base.config.api.vo.CodeValue;
 import cn.iosd.base.config.api.vo.CodeValueListHistory;
 import cn.iosd.base.config.service.entity.BaseConfigInfoEntity;
 import cn.iosd.base.config.service.mapper.BaseConfigInfoMapper;
+import cn.iosd.starter.datasource.base.BaseServiceImpl;
 import cn.iosd.utils.jackson.JsonMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 @Service
 @Primary
-public class BaseConfigInfoServiceImpl extends ServiceImpl<BaseConfigInfoMapper, BaseConfigInfoEntity> implements IBaseConfigService {
+public class BaseConfigInfoServiceImpl extends BaseServiceImpl<BaseConfigInfoMapper, BaseConfigInfoEntity, BaseConfigInfo> implements IBaseConfigService {
 
     /**
      * 历史记录列表保留数

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 /**
+ * 定义了对 T 进行CRUD操作的方法
+ *
  * @author ok1996
  */
 public interface CrudOperations<T> {

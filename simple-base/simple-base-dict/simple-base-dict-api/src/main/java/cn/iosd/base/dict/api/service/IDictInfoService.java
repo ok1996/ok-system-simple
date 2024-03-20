@@ -1,8 +1,10 @@
 package cn.iosd.base.dict.api.service;
 
 
+import cn.iosd.base.dict.api.domain.DictInfo;
 import cn.iosd.base.dict.api.vo.DictGroupVo;
 import cn.iosd.starter.dict.vo.DictItem;
+import cn.iosd.starter.web.base.ICrudService;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * @author ok1996
  */
-public interface IDictInfoService {
+public interface IDictInfoService extends ICrudService<DictInfo> {
     /**
      * 获取指定类型的字典项列表
      *

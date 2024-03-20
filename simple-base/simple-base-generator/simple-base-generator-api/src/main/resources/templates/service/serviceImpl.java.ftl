@@ -1,9 +1,10 @@
 package ${packageParent}.service.service;
 
+import ${packageParent}.api.domain.${entity};
 import ${packageParent}.service.entity.${entity}Entity;
 import ${packageParent}.service.mapper.${table.mapperName};
 import ${packageParent}.api.service.${table.serviceName};
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.iosd.starter.datasource.base.BaseServiceImpl;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Primary
-public class ${entity}ServiceImpl extends ServiceImpl<${table.mapperName}, ${entity}Entity> implements ${table.serviceName} {
+public class ${entity}ServiceImpl extends BaseServiceImpl<${table.mapperName}, ${entity}Entity, ${entity}> implements ${table.serviceName} {
 
 }

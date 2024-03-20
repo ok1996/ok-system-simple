@@ -1,5 +1,7 @@
 package ${packageParent}.api.service;
 
+import ${packageParent}.api.domain.${entity};
+import cn.iosd.starter.web.base.ICrudService;
 
 /**
  * <p>
@@ -8,6 +10,6 @@ package ${packageParent}.api.service;
  *
  * @author ${author}
  */
-public interface ${table.serviceName} {
+public interface ${table.serviceName} extends ICrudService<${entity}> {
 
 }
