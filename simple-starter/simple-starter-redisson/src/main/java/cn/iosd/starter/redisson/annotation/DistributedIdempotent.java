@@ -53,7 +53,7 @@ public @interface DistributedIdempotent {
     /**
      * 获取锁失败后的提示信息
      *
-     * @return
+     * @return 提示信息
      */
     String message() default "操作频繁，请稍后重试!";
 
