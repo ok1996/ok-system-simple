@@ -45,7 +45,7 @@ For example, to quickly integrate a service with a web application and integrate
 |----------------------|---------------------|
 | Java                 | 17                  |
 | Spring Boot          | 3.2.5               |
-| Spring Cloud         | 2023.0.0            |
+| Spring Cloud         | 2023.0.1            |
 | Spring Cloud Alibaba | 2023.0.1.0          |
 | Ok System Simple     | 2024.1.3.0-SNAPSHOT |
 
