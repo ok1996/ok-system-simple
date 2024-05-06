@@ -32,7 +32,7 @@
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>4.5.0</knife4j.version>
         <io-grpc.version>1.63.0</io-grpc.version>
-        <redisson.version>3.27.2</redisson.version>
+        <redisson.version>3.29.0</redisson.version>
         <jts-core.version>1.19.0</jts-core.version>
         <jakarta-mail.version>2.0.1</jakarta-mail.version>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
