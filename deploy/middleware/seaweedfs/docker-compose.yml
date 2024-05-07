@@ -1,7 +1,7 @@
 version: '3'
 services:
   seaweedfsRedis:
-    image: redis:7.0.11
+    image: redis:7.2.3
     restart: always
     container_name: seaweedfsRedis
     ports:
@@ -13,7 +13,7 @@ services:
       redis-server /usr/local/etc/redis/redis.conf --appendonly yes
 
   seaweedfsMaster1:
-    image: chrislusf/seaweedfs:3.53
+    image: chrislusf/seaweedfs:3.64
     container_name: seaweedfsMaster1
     ports:
       - "9331:9331"
@@ -22,7 +22,7 @@ services:
     command: 'master -ip=192.168.213.213 -ip.bind="0.0.0.0" -peers="192.168.213.213:9331" -port=9331 -metricsPort=9324'
 
   seaweedfsVolume1:
-    image: chrislusf/seaweedfs:3.53
+    image: chrislusf/seaweedfs:3.64
     container_name: seaweedfsVolume1
     ports:
       - "8331:8331"
@@ -34,7 +34,7 @@ services:
       - ./seaweedfs/volume1data:/data
 
   seaweedfsFiler1:
-    image: chrislusf/seaweedfs:3.53
+    image: chrislusf/seaweedfs:3.64
     container_name: seaweedfsFiler1
     ports:
       - "9431:9431"
@@ -50,7 +50,7 @@ services:
       - seaweedfsRedis
 
   seaweedfsS31:
-    image: chrislusf/seaweedfs:3.53
+    image: chrislusf/seaweedfs:3.64
     container_name: seaweedfsS31
     ports:
       - "9531:9531"
