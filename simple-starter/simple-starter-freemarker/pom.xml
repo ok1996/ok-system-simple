@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.iosd</groupId>
         <artifactId>simple-starter</artifactId>
-        <version>2024.1.3.0</version>
+        <version>2024.2.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>simple-starter-freemarker</artifactId>
