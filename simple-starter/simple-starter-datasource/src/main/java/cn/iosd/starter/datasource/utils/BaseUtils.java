@@ -3,6 +3,9 @@ package cn.iosd.starter.datasource.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * @author ok1996
+ */
 public class BaseUtils {
 
     /**
