@@ -1,6 +1,7 @@
 package cn.iosd.base.config.service.service;
 
 import cn.iosd.base.config.api.domain.BaseConfigInfo;
+import cn.iosd.base.config.api.exception.BaseConfigException;
 import cn.iosd.base.config.api.service.IBaseConfigService;
 import cn.iosd.base.config.api.utils.ConfigUtils;
 import cn.iosd.base.config.api.vo.BaseConfigVo;
@@ -46,7 +47,7 @@ public class BaseConfigInfoServiceImpl extends BaseServiceImpl<BaseConfigInfoMap
         try {
             return ConfigUtils.readValueList(baseConfigInfo.getCodeValues());
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("key:" + key + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
+            throw new BaseConfigException("key:" + key + "，在反序列化List<CodeValue<?>>过程中出现错误", e);
         }
     }
 
@@ -73,7 +74,7 @@ public class BaseConfigInfoServiceImpl extends BaseServiceImpl<BaseConfigInfoMap
         try {
             return ConfigUtils.readValueListHistory(baseConfigInfo.getHistoryCodeValues());
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("key:" + key + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
+            throw new BaseConfigException("key:" + key + "，在反序列化List<CodeValueListHistory>过程中出现错误", e);
         }
     }
 
@@ -96,7 +97,7 @@ public class BaseConfigInfoServiceImpl extends BaseServiceImpl<BaseConfigInfoMap
             baseConfig.setCodeValues((JsonMapper.getObjectMapper().writeValueAsString(baseConfigVo.getCodeValues())));
             baseConfig.setHistoryCodeValues(inputHistoryCodeValues(baseConfigVo.getCodeValues(), codeValueListHistory));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new BaseConfigException("id:" + baseConfigVo.getId() + "，实体转换反序列化过程中出现错误", e);
         }
         baseConfig.setRemark(baseConfigVo.getRemark());
         baseConfig.setConfigKey(baseConfigVo.getParamKey());
