@@ -28,7 +28,7 @@ public class EmailController {
     @Operation(summary = "发送电子邮件")
     @GetMapping(value = "/sendEmail")
     public Response<?> sendEmail(@ParameterObject SendEmailVo vo) throws MessagingException, IOException {
-        emailService.sendEmail(vo.getToEmails(), vo.getCcEmails(), vo.getBccEmails(), vo.getSubject(), vo.getContent(), vo.getIsHtml(), vo.getAttachments(), vo.getInlineImages());
+        emailService.sendEmail(vo);
         return Response.ok();
     }
 

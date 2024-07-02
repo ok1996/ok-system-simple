@@ -1,5 +1,6 @@
 package cn.iosd.demo.email.vo;
 
+import cn.iosd.starer.email.vo.EmailRequestVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * @author ok1996
  */
 @Data
-public class SendEmailVo {
+public class SendEmailVo extends EmailRequestVo {
     @Schema(description = "收件人的邮件地址列表", example = "xxx@qq.com,xxx@foxmail.com")
     private List<String> toEmails;
 
@@ -34,4 +35,5 @@ public class SendEmailVo {
 
     @Schema(description = "内联图片的路径和CID映射", hidden = true)
     Map<String, String> inlineImages;
+
 }
