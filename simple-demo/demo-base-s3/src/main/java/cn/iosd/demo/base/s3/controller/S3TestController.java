@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class S3TestController {
     @Operation(summary = "上传文件")
     @PostMapping(value = "/upload")
     public Response<String> uploadMultipartFile(@ModelAttribute MultipartFile file
-            , @Parameter(description = "存储桶") String bucketName){
+            , @Parameter(description = "存储桶") String bucketName) {
         return Response.ok(simpleStorageService.uploadMultipartFile(file, bucketName));
     }
 
