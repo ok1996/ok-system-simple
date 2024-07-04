@@ -50,7 +50,7 @@ public class BaseConfigInitLifecycle implements SmartLifecycle {
         if (this.inits != null) {
             this.inits.stream()
                     .filter(Objects::nonNull)
-                    .filter(v -> !StringUtils.isEmpty(v.getKey()))
+                    .filter(v -> StringUtils.isNotEmpty(v.getKey()))
                     .forEach(this::initParam);
         }
     }

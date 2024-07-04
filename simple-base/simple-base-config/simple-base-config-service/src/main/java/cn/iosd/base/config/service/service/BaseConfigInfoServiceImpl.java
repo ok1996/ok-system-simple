@@ -115,7 +115,7 @@ public class BaseConfigInfoServiceImpl extends BaseServiceImpl<BaseConfigInfoMap
      */
     public String inputHistoryCodeValues(List<CodeValue<?>> codeValueList, String codeValueListHistory) throws JsonProcessingException {
         List<CodeValueListHistory> resHistoryObj = new ArrayList<>();
-        if (!StringUtils.isBlank(codeValueListHistory)) {
+        if (StringUtils.isNotBlank(codeValueListHistory)) {
             resHistoryObj = JsonMapper.readValue(codeValueListHistory, new TypeReference<List<CodeValueListHistory>>() {
             });
         }
