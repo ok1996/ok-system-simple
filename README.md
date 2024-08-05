@@ -44,7 +44,7 @@ For example, to quickly integrate a service with a web application and integrate
 | Dependency           | Version             |
 |----------------------|---------------------|
 | Java                 | 17                  |
-| Spring Boot          | 3.3.0               |
+| Spring Boot          | 3.3.2               |
 | Spring Cloud         | 2023.0.2            |
 | Spring Cloud Alibaba | 2023.0.1.2          |
 | Ok System Simple     | 2024.2.0.0-SNAPSHOT |
