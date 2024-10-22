@@ -17,4 +17,5 @@ services:
       - ./config:/config
     restart: always
     environment:
-      - JAVA_OPTS=-Duser.timezone=GMT+08
+      - JAVA_OPTS=-Duser.timezone=GMT+08 -Dspring.config.location=/application.yml
+      - TZ=Asia/Shanghai
