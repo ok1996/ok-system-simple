@@ -19,7 +19,7 @@ public class ProjectGenVo {
     private String projectPort;
 
     @Schema(description = "SpringBoot版本号", hidden = true)
-    private String springBootVersion = "3.3.2";
+    private String springBootVersion = "3.3.6";
 
     @Schema(description = "项目版本号", hidden = true)
     private String projectVersion = "2024.1.0.0-SNAPSHOT";
