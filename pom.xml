@@ -6,14 +6,14 @@
 
     <groupId>cn.iosd</groupId>
     <artifactId>ok-system-simple</artifactId>
-    <version>2024.2.0.0</version>
+    <version>2025.1.0.0-SNAPSHOT</version>
 
     <name>ok-system-simple</name>
     <description>Ok System Simple</description>
     <url>https://github.com/ok1996/ok-system-simple</url>
 
     <properties>
-        <ok-system-simple.version>2024.2.0.0</ok-system-simple.version>
+        <ok-system-simple.version>2025.1.0.0-SNAPSHOT</ok-system-simple.version>
 
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
